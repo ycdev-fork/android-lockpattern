@@ -22,12 +22,17 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.IllegalFormatException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Utilities for the lock pattern and its settings.
  */
 public class LockPatternUtils {
+
+    public static final String Utf8 = "utf-8";
+    public static final String Sha1 = "sha-1";
 
     /**
      * Deserialize a pattern.
@@ -39,13 +44,18 @@ public class LockPatternUtils {
     public static List<LockPatternView.Cell> stringToPattern(String string) {
         List<LockPatternView.Cell> result = Lists.newArrayList();
 
-        final byte[] bytes = string.getBytes();
-        for (int i = 0; i < bytes.length; i++) {
-            byte b = bytes[i];
-            result.add(LockPatternView.Cell.of(b / 3, b % 3));
+        try {
+            final byte[] bytes = string.getBytes(Utf8);
+            for (int i = 0; i < bytes.length; i++) {
+                byte b = bytes[i];
+                result.add(LockPatternView.Cell.of(b / 3, b % 3));
+            }
+        } catch (UnsupportedEncodingException e) {
+            // never catch this
         }
+
         return result;
-    }
+    }// stringToPattern()
 
     /**
      * Serialize a pattern.
@@ -65,8 +75,13 @@ public class LockPatternUtils {
             LockPatternView.Cell cell = pattern.get(i);
             res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
         }
-        return new String(res);
-    }
+        try {
+            return new String(res, Utf8);
+        } catch (UnsupportedEncodingException e) {
+            // never catch this
+            return "";
+        }
+    }// patternToString()
 
     /**
      * Serializes a pattern
@@ -78,12 +93,13 @@ public class LockPatternUtils {
      */
     public static String patternToSha1(List<LockPatternView.Cell> pattern) {
         try {
-            MessageDigest md = MessageDigest.getInstance("sha-1");
-            md.update(patternToString(pattern).getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance(Sha1);
+            md.update(patternToString(pattern).getBytes(Utf8));
 
             byte[] digest = md.digest();
             BigInteger bi = new BigInteger(1, digest);
-            return String.format("%0" + (digest.length * 2) + "x", bi);
+            return String.format((Locale) null, "%0" + (digest.length * 2)
+                    + "x", bi);
         } catch (NoSuchAlgorithmException e) {
             // never catch this
             return "";
