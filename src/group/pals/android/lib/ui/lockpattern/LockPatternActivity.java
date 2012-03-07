@@ -155,8 +155,6 @@ public class LockPatternActivity extends Activity {
             fBtnConfirm.setEnabled(true);
         } else {
             if (lastPattern.equals(LockPatternUtils.patternToSha1(pattern))) {
-                if (fAutoSave)
-                    fPrefs.edit().putString(PaternSha1, lastPattern).commit();
                 fTxtInfo.setText(R.string.msg_your_new_unlock_pattern);
                 fBtnConfirm.setEnabled(true);
             } else {
@@ -234,6 +232,9 @@ public class LockPatternActivity extends Activity {
                 fBtnConfirm.setText(R.string.cmd_confirm);
                 fBtnConfirm.setEnabled(false);
             } else {
+                if (fAutoSave)
+                    fPrefs.edit().putString(PaternSha1, lastPattern).commit();
+
                 Intent i = new Intent();
                 i.putExtra(PaternSha1, lastPattern);
                 setResult(RESULT_OK, i);
