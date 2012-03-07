@@ -18,6 +18,7 @@ package group.pals.android.lib.ui.lockpattern.widget;
 
 import group.pals.android.lib.ui.lockpattern.collect.Lists;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -78,12 +79,15 @@ public class LockPatternUtils {
     public static String patternToSha1(List<LockPatternView.Cell> pattern) {
         try {
             MessageDigest md = MessageDigest.getInstance("sha-1");
-            md.update(patternToString(pattern).getBytes());
+            md.update(patternToString(pattern).getBytes("utf-8"));
 
             byte[] digest = md.digest();
             BigInteger bi = new BigInteger(1, digest);
             return String.format("%0" + (digest.length * 2) + "x", bi);
         } catch (NoSuchAlgorithmException e) {
+            // never catch this
+            return "";
+        } catch (UnsupportedEncodingException e) {
             // never catch this
             return "";
         }
