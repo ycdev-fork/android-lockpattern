@@ -120,7 +120,7 @@ public class LockPatternActivity extends Activity {
         if (pattern == null)
             return;
 
-        String currentPattern = getIntent().getStringExtra(pattern);
+        String currentPattern = getIntent().getStringExtra(PaternSha1);
         if (currentPattern == null)
             currentPattern = fPrefs.getString(PaternSha1, null);
 
