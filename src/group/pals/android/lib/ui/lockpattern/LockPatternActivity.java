@@ -128,11 +128,12 @@ public class LockPatternActivity extends Activity {
             setResult(RESULT_OK);
             finish();
         } else {
+            retryCount++;
+
             if (retryCount >= fMaxRetry) {
                 setResult(RESULT_CANCELED);
                 finish();
             } else {
-                retryCount++;
                 fLockPatternView.setDisplayMode(DisplayMode.Wrong);
                 fTxtInfo.setText(R.string.msg_try_again);
             }
@@ -153,7 +154,7 @@ public class LockPatternActivity extends Activity {
             fTxtInfo.setText(R.string.msg_pattern_recorded);
             fBtnConfirm.setEnabled(true);
         } else {
-            if (lastPattern.equals(pattern)) {
+            if (lastPattern.equals(LockPatternUtils.patternToSha1(pattern))) {
                 if (fAutoSave)
                     fPrefs.edit().putString(PaternSha1, lastPattern).commit();
                 fTxtInfo.setText(R.string.msg_your_new_unlock_pattern);
@@ -196,9 +197,10 @@ public class LockPatternActivity extends Activity {
             case CreatePattern:
                 fBtnConfirm.setEnabled(false);
                 if (getString(R.string.cmd_continue).equals(
-                        fBtnConfirm.getText()))
+                        fBtnConfirm.getText())) {
+                    lastPattern = null;
                     fTxtInfo.setText(R.string.msg_draw_an_unlock_pattern);
-                else
+                } else
                     fTxtInfo.setText(R.string.msg_redraw_pattern_to_confirm);
                 break;
             case ComparePattern:
