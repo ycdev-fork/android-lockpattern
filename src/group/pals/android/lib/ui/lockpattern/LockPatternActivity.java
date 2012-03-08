@@ -77,8 +77,7 @@ public class LockPatternActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_pattern_activity);
 
-        fPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
+        fPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
 
         fMode = getIntent().getIntExtra(Mode, CreatePattern);
         fMaxRetry = getIntent().getIntExtra(MaxRetry, 5);
