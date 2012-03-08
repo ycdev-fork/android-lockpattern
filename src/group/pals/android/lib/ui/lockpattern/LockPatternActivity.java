@@ -169,9 +169,14 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onPatternStart() {
+            fLockPatternView.setDisplayMode(DisplayMode.Correct);
+
             if (fMode == CreatePattern) {
                 fTxtInfo.setText(R.string.msg_release_finger_when_done);
                 fBtnConfirm.setEnabled(false);
+                if (getString(R.string.cmd_continue).equals(
+                        fBtnConfirm.getText()))
+                    lastPattern = null;
             }
         }
 
