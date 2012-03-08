@@ -17,6 +17,6 @@
     <string name="msg_release_finger_when_done">Release finger when done</string>
     <string name="msg_pattern_recorded">Pattern recorded!</string>
     <string name="msg_your_new_unlock_pattern">Your new unlock pattern:</string>
-    <string name="msg_draw_unlock_pattern">Draw unlock pattern:</string>
+    <string name="msg_draw_pattern_to_unlock">Draw pattern to unlock:</string>
 
 </resources>

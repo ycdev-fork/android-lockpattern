@@ -107,7 +107,7 @@ public class LockPatternActivity extends Activity {
             break;
         case ComparePattern:
             fFooter.setVisibility(View.GONE);
-            fTxtInfo.setText(R.string.msg_draw_unlock_pattern);
+            fTxtInfo.setText(R.string.msg_draw_pattern_to_unlock);
             break;
         }
 
@@ -207,7 +207,7 @@ public class LockPatternActivity extends Activity {
                     fTxtInfo.setText(R.string.msg_redraw_pattern_to_confirm);
                 break;
             case ComparePattern:
-                fTxtInfo.setText(R.string.msg_draw_unlock_pattern);
+                fTxtInfo.setText(R.string.msg_draw_pattern_to_unlock);
                 break;
             }
         }// onPatternCleared()
