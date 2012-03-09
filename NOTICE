@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.1
+Version: 1.2
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,11 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.2 +++
+ - Release: March 09, 2012
+
+ - make sure LockPatternUtils.patternToSha1() returns lower case string;
 
 +++ Version 1.1 +++
  - Release: March 08, 2012
