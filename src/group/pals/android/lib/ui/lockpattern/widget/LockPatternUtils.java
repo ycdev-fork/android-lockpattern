@@ -99,7 +99,7 @@ public class LockPatternUtils {
             byte[] digest = md.digest();
             BigInteger bi = new BigInteger(1, digest);
             return String.format((Locale) null, "%0" + (digest.length * 2)
-                    + "x", bi);
+                    + "x", bi).toLowerCase();
         } catch (NoSuchAlgorithmException e) {
             // never catch this
             return "";
