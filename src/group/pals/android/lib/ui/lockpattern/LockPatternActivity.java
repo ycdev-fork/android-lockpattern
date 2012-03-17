@@ -31,17 +31,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Main activity for this library.
+ * 
+ * @author Hai Bison
+ * @since v1.0
+ */
 public class LockPatternActivity extends Activity {
 
     /**
      * Mode for {@link LockPatternActivity}<br>
      * Acceptable values:<br>
-     * - {@link #CreatePattern}<br>
-     * - {@link #ComparePattern}
+     * - {@link LPMode#CreatePattern}<br>
+     * - {@link LPMode#ComparePattern}
      */
-    public static final String Mode = "mode";
-    public static final int CreatePattern = 0;
-    public static final int ComparePattern = 1;
+    public static final String Mode = LPMode.class.getName();
+
+    /**
+     * Lock pattern mode for this activity.
+     * 
+     * @author Hai Bison
+     * @since v1.3 alpha
+     */
+    public static enum LPMode {
+        /**
+         * Creates new pattern.
+         */
+        CreatePattern,
+        /**
+         * Compares to existing pattern.
+         */
+        ComparePattern
+    }
 
     /**
      * Specify if the pattern will be saved automatically or not. Default =
@@ -60,7 +81,7 @@ public class LockPatternActivity extends Activity {
     public static final String PaternSha1 = "pattern_sha1";
 
     private SharedPreferences fPrefs;
-    private int fMode;
+    private LPMode fMode;
     private int fMaxRetry;
     private boolean fAutoSave;
 
@@ -76,9 +97,13 @@ public class LockPatternActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_pattern_activity);
 
-        fPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
+        fPrefs = getSharedPreferences(
+                LockPatternActivity.class.getSimpleName(), 0);
 
-        fMode = getIntent().getIntExtra(Mode, CreatePattern);
+        fMode = (LPMode) getIntent().getSerializableExtra(Mode);
+        if (fMode == null)
+            fMode = LPMode.CreatePattern;
+
         fMaxRetry = getIntent().getIntExtra(MaxRetry, 5);
         fAutoSave = getIntent().getBooleanExtra(AutoSave, true);
 
@@ -169,7 +194,7 @@ public class LockPatternActivity extends Activity {
         public void onPatternStart() {
             fLockPatternView.setDisplayMode(DisplayMode.Correct);
 
-            if (fMode == CreatePattern) {
+            if (fMode == LPMode.CreatePattern) {
                 fTxtInfo.setText(R.string.msg_release_finger_when_done);
                 fBtnConfirm.setEnabled(false);
                 if (getString(R.string.cmd_continue).equals(
