@@ -40,7 +40,8 @@ import android.widget.TextView;
 public class LockPatternActivity extends Activity {
 
     /**
-     * Mode for {@link LockPatternActivity}<br>
+     * Mode for {@link LockPatternActivity}. Default is
+     * {@link LPMode#CreatePattern}<br>
      * Acceptable values:<br>
      * - {@link LPMode#CreatePattern}<br>
      * - {@link LPMode#ComparePattern}
