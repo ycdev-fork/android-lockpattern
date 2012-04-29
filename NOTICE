@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.3 alpha
+Version: 1.4
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,12 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.4 +++
+ - Release: April 29, 2012
+
+ - change UI;
+ - determine and use user's haptic feedback;
 
 +++ Version 1.2 +++
  - Release: March 09, 2012

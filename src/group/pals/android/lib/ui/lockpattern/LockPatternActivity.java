@@ -27,6 +27,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,8 +99,7 @@ public class LockPatternActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_pattern_activity);
 
-        fPrefs = getSharedPreferences(
-                LockPatternActivity.class.getSimpleName(), 0);
+        fPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
 
         fMode = (LPMode) getIntent().getSerializableExtra(Mode);
         if (fMode == null)
@@ -119,6 +119,16 @@ public class LockPatternActivity extends Activity {
     }// onCreate()
 
     private void init() {
+        // haptic feedback
+        boolean hapticFeedbackEnabled = false;
+        try {
+            hapticFeedbackEnabled = Settings.System.getInt(getContentResolver(),
+                    Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0;
+        } catch (Throwable t) {
+            // ignore it
+        }
+        fLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
+
         fLockPatternView.setOnPatternListener(fPatternViewListener);
 
         switch (fMode) {
@@ -198,8 +208,7 @@ public class LockPatternActivity extends Activity {
             if (fMode == LPMode.CreatePattern) {
                 fTxtInfo.setText(R.string.msg_release_finger_when_done);
                 fBtnConfirm.setEnabled(false);
-                if (getString(R.string.cmd_continue).equals(
-                        fBtnConfirm.getText()))
+                if (getString(R.string.cmd_continue).equals(fBtnConfirm.getText()))
                     lastPattern = null;
             }
         }
@@ -223,8 +232,7 @@ public class LockPatternActivity extends Activity {
             switch (fMode) {
             case CreatePattern:
                 fBtnConfirm.setEnabled(false);
-                if (getString(R.string.cmd_continue).equals(
-                        fBtnConfirm.getText())) {
+                if (getString(R.string.cmd_continue).equals(fBtnConfirm.getText())) {
                     lastPattern = null;
                     fTxtInfo.setText(R.string.msg_draw_an_unlock_pattern);
                 } else
