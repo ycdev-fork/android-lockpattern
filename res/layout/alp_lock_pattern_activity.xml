@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/lpa_text_info"
+            android:id="@+id/alp_lpa_text_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -21,31 +19,31 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
-            android:id="@+id/lpa_lockPattern"
+            android:id="@+id/alp_lpa_lockPattern"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lpa_layout_footer"
+        android:id="@+id/alp_lpa_layout_footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/lpa_button_cancel"
+            android:id="@+id/alp_lpa_button_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cmd_cancel" />
+            android:text="@android:string/cancel" />
 
         <Button
-            android:id="@+id/lpa_button_confirm"
+            android:id="@+id/alp_lpa_button_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:enabled="false"
-            android:text="@string/cmd_continue" />
+            android:text="@string/alp_cmd_continue" />
     </LinearLayout>
 
 </LinearLayout>

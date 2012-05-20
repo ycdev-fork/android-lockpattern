@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.4
+Version: 1.5
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,16 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.5 +++
+ - Release: May 21, 2012
+
+ - due to this bug: http://code.google.com/p/android/issues/detail?id=30622,
+   so we prefix all resource names with 'alp_';
+ - add layout for landscape mode;
+ - update coding style:
+   + prefix global fields with 'm';
+   + prefix static final fields with '_';
 
 +++ Version 1.4 +++
  - Release: April 29, 2012

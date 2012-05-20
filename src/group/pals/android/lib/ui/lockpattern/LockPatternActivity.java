@@ -47,7 +47,7 @@ public class LockPatternActivity extends Activity {
      * - {@link LPMode#CreatePattern}<br>
      * - {@link LPMode#ComparePattern}
      */
-    public static final String Mode = LPMode.class.getName();
+    public static final String _Mode = LPMode.class.getName();
 
     /**
      * Lock pattern mode for this activity.
@@ -70,50 +70,50 @@ public class LockPatternActivity extends Activity {
      * Specify if the pattern will be saved automatically or not. Default =
      * {@code true}
      */
-    public static final String AutoSave = "auto_save";
+    public static final String _AutoSave = "auto_save";
 
     /**
      * Maximum retry times, in mode {@link #ComparePattern}
      */
-    public static final String MaxRetry = "max_retry";
+    public static final String _MaxRetry = "max_retry";
 
     /**
      * Key to hold pattern result (in SHA-1 string).
      */
-    public static final String PaternSha1 = "pattern_sha1";
+    public static final String _PaternSha1 = "pattern_sha1";
 
-    private SharedPreferences fPrefs;
-    private LPMode fMode;
-    private int fMaxRetry;
-    private boolean fAutoSave;
+    private SharedPreferences mPrefs;
+    private LPMode mMode;
+    private int mMaxRetry;
+    private boolean mAutoSave;
 
-    private TextView fTxtInfo;
-    private LockPatternView fLockPatternView;
-    private View fFooter;
-    private Button fBtnCancel;
-    private Button fBtnConfirm;
+    private TextView mTxtInfo;
+    private LockPatternView mLockPatternView;
+    private View mFooter;
+    private Button mBtnCancel;
+    private Button mBtnConfirm;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lock_pattern_activity);
+        setContentView(R.layout.alp_lock_pattern_activity);
 
-        fPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
+        mPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
 
-        fMode = (LPMode) getIntent().getSerializableExtra(Mode);
-        if (fMode == null)
-            fMode = LPMode.CreatePattern;
+        mMode = (LPMode) getIntent().getSerializableExtra(_Mode);
+        if (mMode == null)
+            mMode = LPMode.CreatePattern;
 
-        fMaxRetry = getIntent().getIntExtra(MaxRetry, 5);
-        fAutoSave = getIntent().getBooleanExtra(AutoSave, true);
+        mMaxRetry = getIntent().getIntExtra(_MaxRetry, 5);
+        mAutoSave = getIntent().getBooleanExtra(_AutoSave, true);
 
-        fTxtInfo = (TextView) findViewById(R.id.lpa_text_info);
-        fLockPatternView = (LockPatternView) findViewById(R.id.lpa_lockPattern);
+        mTxtInfo = (TextView) findViewById(R.id.alp_lpa_text_info);
+        mLockPatternView = (LockPatternView) findViewById(R.id.alp_lpa_lockPattern);
 
-        fFooter = findViewById(R.id.lpa_layout_footer);
-        fBtnCancel = (Button) findViewById(R.id.lpa_button_cancel);
-        fBtnConfirm = (Button) findViewById(R.id.lpa_button_confirm);
+        mFooter = findViewById(R.id.alp_lpa_layout_footer);
+        mBtnCancel = (Button) findViewById(R.id.alp_lpa_button_cancel);
+        mBtnConfirm = (Button) findViewById(R.id.alp_lpa_button_confirm);
 
         init();
     }// onCreate()
@@ -127,21 +127,21 @@ public class LockPatternActivity extends Activity {
         } catch (Throwable t) {
             // ignore it
         }
-        fLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
+        mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
-        fLockPatternView.setOnPatternListener(fPatternViewListener);
+        mLockPatternView.setOnPatternListener(fPatternViewListener);
 
-        switch (fMode) {
+        switch (mMode) {
         case CreatePattern:
-            fBtnCancel.setOnClickListener(fBtnCancelOnClickListener);
-            fBtnConfirm.setOnClickListener(fBtnConfirmOnClickListener);
+            mBtnCancel.setOnClickListener(fBtnCancelOnClickListener);
+            mBtnConfirm.setOnClickListener(fBtnConfirmOnClickListener);
 
-            fFooter.setVisibility(View.VISIBLE);
-            fTxtInfo.setText(R.string.msg_draw_an_unlock_pattern);
+            mFooter.setVisibility(View.VISIBLE);
+            mTxtInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
             break;
         case ComparePattern:
-            fFooter.setVisibility(View.GONE);
-            fTxtInfo.setText(R.string.msg_draw_pattern_to_unlock);
+            mFooter.setVisibility(View.GONE);
+            mTxtInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
             break;
         }
 
@@ -154,9 +154,9 @@ public class LockPatternActivity extends Activity {
         if (pattern == null)
             return;
 
-        String currentPattern = getIntent().getStringExtra(PaternSha1);
+        String currentPattern = getIntent().getStringExtra(_PaternSha1);
         if (currentPattern == null)
-            currentPattern = fPrefs.getString(PaternSha1, null);
+            currentPattern = mPrefs.getString(_PaternSha1, null);
 
         if (pattern.equals(currentPattern)) {
             setResult(RESULT_OK);
@@ -164,12 +164,12 @@ public class LockPatternActivity extends Activity {
         } else {
             retryCount++;
 
-            if (retryCount >= fMaxRetry) {
+            if (retryCount >= mMaxRetry) {
                 setResult(RESULT_CANCELED);
                 finish();
             } else {
-                fLockPatternView.setDisplayMode(DisplayMode.Wrong);
-                fTxtInfo.setText(R.string.msg_try_again);
+                mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+                mTxtInfo.setText(R.string.alp_msg_try_again);
             }
         }
     }// doComparePattern()
@@ -178,23 +178,23 @@ public class LockPatternActivity extends Activity {
 
     private void doCreatePattern(List<Cell> pattern) {
         if (pattern.size() < 4) {
-            fLockPatternView.setDisplayMode(DisplayMode.Wrong);
-            fTxtInfo.setText(R.string.msg_connect_4dots);
+            mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+            mTxtInfo.setText(R.string.alp_msg_connect_4dots);
             return;
         }
 
         if (lastPattern == null) {
             lastPattern = LockPatternUtils.patternToSha1(pattern);
-            fTxtInfo.setText(R.string.msg_pattern_recorded);
-            fBtnConfirm.setEnabled(true);
+            mTxtInfo.setText(R.string.alp_msg_pattern_recorded);
+            mBtnConfirm.setEnabled(true);
         } else {
             if (lastPattern.equals(LockPatternUtils.patternToSha1(pattern))) {
-                fTxtInfo.setText(R.string.msg_your_new_unlock_pattern);
-                fBtnConfirm.setEnabled(true);
+                mTxtInfo.setText(R.string.alp_msg_your_new_unlock_pattern);
+                mBtnConfirm.setEnabled(true);
             } else {
-                fTxtInfo.setText(R.string.msg_redraw_pattern_to_confirm);
-                fBtnConfirm.setEnabled(false);
-                fLockPatternView.setDisplayMode(DisplayMode.Wrong);
+                mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mBtnConfirm.setEnabled(false);
+                mLockPatternView.setDisplayMode(DisplayMode.Wrong);
             }
         }
     }// doCreatePattern()
@@ -203,19 +203,19 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onPatternStart() {
-            fLockPatternView.setDisplayMode(DisplayMode.Correct);
+            mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
-            if (fMode == LPMode.CreatePattern) {
-                fTxtInfo.setText(R.string.msg_release_finger_when_done);
-                fBtnConfirm.setEnabled(false);
-                if (getString(R.string.cmd_continue).equals(fBtnConfirm.getText()))
+            if (mMode == LPMode.CreatePattern) {
+                mTxtInfo.setText(R.string.alp_msg_release_finger_when_done);
+                mBtnConfirm.setEnabled(false);
+                if (getString(R.string.alp_cmd_continue).equals(mBtnConfirm.getText()))
                     lastPattern = null;
             }
         }
 
         @Override
         public void onPatternDetected(List<Cell> pattern) {
-            switch (fMode) {
+            switch (mMode) {
             case CreatePattern:
                 doCreatePattern(pattern);
                 break;
@@ -227,19 +227,19 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onPatternCleared() {
-            fLockPatternView.setDisplayMode(DisplayMode.Correct);
+            mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
-            switch (fMode) {
+            switch (mMode) {
             case CreatePattern:
-                fBtnConfirm.setEnabled(false);
-                if (getString(R.string.cmd_continue).equals(fBtnConfirm.getText())) {
+                mBtnConfirm.setEnabled(false);
+                if (getString(R.string.alp_cmd_continue).equals(mBtnConfirm.getText())) {
                     lastPattern = null;
-                    fTxtInfo.setText(R.string.msg_draw_an_unlock_pattern);
+                    mTxtInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
                 } else
-                    fTxtInfo.setText(R.string.msg_redraw_pattern_to_confirm);
+                    mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
                 break;
             case ComparePattern:
-                fTxtInfo.setText(R.string.msg_draw_pattern_to_unlock);
+                mTxtInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
                 break;
             }
         }// onPatternCleared()
@@ -263,17 +263,17 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (getString(R.string.cmd_continue).equals(fBtnConfirm.getText())) {
-                fLockPatternView.clearPattern();
-                fTxtInfo.setText(R.string.msg_redraw_pattern_to_confirm);
-                fBtnConfirm.setText(R.string.cmd_confirm);
-                fBtnConfirm.setEnabled(false);
+            if (getString(R.string.alp_cmd_continue).equals(mBtnConfirm.getText())) {
+                mLockPatternView.clearPattern();
+                mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mBtnConfirm.setText(R.string.alp_cmd_confirm);
+                mBtnConfirm.setEnabled(false);
             } else {
-                if (fAutoSave)
-                    fPrefs.edit().putString(PaternSha1, lastPattern).commit();
+                if (mAutoSave)
+                    mPrefs.edit().putString(_PaternSha1, lastPattern).commit();
 
                 Intent i = new Intent();
-                i.putExtra(PaternSha1, lastPattern);
+                i.putExtra(_PaternSha1, lastPattern);
                 setResult(RESULT_OK, i);
                 finish();
             }
