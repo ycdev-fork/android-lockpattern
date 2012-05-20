@@ -26,17 +26,17 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/alp_lpa_button_cancel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@android:string/cancel" />
-
-            <Button
                 android:id="@+id/alp_lpa_button_confirm"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/alp_cmd_continue" />
+
+            <Button
+                android:id="@+id/alp_lpa_button_cancel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel" />
         </LinearLayout>
     </LinearLayout>
 
