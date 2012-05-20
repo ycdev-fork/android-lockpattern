@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.5
+Version: 1.5.1
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,11 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.5.1 +++
+ - Release: May 21, 2012
+
+ - set LockPatternView's gravity center;
 
 +++ Version 1.5 +++
  - Release: May 21, 2012

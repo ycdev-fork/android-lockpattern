@@ -21,7 +21,8 @@
         <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
             android:id="@+id/alp_lpa_lockPattern"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <LinearLayout
