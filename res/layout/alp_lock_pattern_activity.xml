@@ -18,11 +18,16 @@
             android:gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
-            android:id="@+id/alp_lpa_lockPattern"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_height="fill_parent" >
+
+            <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
+                android:id="@+id/alp_lpa_lockPattern"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
