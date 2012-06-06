@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.5.3 beta
+Version: 1.5.3
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,12 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.5.3 +++
+ - Release: June 07, 2012
+
+ - ability to change theme in runtime;
+ - save and restore controls' state after screen orientation changed;
 
 +++ Version 1.5.3 beta +++
  - Initialization: May 21, 2012
