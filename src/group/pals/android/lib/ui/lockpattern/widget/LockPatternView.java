@@ -185,8 +185,7 @@ public class LockPatternView extends View {
                 throw new IllegalArgumentException("row must be in range 0-2");
             }
             if (column < 0 || column > 2) {
-                throw new IllegalArgumentException(
-                        "column must be in range 0-2");
+                throw new IllegalArgumentException("column must be in range 0-2");
             }
         }
 
@@ -295,8 +294,8 @@ public class LockPatternView extends View {
         mBitmapArrowRedUp = getBitmapFor(R.drawable.alp_indicator_code_lock_drag_direction_red_up);
 
         // bitmaps have the size of the largest bitmap in this group
-        final Bitmap bitmaps[] = { mBitmapBtnDefault, mBitmapBtnTouched,
-                mBitmapCircleDefault, mBitmapCircleGreen, mBitmapCircleRed };
+        final Bitmap bitmaps[] = { mBitmapBtnDefault, mBitmapBtnTouched, mBitmapCircleDefault, mBitmapCircleGreen,
+                mBitmapCircleRed };
 
         for (Bitmap bitmap : bitmaps) {
             mBitmapWidth = Math.max(mBitmapWidth, bitmap.getWidth());
@@ -386,9 +385,8 @@ public class LockPatternView extends View {
         mPatternDisplayMode = displayMode;
         if (displayMode == DisplayMode.Animate) {
             if (mPattern.size() == 0) {
-                throw new IllegalStateException(
-                        "you must have a pattern to "
-                                + "animate if you want to set the display mode to animate");
+                throw new IllegalStateException("you must have a pattern to "
+                        + "animate if you want to set the display mode to animate");
             }
             mAnimatingPeriodStart = SystemClock.elapsedRealtime();
             final Cell first = mPattern.get(0);
@@ -397,6 +395,29 @@ public class LockPatternView extends View {
             clearPatternDrawLookup();
         }
         invalidate();
+    }
+
+    /**
+     * Retrieves last display mode. This method is useful in case of storing
+     * states and restoring them after screen orientation changed.
+     * 
+     * @return {@link DisplayMode}
+     * @since v1.5.3 beta
+     */
+    public DisplayMode getDisplayMode() {
+        return mPatternDisplayMode;
+    }
+
+    /**
+     * Retrieves current displaying pattern. This method is useful in case of
+     * storing states and restoring them after screen orientation changed.
+     * 
+     * @return current displaying pattern. <b>Note:</b> This is an independent
+     *         list with the view's pattern itself.
+     * @since v1.5.3 beta
+     */
+    public List<Cell> getPattern() {
+        return (List<Cell>) mPattern.clone();
     }
 
     private void notifyCellAdded() {
@@ -567,14 +588,12 @@ public class LockPatternView extends View {
                 fillInGapCell = Cell.of(fillInRow, fillInColumn);
             }
 
-            if (fillInGapCell != null
-                    && !mPatternDrawLookup[fillInGapCell.row][fillInGapCell.column]) {
+            if (fillInGapCell != null && !mPatternDrawLookup[fillInGapCell.row][fillInGapCell.column]) {
                 addCellToPattern(fillInGapCell);
             }
             addCellToPattern(cell);
             if (mEnableHapticFeedback) {
-                performHapticFeedback(
-                        HapticFeedbackConstants.VIRTUAL_KEY,
+                performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
                         HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING
                                 | HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
             }
@@ -714,10 +733,8 @@ public class LockPatternView extends View {
         // is busy...
         final int historySize = event.getHistorySize();
         for (int i = 0; i < historySize + 1; i++) {
-            final float x = i < historySize ? event.getHistoricalX(i) : event
-                    .getX();
-            final float y = i < historySize ? event.getHistoricalY(i) : event
-                    .getY();
+            final float x = i < historySize ? event.getHistoricalX(i) : event.getX();
+            final float y = i < historySize ? event.getHistoricalY(i) : event.getY();
             final int patternSizePreHitDetect = mPattern.size();
             Cell hitCell = detectAndAddHit(x, y);
             final int patternSize = mPattern.size();
@@ -769,8 +786,7 @@ public class LockPatternView extends View {
 
                     // Invalidate between the pattern's last cell and the
                     // current location
-                    invalidateRect.set((int) (left - radius),
-                            (int) (top - radius), (int) (right + radius),
+                    invalidateRect.set((int) (left - radius), (int) (top - radius), (int) (right + radius),
                             (int) (bottom + radius));
 
                     if (startX < oldX) {
@@ -791,8 +807,7 @@ public class LockPatternView extends View {
 
                     // Invalidate between the pattern's last cell and the
                     // previous location
-                    invalidateRect.union((int) (left - radius),
-                            (int) (top - radius), (int) (right + radius),
+                    invalidateRect.union((int) (left - radius), (int) (top - radius), (int) (right + radius),
                             (int) (bottom + radius));
 
                     // Invalidate between the pattern's new cell and the
@@ -803,8 +818,7 @@ public class LockPatternView extends View {
 
                         if (patternSize >= 2) {
                             // (re-using hitcell for old cell)
-                            hitCell = pattern.get(patternSize - 1
-                                    - (patternSize - patternSizePreHitDetect));
+                            hitCell = pattern.get(patternSize - 1 - (patternSize - patternSizePreHitDetect));
                             oldX = getCenterXForColumn(hitCell.column);
                             oldY = getCenterYForRow(hitCell.row);
 
@@ -831,10 +845,8 @@ public class LockPatternView extends View {
                         final float widthOffset = mSquareWidth / 2f;
                         final float heightOffset = mSquareHeight / 2f;
 
-                        invalidateRect.set((int) (left - widthOffset),
-                                (int) (top - heightOffset),
-                                (int) (right + widthOffset),
-                                (int) (bottom + heightOffset));
+                        invalidateRect.set((int) (left - widthOffset), (int) (top - heightOffset),
+                                (int) (right + widthOffset), (int) (bottom + heightOffset));
                     }
 
                     invalidate(invalidateRect);
@@ -886,9 +898,8 @@ public class LockPatternView extends View {
             final float widthOffset = mSquareWidth / 2f;
             final float heightOffset = mSquareHeight / 2f;
 
-            invalidate((int) (startX - widthOffset),
-                    (int) (startY - heightOffset),
-                    (int) (startX + widthOffset), (int) (startY + heightOffset));
+            invalidate((int) (startX - widthOffset), (int) (startY - heightOffset), (int) (startX + widthOffset),
+                    (int) (startY + heightOffset));
         }
         mInProgressX = x;
         mInProgressY = y;
@@ -920,8 +931,7 @@ public class LockPatternView extends View {
 
             // + 1 so we pause on complete pattern
             final int oneCycle = (count + 1) * MILLIS_PER_CIRCLE_ANIMATING;
-            final int spotInCycle = (int) (SystemClock.elapsedRealtime() - mAnimatingPeriodStart)
-                    % oneCycle;
+            final int spotInCycle = (int) (SystemClock.elapsedRealtime() - mAnimatingPeriodStart) % oneCycle;
             final int numCircles = spotInCycle / MILLIS_PER_CIRCLE_ANIMATING;
 
             clearPatternDrawLookup();
@@ -932,8 +942,7 @@ public class LockPatternView extends View {
 
             // figure out in progress portion of ghosting line
 
-            final boolean needToUpdateInProgressPoint = numCircles > 0
-                    && numCircles < count;
+            final boolean needToUpdateInProgressPoint = numCircles > 0 && numCircles < count;
 
             if (needToUpdateInProgressPoint) {
                 final float percentageOfNextCircle = ((float) (spotInCycle % MILLIS_PER_CIRCLE_ANIMATING))
@@ -944,10 +953,8 @@ public class LockPatternView extends View {
                 final float centerY = getCenterYForRow(currentCell.row);
 
                 final Cell nextCell = pattern.get(numCircles);
-                final float dx = percentageOfNextCircle
-                        * (getCenterXForColumn(nextCell.column) - centerX);
-                final float dy = percentageOfNextCircle
-                        * (getCenterYForRow(nextCell.row) - centerY);
+                final float dx = percentageOfNextCircle * (getCenterXForColumn(nextCell.column) - centerX);
+                final float dy = percentageOfNextCircle * (getCenterYForRow(nextCell.row) - centerY);
                 mInProgressX = centerX + dx;
                 mInProgressY = centerY + dy;
             }
@@ -1033,8 +1040,7 @@ public class LockPatternView extends View {
             }
 
             // add last in progress section
-            if ((mPatternInProgress || mPatternDisplayMode == DisplayMode.Animate)
-                    && anyCircles) {
+            if ((mPatternInProgress || mPatternDisplayMode == DisplayMode.Animate) && anyCircles) {
                 currentPath.lineTo(mInProgressX, mInProgressY);
             }
             canvas.drawPath(currentPath, mPathPaint);
@@ -1043,8 +1049,7 @@ public class LockPatternView extends View {
         mPaint.setFilterBitmap(oldFlag); // restore default flag
     }
 
-    private void drawArrow(Canvas canvas, float leftX, float topY, Cell start,
-            Cell end) {
+    private void drawArrow(Canvas canvas, float leftX, float topY, Cell start, Cell end) {
         boolean green = mPatternDisplayMode != DisplayMode.Wrong;
 
         final int endRow = end.row;
@@ -1067,8 +1072,7 @@ public class LockPatternView extends View {
 
         // the up arrow bitmap is at 12:00, so find the rotation from x axis and
         // add 90 degrees.
-        final float theta = (float) Math.atan2((double) (endRow - startRow),
-                (double) (endColumn - startColumn));
+        final float theta = (float) Math.atan2((double) (endRow - startRow), (double) (endColumn - startColumn));
         final float angle = (float) Math.toDegrees(theta) + 90.0f;
 
         // compose matrix
@@ -1098,13 +1102,11 @@ public class LockPatternView extends View {
      * @param partOfPattern
      *            Whether this circle is part of the pattern.
      */
-    private void drawCircle(Canvas canvas, int leftX, int topY,
-            boolean partOfPattern) {
+    private void drawCircle(Canvas canvas, int leftX, int topY, boolean partOfPattern) {
         Bitmap outerCircle;
         Bitmap innerCircle;
 
-        if (!partOfPattern
-                || (mInStealthMode && mPatternDisplayMode != DisplayMode.Wrong)) {
+        if (!partOfPattern || (mInStealthMode && mPatternDisplayMode != DisplayMode.Wrong)) {
             // unselected circle
             outerCircle = mBitmapCircleDefault;
             innerCircle = mBitmapBtnDefault;
@@ -1116,14 +1118,12 @@ public class LockPatternView extends View {
             // the pattern is wrong
             outerCircle = mBitmapCircleRed;
             innerCircle = mBitmapBtnDefault;
-        } else if (mPatternDisplayMode == DisplayMode.Correct
-                || mPatternDisplayMode == DisplayMode.Animate) {
+        } else if (mPatternDisplayMode == DisplayMode.Correct || mPatternDisplayMode == DisplayMode.Animate) {
             // the pattern is correct
             outerCircle = mBitmapCircleGreen;
             innerCircle = mBitmapBtnDefault;
         } else {
-            throw new IllegalStateException("unknown display mode "
-                    + mPatternDisplayMode);
+            throw new IllegalStateException("unknown display mode " + mPatternDisplayMode);
         }
 
         final int width = mBitmapWidth;
@@ -1151,18 +1151,15 @@ public class LockPatternView extends View {
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(superState,
-                LockPatternUtils.patternToString(mPattern),
-                mPatternDisplayMode.ordinal(), mInputEnabled, mInStealthMode,
-                mEnableHapticFeedback);
+        return new SavedState(superState, LockPatternUtils.patternToString(mPattern), mPatternDisplayMode.ordinal(),
+                mInputEnabled, mInStealthMode, mEnableHapticFeedback);
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         final SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
-        setPattern(DisplayMode.Correct,
-                LockPatternUtils.stringToPattern(ss.getSerializedPattern()));
+        setPattern(DisplayMode.Correct, LockPatternUtils.stringToPattern(ss.getSerializedPattern()));
         mPatternDisplayMode = DisplayMode.values()[ss.getDisplayMode()];
         mInputEnabled = ss.isInputEnabled();
         mInStealthMode = ss.isInStealthMode();
@@ -1183,9 +1180,8 @@ public class LockPatternView extends View {
         /**
          * Constructor called from {@link LockPatternView#onSaveInstanceState()}
          */
-        private SavedState(Parcelable superState, String serializedPattern,
-                int displayMode, boolean inputEnabled, boolean inStealthMode,
-                boolean tactileFeedbackEnabled) {
+        private SavedState(Parcelable superState, String serializedPattern, int displayMode, boolean inputEnabled,
+                boolean inStealthMode, boolean tactileFeedbackEnabled) {
             super(superState);
             mSerializedPattern = serializedPattern;
             mDisplayMode = displayMode;
