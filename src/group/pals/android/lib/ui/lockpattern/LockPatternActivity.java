@@ -21,6 +21,7 @@ import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.DisplayMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -224,9 +225,11 @@ public class LockPatternActivity extends Activity {
     private int mRetryCount = 0;
 
     private void doComparePattern(List<Cell> pattern) {
-        mLastPattern = pattern;
         if (pattern == null)
             return;
+
+        mLastPattern = new ArrayList<LockPatternView.Cell>();
+        mLastPattern.addAll(pattern);
 
         String currentPattern = getIntent().getStringExtra(_PaternSha1);
         if (currentPattern == null)
@@ -258,7 +261,8 @@ public class LockPatternActivity extends Activity {
         }
 
         if (mLastPattern == null) {
-            mLastPattern = pattern;
+            mLastPattern = new ArrayList<LockPatternView.Cell>();
+            mLastPattern.addAll(pattern);
             mTxtInfo.setText(R.string.alp_msg_pattern_recorded);
             mBtnConfirm.setEnabled(true);
         } else {

@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 1.5.4 beta
+Version: 1.5.4
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,12 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 1.5.4 +++
+ - Release: June 09, 2012
+
+ - Fix bug: in mode CreatePattern, LockPatternActivity recognized wrong
+   the confirmed pattern;
 
 +++ Version 1.5.4 beta +++
  - Initialization: June 07, 2012
