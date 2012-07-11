@@ -16,6 +16,7 @@
 
 package group.pals.android.lib.ui.lockpattern;
 
+import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
@@ -103,6 +104,13 @@ public class LockPatternActivity extends Activity {
      * Key to hold pattern result (in SHA-1 string).
      */
     public static final String _PaternSha1 = _ClassName + ".pattern_sha1";
+
+    /**
+     * Key to hold implemented class of {@link IEncrypter}.
+     * 
+     * @since v2 beta
+     */
+    public static final String _EncrypterClass = IEncrypter.class.getName();
 
     private SharedPreferences mPrefs;
     private LPMode mMode;
