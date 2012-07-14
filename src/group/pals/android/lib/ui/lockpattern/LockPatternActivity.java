@@ -17,6 +17,7 @@
 package group.pals.android.lib.ui.lockpattern;
 
 import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
+import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
@@ -101,12 +102,24 @@ public class LockPatternActivity extends Activity {
     public static final String _MaxRetry = _ClassName + ".max_retry";
 
     /**
-     * Key to hold pattern result (in SHA-1 string).
+     * Key to hold pattern result (in SHA-1 string).<br>
+     * From v2 beta, this key is deprecated, please change to or use
+     * {@link #_Pattern}.
      */
+    @Deprecated
     public static final String _PaternSha1 = _ClassName + ".pattern_sha1";
 
     /**
-     * Key to hold implemented class of {@link IEncrypter}.
+     * Key to hold pattern. Can be a SHA-1 <i><b>or</b></i> an encrypted string
+     * of its (if {@link #_EncrypterClass} is set).
+     * 
+     * @since v2 beta
+     */
+    public static final String _Pattern = _ClassName + ".pattern";
+
+    /**
+     * Key to hold implemented class of {@link IEncrypter}.<br>
+     * If {@code null}, nothing will be used.
      * 
      * @since v2 beta
      */
@@ -116,6 +129,7 @@ public class LockPatternActivity extends Activity {
     private LPMode mMode;
     private int mMaxRetry;
     private boolean mAutoSave;
+    private IEncrypter mEncrypter;
 
     private TextView mTxtInfo;
     private LockPatternView mLockPatternView;
@@ -149,6 +163,16 @@ public class LockPatternActivity extends Activity {
 
         mMaxRetry = getIntent().getIntExtra(_MaxRetry, 5);
         mAutoSave = getIntent().getBooleanExtra(_AutoSave, true);
+
+        // encrypter
+        Class<?> encrypterClass = (Class<?>) getIntent().getSerializableExtra(_EncrypterClass);
+        if (encrypterClass != null) {
+            try {
+                mEncrypter = (IEncrypter) encrypterClass.newInstance();
+            } catch (Throwable t) {
+                throw new InvalidEncrypterException();
+            }
+        }
 
         init();
     }// onCreate()
@@ -230,6 +254,31 @@ public class LockPatternActivity extends Activity {
         setResult(RESULT_CANCELED);
     }// init()
 
+    /**
+     * Encodes {@code pattern} to string.<br>
+     * 
+     * <li>If {@link #_EncrypterClass} is not set, return SHA-1 of
+     * {@code pattern}.</li>
+     * 
+     * <li>If {@link #_EncrypterClass} is set, calculate SHA-1 of
+     * {@code pattern}, then encrypt the SHA-1 value and return result.</li>
+     * 
+     * @param pattern
+     * @return SHA-1 of {@code pattern}, or encrypted string of it.
+     * @since v2 beta
+     */
+    private String encodePattern(List<Cell> pattern) {
+        if (mEncrypter == null) {
+            return LockPatternUtils.patternToSha1(pattern);
+        } else {
+            try {
+                return mEncrypter.encrypt(LockPatternUtils.patternToSha1(pattern));
+            } catch (Throwable t) {
+                throw new InvalidEncrypterException();
+            }
+        }
+    }// encodePattern()
+
     private int mRetryCount = 0;
 
     private void doComparePattern(List<Cell> pattern) {
@@ -239,11 +288,11 @@ public class LockPatternActivity extends Activity {
         mLastPattern = new ArrayList<LockPatternView.Cell>();
         mLastPattern.addAll(pattern);
 
-        String currentPattern = getIntent().getStringExtra(_PaternSha1);
+        String currentPattern = getIntent().getStringExtra(_Pattern);
         if (currentPattern == null)
-            currentPattern = mPrefs.getString(_PaternSha1, null);
+            currentPattern = mPrefs.getString(_Pattern, null);
 
-        if (LockPatternUtils.patternToSha1(pattern).equals(currentPattern)) {
+        if (encodePattern(pattern).equals(currentPattern)) {
             setResult(RESULT_OK);
             finish();
         } else {
@@ -274,7 +323,7 @@ public class LockPatternActivity extends Activity {
             mTxtInfo.setText(R.string.alp_msg_pattern_recorded);
             mBtnConfirm.setEnabled(true);
         } else {
-            if (LockPatternUtils.patternToSha1(mLastPattern).equals(LockPatternUtils.patternToSha1(pattern))) {
+            if (encodePattern(mLastPattern).equals(encodePattern(pattern))) {
                 mTxtInfo.setText(R.string.alp_msg_your_new_unlock_pattern);
                 mBtnConfirm.setEnabled(true);
             } else {
@@ -356,10 +405,10 @@ public class LockPatternActivity extends Activity {
                 mBtnConfirm.setEnabled(false);
             } else {
                 if (mAutoSave)
-                    mPrefs.edit().putString(_PaternSha1, LockPatternUtils.patternToSha1(mLastPattern)).commit();
+                    mPrefs.edit().putString(_Pattern, encodePattern(mLastPattern)).commit();
 
                 Intent i = new Intent();
-                i.putExtra(_PaternSha1, LockPatternUtils.patternToSha1(mLastPattern));
+                i.putExtra(_Pattern, encodePattern(mLastPattern));
                 setResult(RESULT_OK, i);
                 finish();
             }
