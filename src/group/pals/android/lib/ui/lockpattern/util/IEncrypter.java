@@ -16,6 +16,8 @@
 
 package group.pals.android.lib.ui.lockpattern.util;
 
+import android.content.Context;
+
 /**
  * Interface for encrypter.
  * 
@@ -31,5 +33,17 @@ public interface IEncrypter {
      * @param s
      * @return the encrypted string.
      */
+    @Deprecated
     String encrypt(String s);
+
+    /**
+     * Encrypt {@code s}.
+     * 
+     * @param context
+     *            {@link Context}
+     * @param s
+     * @return the encrypted string.
+     * @since v2.1 beta
+     */
+    String encrypt(Context context, String s);
 }

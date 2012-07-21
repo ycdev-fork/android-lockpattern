@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 2
+Version: 2.1 beta
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,9 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 2.1 beta +++
+ - Initialization: July 21, 2012
 
 +++ Version 2 +++
  - Release: July 15, 2012
