@@ -272,7 +272,7 @@ public class LockPatternActivity extends Activity {
             return LockPatternUtils.patternToSha1(pattern);
         } else {
             try {
-                return mEncrypter.encrypt(LockPatternUtils.patternToSha1(pattern));
+                return mEncrypter.encrypt(this, LockPatternUtils.patternToSha1(pattern));
             } catch (Throwable t) {
                 throw new InvalidEncrypterException();
             }
