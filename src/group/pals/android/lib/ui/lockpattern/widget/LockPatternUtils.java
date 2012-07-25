@@ -30,8 +30,8 @@ import java.util.Locale;
  */
 public class LockPatternUtils {
 
-    public static final String Utf8 = "utf-8";
-    public static final String Sha1 = "sha-1";
+    public static final String _Utf8 = "utf-8";
+    public static final String _Sha1 = "sha-1";
 
     /**
      * Deserialize a pattern.
@@ -44,7 +44,7 @@ public class LockPatternUtils {
         List<LockPatternView.Cell> result = Lists.newArrayList();
 
         try {
-            final byte[] bytes = string.getBytes(Utf8);
+            final byte[] bytes = string.getBytes(_Utf8);
             for (int i = 0; i < bytes.length; i++) {
                 byte b = bytes[i];
                 result.add(LockPatternView.Cell.of(b / 3, b % 3));
@@ -75,7 +75,7 @@ public class LockPatternUtils {
             res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
         }
         try {
-            return new String(res, Utf8);
+            return new String(res, _Utf8);
         } catch (UnsupportedEncodingException e) {
             // never catch this
             return "";
@@ -92,8 +92,8 @@ public class LockPatternUtils {
      */
     public static String patternToSha1(List<LockPatternView.Cell> pattern) {
         try {
-            MessageDigest md = MessageDigest.getInstance(Sha1);
-            md.update(patternToString(pattern).getBytes(Utf8));
+            MessageDigest md = MessageDigest.getInstance(_Sha1);
+            md.update(patternToString(pattern).getBytes(_Utf8));
 
             byte[] digest = md.digest();
             BigInteger bi = new BigInteger(1, digest);
