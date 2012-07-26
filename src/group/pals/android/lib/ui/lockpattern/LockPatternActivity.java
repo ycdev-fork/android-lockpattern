@@ -155,14 +155,19 @@ public class LockPatternActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        mPrefs = getSharedPreferences(LockPatternActivity.class.getSimpleName(), 0);
+        mPrefs = getSharedPreferences(LockPatternActivity.class.getName(), 0);
 
         mMode = (LPMode) getIntent().getSerializableExtra(_Mode);
         if (mMode == null)
             mMode = LPMode.CreatePattern;
 
         mMaxRetry = getIntent().getIntExtra(_MaxRetry, 5);
-        mAutoSave = getIntent().getBooleanExtra(_AutoSave, true);
+
+        // set this to false by default, for security enhancement
+        mAutoSave = getIntent().getBooleanExtra(_AutoSave, false);
+        // if false, clear previous values (currently it is the pattern only)
+        if (!mAutoSave)
+            mPrefs.edit().clear().commit();
 
         // encrypter
         Class<?> encrypterClass = (Class<?>) getIntent().getSerializableExtra(_EncrypterClass);
