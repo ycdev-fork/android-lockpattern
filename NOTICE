@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 2.1 beta
+Version: 2.1
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,13 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 2.1 +++
+ - Release: July 29, 2012
+
+ - turn off AutoSave by default;
+ - add new method IEncrypter.encrypt(Context, String);
+ - set method IEncrypter.encrypt(String) as deprecated;
 
 +++ Version 2.1 beta +++
  - Initialization: July 21, 2012
