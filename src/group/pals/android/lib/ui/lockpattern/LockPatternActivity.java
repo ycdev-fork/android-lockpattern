@@ -92,26 +92,26 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Specify if the pattern will be saved automatically or not. Default =
-     * {@code true}
+     * {@code false}
      */
     public static final String _AutoSave = _ClassName + ".auto_save";
 
     /**
-     * Maximum retry times, in mode {@link #ComparePattern}
+     * Maximum retry times, in mode {@link #ComparePattern}, default is {@code 5}.
      */
     public static final String _MaxRetry = _ClassName + ".max_retry";
 
     /**
-     * Key to hold pattern result (in SHA-1 string).<br>
-     * From v2 beta, this key is deprecated, please change to or use
-     * {@link #_Pattern}.
+     * Key to hold pattern result (in form of a SHA-1 string).<br>
+     * From v2 beta, this key is <b><i>deprecated</i></b> and <b><i>no
+     * longer used</i></b>, please use {@link #_Pattern} instead.
      */
     @Deprecated
     public static final String _PaternSha1 = _ClassName + ".pattern_sha1";
 
     /**
-     * Key to hold pattern. Can be a SHA-1 <i><b>or</b></i> an encrypted string
-     * of its (if {@link #_EncrypterClass} is set).
+     * Key to hold pattern. Can be a SHA-1 string <i><b>or</b></i> an encrypted string
+     * of its (if {@link #_EncrypterClass} is used).
      * 
      * @since v2 beta
      */
@@ -260,16 +260,16 @@ public class LockPatternActivity extends Activity {
     }// init()
 
     /**
-     * Encodes {@code pattern} to string.<br>
+     * Encodes {@code pattern} to a string.<br>
      * 
      * <li>If {@link #_EncrypterClass} is not set, return SHA-1 of
      * {@code pattern}.</li>
      * 
      * <li>If {@link #_EncrypterClass} is set, calculate SHA-1 of
-     * {@code pattern}, then encrypt the SHA-1 value and return result.</li>
+     * {@code pattern}, then encrypt the SHA-1 value and return the result.</li>
      * 
      * @param pattern
-     * @return SHA-1 of {@code pattern}, or encrypted string of it.
+     * @return SHA-1 of {@code pattern}, or encrypted string of its.
      * @since v2 beta
      */
     private String encodePattern(List<Cell> pattern) {
@@ -351,7 +351,7 @@ public class LockPatternActivity extends Activity {
                 if (getString(R.string.alp_cmd_continue).equals(mBtnConfirm.getText()))
                     mLastPattern = null;
             }
-        }
+        }// onPatternStart()
 
         @Override
         public void onPatternDetected(List<Cell> pattern) {
