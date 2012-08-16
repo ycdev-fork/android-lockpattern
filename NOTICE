@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 2.1
+Version: 2.2
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -21,6 +21,12 @@ limitations under the License.
 ===============================================================
 
 History:
+
++++ Version 2.2 +++
+ - Release: August 17, 2012
+
+ - added: Spanish language; special thanks to C. - a kind friend who helped
+   us translate the library into his mother language;
 
 +++ Version 2.1 +++
  - Release: July 29, 2012
