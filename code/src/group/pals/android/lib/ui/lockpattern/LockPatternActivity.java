@@ -97,21 +97,14 @@ public class LockPatternActivity extends Activity {
     public static final String _AutoSave = _ClassName + ".auto_save";
 
     /**
-     * Maximum retry times, in mode {@link #ComparePattern}, default is {@code 5}.
+     * Maximum retry times, in mode {@link #ComparePattern}, default is
+     * {@code 5}.
      */
     public static final String _MaxRetry = _ClassName + ".max_retry";
 
     /**
-     * Key to hold pattern result (in form of a SHA-1 string).<br>
-     * From v2 beta, this key is <b><i>deprecated</i></b> and <b><i>no
-     * longer used</i></b>, please use {@link #_Pattern} instead.
-     */
-    @Deprecated
-    public static final String _PaternSha1 = _ClassName + ".pattern_sha1";
-
-    /**
-     * Key to hold pattern. Can be a SHA-1 string <i><b>or</b></i> an encrypted string
-     * of its (if {@link #_EncrypterClass} is used).
+     * Key to hold pattern. Can be a SHA-1 string <i><b>or</b></i> an encrypted
+     * string of its (if {@link #_EncrypterClass} is used).
      * 
      * @since v2 beta
      */
