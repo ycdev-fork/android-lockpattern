@@ -30,15 +30,6 @@ public interface IEncrypter {
     /**
      * Encrypt {@code s}.
      * 
-     * @param s
-     * @return the encrypted string.
-     */
-    @Deprecated
-    String encrypt(String s);
-
-    /**
-     * Encrypt {@code s}.
-     * 
      * @param context
      *            {@link Context}
      * @param s
