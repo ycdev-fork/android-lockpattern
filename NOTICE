@@ -23,6 +23,12 @@ limitations under the License.
 History:
 
 +++ Version 2.3 +++
+ - Update info: August 28, 2012
+
+ - The serious bug was invalid:
+   + http://code.google.com/p/android-lockpattern/issues/detail?id=1
+
++++ Version 2.3 +++
  - Release: August 28, 2012
 
  - Fixed serious bug: key _PaternSha1 is deprecated but is used to return the pattern;
