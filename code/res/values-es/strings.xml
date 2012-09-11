@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   We sincerely thank C. - a kind friend who helped us translate this file into
+   his mother language.
+-->
+
 <resources>
 
     <string name="alp_app_name">android-lockpattern</string>
