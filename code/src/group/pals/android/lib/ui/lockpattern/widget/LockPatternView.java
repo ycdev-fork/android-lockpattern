@@ -416,6 +416,7 @@ public class LockPatternView extends View {
      *         list with the view's pattern itself.
      * @since v1.5.3 beta
      */
+    @SuppressWarnings("unchecked")
     public List<Cell> getPattern() {
         return (List<Cell>) mPattern.clone();
     }
