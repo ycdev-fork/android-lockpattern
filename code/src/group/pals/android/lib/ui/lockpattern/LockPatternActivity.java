@@ -137,14 +137,16 @@ public class LockPatternActivity extends Activity {
          * THEME
          */
 
-        int theme;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            theme = getIntent().getIntExtra(_Theme, android.R.style.Theme_DeviceDefault);
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-            theme = getIntent().getIntExtra(_Theme, android.R.style.Theme_Holo);
-        else
-            theme = getIntent().getIntExtra(_Theme, android.R.style.Theme);
-        setTheme(theme);
+        if (getIntent().hasExtra(_Theme)) {
+            int theme;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+                theme = getIntent().getIntExtra(_Theme, android.R.style.Theme_DeviceDefault);
+            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                theme = getIntent().getIntExtra(_Theme, android.R.style.Theme_Holo);
+            else
+                theme = getIntent().getIntExtra(_Theme, android.R.style.Theme);
+            setTheme(theme);
+        }
 
         super.onCreate(savedInstanceState);
 
