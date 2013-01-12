@@ -34,6 +34,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -132,13 +133,22 @@ public class LockPatternActivity extends Activity {
     public static final String _EncrypterClass = IEncrypter.class.getName();
 
     /**
+     * You can provide an {@link ResultReceiver} with this key. The activity
+     * will notify your receiver the same result code and intent data as you
+     * will receive them in {@code onActivityResult()}.
+     * 
+     * @since v2.4 beta
+     */
+    public static final String _ResultReceiver = _ClassName + ".result_receiver";
+
+    /**
      * If you want to execute an operation after successfully creating new
      * pattern or comparing patterns, use this key with a {@link PendingIntent}.
      * 
      * @since v2.4 beta
      * @see #_CancelledPendingIntent
      */
-    public static final String _OkPendingIntent = _ClassName + ".ok_" + PendingIntent.class.getSimpleName();
+    public static final String _OkPendingIntent = _ClassName + ".ok_pending_intent";
 
     /**
      * If you want to execute an operation after un-successfully creating new
@@ -147,8 +157,7 @@ public class LockPatternActivity extends Activity {
      * @since v2.4 beta
      * @see #_OkPendingIntent
      */
-    public static final String _CancelledPendingIntent = _ClassName + ".cancelled_"
-            + PendingIntent.class.getSimpleName();
+    public static final String _CancelledPendingIntent = _ClassName + ".cancelled_pending_intent";
 
     /*
      * FIELDS
@@ -157,6 +166,7 @@ public class LockPatternActivity extends Activity {
     private int mMaxRetry;
     private boolean mAutoSave;
     private IEncrypter mEncrypter;
+    private ResultReceiver mResultReceiver;
     private PendingIntent mOkPendingIntent;
     private PendingIntent mCancelledPendingIntent;
 
@@ -220,8 +230,9 @@ public class LockPatternActivity extends Activity {
         }
 
         /*
-         * Pending intents.
+         * ResultReceiver and PendingIntents.
          */
+        mResultReceiver = getIntent().getParcelableExtra(_ResultReceiver);
         mOkPendingIntent = getIntent().getParcelableExtra(_OkPendingIntent);
         mCancelledPendingIntent = getIntent().getParcelableExtra(_CancelledPendingIntent);
 
@@ -353,34 +364,14 @@ public class LockPatternActivity extends Activity {
         if (currentPattern == null)
             currentPattern = mPrefs.getString(_Pattern, null);
 
-        if (encodePattern(pattern).equals(currentPattern)) {
-            setResult(RESULT_OK);
-            finish();
-
-            try {
-                if (mOkPendingIntent != null)
-                    mOkPendingIntent.send();
-            } catch (CanceledException e) {
-                /*
-                 * Ignore it.
-                 */
-            }
-        } else {
+        if (encodePattern(pattern).equals(currentPattern))
+            finishWithResultOk(null);
+        else {
             mRetryCount++;
 
-            if (mRetryCount >= mMaxRetry) {
-                setResult(RESULT_CANCELED);
-                finish();
-
-                try {
-                    if (mCancelledPendingIntent != null)
-                        mCancelledPendingIntent.send();
-                } catch (CanceledException e) {
-                    /*
-                     * Ignore it.
-                     */
-                }
-            } else {
+            if (mRetryCount >= mMaxRetry)
+                finishWithResultCancelled();
+            else {
                 mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                 mTxtInfo.setText(R.string.alp_msg_try_again);
             }
@@ -412,6 +403,66 @@ public class LockPatternActivity extends Activity {
             }
         }
     }// doCreatePattern()
+
+    /**
+     * Finishes activity with {@link Activity#RESULT_OK}.
+     * 
+     * @param pattern
+     *            the pattern, if this is in mode creating pattern. Can be
+     *            {@code null}.
+     */
+    private void finishWithResultOk(String pattern) {
+        if (pattern != null) {
+            Intent i = new Intent();
+            i.putExtra(_Pattern, pattern);
+            setResult(RESULT_OK, i);
+        } else
+            setResult(RESULT_OK);
+
+        finish();
+
+        if (mResultReceiver != null) {
+            Bundle bundle = null;
+            if (pattern != null) {
+                bundle = new Bundle();
+                bundle.putString(_Pattern, pattern);
+            }
+            mResultReceiver.send(RESULT_OK, bundle);
+        }
+
+        try {
+            if (mOkPendingIntent != null)
+                mOkPendingIntent.send();
+        } catch (CanceledException e) {
+            /*
+             * Ignore it.
+             */
+        }
+    }// finishWithResultOk()
+
+    /**
+     * Finishes the activity with {@link Activity#RESULT_CANCELED}.
+     */
+    private void finishWithResultCancelled() {
+        setResult(RESULT_CANCELED);
+        finish();
+
+        if (mResultReceiver != null)
+            mResultReceiver.send(RESULT_CANCELED, null);
+
+        try {
+            if (mCancelledPendingIntent != null)
+                mCancelledPendingIntent.send();
+        } catch (CanceledException e) {
+            /*
+             * Ignore it.
+             */
+        }
+    }// finishWithResultCancelled()
+
+    /*
+     * LISTENERS
+     */
 
     private final LockPatternView.OnPatternListener mPatternViewListener = new LockPatternView.OnPatternListener() {
 
@@ -461,17 +512,7 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            setResult(RESULT_CANCELED);
-            finish();
-
-            try {
-                if (mCancelledPendingIntent != null)
-                    mCancelledPendingIntent.send();
-            } catch (CanceledException e) {
-                /*
-                 * Ignore it.
-                 */
-            }
+            finishWithResultCancelled();
         }// onClick()
     };// mBtnCancelOnClickListener
 
@@ -488,19 +529,7 @@ public class LockPatternActivity extends Activity {
                 if (mAutoSave)
                     mPrefs.edit().putString(_Pattern, encodePattern(mLastPattern)).commit();
 
-                Intent i = new Intent(getIntent().getAction());
-                i.putExtra(_Pattern, encodePattern(mLastPattern));
-                setResult(RESULT_OK, i);
-                finish();
-
-                try {
-                    if (mOkPendingIntent != null)
-                        mOkPendingIntent.send();
-                } catch (CanceledException e) {
-                    /*
-                     * Ignore it.
-                     */
-                }
+                finishWithResultOk(encodePattern(mLastPattern));
             }
         }// onClick()
     };// mBtnConfirmOnClickListener
