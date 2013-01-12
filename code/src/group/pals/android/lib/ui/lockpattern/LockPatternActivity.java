@@ -66,6 +66,8 @@ public class LockPatternActivity extends Activity {
      * 
      * @since v2.4 beta
      * @see #_EncrypterClass
+     * @see #_OkPendingIntent
+     * @see #_CancelledPendingIntent
      */
     public static final String _ActionCreatePattern = _ClassName + ".create_pattern";
 
@@ -80,6 +82,8 @@ public class LockPatternActivity extends Activity {
      * @since v2.4 beta
      * @see #_Pattern
      * @see #_EncrypterClass
+     * @see #_OkPendingIntent
+     * @see #_CancelledPendingIntent
      */
     public static final String _ActionComparePattern = _ClassName + ".compare_pattern";
 
@@ -128,26 +132,23 @@ public class LockPatternActivity extends Activity {
     public static final String _EncrypterClass = IEncrypter.class.getName();
 
     /**
-     * If you want to execute an operation after creating new pattern or
-     * comparing patterns, use this key with a {@link PendingIntent}. Your
-     * intent will be called with either {@link Activity#RESULT_OK} or
-     * {@link Activity#RESULT_CANCELED}, an intent with original action you
-     * used, and along with these information:
-     * <p>
-     * In case of creating new pattern, if OK, your intent will be called with
-     * {@link Activity#RESULT_OK} and an intent containing {@link #_Pattern}. If
-     * the user cancelled, your intent will be called with
-     * {@link Activity#RESULT_CANCELED}.
-     * </p>
-     * <p>
-     * In case of comparing patterns, if OK, your intent will be called with
-     * {@link Activity#RESULT_OK}; if not, your intent will be called with
-     * {@link Activity#RESULT_CANCELED}.
-     * </p>
+     * If you want to execute an operation after successfully creating new
+     * pattern or comparing patterns, use this key with a {@link PendingIntent}.
      * 
      * @since v2.4 beta
+     * @see #_CancelledPendingIntent
      */
-    public static final String _PendingIntent = _ClassName + "." + PendingIntent.class.getSimpleName();
+    public static final String _OkPendingIntent = _ClassName + ".ok_" + PendingIntent.class.getSimpleName();
+
+    /**
+     * If you want to execute an operation after un-successfully creating new
+     * pattern or comparing patterns, use this key with a {@link PendingIntent}.
+     * 
+     * @since v2.4 beta
+     * @see #_OkPendingIntent
+     */
+    public static final String _CancelledPendingIntent = _ClassName + ".cancelled_"
+            + PendingIntent.class.getSimpleName();
 
     /*
      * FIELDS
@@ -156,7 +157,8 @@ public class LockPatternActivity extends Activity {
     private int mMaxRetry;
     private boolean mAutoSave;
     private IEncrypter mEncrypter;
-    private PendingIntent mPendingIntent;
+    private PendingIntent mOkPendingIntent;
+    private PendingIntent mCancelledPendingIntent;
 
     /*
      * CONTROLS
@@ -218,9 +220,10 @@ public class LockPatternActivity extends Activity {
         }
 
         /*
-         * Pending intent.
+         * Pending intents.
          */
-        mPendingIntent = getIntent().getParcelableExtra(_PendingIntent);
+        mOkPendingIntent = getIntent().getParcelableExtra(_OkPendingIntent);
+        mCancelledPendingIntent = getIntent().getParcelableExtra(_CancelledPendingIntent);
 
         init();
     }// onCreate()
@@ -355,8 +358,8 @@ public class LockPatternActivity extends Activity {
             finish();
 
             try {
-                if (mPendingIntent != null)
-                    mPendingIntent.send(getApplicationContext(), RESULT_OK, new Intent(getIntent().getAction()));
+                if (mOkPendingIntent != null)
+                    mOkPendingIntent.send();
             } catch (CanceledException e) {
                 /*
                  * Ignore it.
@@ -370,9 +373,8 @@ public class LockPatternActivity extends Activity {
                 finish();
 
                 try {
-                    if (mPendingIntent != null)
-                        mPendingIntent.send(getApplicationContext(), RESULT_CANCELED, new Intent(getIntent()
-                                .getAction()));
+                    if (mCancelledPendingIntent != null)
+                        mCancelledPendingIntent.send();
                 } catch (CanceledException e) {
                     /*
                      * Ignore it.
@@ -463,8 +465,8 @@ public class LockPatternActivity extends Activity {
             finish();
 
             try {
-                if (mPendingIntent != null)
-                    mPendingIntent.send(getApplicationContext(), RESULT_CANCELED, new Intent(getIntent().getAction()));
+                if (mCancelledPendingIntent != null)
+                    mCancelledPendingIntent.send();
             } catch (CanceledException e) {
                 /*
                  * Ignore it.
@@ -492,8 +494,8 @@ public class LockPatternActivity extends Activity {
                 finish();
 
                 try {
-                    if (mPendingIntent != null)
-                        mPendingIntent.send(getApplicationContext(), RESULT_OK, i);
+                    if (mOkPendingIntent != null)
+                        mOkPendingIntent.send();
                 } catch (CanceledException e) {
                     /*
                      * Ignore it.
