@@ -27,29 +27,30 @@
         android:layout_weight=".3" >
 
         <TextView
-            android:id="@+id/alp_lpa_text_info"
+            android:id="@+id/alp_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/alp_lpa_layout_footer"
+            android:layout_above="@+id/alp_footer"
             android:gravity="center_horizontal|top"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textIsSelectable="true" />
 
         <LinearLayout
-            android:id="@+id/alp_lpa_layout_footer"
+            android:id="@+id/alp_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/alp_lpa_button_confirm"
+                android:id="@+id/alp_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/alp_cmd_continue" />
 
             <Button
-                android:id="@+id/alp_lpa_button_cancel"
+                android:id="@+id/alp_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@android:string/cancel" />
@@ -62,7 +63,7 @@
         android:layout_weight=".7" >
 
         <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
-            android:id="@+id/alp_lpa_lockPattern"
+            android:id="@+id/alp_lock_pattern"
             android:layout_width="@dimen/alp_lockpatternview_max_size"
             android:layout_height="@dimen/alp_lockpatternview_max_size"
             android:layout_centerInParent="true" />
