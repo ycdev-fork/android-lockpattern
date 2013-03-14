@@ -13,7 +13,7 @@
    height="48"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="/media/truecrypt64/projs/android/library/android-lockpattern/resources/images/logo/logo_android-lockpattern_55.png"
    inkscape:export-xdpi="103.125"
@@ -1196,16 +1196,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.7875162"
-     inkscape:cx="-117.12035"
-     inkscape:cy="-1.2188238"
+     inkscape:zoom="3.5750324"
+     inkscape:cx="50.308836"
+     inkscape:cy="12.598957"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1440"
-     inkscape:window-height="880"
-     inkscape:window-x="-3"
-     inkscape:window-y="-3"
+     inkscape:window-height="849"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -1226,7 +1226,7 @@
      transform="translate(0,-1004.3622)">
     <g
        id="g3187"
-       transform="matrix(0.85698158,0,0,0.8563506,3.4324569,147.72361)">
+       transform="matrix(0.75730866,0,0,0.75675107,5.8246053,250.148)">
       <rect
          y="1004.3622"
          x="0"

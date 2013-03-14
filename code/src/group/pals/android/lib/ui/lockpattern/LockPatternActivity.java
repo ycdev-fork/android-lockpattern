@@ -52,7 +52,8 @@ import android.widget.TextView;
  */
 public class LockPatternActivity extends Activity {
 
-    public static final String _ClassName = LockPatternActivity.class.getName();
+    private static final String _ClassName = LockPatternActivity.class
+            .getName();
 
     /**
      * Use this action to create new pattern. You can provide an
@@ -159,6 +160,9 @@ public class LockPatternActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (BuildConfig.DEBUG)
+            Log.d(_ClassName, "ClassName = " + _ClassName);
+
         /*
          * THEME
          */
@@ -171,8 +175,9 @@ public class LockPatternActivity extends Activity {
         mPrefs = getSharedPreferences(LockPatternActivity.class.getName(), 0);
 
         if (!_ActionCreatePattern.equals(getIntent().getAction())
-                || !_ActionComparePattern.equals(getIntent().getAction()))
-            throw new UnsupportedOperationException();
+                && !_ActionComparePattern.equals(getIntent().getAction()))
+            throw new UnsupportedOperationException("Unknown Action >> "
+                    + getIntent().getAction());
 
         mMaxRetry = getIntent().getIntExtra(_MaxRetry, 5);
 
