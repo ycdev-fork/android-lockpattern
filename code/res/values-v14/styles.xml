@@ -19,4 +19,6 @@
 
     <style name="Alp.Theme.Dark" parent="@android:style/Theme.DeviceDefault"></style>
 
+    <style name="Alp.Theme.Dialog.Dark" parent="@android:style/Theme.DeviceDefault.Dialog"></style>
+
 </resources>

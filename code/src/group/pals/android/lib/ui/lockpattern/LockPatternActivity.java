@@ -139,6 +139,15 @@ public class LockPatternActivity extends Activity {
     public static final String _ResultReceiver = _ClassName
             + ".result_receiver";
 
+    /**
+     * Set to {@code true} if you want to use invisible pattern (there will be
+     * no visible feedback as the user enters the pattern).
+     * <p>
+     * Default: {@code false}
+     * </p>
+     */
+    public static final String _StealthMode = _ClassName + ".stealth_mode";
+
     /*
      * FIELDS
      */
@@ -265,6 +274,8 @@ public class LockPatternActivity extends Activity {
         }
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
+        mLockPatternView.setInStealthMode(getIntent().getBooleanExtra(
+                _StealthMode, false));
         mLockPatternView.setOnPatternListener(mPatternViewListener);
         if (lastPattern != null && lastDisplayMode != null)
             mLockPatternView.setPattern(lastDisplayMode, lastPattern);
