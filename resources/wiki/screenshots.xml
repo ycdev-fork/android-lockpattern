@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
   <ModulePrefs title="screenshots" />
-  <Content type="html" href="http://imgur.com/a/ISKIC/embed" class="imgur-album" />
+  <Content type="url" href="http://imgur.com/a/ISKIC/embed" />
 </Module>
