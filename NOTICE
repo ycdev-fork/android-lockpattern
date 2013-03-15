@@ -1,7 +1,7 @@
 android-lockpattern
 Copyright 2012 Hai Bison
 
-Version: 2.3
+Version: 2.4
 
 This product includes software developed at
 http://code.google.com/p/android-lockpattern/
@@ -30,6 +30,20 @@ In short, you can use this library in your commercial apps with or without our
 knowledge. Hope you enjoy it  :-)
 
 And here is history:
+
++++ Version 2.4 +++
+ * Release: March 16, 2013
+
+ - Merge latest code from AOSP;
+ - Use action names instead of extra fields for different types of handlers:
+   + _ActionCreatePattern
+   + _ActionComparePattern
+ - Add built-in themes: default dark and dark dialog;
+ - Add stealth-mode;
+ - New icon set;
+ - Optimize code and UI; special thanks to Steven Byle:
+   + http://stackoverflow.com/users/1507439/steven-byle
+   + http://stackoverflow.com/a/15424636/1521536
 
 +++ Version 2.3 +++
  - Update info: August 28, 2012
