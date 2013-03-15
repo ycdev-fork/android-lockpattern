@@ -694,11 +694,17 @@ public class LockPatternView extends View {
             handleActionMove(event);
             return true;
         case MotionEvent.ACTION_CANCEL:
-            if (mPatternInProgress) {
-                mPatternInProgress = false;
-                resetPattern();
-                notifyPatternCleared();
-            }
+            /*
+             * Original source check for mPatternInProgress == true first before
+             * calling next three lines. But if we do that, there will be
+             * nothing happened when the user taps at empty area and releases
+             * the finger. We want the pattern to be reset and the message will
+             * be updated after the user did that.
+             */
+            mPatternInProgress = false;
+            resetPattern();
+            notifyPatternCleared();
+
             if (PROFILE_DRAWING) {
                 if (mDrawingProfilingStarted) {
                     Debug.stopMethodTracing();
@@ -881,7 +887,14 @@ public class LockPatternView extends View {
             mPatternInProgress = true;
             mPatternDisplayMode = DisplayMode.Correct;
             notifyPatternStarted();
-        } else if (mPatternInProgress) {
+        } else {
+            /*
+             * Original source check for mPatternInProgress == true first before
+             * calling this block. But if we do that, there will be nothing
+             * happened when the user taps at empty area and releases the
+             * finger. We want the pattern to be reset and the message will be
+             * updated after the user did that.
+             */
             mPatternInProgress = false;
             notifyPatternCleared();
         }
