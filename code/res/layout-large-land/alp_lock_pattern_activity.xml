@@ -62,11 +62,12 @@
         android:layout_height="match_parent"
         android:layout_weight=".7" >
 
-        <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
+        <include
             android:id="@+id/alp_lock_pattern"
             android:layout_width="@dimen/alp_lockpatternview_max_size"
             android:layout_height="@dimen/alp_lockpatternview_max_size"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            layout="@layout/alp_lock_pattern_view" />
     </RelativeLayout>
 
 </LinearLayout>

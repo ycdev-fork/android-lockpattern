@@ -29,13 +29,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textIsSelectable="true" />
 
-    <group.pals.android.lib.ui.lockpattern.widget.LockPatternView
+    <include
         android:id="@+id/alp_lock_pattern"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/alp_footer"
         android:layout_below="@id/alp_info"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        layout="@layout/alp_lock_pattern_view" />
 
     <LinearLayout
         android:id="@+id/alp_footer"
