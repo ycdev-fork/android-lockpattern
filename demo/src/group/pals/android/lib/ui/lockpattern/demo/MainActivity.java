@@ -83,9 +83,9 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             Intent i = new Intent(LockPatternActivity._ActionCreatePattern,
                     null, MainActivity.this, LockPatternActivity.class);
-            if (mChkDialog.isChecked())
-                i.putExtra(LockPatternActivity._Theme,
-                        R.style.Alp_Theme_Dialog_Dark);
+            i.putExtra(LockPatternActivity._Theme,
+                    mChkDialog.isChecked() ? R.style.Alp_Theme_Dialog_Dark
+                            : R.style.Alp_Theme_Dark);
             i.putExtra(LockPatternActivity._StealthMode,
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
@@ -100,9 +100,9 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             Intent i = new Intent(LockPatternActivity._ActionComparePattern,
                     null, MainActivity.this, LockPatternActivity.class);
-            if (mChkDialog.isChecked())
-                i.putExtra(LockPatternActivity._Theme,
-                        R.style.Alp_Theme_Dialog_Dark);
+            i.putExtra(LockPatternActivity._Theme,
+                    mChkDialog.isChecked() ? R.style.Alp_Theme_Dialog_Dark
+                            : R.style.Alp_Theme_Dark);
             i.putExtra(LockPatternActivity._StealthMode,
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
