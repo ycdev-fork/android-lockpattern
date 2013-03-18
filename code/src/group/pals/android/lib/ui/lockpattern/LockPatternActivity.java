@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -45,6 +46,10 @@ import android.widget.TextView;
  * You must use either {@link #_ActionCreatePattern} or
  * {@link #_ActionComparePattern}. Otherwise an
  * {@link UnsupportedOperationException} will be thrown.
+ * </p>
+ * <p>
+ * You can use {@link PendingIntent}s too. See {@link #_OkPendingIntent} and
+ * {@link #_CancelledPendingIntent} for more details.
  * </p>
  * 
  * @author Hai Bison
@@ -66,6 +71,8 @@ public class LockPatternActivity extends Activity {
      * 
      * @since v2.4 beta
      * @see #_EncrypterClass
+     * @see #_OkPendingIntent
+     * @see #_CancelledPendingIntent
      */
     public static final String _ActionCreatePattern = _ClassName
             + ".create_pattern";
@@ -81,6 +88,8 @@ public class LockPatternActivity extends Activity {
      * @since v2.4 beta
      * @see #_Pattern
      * @see #_EncrypterClass
+     * @see #_OkPendingIntent
+     * @see #_CancelledPendingIntent
      */
     public static final String _ActionComparePattern = _ClassName
             + ".compare_pattern";
@@ -148,6 +157,22 @@ public class LockPatternActivity extends Activity {
      */
     public static final String _StealthMode = _ClassName + ".stealth_mode";
 
+    /**
+     * Put a {@link PendingIntent} into this key. It will be sent before
+     * {@link Activity#RESULT_OK} will be returning. If you were calling this
+     * activity with {@link #_ActionCreatePattern}, key {@link #_Pattern} will
+     * be attached to the original intent which the pending intent holds.
+     */
+    public static final String _OkPendingIntent = _ClassName
+            + ".ok_pending_intent";
+
+    /**
+     * Put a {@link PendingIntent} into this key. It will be sent before
+     * {@link Activity#RESULT_CANCELED} will be returning.
+     */
+    public static final String _CancelledPendingIntent = _ClassName
+            + ".cancelled_pending_intent";
+
     /*
      * FIELDS
      */
@@ -155,7 +180,6 @@ public class LockPatternActivity extends Activity {
     private int mMaxRetry;
     private boolean mAutoSave;
     private IEncrypter mEncrypter;
-    private ResultReceiver mResultReceiver;
 
     /*
      * CONTROLS
@@ -212,11 +236,6 @@ public class LockPatternActivity extends Activity {
                 throw new InvalidEncrypterException();
             }
         }
-
-        /*
-         * ResultReceiver.
-         */
-        mResultReceiver = getIntent().getParcelableExtra(_ResultReceiver);
 
         init();
     }// onCreate()
@@ -401,23 +420,49 @@ public class LockPatternActivity extends Activity {
      *            {@code null}.
      */
     private void finishWithResultOk(String pattern) {
+        Intent data = null;
+
         if (pattern != null) {
-            Intent i = new Intent();
-            i.putExtra(_Pattern, pattern);
-            setResult(RESULT_OK, i);
+            data = new Intent();
+            data.putExtra(_Pattern, pattern);
+            setResult(RESULT_OK, data);
         } else
             setResult(RESULT_OK);
 
-        finish();
-
-        if (mResultReceiver != null) {
+        /*
+         * ResultReceiver
+         */
+        ResultReceiver receiver = getIntent().getParcelableExtra(
+                _ResultReceiver);
+        if (receiver != null) {
             Bundle bundle = null;
             if (pattern != null) {
                 bundle = new Bundle();
                 bundle.putString(_Pattern, pattern);
             }
-            mResultReceiver.send(RESULT_OK, bundle);
+            receiver.send(RESULT_OK, bundle);
         }
+
+        /*
+         * PendingIntent
+         */
+        PendingIntent pi = getIntent().getParcelableExtra(_OkPendingIntent);
+        if (pi != null) {
+            try {
+                if (data != null)
+                    pi.send(this, RESULT_OK, data);
+                else
+                    pi.send();
+            } catch (Throwable t) {
+                if (BuildConfig.DEBUG) {
+                    Log.e(_ClassName, "Error sending PendingIntent: " + pi);
+                    Log.e(_ClassName, ">>> " + t);
+                    t.printStackTrace();
+                }
+            }
+        }
+
+        finish();
     }// finishWithResultOk()
 
     /**
@@ -425,10 +470,33 @@ public class LockPatternActivity extends Activity {
      */
     private void finishWithResultCancelled() {
         setResult(RESULT_CANCELED);
-        finish();
 
-        if (mResultReceiver != null)
-            mResultReceiver.send(RESULT_CANCELED, null);
+        /*
+         * ResultReceiver
+         */
+        ResultReceiver receiver = getIntent().getParcelableExtra(
+                _ResultReceiver);
+        if (receiver != null)
+            receiver.send(RESULT_CANCELED, null);
+
+        /*
+         * PendingIntent
+         */
+        PendingIntent pi = getIntent().getParcelableExtra(
+                _CancelledPendingIntent);
+        if (pi != null) {
+            try {
+                pi.send();
+            } catch (Throwable t) {
+                if (BuildConfig.DEBUG) {
+                    Log.e(_ClassName, "Error sending PendingIntent: " + pi);
+                    Log.e(_ClassName, ">>> " + t);
+                    t.printStackTrace();
+                }
+            }
+        }
+
+        finish();
     }// finishWithResultCancelled()
 
     /*
