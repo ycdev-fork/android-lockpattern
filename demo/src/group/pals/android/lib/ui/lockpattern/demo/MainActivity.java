@@ -24,6 +24,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -33,6 +35,10 @@ public class MainActivity extends Activity {
 
     private CheckBox mChkDialog;
     private CheckBox mChkStealthMode;
+    private TextView mTextMinWiredDots;
+    private SeekBar mBarMinWiredDots;
+    private TextView mTextMaxTries;
+    private SeekBar mBarMaxTries;
     private Button mBtnCreateLockPattern;
     private Button mBtnEnterLockPattern;
 
@@ -43,10 +49,28 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
 
+        /*
+         * MAP CONTROLS
+         */
+
         mChkDialog = (CheckBox) findViewById(R.id.dialog);
         mChkStealthMode = (CheckBox) findViewById(R.id.stealth_mode);
+        mTextMinWiredDots = (TextView) findViewById(R.id.text_min_wired_dots);
+        mBarMinWiredDots = (SeekBar) findViewById(R.id.seek_bar_min_wired_dots);
+        mTextMaxTries = (TextView) findViewById(R.id.text_max_tries);
+        mBarMaxTries = (SeekBar) findViewById(R.id.seek_bar_max_tries);
         mBtnCreateLockPattern = (Button) findViewById(R.id.create_lockpattern);
         mBtnEnterLockPattern = (Button) findViewById(R.id.enter_lockpattern);
+
+        /*
+         * SET LISTENERS
+         */
+
+        for (SeekBar sb : new SeekBar[] { mBarMinWiredDots, mBarMaxTries }) {
+            sb.setOnSeekBarChangeListener(mSeekBarsOnChangeListener);
+            mSeekBarsOnChangeListener.onProgressChanged(sb, sb.getProgress(),
+                    false);
+        }
 
         mBtnCreateLockPattern
                 .setOnClickListener(mBtnCreateLockPatternOnClickListener);
@@ -66,16 +90,66 @@ public class MainActivity extends Activity {
             break;// _ReqCreateLockPattern
 
         case _ReqEnterLockPattern:
-            Toast toast = Toast.makeText(this,
-                    resultCode == RESULT_OK ? android.R.string.ok
-                            : android.R.string.cancel, Toast.LENGTH_SHORT);
-            toast.setDuration(Toast.LENGTH_SHORT);
+            int msgId = 0;
+
+            switch (resultCode) {
+            case RESULT_OK:
+                msgId = android.R.string.ok;
+                break;
+            case RESULT_CANCELED:
+                msgId = android.R.string.cancel;
+                break;
+            case LockPatternActivity._ResultFailed:
+                msgId = R.string.failed;
+                break;
+            default:
+                return;
+            }
+
+            String msg = String.format("%s (%,d tries)", getString(msgId),
+                    data.getIntExtra(LockPatternActivity._ExtraRetryCount, 0));
+
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+            toast.setDuration(Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
             break;// _ReqEnterLockPattern
         }
     }// onActivityResult()
+
+    private final SeekBar.OnSeekBarChangeListener mSeekBarsOnChangeListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            /*
+             * Do nothing.
+             */
+        }// onStopTrackingTouch()
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            /*
+             * Do nothing.
+             */
+        }// onStartTrackingTouch()
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                boolean fromUser) {
+            if (progress == 0) {
+                seekBar.setProgress(1);
+                return;
+            }
+
+            if (seekBar.getId() == R.id.seek_bar_max_tries)
+                mTextMaxTries.setText(getString(
+                        R.string.pmsg_max_tries_allowed, progress));
+            else if (seekBar.getId() == R.id.seek_bar_min_wired_dots)
+                mTextMinWiredDots.setText(getString(
+                        R.string.pmsg_min_wired_dots, progress));
+        }// onProgressChanged()
+    };// mSeekBarsOnChangeListener
 
     private final View.OnClickListener mBtnCreateLockPatternOnClickListener = new View.OnClickListener() {
 
@@ -90,8 +164,10 @@ public class MainActivity extends Activity {
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
             i.putExtra(LockPatternActivity._AutoSave, true);
+            i.putExtra(LockPatternActivity._MinWiredDots,
+                    mBarMinWiredDots.getProgress());
             startActivityForResult(i, _ReqCreateLockPattern);
-        }
+        }// onClick()
     };// mBtnCreateLockPatternOnClickListener
 
     private final View.OnClickListener mBtnEnterLockPatternOnClickListener = new View.OnClickListener() {
@@ -107,7 +183,9 @@ public class MainActivity extends Activity {
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
             i.putExtra(LockPatternActivity._AutoSave, true);
+            i.putExtra(LockPatternActivity._MaxRetry,
+                    mBarMaxTries.getProgress());
             startActivityForResult(i, _ReqEnterLockPattern);
-        }
+        }// onClick()
     };// mBtnEnterLockPatternOnClickListener
 }

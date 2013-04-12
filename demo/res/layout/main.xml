@@ -26,7 +26,7 @@
         android:id="@+id/dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/control_margin"
         android:checked="true"
         android:text="Dialog Theme" />
 
@@ -34,21 +34,53 @@
         android:id="@+id/stealth_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/control_margin"
         android:text="Stealth Mode" />
+
+    <TextView
+        android:id="@+id/text_min_wired_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/control_margin"
+        android:text="@string/pmsg_min_wired_dots"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_min_wired_dots"
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/control_margin"
+        android:max="9"
+        android:progress="4" />
+
+    <TextView
+        android:id="@+id/text_max_tries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/control_margin"
+        android:text="@string/pmsg_max_tries_allowed"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_max_tries"
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/control_margin"
+        android:max="5"
+        android:progress="5" />
 
     <Button
         android:id="@+id/create_lockpattern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/control_margin"
         android:text="Create lock pattern…" />
 
     <Button
         android:id="@+id/enter_lockpattern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/control_margin"
         android:text="Enter lock pattern…" />
 
 </LinearLayout>
