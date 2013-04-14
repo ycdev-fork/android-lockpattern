@@ -28,7 +28,12 @@
         <item name="android:windowBackground">@drawable/aosp_background_holo_dark</item>
     </style>
 
-    <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.Dialog" />
+    <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.Dialog">
+
+        <!-- AOSP -->
+
+        <item name="android:windowBackground">@drawable/aosp_dialog_full_holo_dark</item>
+    </style>
 
     <style name="Alp.Theme.Dialog.Dark" parent="@style/Alp.BaseTheme.Dialog.Dark"></style>
 
