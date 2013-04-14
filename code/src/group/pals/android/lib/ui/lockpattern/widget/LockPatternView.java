@@ -17,6 +17,7 @@
 package group.pals.android.lib.ui.lockpattern.widget;
 
 import group.pals.android.lib.ui.lockpattern.R;
+import group.pals.android.lib.ui.lockpattern.util.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -279,17 +279,27 @@ public class LockPatternView extends View {
 
         mPathPaint.setAntiAlias(true);
         mPathPaint.setDither(true);
-        mPathPaint.setColor(Color.WHITE); // TODO this should be from the style
+        mPathPaint.setColor(getContext().getResources()
+                .getColor(
+                        UI.resolveAttribute(getContext(),
+                                R.attr.alp_color_pattern_path)));
         mPathPaint.setAlpha(mStrokeAlpha);
         mPathPaint.setStyle(Paint.Style.STROKE);
         mPathPaint.setStrokeJoin(Paint.Join.ROUND);
         mPathPaint.setStrokeCap(Paint.Cap.ROUND);
 
         // lot's of bitmaps!
-        mBitmapBtnDefault = getBitmapFor(R.drawable.alp_btn_code_lock_default_holo);
-        mBitmapBtnTouched = getBitmapFor(R.drawable.alp_btn_code_lock_touched_holo);
-        mBitmapCircleDefault = getBitmapFor(R.drawable.alp_indicator_code_lock_point_area_default_holo);
-        mBitmapCircleGreen = getBitmapFor(R.drawable.aosp_indicator_code_lock_point_area_green_holo);
+        mBitmapBtnDefault = getBitmapFor(UI.resolveAttribute(getContext(),
+                R.attr.alp_drawable_btn_code_lock_default_holo));
+        mBitmapBtnTouched = getBitmapFor(UI.resolveAttribute(getContext(),
+                R.attr.alp_drawable_btn_code_lock_touched_holo));
+        mBitmapCircleDefault = getBitmapFor(UI
+                .resolveAttribute(
+                        getContext(),
+                        R.attr.alp_drawable_indicator_code_lock_point_area_default_holo));
+
+        mBitmapCircleGreen = getBitmapFor(UI.resolveAttribute(getContext(),
+                R.attr.aosp_drawable_indicator_code_lock_point_area_normal));
         mBitmapCircleRed = getBitmapFor(R.drawable.aosp_indicator_code_lock_point_area_red_holo);
 
         mBitmapArrowGreenUp = getBitmapFor(R.drawable.aosp_indicator_code_lock_drag_direction_green_up);

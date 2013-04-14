@@ -18,6 +18,9 @@ package group.pals.android.lib.ui.lockpattern.util;
 
 import group.pals.android.lib.ui.lockpattern.R;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.Window;
 
 /**
@@ -60,4 +63,22 @@ public class UI {
                             .getDimensionPixelSize(
                                     R.dimen.alp_dialog_height_large));
     }// adjustDialogSizeForLargeScreen()
+
+    /**
+     * Convenient method for {@link Context#getTheme()} and
+     * {@link Resources.Theme#resolveAttribute(int, TypedValue, boolean)}.
+     * 
+     * @param context
+     *            the context.
+     * @param resId
+     *            The resource identifier of the desired theme attribute.
+     * @return the resource ID that {@link TypedValue#resourceId} points to, or
+     *         {@code 0} if not found.
+     */
+    public static int resolveAttribute(Context context, int resId) {
+        TypedValue typedValue = new TypedValue();
+        if (context.getTheme().resolveAttribute(resId, typedValue, true))
+            return typedValue.resourceId;
+        return 0;
+    }// resolveAttribute()
 }

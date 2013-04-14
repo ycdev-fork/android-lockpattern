@@ -33,7 +33,8 @@ public class MainActivity extends Activity {
     private static final int _ReqCreateLockPattern = 0;
     private static final int _ReqEnterLockPattern = 1;
 
-    private CheckBox mChkDialog;
+    private CheckBox mChkLightTheme;
+    private CheckBox mChkDialogTheme;
     private CheckBox mChkStealthMode;
     private TextView mTextMinWiredDots;
     private SeekBar mBarMinWiredDots;
@@ -53,14 +54,15 @@ public class MainActivity extends Activity {
          * MAP CONTROLS
          */
 
-        mChkDialog = (CheckBox) findViewById(R.id.dialog);
-        mChkStealthMode = (CheckBox) findViewById(R.id.stealth_mode);
+        mChkLightTheme = (CheckBox) findViewById(R.id.checkbox_light_theme);
+        mChkDialogTheme = (CheckBox) findViewById(R.id.checkbox_dialog_theme);
+        mChkStealthMode = (CheckBox) findViewById(R.id.checkbox_stealth_mode);
         mTextMinWiredDots = (TextView) findViewById(R.id.text_min_wired_dots);
         mBarMinWiredDots = (SeekBar) findViewById(R.id.seek_bar_min_wired_dots);
         mTextMaxTries = (TextView) findViewById(R.id.text_max_tries);
         mBarMaxTries = (SeekBar) findViewById(R.id.seek_bar_max_tries);
-        mBtnCreateLockPattern = (Button) findViewById(R.id.create_lockpattern);
-        mBtnEnterLockPattern = (Button) findViewById(R.id.enter_lockpattern);
+        mBtnCreateLockPattern = (Button) findViewById(R.id.button_create_lockpattern);
+        mBtnEnterLockPattern = (Button) findViewById(R.id.button_enter_lockpattern);
 
         /*
          * SET LISTENERS
@@ -118,6 +120,20 @@ public class MainActivity extends Activity {
         }
     }// onActivityResult()
 
+    /**
+     * Gets the theme that the user chose to apply to
+     * {@link LockPatternActivity}.
+     * 
+     * @return the theme for {@link LockPatternActivity}.
+     */
+    private int getThemeForLockPatternActivity() {
+        if (mChkLightTheme.isChecked())
+            return mChkDialogTheme.isChecked() ? R.style.Alp_Theme_Dialog_Light
+                    : R.style.Alp_Theme_Light;
+        return mChkDialogTheme.isChecked() ? R.style.Alp_Theme_Dialog_Dark
+                : R.style.Alp_Theme_Dark;
+    }// getThemeForLockPatternActivity()
+
     private final SeekBar.OnSeekBarChangeListener mSeekBarsOnChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
         @Override
@@ -158,8 +174,7 @@ public class MainActivity extends Activity {
             Intent i = new Intent(LockPatternActivity._ActionCreatePattern,
                     null, MainActivity.this, LockPatternActivity.class);
             i.putExtra(LockPatternActivity._Theme,
-                    mChkDialog.isChecked() ? R.style.Alp_Theme_Dialog_Dark
-                            : R.style.Alp_Theme_Dark);
+                    getThemeForLockPatternActivity());
             i.putExtra(LockPatternActivity._StealthMode,
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
@@ -177,8 +192,7 @@ public class MainActivity extends Activity {
             Intent i = new Intent(LockPatternActivity._ActionComparePattern,
                     null, MainActivity.this, LockPatternActivity.class);
             i.putExtra(LockPatternActivity._Theme,
-                    mChkDialog.isChecked() ? R.style.Alp_Theme_Dialog_Dark
-                            : R.style.Alp_Theme_Dark);
+                    getThemeForLockPatternActivity());
             i.putExtra(LockPatternActivity._StealthMode,
                     mChkStealthMode.isChecked());
             i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);

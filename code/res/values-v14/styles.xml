@@ -21,4 +21,8 @@
 
     <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.DeviceDefault.Dialog" />
 
+    <style name="Alp.BaseTheme.Light" parent="@android:style/Theme.DeviceDefault.Light" />
+
+    <style name="Alp.BaseTheme.Dialog.Light" parent="@android:style/Theme.DeviceDefault.Light.Dialog" />
+
 </resources>

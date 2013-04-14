@@ -24,9 +24,23 @@
         <item name="alp_button_bar_button_style">?android:attr/buttonBarButtonStyle</item>
     </style>
 
+    <style name="Alp.BaseTheme.Light" parent="@android:style/Theme.Holo.Light" />
+
+    <style name="Alp.BaseThemeHelper.Light" parent="@style/Alp.BaseTheme.Light">
+        <item name="alp_button_bar_style">?android:attr/buttonBarStyle</item>
+        <item name="alp_button_bar_button_style">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
     <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.Holo.Dialog" />
 
-    <style name="Alp.Theme.Dialog.Dark" parent="@style/Alp.BaseTheme.Dialog.Dark">
+    <style name="Alp.BaseThemeHelper.Dialog.Dark" parent="@style/Alp.BaseTheme.Dialog.Dark">
+        <item name="alp_button_bar_style">?android:attr/buttonBarStyle</item>
+        <item name="alp_button_bar_button_style">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="Alp.BaseTheme.Dialog.Light" parent="@android:style/Theme.Holo.Light.Dialog" />
+
+    <style name="Alp.BaseThemeHelper.Dialog.Light" parent="@style/Alp.BaseTheme.Dialog.Light">
         <item name="alp_button_bar_style">?android:attr/buttonBarStyle</item>
         <item name="alp_button_bar_button_style">?android:attr/buttonBarButtonStyle</item>
     </style>
