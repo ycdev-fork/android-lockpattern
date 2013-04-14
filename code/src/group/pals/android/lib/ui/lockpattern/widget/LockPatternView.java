@@ -289,11 +289,11 @@ public class LockPatternView extends View {
         mBitmapBtnDefault = getBitmapFor(R.drawable.alp_btn_code_lock_default_holo);
         mBitmapBtnTouched = getBitmapFor(R.drawable.alp_btn_code_lock_touched_holo);
         mBitmapCircleDefault = getBitmapFor(R.drawable.alp_indicator_code_lock_point_area_default_holo);
-        mBitmapCircleGreen = getBitmapFor(R.drawable.alp_indicator_code_lock_point_area_green_holo);
-        mBitmapCircleRed = getBitmapFor(R.drawable.alp_indicator_code_lock_point_area_red_holo);
+        mBitmapCircleGreen = getBitmapFor(R.drawable.aosp_indicator_code_lock_point_area_green_holo);
+        mBitmapCircleRed = getBitmapFor(R.drawable.aosp_indicator_code_lock_point_area_red_holo);
 
-        mBitmapArrowGreenUp = getBitmapFor(R.drawable.alp_indicator_code_lock_drag_direction_green_up);
-        mBitmapArrowRedUp = getBitmapFor(R.drawable.alp_indicator_code_lock_drag_direction_red_up);
+        mBitmapArrowGreenUp = getBitmapFor(R.drawable.aosp_indicator_code_lock_drag_direction_green_up);
+        mBitmapArrowRedUp = getBitmapFor(R.drawable.aosp_indicator_code_lock_drag_direction_red_up);
 
         // bitmaps have the size of the largest bitmap in this group
         final Bitmap bitmaps[] = { mBitmapBtnDefault, mBitmapBtnTouched,
