@@ -29,36 +29,57 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textIsSelectable="true" />
 
-    <include
-        android:id="@+id/alp_lock_pattern"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/alp_footer"
-        android:layout_below="@id/alp_info"
-        android:layout_gravity="center"
-        layout="@layout/alp_lock_pattern_view" />
+        android:layout_below="@id/alp_info" >
+
+        <include
+            android:id="@+id/alp_lock_pattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            layout="@layout/alp_lock_pattern_view" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/alp_footer"
+        style="?attr/alp_button_bar_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/alp_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@android:string/cancel" />
+        <!-- A separator view -->
 
-        <Button
-            android:id="@+id/alp_confirm"
-            android:layout_width="0dp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alp_separator_size" />
+
+        <LinearLayout
+            style="?attr/alp_button_bar_style"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="@string/alp_cmd_continue" />
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/alp_cancel"
+                style="?attr/alp_button_bar_button_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@android:string/cancel" />
+
+            <Button
+                android:id="@+id/alp_confirm"
+                style="?attr/alp_button_bar_button_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="@string/alp_cmd_continue" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

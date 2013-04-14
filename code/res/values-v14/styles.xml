@@ -17,8 +17,8 @@
 
 <resources>
 
-    <style name="Alp.Theme.Dark" parent="@android:style/Theme.DeviceDefault"></style>
+    <style name="Alp.BaseTheme.Dark" parent="@android:style/Theme.DeviceDefault" />
 
-    <style name="Alp.Theme.Dialog.Dark" parent="@android:style/Theme.DeviceDefault.Dialog"></style>
+    <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.DeviceDefault.Dialog" />
 
 </resources>

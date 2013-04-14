@@ -37,13 +37,21 @@
 
         <LinearLayout
             android:id="@+id/alp_footer"
+            style="?attr/alp_button_bar_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical" >
 
+            <!-- A separator view -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alp_separator_size" />
+
             <Button
                 android:id="@+id/alp_confirm"
+                style="?attr/alp_button_bar_button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
@@ -51,6 +59,7 @@
 
             <Button
                 android:id="@+id/alp_cancel"
+                style="?attr/alp_button_bar_button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@android:string/cancel" />
@@ -64,8 +73,8 @@
 
         <include
             android:id="@+id/alp_lock_pattern"
-            android:layout_width="@dimen/alp_lockpatternview_max_size"
-            android:layout_height="@dimen/alp_lockpatternview_max_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             layout="@layout/alp_lock_pattern_view" />
     </RelativeLayout>

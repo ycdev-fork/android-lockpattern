@@ -17,7 +17,8 @@
 
 <resources>
 
-    <dimen name="alp_lockpatternview_max_size">350dp</dimen>
+    <dimen name="alp_lockpatternview_size">400dp</dimen>
+    <dimen name="alp_separator_size">1dp</dimen>
 
     <!-- Dialog dimensions for large screens -->
 

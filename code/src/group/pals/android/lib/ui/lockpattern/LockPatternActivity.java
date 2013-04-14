@@ -39,6 +39,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -226,6 +227,7 @@ public class LockPatternActivity extends Activity {
     private IEncrypter mEncrypter;
     private int mMinWiredDots;
     private ButtonOkCommand mBtnOkCmd;
+    private Intent mIntentResult;
 
     /*
      * CONTROLS
@@ -287,6 +289,9 @@ public class LockPatternActivity extends Activity {
             }
         }
 
+        mIntentResult = new Intent();
+        setResult(RESULT_CANCELED, mIntentResult);
+
         initContentView();
     }// onCreate()
 
@@ -341,6 +346,16 @@ public class LockPatternActivity extends Activity {
         /*
          * LOCK PATTERN VIEW
          */
+
+        if (getResources().getBoolean(R.bool.alp_is_large_screen)
+                && !getWindow().isFloating()) {
+            int size = getResources().getDimensionPixelSize(
+                    R.dimen.alp_lockpatternview_size);
+            LayoutParams lp = mLockPatternView.getLayoutParams();
+            lp.width = size;
+            lp.height = size;
+            mLockPatternView.setLayoutParams(lp);
+        }
 
         /*
          * Haptic feedback.
@@ -402,8 +417,6 @@ public class LockPatternActivity extends Activity {
             else
                 mTxtInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
         }// _ActionComparePattern
-
-        setResult(RESULT_CANCELED);
     }// initContentView()
 
     /**
@@ -451,6 +464,7 @@ public class LockPatternActivity extends Activity {
             finishWithResultOk(null);
         else {
             mRetryCount++;
+            mIntentResult.putExtra(_ExtraRetryCount, mRetryCount);
 
             if (mRetryCount >= mMaxRetry)
                 finishWithNegativeResult(_ResultFailed);
@@ -496,18 +510,16 @@ public class LockPatternActivity extends Activity {
      *            {@code null}.
      */
     private void finishWithResultOk(String pattern) {
-        Intent data = new Intent();
-
         if (_ActionCreatePattern.equals(getIntent().getAction()))
-            data.putExtra(_Pattern, pattern);
+            mIntentResult.putExtra(_Pattern, pattern);
         else {
             /*
              * If the user was "logging in", minimum try count can not be zero.
              */
-            data.putExtra(_ExtraRetryCount, mRetryCount + 1);
+            mIntentResult.putExtra(_ExtraRetryCount, mRetryCount + 1);
         }
 
-        setResult(RESULT_OK, data);
+        setResult(RESULT_OK, mIntentResult);
 
         /*
          * ResultReceiver
@@ -534,7 +546,7 @@ public class LockPatternActivity extends Activity {
         PendingIntent pi = getIntent().getParcelableExtra(_OkPendingIntent);
         if (pi != null) {
             try {
-                pi.send(this, RESULT_OK, data);
+                pi.send(this, RESULT_OK, mIntentResult);
             } catch (Throwable t) {
                 if (BuildConfig.DEBUG) {
                     Log.e(_ClassName, "Error sending PendingIntent: " + pi);
@@ -552,13 +564,10 @@ public class LockPatternActivity extends Activity {
      * {@link Activity#RESULT_CANCELED} or {@link #_ResultFailed}).
      */
     private void finishWithNegativeResult(int resultCode) {
-        Intent resultIntent = null;
-        if (_ActionComparePattern.equals(getIntent().getAction())) {
-            resultIntent = new Intent();
-            resultIntent.putExtra(_ExtraRetryCount, mRetryCount);
-        }
+        if (_ActionComparePattern.equals(getIntent().getAction()))
+            mIntentResult.putExtra(_ExtraRetryCount, mRetryCount);
 
-        setResult(resultCode, resultIntent);
+        setResult(resultCode, mIntentResult);
 
         /*
          * ResultReceiver
@@ -581,7 +590,7 @@ public class LockPatternActivity extends Activity {
                 _CancelledPendingIntent);
         if (pi != null) {
             try {
-                pi.send(this, resultCode, resultIntent);
+                pi.send(this, resultCode, mIntentResult);
             } catch (Throwable t) {
                 if (BuildConfig.DEBUG) {
                     Log.e(_ClassName, "Error sending PendingIntent: " + pi);

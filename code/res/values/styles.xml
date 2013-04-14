@@ -17,8 +17,25 @@
 
 <resources>
 
-    <style name="Alp.Theme.Dark" parent="@android:style/Theme"></style>
+    <style name="Alp.BaseTheme.Dark" parent="@android:style/Theme" />
 
-    <style name="Alp.Theme.Dialog.Dark" parent="@android:style/Theme.Dialog"></style>
+    <style name="Alp.BaseThemeHelper.Dark" parent="@style/Alp.BaseTheme.Dark" />
+
+    <style name="Alp.Theme.Dark" parent="@style/Alp.BaseThemeHelper.Dark">
+
+        <!-- AOSP -->
+
+        <item name="android:windowBackground">@drawable/aosp_background_holo_dark</item>
+    </style>
+
+    <style name="Alp.BaseTheme.Dialog.Dark" parent="@android:style/Theme.Dialog" />
+
+    <style name="Alp.Theme.Dialog.Dark" parent="@style/Alp.BaseTheme.Dialog.Dark"></style>
+
+    <item name="alp_button_bar_style" type="style">@null</item>
+    <item name="alp_button_bar_button_style" type="style">@null</item>
+
+    <attr name="alp_button_bar_style" format="reference" />
+    <attr name="alp_button_bar_button_style" format="reference" />
 
 </resources>
