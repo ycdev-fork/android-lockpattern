@@ -580,7 +580,7 @@ public class LockPatternActivity extends Activity {
                 resultBundle = new Bundle();
                 resultBundle.putInt(_ExtraRetryCount, mRetryCount);
             }
-            receiver.send(_ResultFailed, resultBundle);
+            receiver.send(resultCode, resultBundle);
         }
 
         /*
