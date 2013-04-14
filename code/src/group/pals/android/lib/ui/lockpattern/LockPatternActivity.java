@@ -18,6 +18,7 @@ package group.pals.android.lib.ui.lockpattern;
 
 import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
 import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
+import group.pals.android.lib.ui.lockpattern.util.UI;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
@@ -328,6 +329,7 @@ public class LockPatternActivity extends Activity {
                 .getPattern() : null;
 
         setContentView(R.layout.alp_lock_pattern_activity);
+        UI.adjustDialogSizeForLargeScreen(getWindow());
 
         mTxtInfo = (TextView) findViewById(R.id.alp_info);
         mLockPatternView = (LockPatternView) findViewById(R.id.alp_lock_pattern);

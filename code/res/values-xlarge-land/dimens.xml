@@ -17,15 +17,7 @@
 
 <resources>
 
-    <dimen name="alp_lockpatternview_max_size">350dp</dimen>
-
-    <!-- Dialog dimensions for large screens -->
-
-    <dimen name="alp_dialog_height_large_base">650dp</dimen>
-    <dimen name="alp_dialog_width_large_base">550dp</dimen>
-    <dimen name="alp_dialog_height_large_land_base">450dp</dimen>
-    <dimen name="alp_dialog_width_large_land_base">550dp</dimen>
-    <dimen name="alp_dialog_height_xlarge_land_base">650dp</dimen>
-    <dimen name="alp_dialog_width_xlarge_land_base">550dp</dimen>
+    <item name="alp_dialog_height_large" type="dimen">@dimen/alp_dialog_height_xlarge_land_base</item>
+    <item name="alp_dialog_width_large" type="dimen">@dimen/alp_dialog_width_xlarge_land_base</item>
 
 </resources>
