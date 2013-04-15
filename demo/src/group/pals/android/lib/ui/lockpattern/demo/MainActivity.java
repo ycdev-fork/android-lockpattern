@@ -83,15 +83,16 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-        case _ReqCreateLockPattern:
+        case _ReqCreateLockPattern: {
             if (resultCode == RESULT_OK)
                 setTitle(data.getStringExtra(LockPatternActivity._Pattern));
             else
                 setTitle(R.string.app_name);
 
-            break;// _ReqCreateLockPattern
+            break;
+        }// _ReqCreateLockPattern
 
-        case _ReqEnterLockPattern:
+        case _ReqEnterLockPattern: {
             int msgId = 0;
 
             switch (resultCode) {
@@ -111,12 +112,12 @@ public class MainActivity extends Activity {
             String msg = String.format("%s (%,d tries)", getString(msgId),
                     data.getIntExtra(LockPatternActivity._ExtraRetryCount, 0));
 
-            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-            toast.setDuration(Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
-            break;// _ReqEnterLockPattern
+            break;
+        }// _ReqEnterLockPattern
         }
     }// onActivityResult()
 
