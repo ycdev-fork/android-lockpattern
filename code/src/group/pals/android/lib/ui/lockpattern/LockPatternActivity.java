@@ -32,7 +32,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -51,8 +50,19 @@ import android.widget.TextView;
  * {@link UnsupportedOperationException} will be thrown.
  * </p>
  * <p>
- * You can use {@link PendingIntent}s too. See {@link #_OkPendingIntent} and
- * {@link #_CancelledPendingIntent} for more details.
+ * You can deliver result to {@link PendingIntent}s and/ or
+ * {@link ResultReceiver} too. See {@link #_OkPendingIntent},
+ * {@link #_CancelledPendingIntent} and {@link #_ResultReceiver} for more
+ * details.
+ * </p>
+ * <p>
+ * <strong>NOTES</strong>
+ * <li>You must use one of the themes that this library provides. They start
+ * with {@code R.style.Alp_Theme_*}. The reason is the themes contain resources
+ * that the library needs.</li>
+ * <li>In mode comparing pattern, there are <strong><i>3 possible result
+ * codes</i></strong>: {@link Activity#RESULT_OK},
+ * {@link Activity#RESULT_CANCELED} and {@link #_ResultFailed}.</li>
  * </p>
  * 
  * @author Hai Bison
@@ -90,6 +100,10 @@ public class LockPatternActivity extends Activity {
      * <p>
      * If the user cancels the task, {@link Activity#RESULT_CANCELED} returns.
      * </p>
+     * <p>
+     * In any case, there will be key {@link #_ExtraRetryCount} available in the
+     * intent result.
+     * </p>
      * 
      * @since v2.4 beta
      * @see #_Pattern
@@ -97,6 +111,7 @@ public class LockPatternActivity extends Activity {
      * @see #_OkPendingIntent
      * @see #_CancelledPendingIntent
      * @see #_ResultFailed
+     * @see #_ExtraRetryCount
      */
     public static final String _ActionComparePattern = _ClassName
             + ".compare_pattern";
@@ -121,24 +136,18 @@ public class LockPatternActivity extends Activity {
     public static final String _ExtraRetryCount = _ClassName + ".retry_count";
 
     /**
-     * Sets value of this key to a theme in {@code android.R.style.Theme_*}.<br>
-     * Default is:<br>
-     * 
-     * <li>{@link android.R.style#Theme_DeviceDefault} for {@code SDK >= }
-     * {@link Build.VERSION_CODES#ICE_CREAM_SANDWICH}</li>
-     * 
-     * <li>{@link android.R.style#Theme_Holo} for {@code SDK >= }
-     * {@link Build.VERSION_CODES#HONEYCOMB}</li>
-     * 
-     * <li>{@link android.R.style#Theme} for older systems</li>
+     * Sets value of this key to a theme in {@code R.style.Alp_Theme_*}. Default
+     * is the one you set in AndroidManifest.xml.
      * 
      * @since v1.5.3 beta
      */
     public static final String _Theme = _ClassName + ".theme";
 
     /**
-     * Specify if the pattern will be saved automatically or not. Default =
-     * {@code false}
+     * Specify if the pattern will be saved automatically or not.
+     * <p>
+     * Default: {@code false}
+     * </p>
      */
     public static final String _AutoSave = _ClassName + ".auto_save";
 
@@ -151,8 +160,10 @@ public class LockPatternActivity extends Activity {
     public static final String _MinWiredDots = _ClassName + ".min_wired_dots";
 
     /**
-     * Maximum retry times, in mode {@link #ComparePattern}, default is
-     * {@code 5}.
+     * Maximum retry times, used with {@link #_ActionComparePattern}.
+     * <p>
+     * Default: {@code 5}
+     * </p>
      */
     public static final String _MaxRetry = _ClassName + ".max_retry";
 
@@ -175,7 +186,7 @@ public class LockPatternActivity extends Activity {
     /**
      * You can provide an {@link ResultReceiver} with this key. The activity
      * will notify your receiver the same result code and intent data as you
-     * will receive them in {@code onActivityResult()}.
+     * will receive them in {@link #onActivityResult(int, int, Intent)}.
      * 
      * @since v2.4 beta
      */
