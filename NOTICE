@@ -44,7 +44,7 @@ And here is history:
    + for setting minimum wired dots in mode creating pattern;
    + for setting maximum tries and determining the number of tries that the user
      did in mode comparing patterns;
-   + thanks to @dmyers314 for his feedbacks;
+   + thanks to David Myers for his feedbacks;
  - Use fixed size for LockPatternActivity in large screens with dialog themes;
  - Add options for sending result to a PendingIntent and/ or ResultReceiver;
  - Fix minor bugs; optimize code;
