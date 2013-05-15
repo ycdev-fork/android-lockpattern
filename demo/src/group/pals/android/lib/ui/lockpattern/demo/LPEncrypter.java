@@ -16,19 +16,19 @@
 
 package group.pals.android.lib.ui.lockpattern.demo;
 
-import android.content.Context;
+import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
 
 import java.util.zip.CRC32;
 
-import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
+import android.content.Context;
 
 public class LPEncrypter implements IEncrypter {
 
     @Override
-    public String encrypt(Context context, String s) {
+    public char[] encrypt(Context context, char[] pattern) {
         CRC32 c = new CRC32();
-        c.update(s.getBytes());
+        c.update(new String(pattern).getBytes());
 
-        return String.format("%08x", c.getValue());
+        return String.format("%08x", c.getValue()).toCharArray();
     }// encrypt()
 }

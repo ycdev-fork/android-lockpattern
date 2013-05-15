@@ -17,6 +17,8 @@
 package group.pals.android.lib.ui.lockpattern.demo;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
+import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,14 +26,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private static final int _ReqCreateLockPattern = 0;
-    private static final int _ReqEnterLockPattern = 1;
+    private static final int REQ_CREATE_PATTERN = 0;
+    private static final int REQ_ENTER_PATTERN = 1;
 
     private CheckBox mChkLightTheme;
     private CheckBox mChkDialogTheme;
@@ -68,6 +71,9 @@ public class MainActivity extends Activity {
          * SET LISTENERS
          */
 
+        mChkStealthMode
+                .setOnCheckedChangeListener(mChkStealthModeOnCheckedChangeListener);
+
         for (SeekBar sb : new SeekBar[] { mBarMinWiredDots, mBarMaxTries }) {
             sb.setOnSeekBarChangeListener(mSeekBarsOnChangeListener);
             mSeekBarsOnChangeListener.onProgressChanged(sb, sb.getProgress(),
@@ -78,21 +84,29 @@ public class MainActivity extends Activity {
                 .setOnClickListener(mBtnCreateLockPatternOnClickListener);
         mBtnEnterLockPattern
                 .setOnClickListener(mBtnEnterLockPatternOnClickListener);
+
+        /*
+         * LOCKPATTERN PREFERENCES
+         */
+
+        SecurityPrefs.setAutoSavePattern(this, true);
+        SecurityPrefs.setEncrypterClass(this, LPEncrypter.class);
     }// onCreate()
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-        case _ReqCreateLockPattern: {
+        case REQ_CREATE_PATTERN: {
             if (resultCode == RESULT_OK)
-                setTitle(data.getStringExtra(LockPatternActivity._Pattern));
+                setTitle(new String(
+                        data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN)));
             else
                 setTitle(R.string.app_name);
 
             break;
-        }// _ReqCreateLockPattern
+        }// REQ_CREATE_PATTERN
 
-        case _ReqEnterLockPattern: {
+        case REQ_ENTER_PATTERN: {
             int msgId = 0;
 
             switch (resultCode) {
@@ -102,7 +116,7 @@ public class MainActivity extends Activity {
             case RESULT_CANCELED:
                 msgId = android.R.string.cancel;
                 break;
-            case LockPatternActivity._ResultFailed:
+            case LockPatternActivity.RESULT_FAILED:
                 msgId = R.string.failed;
                 break;
             default:
@@ -110,14 +124,14 @@ public class MainActivity extends Activity {
             }
 
             String msg = String.format("%s (%,d tries)", getString(msgId),
-                    data.getIntExtra(LockPatternActivity._ExtraRetryCount, 0));
+                    data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0));
 
             Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
             break;
-        }// _ReqEnterLockPattern
+        }// REQ_ENTER_PATTERN
         }
     }// onActivityResult()
 
@@ -134,6 +148,19 @@ public class MainActivity extends Activity {
         return mChkDialogTheme.isChecked() ? R.style.Alp_Theme_Dialog_Dark
                 : R.style.Alp_Theme_Dark;
     }// getThemeForLockPatternActivity()
+
+    /*
+     * LISTENERS
+     */
+
+    private final CompoundButton.OnCheckedChangeListener mChkStealthModeOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView,
+                boolean isChecked) {
+            DisplayPrefs.setStealthMode(MainActivity.this, isChecked);
+        }// onCheckedChanged()
+    };// mChkStealthModeOnCheckedChangeListener
 
     private final SeekBar.OnSeekBarChangeListener mSeekBarsOnChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
@@ -159,12 +186,15 @@ public class MainActivity extends Activity {
                 return;
             }
 
-            if (seekBar.getId() == R.id.seek_bar_max_tries)
+            if (seekBar.getId() == R.id.seek_bar_max_tries) {
                 mTextMaxTries.setText(getString(
                         R.string.pmsg_max_tries_allowed, progress));
-            else if (seekBar.getId() == R.id.seek_bar_min_wired_dots)
+                DisplayPrefs.setMaxRetry(MainActivity.this, progress);
+            } else if (seekBar.getId() == R.id.seek_bar_min_wired_dots) {
                 mTextMinWiredDots.setText(getString(
                         R.string.pmsg_min_wired_dots, progress));
+                DisplayPrefs.setMinWiredDots(MainActivity.this, progress);
+            }
         }// onProgressChanged()
     };// mSeekBarsOnChangeListener
 
@@ -172,17 +202,11 @@ public class MainActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(LockPatternActivity._ActionCreatePattern,
+            Intent i = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN,
                     null, MainActivity.this, LockPatternActivity.class);
-            i.putExtra(LockPatternActivity._Theme,
+            i.putExtra(LockPatternActivity.EXTRA_THEME,
                     getThemeForLockPatternActivity());
-            i.putExtra(LockPatternActivity._StealthMode,
-                    mChkStealthMode.isChecked());
-            i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
-            i.putExtra(LockPatternActivity._AutoSave, true);
-            i.putExtra(LockPatternActivity._MinWiredDots,
-                    mBarMinWiredDots.getProgress());
-            startActivityForResult(i, _ReqCreateLockPattern);
+            startActivityForResult(i, REQ_CREATE_PATTERN);
         }// onClick()
     };// mBtnCreateLockPatternOnClickListener
 
@@ -190,17 +214,11 @@ public class MainActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(LockPatternActivity._ActionComparePattern,
+            Intent i = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN,
                     null, MainActivity.this, LockPatternActivity.class);
-            i.putExtra(LockPatternActivity._Theme,
+            i.putExtra(LockPatternActivity.EXTRA_THEME,
                     getThemeForLockPatternActivity());
-            i.putExtra(LockPatternActivity._StealthMode,
-                    mChkStealthMode.isChecked());
-            i.putExtra(LockPatternActivity._EncrypterClass, LPEncrypter.class);
-            i.putExtra(LockPatternActivity._AutoSave, true);
-            i.putExtra(LockPatternActivity._MaxRetry,
-                    mBarMaxTries.getProgress());
-            startActivityForResult(i, _ReqEnterLockPattern);
+            startActivityForResult(i, REQ_ENTER_PATTERN);
         }// onClick()
     };// mBtnEnterLockPatternOnClickListener
 }

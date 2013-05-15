@@ -53,9 +53,9 @@ import android.widget.TextView;
  * </p>
  * <p>
  * You can deliver result to {@link PendingIntent}s and/ or
- * {@link ResultReceiver} too. See {@link #OK_PENDING_INTENT},
- * {@link #CANCELLED_PENDING_INTENT} and {@link #RESULT_RECEIVER} for more
- * details.
+ * {@link ResultReceiver} too. See {@link #EXTRA_OK_PENDING_INTENT},
+ * {@link #EXTRA_CANCELLED_PENDING_INTENT} and {@link #EXTRA_RESULT_RECEIVER}
+ * for more details.
  * </p>
  * <p>
  * <strong>NOTES</strong>
@@ -80,21 +80,21 @@ public class LockPatternActivity extends Activity {
      * {@link IEncrypter} with {@link #_EncrypterClass} to improve security.
      * <p>
      * If the use created a pattern, {@link Activity#RESULT_OK} returns with the
-     * pattern ({@link #PATTERN}). Otherwise {@link Activity#RESULT_CANCELED}
-     * returns.
+     * pattern ({@link #EXTRA_PATTERN}). Otherwise
+     * {@link Activity#RESULT_CANCELED} returns.
      * </p>
      * 
      * @since v2.4 beta
      * @see #_EncrypterClass
-     * @see #OK_PENDING_INTENT
-     * @see #CANCELLED_PENDING_INTENT
+     * @see #EXTRA_OK_PENDING_INTENT
+     * @see #EXTRA_CANCELLED_PENDING_INTENT
      */
     public static final String ACTION_CREATE_PATTERN = CLASS_NAME
             + ".create_pattern";
 
     /**
      * Use this action to compare pattern. You provide the pattern to be
-     * compared with {@link #PATTERN}.
+     * compared with {@link #EXTRA_PATTERN}.
      * <p>
      * If the user passes, {@link Activity#RESULT_OK} returns. If not,
      * {@link #RESULT_FAILED} returns.
@@ -108,10 +108,10 @@ public class LockPatternActivity extends Activity {
      * </p>
      * 
      * @since v2.4 beta
-     * @see #PATTERN
+     * @see #EXTRA_PATTERN
      * @see #_EncrypterClass
-     * @see #OK_PENDING_INTENT
-     * @see #CANCELLED_PENDING_INTENT
+     * @see #EXTRA_OK_PENDING_INTENT
+     * @see #EXTRA_CANCELLED_PENDING_INTENT
      * @see #RESULT_FAILED
      * @see #EXTRA_RETRY_COUNT
      */
@@ -143,14 +143,14 @@ public class LockPatternActivity extends Activity {
      * 
      * @since v1.5.3 beta
      */
-    public static final String THEME = CLASS_NAME + ".theme";
+    public static final String EXTRA_THEME = CLASS_NAME + ".theme";
 
     /**
      * Key to hold the pattern. It must be a char array.
      * 
      * @since v2 beta
      */
-    public static final String PATTERN = CLASS_NAME + ".pattern";
+    public static final String EXTRA_PATTERN = CLASS_NAME + ".pattern";
 
     /**
      * You can provide an {@link ResultReceiver} with this key. The activity
@@ -159,23 +159,23 @@ public class LockPatternActivity extends Activity {
      * 
      * @since v2.4 beta
      */
-    public static final String RESULT_RECEIVER = CLASS_NAME
+    public static final String EXTRA_RESULT_RECEIVER = CLASS_NAME
             + ".result_receiver";
 
     /**
      * Put a {@link PendingIntent} into this key. It will be sent before
      * {@link Activity#RESULT_OK} will be returning. If you were calling this
-     * activity with {@link #ACTION_CREATE_PATTERN}, key {@link #PATTERN} will
-     * be attached to the original intent which the pending intent holds.
+     * activity with {@link #ACTION_CREATE_PATTERN}, key {@link #EXTRA_PATTERN}
+     * will be attached to the original intent which the pending intent holds.
      */
-    public static final String OK_PENDING_INTENT = CLASS_NAME
+    public static final String EXTRA_OK_PENDING_INTENT = CLASS_NAME
             + ".ok_pending_intent";
 
     /**
      * Put a {@link PendingIntent} into this key. It will be sent before
      * {@link Activity#RESULT_CANCELED} will be returning.
      */
-    public static final String CANCELLED_PENDING_INTENT = CLASS_NAME
+    public static final String EXTRA_CANCELLED_PENDING_INTENT = CLASS_NAME
             + ".cancelled_pending_intent";
 
     /**
@@ -215,11 +215,12 @@ public class LockPatternActivity extends Activity {
             Log.d(CLASS_NAME, "ClassName = " + CLASS_NAME);
 
         /*
-         * THEME
+         * EXTRA_THEME
          */
 
-        if (getIntent().hasExtra(THEME))
-            setTheme(getIntent().getIntExtra(THEME, R.style.Alp_Theme_Dark));
+        if (getIntent().hasExtra(EXTRA_THEME))
+            setTheme(getIntent().getIntExtra(EXTRA_THEME,
+                    R.style.Alp_Theme_Dark));
 
         super.onCreate(savedInstanceState);
 
@@ -301,7 +302,7 @@ public class LockPatternActivity extends Activity {
         mBtnConfirm = (Button) findViewById(R.id.alp_confirm);
 
         /*
-         * LOCK PATTERN VIEW
+         * LOCK EXTRA_PATTERN VIEW
          */
 
         if (getResources().getBoolean(R.bool.alp_is_large_screen)
@@ -412,7 +413,7 @@ public class LockPatternActivity extends Activity {
         mLastPattern = new ArrayList<LockPatternView.Cell>();
         mLastPattern.addAll(pattern);
 
-        char[] currentPattern = getIntent().getCharArrayExtra(PATTERN);
+        char[] currentPattern = getIntent().getCharArrayExtra(EXTRA_PATTERN);
         if (currentPattern == null)
             currentPattern = SecurityPrefs.getPattern(this);
 
@@ -468,7 +469,7 @@ public class LockPatternActivity extends Activity {
      */
     private void finishWithResultOk(char[] pattern) {
         if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
-            mIntentResult.putExtra(PATTERN, pattern);
+            mIntentResult.putExtra(EXTRA_PATTERN, pattern);
         else {
             /*
              * If the user was "logging in", minimum try count can not be zero.
@@ -482,11 +483,11 @@ public class LockPatternActivity extends Activity {
          * ResultReceiver
          */
         ResultReceiver receiver = getIntent().getParcelableExtra(
-                RESULT_RECEIVER);
+                EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
             Bundle bundle = new Bundle();
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
-                bundle.putCharArray(PATTERN, pattern);
+                bundle.putCharArray(EXTRA_PATTERN, pattern);
             else {
                 /*
                  * If the user was "logging in", minimum try count can not be
@@ -500,7 +501,8 @@ public class LockPatternActivity extends Activity {
         /*
          * PendingIntent
          */
-        PendingIntent pi = getIntent().getParcelableExtra(OK_PENDING_INTENT);
+        PendingIntent pi = getIntent().getParcelableExtra(
+                EXTRA_OK_PENDING_INTENT);
         if (pi != null) {
             try {
                 pi.send(this, RESULT_OK, mIntentResult);
@@ -530,7 +532,7 @@ public class LockPatternActivity extends Activity {
          * ResultReceiver
          */
         ResultReceiver receiver = getIntent().getParcelableExtra(
-                RESULT_RECEIVER);
+                EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
             Bundle resultBundle = null;
             if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
@@ -544,7 +546,7 @@ public class LockPatternActivity extends Activity {
          * PendingIntent
          */
         PendingIntent pi = getIntent().getParcelableExtra(
-                CANCELLED_PENDING_INTENT);
+                EXTRA_CANCELLED_PENDING_INTENT);
         if (pi != null) {
             try {
                 pi.send(this, resultCode, mIntentResult);
