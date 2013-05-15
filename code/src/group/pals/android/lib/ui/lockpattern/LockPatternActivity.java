@@ -146,8 +146,7 @@ public class LockPatternActivity extends Activity {
     public static final String THEME = CLASS_NAME + ".theme";
 
     /**
-     * Key to hold pattern. Can be a SHA-1 string <i><b>or</b></i> an encrypted
-     * string of its (if {@link #_EncrypterClass} is used).
+     * Key to hold the pattern. It must be a char array.
      * 
      * @since v2 beta
      */
