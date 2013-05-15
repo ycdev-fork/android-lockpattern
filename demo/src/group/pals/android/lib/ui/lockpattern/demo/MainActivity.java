@@ -89,6 +89,10 @@ public class MainActivity extends Activity {
          * LOCKPATTERN PREFERENCES
          */
 
+        mChkStealthMode.setChecked(DisplayPrefs.isStealthMode(this));
+        mBarMaxTries.setProgress(DisplayPrefs.getMaxRetry(this));
+        mBarMinWiredDots.setProgress(DisplayPrefs.getMinWiredDots(this));
+
         SecurityPrefs.setAutoSavePattern(this, true);
         SecurityPrefs.setEncrypterClass(this, LPEncrypter.class);
     }// onCreate()
