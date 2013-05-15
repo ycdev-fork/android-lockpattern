@@ -81,6 +81,9 @@ public class DisplayPrefs extends Prefs {
      *            the minimum wired dots allowed for a pattern.
      */
     public static void setMinWiredDots(Context context, int v) {
+        if (v <= 0 || v > 9)
+            v = context.getResources().getInteger(
+                    R.integer.alp_pkey_display_min_wired_dots_default);
         p(context)
                 .edit()
                 .putInt(context
@@ -112,6 +115,9 @@ public class DisplayPrefs extends Prefs {
      *            the max retry allowed in mode comparing pattern.
      */
     public static void setMaxRetry(Context context, int v) {
+        if (v <= 0)
+            v = context.getResources().getInteger(
+                    R.integer.alp_pkey_display_max_retry_default);
         p(context)
                 .edit()
                 .putInt(context.getString(R.string.alp_pkey_display_max_retry),

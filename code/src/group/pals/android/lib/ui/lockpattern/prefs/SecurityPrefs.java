@@ -55,6 +55,8 @@ public class SecurityPrefs extends Prefs {
                 .putBoolean(
                         context.getString(R.string.alp_pkey_sys_auto_save_pattern),
                         v).commit();
+        if (!v)
+            setPattern(context, null);
     }// setAutoSavePattern()
 
     /**
@@ -82,7 +84,7 @@ public class SecurityPrefs extends Prefs {
         p(context)
                 .edit()
                 .putString(context.getString(R.string.alp_pkey_sys_pattern),
-                        new String(pattern)).commit();
+                        pattern != null ? new String(pattern) : null).commit();
     }// setPattern()
 
     /**
@@ -104,10 +106,12 @@ public class SecurityPrefs extends Prefs {
      * @param context
      *            the context.
      * @param clazz
-     *            the encrypter class.
+     *            the encrypter class, can be {@code null} if you don't want to
+     *            use it.
      */
     public static void setEncrypterClass(Context context, Class<?> clazz) {
-        setEncrypterClass(context, clazz.getName().toCharArray());
+        setEncrypterClass(context, clazz != null ? clazz.getName()
+                .toCharArray() : null);
     }// setEncrypterClass()
 
     /**
@@ -116,13 +120,14 @@ public class SecurityPrefs extends Prefs {
      * @param context
      *            the context.
      * @param clazz
-     *            the full name of encrypter class.
+     *            the full name of encrypter class, can be {@code null} if you
+     *            don't want to use it.
      */
     public static void setEncrypterClass(Context context, char[] clazz) {
         p(context)
                 .edit()
                 .putString(
                         context.getString(R.string.alp_pkey_sys_encrypter_class),
-                        new String(clazz)).commit();
+                        clazz != null ? new String(clazz) : null).commit();
     }// setEncrypterClass()
 }

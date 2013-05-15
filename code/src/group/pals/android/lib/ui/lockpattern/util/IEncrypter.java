@@ -31,10 +31,11 @@ public interface IEncrypter {
      * Encrypt {@code s}.
      * 
      * @param context
-     *            {@link Context}
-     * @param s
-     * @return the encrypted string.
+     *            the context.
+     * @param pattern
+     *            the char array of the pattern.
+     * @return the encrypted char array.
      * @since v2.1 beta
      */
-    String encrypt(Context context, String s);
+    char[] encrypt(Context context, char[] pattern);
 }
