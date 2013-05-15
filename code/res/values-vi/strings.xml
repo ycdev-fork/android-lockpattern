@@ -17,7 +17,6 @@
 
 <resources>
 
-    <string name="alp_app_name">android-lockpattern</string>
     <string name="alp_cmd_confirm">Xác nhận</string>
     <string name="alp_cmd_continue">Tiếp tục</string>
     <string name="alp_cmd_retry">Thử lại</string>
