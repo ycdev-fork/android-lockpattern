@@ -71,9 +71,12 @@ public class MainActivity extends Activity {
          * SET LISTENERS
          */
 
+        mChkStealthMode.setChecked(DisplayPrefs.isStealthMode(this));
         mChkStealthMode
                 .setOnCheckedChangeListener(mChkStealthModeOnCheckedChangeListener);
 
+        mBarMaxTries.setProgress(DisplayPrefs.getMaxRetry(this));
+        mBarMinWiredDots.setProgress(DisplayPrefs.getMinWiredDots(this));
         for (SeekBar sb : new SeekBar[] { mBarMinWiredDots, mBarMaxTries }) {
             sb.setOnSeekBarChangeListener(mSeekBarsOnChangeListener);
             mSeekBarsOnChangeListener.onProgressChanged(sb, sb.getProgress(),
@@ -88,10 +91,6 @@ public class MainActivity extends Activity {
         /*
          * LOCKPATTERN PREFERENCES
          */
-
-        mChkStealthMode.setChecked(DisplayPrefs.isStealthMode(this));
-        mBarMaxTries.setProgress(DisplayPrefs.getMaxRetry(this));
-        mBarMinWiredDots.setProgress(DisplayPrefs.getMinWiredDots(this));
 
         SecurityPrefs.setAutoSavePattern(this, true);
         SecurityPrefs.setEncrypterClass(this, LPEncrypter.class);
@@ -193,11 +192,13 @@ public class MainActivity extends Activity {
             if (seekBar.getId() == R.id.seek_bar_max_tries) {
                 mTextMaxTries.setText(getString(
                         R.string.pmsg_max_tries_allowed, progress));
-                DisplayPrefs.setMaxRetry(MainActivity.this, progress);
+                if (fromUser)
+                    DisplayPrefs.setMaxRetry(MainActivity.this, progress);
             } else if (seekBar.getId() == R.id.seek_bar_min_wired_dots) {
                 mTextMinWiredDots.setText(getString(
                         R.string.pmsg_min_wired_dots, progress));
-                DisplayPrefs.setMinWiredDots(MainActivity.this, progress);
+                if (fromUser)
+                    DisplayPrefs.setMinWiredDots(MainActivity.this, progress);
             }
         }// onProgressChanged()
     };// mSeekBarsOnChangeListener
