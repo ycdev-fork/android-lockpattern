@@ -19,6 +19,7 @@
 
     <string name="alp_pkey_sys_pattern">alp.pkey.sys.pattern</string>
     <string name="alp_pkey_sys_auto_save_pattern">alp.pkey.sys.auto_save_pattern</string>
+    <string name="alp_pkey_sys_encrypter_class">alp.pkey.sys.encrypter_class</string>
     <string name="alp_pkey_display_stealth_mode">alp.pkey.display.stealth_mode</string>
     <string name="alp_pkey_display_min_wired_dots">alp.pkey.display.min_wired_dots</string>
     <string name="alp_pkey_display_max_retry">alp.pkey.display.max_retry</string>

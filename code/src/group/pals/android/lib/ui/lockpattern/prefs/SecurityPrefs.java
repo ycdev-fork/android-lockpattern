@@ -84,4 +84,45 @@ public class SecurityPrefs extends Prefs {
                 .putString(context.getString(R.string.alp_pkey_sys_pattern),
                         new String(pattern)).commit();
     }// setPattern()
+
+    /**
+     * Gets encrypter class.
+     * 
+     * @param context
+     *            the context.
+     * @return the full name of encrypter class. Default is {@code null}.
+     */
+    public static char[] getEncrypterClass(Context context) {
+        String clazz = p(context).getString(
+                context.getString(R.string.alp_pkey_sys_encrypter_class), null);
+        return clazz == null ? null : clazz.toCharArray();
+    }// getEncrypterClass()
+
+    /**
+     * Sets encrypter class.
+     * 
+     * @param context
+     *            the context.
+     * @param clazz
+     *            the encrypter class.
+     */
+    public static void setEncrypterClass(Context context, Class<?> clazz) {
+        setEncrypterClass(context, clazz.getName().toCharArray());
+    }// setEncrypterClass()
+
+    /**
+     * Sets encrypter class.
+     * 
+     * @param context
+     *            the context.
+     * @param clazz
+     *            the full name of encrypter class.
+     */
+    public static void setEncrypterClass(Context context, char[] clazz) {
+        p(context)
+                .edit()
+                .putString(
+                        context.getString(R.string.alp_pkey_sys_encrypter_class),
+                        new String(clazz)).commit();
+    }// setEncrypterClass()
 }
