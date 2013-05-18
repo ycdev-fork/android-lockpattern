@@ -17,7 +17,7 @@
 
 <resources>
 
-    <string name="app_name">ALP 2.6 beta - Demo</string>
+    <string name="app_name">ALP 2.6 - Demo</string>
     <string name="failed">Failed</string>
     <string name="pmsg_min_wired_dots">Minimum wired dots: %1$,d</string>
     <string name="pmsg_max_tries_allowed">Maximum tries: %1$,d</string>
