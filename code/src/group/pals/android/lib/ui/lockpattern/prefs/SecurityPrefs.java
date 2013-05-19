@@ -16,22 +16,20 @@
 
 package group.pals.android.lib.ui.lockpattern.prefs;
 
-import group.pals.android.lib.ui.lockpattern.R;
 import android.content.Context;
+import group.pals.android.lib.ui.lockpattern.R;
 
 /**
  * Security preferences.
- * 
+ *
  * @author Hai Bison
- * 
  */
 public class SecurityPrefs extends Prefs {
 
     /**
      * Checks if the library is using auto-save pattern mode.
-     * 
-     * @param context
-     *            the context.
+     *
+     * @param context the context.
      * @return {@code true} or {@code false}. Default is {@code false}.
      */
     public static boolean isAutoSavePattern(Context context) {
@@ -43,11 +41,9 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Sets auto-save pattern mode.
-     * 
-     * @param context
-     *            the context.
-     * @param v
-     *            the auto-save mode.
+     *
+     * @param context the context.
+     * @param v       the auto-save mode.
      */
     public static void setAutoSavePattern(Context context, boolean v) {
         p(context)
@@ -61,9 +57,8 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Gets the pattern.
-     * 
-     * @param context
-     *            the context.
+     *
+     * @param context the context.
      * @return the pattern. Default is {@code null}.
      */
     public static char[] getPattern(Context context) {
@@ -74,11 +69,9 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Sets the pattern.
-     * 
-     * @param context
-     *            the context.
-     * @param pattern
-     *            the pattern.
+     *
+     * @param context the context.
+     * @param pattern the pattern.
      */
     public static void setPattern(Context context, char[] pattern) {
         p(context)
@@ -89,9 +82,8 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Gets encrypter class.
-     * 
-     * @param context
-     *            the context.
+     *
+     * @param context the context.
      * @return the full name of encrypter class. Default is {@code null}.
      */
     public static char[] getEncrypterClass(Context context) {
@@ -102,12 +94,10 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Sets encrypter class.
-     * 
-     * @param context
-     *            the context.
-     * @param clazz
-     *            the encrypter class, can be {@code null} if you don't want to
-     *            use it.
+     *
+     * @param context the context.
+     * @param clazz   the encrypter class, can be {@code null} if you don't want to
+     *                use it.
      */
     public static void setEncrypterClass(Context context, Class<?> clazz) {
         setEncrypterClass(context, clazz != null ? clazz.getName()
@@ -116,12 +106,10 @@ public class SecurityPrefs extends Prefs {
 
     /**
      * Sets encrypter class.
-     * 
-     * @param context
-     *            the context.
-     * @param clazz
-     *            the full name of encrypter class, can be {@code null} if you
-     *            don't want to use it.
+     *
+     * @param context the context.
+     * @param clazz   the full name of encrypter class, can be {@code null} if you
+     *                don't want to use it.
      */
     public static void setEncrypterClass(Context context, char[] clazz) {
         p(context)

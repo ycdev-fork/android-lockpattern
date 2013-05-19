@@ -21,13 +21,13 @@ import java.util.Collections;
 
 /**
  * Provides static methods for creating {@code List} instances easily, and other
- * utility methods for working with lists. 
+ * utility methods for working with lists.
  */
 public class Lists {
 
     /**
      * Creates an empty {@code ArrayList} instance.
-     *
+     * <p/>
      * <p><b>Note:</b> if you only need an <i>immutable</i> empty List, use
      * {@link Collections#emptyList} instead.
      *
@@ -40,16 +40,16 @@ public class Lists {
     /**
      * Creates a resizable {@code ArrayList} instance containing the given
      * elements.
-     *
+     * <p/>
      * <p><b>Note:</b> due to a bug in javac 1.5.0_06, we cannot support the
      * following:
-     *
+     * <p/>
      * <p>{@code List<Base> list = Lists.newArrayList(sub1, sub2);}
-     *
+     * <p/>
      * <p>where {@code sub1} and {@code sub2} are references to subtypes of
      * {@code Base}, not of {@code Base} itself. To get around this, you must
      * use:
-     *
+     * <p/>
      * <p>{@code List<Base> list = Lists.<Base>newArrayList(sub1, sub2);}
      *
      * @param elements the elements that the list should contain, in order

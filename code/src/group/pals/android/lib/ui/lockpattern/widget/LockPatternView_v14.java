@@ -26,9 +26,9 @@ import android.view.accessibility.AccessibilityManager;
  * <p>
  * <b>Minimum API: 14</b>
  * </p>
- * 
- * @since v2.4 beta
+ *
  * @author Hai Bison
+ * @since v2.4 beta
  */
 public class LockPatternView_v14 extends LockPatternView {
 
@@ -43,7 +43,7 @@ public class LockPatternView_v14 extends LockPatternView {
 
         mAccessibilityManager = isInEditMode() ? null
                 : (AccessibilityManager) context
-                        .getSystemService(Context.ACCESSIBILITY_SERVICE);
+                .getSystemService(Context.ACCESSIBILITY_SERVICE);
     }
 
     @Override
@@ -52,15 +52,15 @@ public class LockPatternView_v14 extends LockPatternView {
                 && mAccessibilityManager.isTouchExplorationEnabled()) {
             final int action = event.getAction();
             switch (action) {
-            case MotionEvent.ACTION_HOVER_ENTER:
-                event.setAction(MotionEvent.ACTION_DOWN);
-                break;
-            case MotionEvent.ACTION_HOVER_MOVE:
-                event.setAction(MotionEvent.ACTION_MOVE);
-                break;
-            case MotionEvent.ACTION_HOVER_EXIT:
-                event.setAction(MotionEvent.ACTION_UP);
-                break;
+                case MotionEvent.ACTION_HOVER_ENTER:
+                    event.setAction(MotionEvent.ACTION_DOWN);
+                    break;
+                case MotionEvent.ACTION_HOVER_MOVE:
+                    event.setAction(MotionEvent.ACTION_MOVE);
+                    break;
+                case MotionEvent.ACTION_HOVER_EXIT:
+                    event.setAction(MotionEvent.ACTION_UP);
+                    break;
             }
             onTouchEvent(event);
             event.setAction(action);

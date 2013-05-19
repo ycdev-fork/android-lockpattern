@@ -16,20 +16,6 @@
 
 package group.pals.android.lib.ui.lockpattern;
 
-import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
-import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
-import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
-import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
-import group.pals.android.lib.ui.lockpattern.util.UI;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.DisplayMode;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -43,6 +29,19 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
+import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
+import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
+import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
+import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
+import group.pals.android.lib.ui.lockpattern.util.UI;
+import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
+import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
+import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
+import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.DisplayMode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Main activity for this library.
@@ -66,7 +65,7 @@ import android.widget.TextView;
  * codes</i></strong>: {@link Activity#RESULT_OK},
  * {@link Activity#RESULT_CANCELED} and {@link #RESULT_FAILED}.</li>
  * </p>
- * 
+ *
  * @author Hai Bison
  * @since v1.0
  */
@@ -83,11 +82,11 @@ public class LockPatternActivity extends Activity {
      * pattern ({@link #EXTRA_PATTERN}). Otherwise
      * {@link Activity#RESULT_CANCELED} returns.
      * </p>
-     * 
-     * @since v2.4 beta
+     *
      * @see #_EncrypterClass
      * @see #EXTRA_OK_PENDING_INTENT
      * @see #EXTRA_CANCELLED_PENDING_INTENT
+     * @since v2.4 beta
      */
     public static final String ACTION_CREATE_PATTERN = CLASS_NAME
             + ".create_pattern";
@@ -106,14 +105,14 @@ public class LockPatternActivity extends Activity {
      * In any case, there will be key {@link #EXTRA_RETRY_COUNT} available in
      * the intent result.
      * </p>
-     * 
-     * @since v2.4 beta
+     *
      * @see #EXTRA_PATTERN
      * @see #_EncrypterClass
      * @see #EXTRA_OK_PENDING_INTENT
      * @see #EXTRA_CANCELLED_PENDING_INTENT
      * @see #RESULT_FAILED
      * @see #EXTRA_RETRY_COUNT
+     * @since v2.4 beta
      */
     public static final String ACTION_COMPARE_PATTERN = CLASS_NAME
             + ".compare_pattern";
@@ -121,7 +120,7 @@ public class LockPatternActivity extends Activity {
     /**
      * If you use {@link #ACTION_COMPARE_PATTERN} and the user fails to "login"
      * after a number of tries, this activity will finish with this result code.
-     * 
+     *
      * @see #ACTION_COMPARE_PATTERN
      * @see #_MaxRetry
      * @see #EXTRA_RETRY_COUNT
@@ -131,7 +130,7 @@ public class LockPatternActivity extends Activity {
     /**
      * If you use {@link #ACTION_COMPARE_PATTERN}, and the user fails to "login"
      * after a number of tries, this key holds that number.
-     * 
+     *
      * @see #ACTION_COMPARE_PATTERN
      * @see #_MaxRetry
      */
@@ -140,14 +139,14 @@ public class LockPatternActivity extends Activity {
     /**
      * Sets value of this key to a theme in {@code R.style.Alp_Theme_*}. Default
      * is the one you set in AndroidManifest.xml.
-     * 
+     *
      * @since v1.5.3 beta
      */
     public static final String EXTRA_THEME = CLASS_NAME + ".theme";
 
     /**
      * Key to hold the pattern. It must be a char array.
-     * 
+     *
      * @since v2 beta
      */
     public static final String EXTRA_PATTERN = CLASS_NAME + ".pattern";
@@ -156,7 +155,7 @@ public class LockPatternActivity extends Activity {
      * You can provide an {@link ResultReceiver} with this key. The activity
      * will notify your receiver the same result code and intent data as you
      * will receive them in {@link #onActivityResult(int, int, Intent)}.
-     * 
+     *
      * @since v2.4 beta
      */
     public static final String EXTRA_RESULT_RECEIVER = CLASS_NAME
@@ -181,9 +180,8 @@ public class LockPatternActivity extends Activity {
     /**
      * Helper enum for button OK commands. (Because we use only one "OK" button
      * for different commands).
-     * 
+     *
      * @author Hai Bison
-     * 
      */
     private static enum ButtonOkCommand {
         CONTINUE, DONE
@@ -208,7 +206,9 @@ public class LockPatternActivity extends Activity {
     private Button mBtnCancel;
     private Button mBtnConfirm;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (BuildConfig.DEBUG)
@@ -356,12 +356,12 @@ public class LockPatternActivity extends Activity {
             if (mBtnOkCmd == null)
                 mBtnOkCmd = ButtonOkCommand.CONTINUE;
             switch (mBtnOkCmd) {
-            case CONTINUE:
-                mBtnConfirm.setText(R.string.alp_cmd_continue);
-                break;
-            case DONE:
-                mBtnConfirm.setText(R.string.alp_cmd_confirm);
-                break;
+                case CONTINUE:
+                    mBtnConfirm.setText(R.string.alp_cmd_continue);
+                    break;
+                case DONE:
+                    mBtnConfirm.setText(R.string.alp_cmd_confirm);
+                    break;
             }
             if (btnOkEnabled != null)
                 mBtnConfirm.setEnabled(btnOkEnabled);
@@ -381,13 +381,12 @@ public class LockPatternActivity extends Activity {
      * <p>
      * <li>If {@link #_EncrypterClass} is not set, returns SHA-1 of
      * {@code pattern}.</li>
-     * 
+     * <p/>
      * <li>If {@link #_EncrypterClass} is set, calculates SHA-1 of
      * {@code pattern}, then encrypts the SHA-1 value and returns the result.</li>
      * </p>
-     * 
-     * @param pattern
-     *            the pattern.
+     *
+     * @param pattern the pattern.
      * @return SHA-1 of {@code pattern}, or encrypted string of its.
      * @since v2 beta
      */
@@ -462,10 +461,9 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Finishes activity with {@link Activity#RESULT_OK}.
-     * 
-     * @param pattern
-     *            the pattern, if this is in mode creating pattern. In any
-     *            cases, it can be set to {@code null}.
+     *
+     * @param pattern the pattern, if this is in mode creating pattern. In any
+     *                cases, it can be set to {@code null}.
      */
     private void finishWithResultOk(char[] pattern) {
         if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))

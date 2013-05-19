@@ -35,9 +35,8 @@ public class LockPatternUtils {
 
     /**
      * Deserialize a pattern.
-     * 
-     * @param string
-     *            The pattern serialized with {@link #patternToString}
+     *
+     * @param string The pattern serialized with {@link #patternToString}
      * @return The pattern.
      */
     public static List<LockPatternView.Cell> stringToPattern(String string) {
@@ -58,9 +57,8 @@ public class LockPatternUtils {
 
     /**
      * Serialize a pattern.
-     * 
-     * @param pattern
-     *            The pattern.
+     *
+     * @param pattern The pattern.
      * @return The pattern in string form.
      */
     public static String patternToString(List<LockPatternView.Cell> pattern) {
@@ -84,9 +82,8 @@ public class LockPatternUtils {
 
     /**
      * Serializes a pattern
-     * 
-     * @param pattern
-     *            The pattern
+     *
+     * @param pattern The pattern
      * @return The SHA-1 string of the pattern got from
      *         {@link #patternToString(List)}
      */

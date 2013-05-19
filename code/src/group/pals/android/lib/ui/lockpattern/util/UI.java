@@ -16,26 +16,24 @@
 
 package group.pals.android.lib.ui.lockpattern.util;
 
-import group.pals.android.lib.ui.lockpattern.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 import android.view.Window;
+import group.pals.android.lib.ui.lockpattern.R;
 
 /**
  * UI utilities.
- * 
+ *
  * @author Hai Bison
- * 
  */
 public class UI {
 
     /**
      * Uses a fixed size for {@code dialog} in large screens.
-     * 
-     * @param dialog
-     *            the dialog.
+     *
+     * @param dialog the dialog.
      */
     public static void adjustDialogSizeForLargeScreen(Dialog dialog) {
         adjustDialogSizeForLargeScreen(dialog.getWindow());
@@ -43,14 +41,13 @@ public class UI {
 
     /**
      * Uses a fixed size for {@code dialogWindow} in large screens.
-     * 
-     * @param dialogWindow
-     *            the window <i>of the dialog</i>.
+     *
+     * @param dialogWindow the window <i>of the dialog</i>.
      */
     public static void adjustDialogSizeForLargeScreen(Window dialogWindow) {
         if (dialogWindow.isFloating()
                 && dialogWindow.getContext().getResources()
-                        .getBoolean(R.bool.alp_is_large_screen))
+                .getBoolean(R.bool.alp_is_large_screen))
             dialogWindow.setLayout(
                     dialogWindow
                             .getContext()
@@ -67,11 +64,9 @@ public class UI {
     /**
      * Convenient method for {@link Context#getTheme()} and
      * {@link Resources.Theme#resolveAttribute(int, TypedValue, boolean)}.
-     * 
-     * @param context
-     *            the context.
-     * @param resId
-     *            The resource identifier of the desired theme attribute.
+     *
+     * @param context the context.
+     * @param resId   The resource identifier of the desired theme attribute.
      * @return the resource ID that {@link TypedValue#resourceId} points to, or
      *         {@code 0} if not found.
      */

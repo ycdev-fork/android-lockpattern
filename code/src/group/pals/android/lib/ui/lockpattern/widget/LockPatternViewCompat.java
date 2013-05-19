@@ -24,26 +24,22 @@ import android.view.View;
  * <p>
  * <b>Minimum API: 16</b>
  * </p>
- * 
- * @since v2.4 beta
+ *
  * @author Hai Bison
- * 
+ * @since v2.4 beta
  */
 public class LockPatternViewCompat {
 
     /**
      * Wrapper for {@link View#announceForAccessibility(CharSequence)}.
-     * 
-     * @param view
-     *            a view.
-     * @param context
-     *            the context.
-     * @param resId
-     *            String resource ID.
+     *
+     * @param view    a view.
+     * @param context the context.
+     * @param resId   String resource ID.
      * @see View#announceForAccessibility(CharSequence)
      */
     public static void announceForAccessibility(View view, Context context,
-            int resId) {
+                                                int resId) {
         view.announceForAccessibility(context.getString(resId));
     }
 }

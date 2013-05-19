@@ -20,20 +20,17 @@ import android.content.Context;
 
 /**
  * Interface for encrypter.
- * 
+ *
  * @author Hai Bison
  * @since v2 beta
- * 
  */
 public interface IEncrypter {
 
     /**
      * Encrypt {@code s}.
-     * 
-     * @param context
-     *            the context.
-     * @param pattern
-     *            the char array of the pattern.
+     *
+     * @param context the context.
+     * @param pattern the char array of the pattern.
      * @return the encrypted char array.
      * @since v2.1 beta
      */
