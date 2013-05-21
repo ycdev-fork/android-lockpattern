@@ -65,14 +65,6 @@ public class PrefsActivity_v11 extends PrefsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            /*
-             * Since this demo is a small app, we borrow ALP's preferences file.
-             * If you're building a medium or large app, you should use your own
-             * preference file. You can easily write some wrappers to forward
-             * your preferences to ALP's preferences.
-             */
-            Prefs.setupPreferenceManager(getActivity(), getPreferenceManager());
-
             addPreferencesFromResource(R.xml.main_preferences_commands);
             CommandsPrefsHelper.init(getActivity(), this);
         }// onCreate()
