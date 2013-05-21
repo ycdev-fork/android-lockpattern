@@ -1,0 +1,81 @@
+group.pals.android.lib.ui.lockpattern.LockPatternActivity:
+    public static final int RESULT_FAILED
+group.pals.android.lib.ui.lockpattern.R:
+====    9:9:public R()
+group.pals.android.lib.ui.lockpattern.R$attr:
+====    10:10:public R$attr()
+group.pals.android.lib.ui.lockpattern.R$bool:
+====    20:20:public R$bool()
+group.pals.android.lib.ui.lockpattern.R$color
+group.pals.android.lib.ui.lockpattern.R$dimen:
+====    29:29:public R$dimen()
+group.pals.android.lib.ui.lockpattern.R$drawable:
+====    41:41:public R$drawable()
+group.pals.android.lib.ui.lockpattern.R$id:
+====    58:58:public R$id()
+group.pals.android.lib.ui.lockpattern.R$integer:
+====    65:65:public R$integer()
+group.pals.android.lib.ui.lockpattern.R$layout:
+====    70:70:public R$layout()
+group.pals.android.lib.ui.lockpattern.R$string:
+====    75:75:public R$string()
+group.pals.android.lib.ui.lockpattern.R$style:
+====    101:101:public R$style()
+group.pals.android.lib.ui.lockpattern.collect.Lists:
+====    26:26:public Lists()
+====    59:62:public static varargs java.util.ArrayList newArrayList(java.lang.Object[])
+group.pals.android.lib.ui.lockpattern.demo.BuildConfig
+group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper:
+    public static final int REQ_CREATE_PATTERN
+    public static final int REQ_ENTER_PATTERN
+====    34:34:public CommandsPrefsHelper()
+group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference:
+    public static final int DEFAULT_VALUE
+group.pals.android.lib.ui.lockpattern.demo.R:
+====    10:10:public R()
+group.pals.android.lib.ui.lockpattern.demo.R$attr
+group.pals.android.lib.ui.lockpattern.demo.R$bool
+group.pals.android.lib.ui.lockpattern.demo.R$color
+group.pals.android.lib.ui.lockpattern.demo.R$dimen
+group.pals.android.lib.ui.lockpattern.demo.R$drawable
+group.pals.android.lib.ui.lockpattern.demo.R$id
+group.pals.android.lib.ui.lockpattern.demo.R$integer
+group.pals.android.lib.ui.lockpattern.demo.R$layout
+group.pals.android.lib.ui.lockpattern.demo.R$string
+group.pals.android.lib.ui.lockpattern.demo.R$style
+group.pals.android.lib.ui.lockpattern.demo.R$styleable:
+====    249:249:public R$styleable()
+group.pals.android.lib.ui.lockpattern.demo.R$xml
+group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs:
+====    27:27:public DisplayPrefs()
+====    49:54:public static void setStealthMode(android.content.Context,boolean)
+====    77:85:public static void setMinWiredDots(android.content.Context,int)
+====    108:115:public static void setMaxRetry(android.content.Context,int)
+group.pals.android.lib.ui.lockpattern.prefs.Prefs:
+    public static final java.lang.String UID
+====    28:28:public Prefs()
+====    56:57:public static final java.lang.String genDatabaseFilename(android.content.Context,java.lang.String)
+group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs:
+====    27:27:public SecurityPrefs()
+group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException:
+    private static final long serialVersionUID
+group.pals.android.lib.ui.lockpattern.util.UI:
+====    31:31:public UI()
+====    39:40:public static void adjustDialogSizeForLargeScreen(android.app.Dialog)
+group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils:
+    public static final java.lang.String _Utf8
+    public static final java.lang.String _Sha1
+====    31:31:public LockPatternUtils()
+group.pals.android.lib.ui.lockpattern.widget.LockPatternView:
+    private static final int ASPECT_SQUARE
+    private static final int ASPECT_LOCK_WIDTH
+    private static final int ASPECT_LOCK_HEIGHT
+    private static final boolean PROFILE_DRAWING
+    static final int STATUS_BAR_HEIGHT
+    private static final int MILLIS_PER_CIRCLE_ANIMATING
+====    310:310:public boolean isInStealthMode()
+====    317:317:public boolean isTactileFeedbackEnabled()
+====    476:477:public void disableInput()
+====    483:484:public void enableInput()
+group.pals.android.lib.ui.lockpattern.widget.LockPatternViewCompat:
+====    31:31:public LockPatternViewCompat()
