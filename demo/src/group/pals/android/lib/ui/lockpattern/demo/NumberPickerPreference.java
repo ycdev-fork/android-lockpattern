@@ -33,6 +33,9 @@ import android.widget.TextView;
  */
 public class NumberPickerPreference extends DialogPreference {
 
+    private static final String CLASSNAME = NumberPickerPreference.class
+            .getName();
+
     /**
      * Default mValue of this preference.
      */
@@ -87,6 +90,10 @@ public class NumberPickerPreference extends DialogPreference {
         mIncrement = a.getInt(R.styleable.NumberPickerPreference_increment, 0);
 
         a.recycle();
+
+        mCurrentValue = getPersistedInt(DEFAULT_VALUE);
+
+        updateUI();
     }// NumberPickerPreference()
 
     @Override
@@ -127,12 +134,14 @@ public class NumberPickerPreference extends DialogPreference {
             mCurrentValue = (Integer) defaultValue;
             persistInt(mCurrentValue);
         }
+
+        updateUI();
     }// onSetInitialValue()
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
-            persistInt(9);// TODO
+            persistInt(mCurrentValue);
         }
     }// onDialogClosed()
 
@@ -213,8 +222,10 @@ public class NumberPickerPreference extends DialogPreference {
      * Update the UI.
      */
     private void updateUI() {
+        setSummary(String.format("%,d", mCurrentValue));
+
         if (mTextNumber != null) {
-            mTextNumber.setText(String.format("%,d", mCurrentValue));
+            mTextNumber.setText(getSummary());
             mBtnDecrease.setEnabled(mCurrentValue > mMin);
             mBtnIncrease.setEnabled(mCurrentValue < mMax);
         }

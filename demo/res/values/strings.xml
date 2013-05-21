@@ -19,6 +19,8 @@
 
     <string name="app_name">ALP 2.6 - Demo</string>
     <string name="commands">Commands</string>
+    <string name="create_lock_pattern">Create lock pattern</string>
+    <string name="enter_lock_pattern">Enter lock pattern</string>
     <string name="failed">Failed</string>
     <string name="dialog_theme">Dialog Theme</string>
     <string name="light_theme">Light Theme</string>
