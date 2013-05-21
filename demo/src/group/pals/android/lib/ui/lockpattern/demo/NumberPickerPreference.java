@@ -23,6 +23,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,8 +35,8 @@ import android.widget.TextView;
  */
 public class NumberPickerPreference extends DialogPreference {
 
-    // private static final String CLASSNAME = NumberPickerPreference.class
-    // .getName();
+    private static final String CLASSNAME = NumberPickerPreference.class
+            .getName();
 
     /**
      * Default mValue of this preference.
@@ -58,6 +59,7 @@ public class NumberPickerPreference extends DialogPreference {
     private final int mMax;
     private final int mIncrement;
     private int mCurrentValue = 0;
+    private int mDelta = 0;
 
     /**
      * Creates new instance.
@@ -91,8 +93,6 @@ public class NumberPickerPreference extends DialogPreference {
         mIncrement = a.getInt(R.styleable.NumberPickerPreference_increment, 0);
 
         a.recycle();
-
-        mCurrentValue = getPersistedInt(DEFAULT_VALUE);
 
         updateUI();
     }// NumberPickerPreference()
@@ -147,9 +147,19 @@ public class NumberPickerPreference extends DialogPreference {
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
+        if (BuildConfig.DEBUG)
+            Log.d(CLASSNAME, "onDialogClosed() >> positiveResult = "
+                    + positiveResult);
+
         if (positiveResult) {
+            mCurrentValue += mDelta;
             persistInt(mCurrentValue);
         }
+
+        mDelta = 0;
+
+        if (positiveResult)
+            updateUI();
     }// onDialogClosed()
 
     @Override
@@ -229,12 +239,16 @@ public class NumberPickerPreference extends DialogPreference {
      * Update the UI.
      */
     private void updateUI() {
-        setSummary(String.format("%,d", mCurrentValue));
+        int value = mCurrentValue + mDelta;
+        String info = String.format("%,d", value);
+
+        if (getDialog() == null || !getDialog().isShowing())
+            setSummary(info);
 
         if (mTextNumber != null) {
-            mTextNumber.setText(getSummary());
-            mBtnDecrease.setEnabled(mCurrentValue > mMin);
-            mBtnIncrease.setEnabled(mCurrentValue < mMax);
+            mTextNumber.setText(info);
+            mBtnDecrease.setEnabled(value > mMin);
+            mBtnIncrease.setEnabled(value < mMax);
         }
     }// updateUI()
 
@@ -247,9 +261,10 @@ public class NumberPickerPreference extends DialogPreference {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.button_decrease)
-                mCurrentValue -= mIncrement;
+                mDelta -= mIncrement;
             else
-                mCurrentValue += mIncrement;
+                mDelta += mIncrement;
+
             updateUI();
         }// onClick()
     };// mBtnChangeValueOnClickListener
