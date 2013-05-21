@@ -5688,16 +5688,19 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [group/pals/android/lib/ui/lockpattern/demo/g]
 
-Constant Pool (count = 105):
+Constant Pool (count = 125):
   + Integer [17039360]
   + Integer [17039370]
+  + Integer [17170445]
   + Integer [2130968576]
   + Integer [2131165212]
   + Integer [2131165216]
   + String [%s (%,d tries)]
   + Class [android/content/Intent]
+  + Class [android/content/res/Resources]
   + Class [android/os/Build$VERSION]
   + Class [android/preference/PreferenceActivity]
+  + Class [android/widget/ListView]
   + Class [android/widget/Toast]
   + Class [group/pals/android/lib/ui/lockpattern/LockPatternActivity]
   + Class [group/pals/android/lib/ui/lockpattern/b/b]
@@ -5712,13 +5715,17 @@ Constant Pool (count = 105):
   + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.e Ljava/lang/String;]
   + Methodref [android/content/Intent.getCharArrayExtra (Ljava/lang/String;)[C]
   + Methodref [android/content/Intent.getIntExtra (Ljava/lang/String;I)I]
+  + Methodref [android/content/res/Resources.getColor (I)I]
   + Methodref [android/preference/PreferenceActivity.<init> ()V]
   + Methodref [android/preference/PreferenceActivity.onCreate (Landroid/os/Bundle;)V]
+  + Methodref [android/widget/ListView.setCacheColorHint (I)V]
   + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
   + Methodref [android/widget/Toast.show ()V]
   + Methodref [group/pals/android/lib/ui/lockpattern/b/b.a (Landroid/content/Context;Landroid/preference/PreferenceManager;)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.addPreferencesFromResource (I)V]
+  + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getListView ()Landroid/widget/ListView;]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getPreferenceManager ()Landroid/preference/PreferenceManager;]
+  + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getResources ()Landroid/content/res/Resources;]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getString (I)Ljava/lang/String;]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.setTitle (I)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.setTitle (Ljava/lang/CharSequence;)V]
@@ -5736,18 +5743,25 @@ Constant Pool (count = 105):
   + NameAndType [e Ljava/lang/String;]
   + NameAndType [format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;]
   + NameAndType [getCharArrayExtra (Ljava/lang/String;)[C]
+  + NameAndType [getColor (I)I]
   + NameAndType [getIntExtra (Ljava/lang/String;I)I]
+  + NameAndType [getListView ()Landroid/widget/ListView;]
   + NameAndType [getPreferenceManager ()Landroid/preference/PreferenceManager;]
+  + NameAndType [getResources ()Landroid/content/res/Resources;]
   + NameAndType [getString (I)Ljava/lang/String;]
   + NameAndType [makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
   + NameAndType [onCreate (Landroid/os/Bundle;)V]
+  + NameAndType [setCacheColorHint (I)V]
   + NameAndType [setTitle (I)V]
   + NameAndType [setTitle (Ljava/lang/CharSequence;)V]
   + NameAndType [show ()V]
   + NameAndType [valueOf (I)Ljava/lang/Integer;]
   + Utf8 [%s (%,d tries)]
+  + Utf8 [()Landroid/content/res/Resources;]
   + Utf8 [()Landroid/preference/PreferenceManager;]
+  + Utf8 [()Landroid/widget/ListView;]
   + Utf8 [()V]
+  + Utf8 [(I)I]
   + Utf8 [(I)Ljava/lang/Integer;]
   + Utf8 [(I)Ljava/lang/String;]
   + Utf8 [(I)V]
@@ -5769,15 +5783,20 @@ Constant Pool (count = 105):
   + Utf8 [a]
   + Utf8 [addPreferencesFromResource]
   + Utf8 [android/content/Intent]
+  + Utf8 [android/content/res/Resources]
   + Utf8 [android/os/Build$VERSION]
   + Utf8 [android/preference/PreferenceActivity]
+  + Utf8 [android/widget/ListView]
   + Utf8 [android/widget/Toast]
   + Utf8 [c]
   + Utf8 [e]
   + Utf8 [format]
   + Utf8 [getCharArrayExtra]
+  + Utf8 [getColor]
   + Utf8 [getIntExtra]
+  + Utf8 [getListView]
   + Utf8 [getPreferenceManager]
+  + Utf8 [getResources]
   + Utf8 [getString]
   + Utf8 [group/pals/android/lib/ui/lockpattern/LockPatternActivity]
   + Utf8 [group/pals/android/lib/ui/lockpattern/b/b]
@@ -5790,6 +5809,7 @@ Constant Pool (count = 105):
   + Utf8 [makeText]
   + Utf8 [onActivityResult]
   + Utf8 [onCreate]
+  + Utf8 [setCacheColorHint]
   + Utf8 [setTitle]
   + Utf8 [show]
   + Utf8 [valueOf]
@@ -5803,7 +5823,7 @@ Methods (count = 3):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #24
+      [1] invokespecial #28
         + Methodref [android/preference/PreferenceActivity.<init> ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -5812,31 +5832,43 @@ Methods (count = 3):
     Access flags: 0x1
       = public void onCreate(android.os.Bundle)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 33, locals = 2, stack = 2):
+    + Code attribute instructions (code length = 49, locals = 2, stack = 3):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #25
+      [2] invokespecial #29
         + Methodref [android/preference/PreferenceActivity.onCreate (Landroid/os/Bundle;)V]
-      [5] getstatic #19
+      [5] getstatic #22
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [8] bipush 11
-      [10] ificmpge +22 (target=32)
+      [10] ificmpge +38 (target=48)
       [13] aload_0 v0
       [14] aload_0 v0
-      [15] invokevirtual #30
+      [15] invokevirtual #36
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getPreferenceManager ()Landroid/preference/PreferenceManager;]
-      [18] invokestatic #28
+      [18] invokestatic #33
         + Methodref [group/pals/android/lib/ui/lockpattern/b/b.a (Landroid/content/Context;Landroid/preference/PreferenceManager;)V]
       [21] aload_0 v0
-      [22] ldc #3
+      [22] ldc #4
         + Integer [2130968576]
-      [24] invokevirtual #29
+      [24] invokevirtual #34
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.addPreferencesFromResource (I)V]
       [27] aload_0 v0
       [28] aload_0 v0
-      [29] invokestatic #34
+      [29] invokestatic #41
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Landroid/app/Activity;Lgroup/pals/android/lib/ui/lockpattern/demo/g;)V]
-      [32] return
+      [32] aload_0 v0
+      [33] invokevirtual #35
+        + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getListView ()Landroid/widget/ListView;]
+      [36] aload_0 v0
+      [37] invokevirtual #37
+        + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getResources ()Landroid/content/res/Resources;]
+      [40] ldc #3
+        + Integer [17170445]
+      [42] invokevirtual #27
+        + Methodref [android/content/res/Resources.getColor (I)I]
+      [45] invokevirtual #30
+        + Methodref [android/widget/ListView.setCacheColorHint (I)V]
+      [48] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       onActivityResult(IILandroid/content/Intent;)V
@@ -5853,23 +5885,23 @@ Methods (count = 3):
       [25] iconst_m1
       [26] ificmpne +24 (target=50)
       [29] aload_0 v0
-      [30] new #18
+      [30] new #21
         + Class [java/lang/String]
       [33] dup
       [34] aload_3 v3
-      [35] getstatic #21
+      [35] getstatic #24
         + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.e Ljava/lang/String;]
-      [38] invokevirtual #22
+      [38] invokevirtual #25
         + Methodref [android/content/Intent.getCharArrayExtra (Ljava/lang/String;)[C]
-      [41] invokespecial #36
+      [41] invokespecial #43
         + Methodref [java/lang/String.<init> ([C)V]
-      [44] invokevirtual #33
+      [44] invokevirtual #40
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.setTitle (Ljava/lang/CharSequence;)V]
       [47] goto +115 (target=162)
       [50] aload_0 v0
-      [51] ldc #4
+      [51] ldc #5
         + Integer [2131165212]
-      [53] invokevirtual #32
+      [53] invokevirtual #39
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.setTitle (I)V]
       [56] goto +106 (target=162)
       [59] iconst_0
@@ -5889,45 +5921,45 @@ Methods (count = 3):
         + Integer [17039360]
       [101] istore v4
       [103] goto +11 (target=114)
-      [106] ldc #5
+      [106] ldc #6
         + Integer [2131165216]
       [108] istore v4
       [110] goto +4 (target=114)
       [113] return
-      [114] ldc #6
+      [114] ldc #7
         + String [%s (%,d tries)]
       [116] iconst_2
-      [117] anewarray #17
+      [117] anewarray #20
         + Class [java/lang/Object]
       [120] dup
       [121] iconst_0
       [122] aload_0 v0
       [123] iload v4
-      [125] invokevirtual #31
+      [125] invokevirtual #38
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/PrefsActivity.getString (I)Ljava/lang/String;]
       [128] aastore
       [129] dup
       [130] iconst_1
       [131] aload_3 v3
-      [132] getstatic #20
+      [132] getstatic #23
         + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.c Ljava/lang/String;]
       [135] iconst_0
-      [136] invokevirtual #23
+      [136] invokevirtual #26
         + Methodref [android/content/Intent.getIntExtra (Ljava/lang/String;I)I]
-      [139] invokestatic #35
+      [139] invokestatic #42
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [142] aastore
-      [143] invokestatic #37
+      [143] invokestatic #44
         + Methodref [java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;]
       [146] astore v5
       [148] aload_0 v0
       [149] aload v5
       [151] iconst_1
-      [152] invokestatic #26
+      [152] invokestatic #31
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
       [155] astore v6
       [157] aload v6
-      [159] invokevirtual #27
+      [159] invokevirtual #32
         + Methodref [android/widget/Toast.show ()V]
       [162] return
       Code attribute exceptions (count = 0):

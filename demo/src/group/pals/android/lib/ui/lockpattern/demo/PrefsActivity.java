@@ -40,8 +40,12 @@ public class PrefsActivity extends PreferenceActivity implements
              * your preferences to ALP's preferences.
              */
             Prefs.setupPreferenceManager(this, getPreferenceManager());
+
             addPreferencesFromResource(R.xml.main_preferences);
             CommandsPrefsHelper.init(this, this);
+
+            getListView().setCacheColorHint(
+                    getResources().getColor(android.R.color.transparent));
         }
     }// onCreate()
 
