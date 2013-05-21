@@ -18,6 +18,7 @@ package group.pals.android.lib.ui.lockpattern.demo;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.DialogPreference;
@@ -33,8 +34,8 @@ import android.widget.TextView;
  */
 public class NumberPickerPreference extends DialogPreference {
 
-    private static final String CLASSNAME = NumberPickerPreference.class
-            .getName();
+    // private static final String CLASSNAME = NumberPickerPreference.class
+    // .getName();
 
     /**
      * Default mValue of this preference.
@@ -76,7 +77,7 @@ public class NumberPickerPreference extends DialogPreference {
         setDialogLayoutResource(R.layout.dialog_number_picker);
         setDialogIcon(null);
         setPositiveButtonText(android.R.string.ok);
-        setNegativeButtonText(android.R.string.cancel);
+        setNegativeButtonText(null);
 
         /*
          * VALUES
@@ -95,6 +96,12 @@ public class NumberPickerPreference extends DialogPreference {
 
         updateUI();
     }// NumberPickerPreference()
+
+    @Override
+    protected void showDialog(Bundle state) {
+        super.showDialog(state);
+        getDialog().setCanceledOnTouchOutside(true);
+    }// showDialog()
 
     @Override
     protected void onBindDialogView(View view) {

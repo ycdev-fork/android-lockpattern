@@ -16,14 +16,65 @@
 
 package group.pals.android.lib.ui.lockpattern.demo;
 
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import group.pals.android.lib.ui.lockpattern.prefs.Prefs;
 
-public class PrefsActivity_v11 extends PreferenceActivity implements
-        PreferenceHolder {
+import java.util.List;
+
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+
+/**
+ * Preferences activity for API 11+.
+ * 
+ * @author Hai Bison
+ * 
+ */
+public class PrefsActivity_v11 extends PrefsActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }// onCreate()
+    public void onBuildHeaders(List<Header> target) {
+        loadHeadersFromResource(R.xml.main_preferences_headers, target);
+    }// onBuildHeaders()
+
+    /**
+     * This fragment shows the preferences for SETTINGS.
+     */
+    public static class Fragment_Prefs_Settings extends PreferenceFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            /*
+             * Since this demo is a small app, we borrow ALP's preferences file.
+             * If you're building a medium or large app, you should use your own
+             * preference file. You can easily write some wrappers to forward
+             * your preferences to ALP's preferences.
+             */
+            Prefs.setupPreferenceManager(getActivity(), getPreferenceManager());
+
+            addPreferencesFromResource(R.xml.main_preferences_settings);
+        }// onCreate()
+    }// Fragment_Prefs_Settings
+
+    /**
+     * This fragment shows the COMMANDS.
+     */
+    public static class Fragment_Prefs_Commands extends PreferenceFragment
+            implements PreferenceHolder {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            /*
+             * Since this demo is a small app, we borrow ALP's preferences file.
+             * If you're building a medium or large app, you should use your own
+             * preference file. You can easily write some wrappers to forward
+             * your preferences to ALP's preferences.
+             */
+            Prefs.setupPreferenceManager(getActivity(), getPreferenceManager());
+
+            addPreferencesFromResource(R.xml.main_preferences_commands);
+            CommandsPrefsHelper.init(getActivity(), this);
+        }// onCreate()
+    }// Fragment_Prefs_Commands
 }

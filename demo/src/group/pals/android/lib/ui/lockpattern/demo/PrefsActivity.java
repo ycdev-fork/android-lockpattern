@@ -16,9 +16,13 @@
 
 package group.pals.android.lib.ui.lockpattern.demo;
 
+import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import group.pals.android.lib.ui.lockpattern.prefs.Prefs;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.widget.Toast;
 
 public class PrefsActivity extends PreferenceActivity implements
         PreferenceHolder {
@@ -28,14 +32,57 @@ public class PrefsActivity extends PreferenceActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-         * Since this demo is a small app, we borrow ALP's preferences file. If
-         * you're building a medium or large app, you should use your own
-         * preference file. You can easily write some wrappers to forward your
-         * preferences to ALP's preferences.
-         */
-        Prefs.setupPreferenceManager(this, getPreferenceManager());
-
-        addPreferencesFromResource(R.xml.main_preferences);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            /*
+             * Since this demo is a small app, we borrow ALP's preferences file.
+             * If you're building a medium or large app, you should use your own
+             * preference file. You can easily write some wrappers to forward
+             * your preferences to ALP's preferences.
+             */
+            Prefs.setupPreferenceManager(this, getPreferenceManager());
+            addPreferencesFromResource(R.xml.main_preferences);
+            CommandsPrefsHelper.init(this, this);
+        }
     }// onCreate()
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case CommandsPrefsHelper.REQ_CREATE_PATTERN: {
+            if (resultCode == RESULT_OK)
+                setTitle(new String(
+                        data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN)));
+            else
+                setTitle(R.string.app_name);
+
+            break;
+        }// REQ_CREATE_PATTERN
+
+        case CommandsPrefsHelper.REQ_ENTER_PATTERN: {
+            int msgId = 0;
+
+            switch (resultCode) {
+            case RESULT_OK:
+                msgId = android.R.string.ok;
+                break;
+            case RESULT_CANCELED:
+                msgId = android.R.string.cancel;
+                break;
+            case LockPatternActivity.RESULT_FAILED:
+                msgId = R.string.failed;
+                break;
+            default:
+                return;
+            }
+
+            String msg = String.format("%s (%,d tries)", getString(msgId),
+                    data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0));
+
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+            toast.show();
+
+            break;
+        }// REQ_ENTER_PATTERN
+        }
+    }// onActivityResult()
 }
