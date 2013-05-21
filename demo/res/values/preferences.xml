@@ -17,16 +17,13 @@
 
 <resources>
 
-    <string name="app_name">ALP 2.6 - Demo</string>
-    <string name="commands">Commands</string>
-    <string name="failed">Failed</string>
-    <string name="dialog_theme">Dialog Theme</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="max_retry">Maximum retry</string>
-    <string name="min_wired_dots">Minimum wired dots</string>
-    <string name="pmsg_min_wired_dots">Minimum wired dots: %1$,d</string>
-    <string name="pmsg_max_tries_allowed">Maximum tries: %1$,d</string>
-    <string name="settings">Settings</string>
-    <string name="stealth_mode">Stealth Mode</string>
+    <string name="pkey_lockpattern_activity_light_theme">pkey.lockpattern.activity_light_theme</string>
+    <string name="pkey_lockpattern_activity_dialog_theme">pkey.lockpattern.activity_dialog_theme</string>
+
+    <bool name="pkey_lockpattern_activity_light_theme_default">false</bool>
+    <bool name="pkey_lockpattern_activity_dialog_theme_default">true</bool>
+
+    <string name="pkey_create_lock_pattern">pkey.create_lock_pattern</string>
+    <string name="pkey_enter_lock_pattern">pkey.enter_lock_pattern</string>
 
 </resources>

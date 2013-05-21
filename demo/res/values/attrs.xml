@@ -17,16 +17,10 @@
 
 <resources>
 
-    <string name="app_name">ALP 2.6 - Demo</string>
-    <string name="commands">Commands</string>
-    <string name="failed">Failed</string>
-    <string name="dialog_theme">Dialog Theme</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="max_retry">Maximum retry</string>
-    <string name="min_wired_dots">Minimum wired dots</string>
-    <string name="pmsg_min_wired_dots">Minimum wired dots: %1$,d</string>
-    <string name="pmsg_max_tries_allowed">Maximum tries: %1$,d</string>
-    <string name="settings">Settings</string>
-    <string name="stealth_mode">Stealth Mode</string>
+    <declare-styleable name="NumberPickerPreference">
+        <attr name="min" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="increment" format="integer" />
+    </declare-styleable>
 
 </resources>

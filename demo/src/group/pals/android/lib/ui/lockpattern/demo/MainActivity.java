@@ -21,6 +21,7 @@ import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
 import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -51,6 +52,14 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+            startActivity(new Intent(this, PrefsActivity.class));
+        else
+            startActivity(new Intent(this, PrefsActivity_v11.class));
+        finish();
+
+        if (true)
+            return;
         setContentView(R.layout.main);
 
         /*
