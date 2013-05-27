@@ -41,26 +41,22 @@
         <item name="selector_image_button">@drawable/selector_image_button_light</item>
     </style>
 
-    <style name="button_navi_left">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="button_navi">
+        <item name="android:layout_width">@dimen/button_navi_size</item>
+        <item name="android:layout_height">@dimen/button_navi_size</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:scaleType">center</item>
-        <item name="android:background">?attr/selector_image_button</item>
-        <item name="android:src">?attr/selector_button_navi_left_foreground</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:background">?attr/selector_image_button</item>
     </style>
 
-    <style name="button_navi_right">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:background">?attr/selector_image_button</item>
+    <style name="button_navi_left" parent="@style/button_navi">
+        <item name="android:src">?attr/selector_button_navi_left_foreground</item>
+    </style>
+
+    <style name="button_navi_right" parent="@style/button_navi">
         <item name="android:src">?attr/selector_button_navi_right_foreground</item>
-        <item name="android:layout_margin">2dp</item>
-        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

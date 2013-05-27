@@ -92,7 +92,7 @@ public class PrefsActivity extends PreferenceActivity implements
             String msg = String.format("%s (%,d tries)", getString(msgId),
                     data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0));
 
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
             break;
         }// REQ_ENTER_PATTERN
