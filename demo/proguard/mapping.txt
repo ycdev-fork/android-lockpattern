@@ -173,7 +173,14 @@ group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$1 -> group.pals.a
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$2 -> group.pals.android.lib.ui.lockpattern.demo.c:
     android.app.Activity val$activity -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-group.pals.android.lib.ui.lockpattern.demo.LPEncrypter -> group.pals.android.lib.ui.lockpattern.demo.d:
+group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3 -> group.pals.android.lib.ui.lockpattern.demo.d:
+    android.app.Activity val$activity -> a
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
+group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3$1 -> group.pals.android.lib.ui.lockpattern.demo.e:
+    group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3 this$1 -> a
+    android.app.Activity val$activity -> b
+    void onClick(android.view.View) -> onClick
+group.pals.android.lib.ui.lockpattern.demo.LPEncrypter -> group.pals.android.lib.ui.lockpattern.demo.f:
     char[] encrypt(android.content.Context,char[]) -> a
 group.pals.android.lib.ui.lockpattern.demo.MainActivity -> group.pals.android.lib.ui.lockpattern.demo.MainActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -200,19 +207,19 @@ group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference -> group.pals.
     int access$1(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference) -> b
     void access$2(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference,int) -> a
     void access$3(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference) -> c
-group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$1 -> group.pals.android.lib.ui.lockpattern.demo.e:
+group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$1 -> group.pals.android.lib.ui.lockpattern.demo.g:
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference this$0 -> a
     void onClick(android.view.View) -> onClick
 group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState -> group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState:
     int mValue -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState$1 -> group.pals.android.lib.ui.lockpattern.demo.f:
+group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState$1 -> group.pals.android.lib.ui.lockpattern.demo.h:
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState createFromParcel(android.os.Parcel) -> a
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState[] newArray(int) -> a
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
     java.lang.Object[] newArray(int) -> newArray
-group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder -> group.pals.android.lib.ui.lockpattern.demo.g:
+group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder -> group.pals.android.lib.ui.lockpattern.demo.i:
     android.preference.Preference findPreference(java.lang.CharSequence) -> findPreference
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -223,8 +230,8 @@ group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Comm
     void onCreate(android.os.Bundle) -> onCreate
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings:
     void onCreate(android.os.Bundle) -> onCreate
-group.pals.android.lib.ui.lockpattern.demo.R -> group.pals.android.lib.ui.lockpattern.demo.h:
-group.pals.android.lib.ui.lockpattern.demo.R$styleable -> group.pals.android.lib.ui.lockpattern.demo.i:
+group.pals.android.lib.ui.lockpattern.demo.R -> group.pals.android.lib.ui.lockpattern.demo.j:
+group.pals.android.lib.ui.lockpattern.demo.R$styleable -> group.pals.android.lib.ui.lockpattern.demo.k:
     int[] NumberPickerPreference -> NumberPickerPreference
     int NumberPickerPreference_increment -> NumberPickerPreference_increment
     int NumberPickerPreference_max -> NumberPickerPreference_max

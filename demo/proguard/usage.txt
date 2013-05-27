@@ -28,7 +28,7 @@ group.pals.android.lib.ui.lockpattern.demo.BuildConfig
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper:
     public static final int REQ_CREATE_PATTERN
     public static final int REQ_ENTER_PATTERN
-====    34:34:public CommandsPrefsHelper()
+====    40:40:public CommandsPrefsHelper()
 group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference:
     public static final int DEFAULT_VALUE
 group.pals.android.lib.ui.lockpattern.demo.R:
@@ -44,7 +44,7 @@ group.pals.android.lib.ui.lockpattern.demo.R$layout
 group.pals.android.lib.ui.lockpattern.demo.R$string
 group.pals.android.lib.ui.lockpattern.demo.R$style
 group.pals.android.lib.ui.lockpattern.demo.R$styleable:
-====    249:249:public R$styleable()
+====    244:244:public R$styleable()
 group.pals.android.lib.ui.lockpattern.demo.R$xml
 group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs:
 ====    27:27:public DisplayPrefs()
