@@ -15,19 +15,17 @@
    limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:demo="http://schemas.android.com/apk/res-auto"
-    android:title="@string/commands" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="290dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
-    <Preference
-        android:key="@string/pkey_create_lock_pattern"
-        android:title="@string/create_lock_pattern" />
-    <Preference
-        android:key="@string/pkey_enter_lock_pattern"
-        android:title="@string/enter_lock_pattern" />
-    <Preference
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:key="@string/pkey_about"
-        android:title="@string/about" />
+    <TextView
+        android:id="@+id/textview_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:textIsSelectable="true" />
 
-</PreferenceScreen>
+</LinearLayout>

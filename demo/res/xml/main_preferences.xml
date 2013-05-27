@@ -55,6 +55,10 @@
         <Preference
             android:key="@string/pkey_enter_lock_pattern"
             android:title="@string/enter_lock_pattern" />
+        <Preference
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:key="@string/pkey_about"
+            android:title="@string/about" />
     </PreferenceCategory>
 
 </PreferenceScreen>
