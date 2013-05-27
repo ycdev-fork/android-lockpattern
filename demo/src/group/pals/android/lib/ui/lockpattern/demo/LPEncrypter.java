@@ -26,6 +26,11 @@ public class LPEncrypter implements IEncrypter {
 
     @Override
     public char[] encrypt(Context context, char[] pattern) {
+        /*
+         * This is a simple example. And it's also worth mentioning that this is
+         * a very weak encrypter.
+         */
+
         CRC32 c = new CRC32();
         c.update(new String(pattern).getBytes());
 

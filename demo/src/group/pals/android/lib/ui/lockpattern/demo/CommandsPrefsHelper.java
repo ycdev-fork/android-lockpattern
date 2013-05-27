@@ -26,7 +26,7 @@ import android.content.SharedPreferences;
 import android.preference.Preference;
 
 /**
- * Helper class for {@link PrefsActivity} or {@link PrefsActivity_v11}.
+ * Helper class for {@link PrefsActivity} and {@link PrefsActivity_v11}.
  * 
  * @author Hai Bison
  * 

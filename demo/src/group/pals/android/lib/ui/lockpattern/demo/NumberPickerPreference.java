@@ -39,7 +39,7 @@ public class NumberPickerPreference extends DialogPreference {
             .getName();
 
     /**
-     * Default mValue of this preference.
+     * Default value of this preference.
      */
     public static final int DEFAULT_VALUE = 0;
 
@@ -239,8 +239,8 @@ public class NumberPickerPreference extends DialogPreference {
      * Update the UI.
      */
     private void updateUI() {
-        int value = mCurrentValue + mDelta;
-        String info = String.format("%,d", value);
+        final int value = mCurrentValue + mDelta;
+        final String info = String.format("%,d", value);
 
         if (getDialog() == null || !getDialog().isShowing())
             setSummary(info);

@@ -36,7 +36,7 @@ public class PrefsActivity extends PreferenceActivity implements
             /*
              * Since this demo is a small app, we borrow ALP's preferences file.
              * If you're building a medium or large app, you should use your own
-             * preference file. You can easily write some wrappers to forward
+             * preferences file. You can easily write some wrappers to forward
              * your preferences to ALP's preferences.
              */
             Prefs.setupPreferenceManager(this, getPreferenceManager());
@@ -65,25 +65,34 @@ public class PrefsActivity extends PreferenceActivity implements
         case CommandsPrefsHelper.REQ_ENTER_PATTERN: {
             int msgId = 0;
 
+            /*
+             * NOTE that there are 3 possible result codes!!!
+             */
             switch (resultCode) {
             case RESULT_OK:
+                // The user passed
                 msgId = android.R.string.ok;
                 break;
             case RESULT_CANCELED:
+                // The user cancelled the task
                 msgId = android.R.string.cancel;
                 break;
             case LockPatternActivity.RESULT_FAILED:
+                // The user failed to enter the pattern
                 msgId = R.string.failed;
                 break;
             default:
                 return;
             }
 
+            /*
+             * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
+             * the number of tries that the user did.
+             */
             String msg = String.format("%s (%,d tries)", getString(msgId),
                     data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0));
 
-            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-            toast.show();
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
 
             break;
         }// REQ_ENTER_PATTERN
