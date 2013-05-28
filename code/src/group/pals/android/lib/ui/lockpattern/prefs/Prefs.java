@@ -77,7 +77,7 @@ public class Prefs {
      *
      * @param context the context.
      * @param pm      {@link PreferenceManager}.
-     * @since v4.9 beta
+     * @since v2.6 beta
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void setupPreferenceManager(Context context,
