@@ -21,8 +21,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
 /**
- * Helper interface for {@link PreferenceActivity} and
- * {@link PreferenceFragment}.
+ * Helper interface for using same functionalities provided by
+ * {@link PreferenceActivity} and {@link PreferenceFragment}.
  * 
  * @author Hai Bison
  * 
@@ -30,7 +30,8 @@ import android.preference.PreferenceFragment;
 public interface PreferenceHolder {
 
     /**
-     * Finds a preference by its key.
+     * Wrapper for {@link PreferenceActivity#findPreference(CharSequence)} and
+     * {@link PreferenceFragment#findPreference(CharSequence)}.
      * 
      * @param key
      *            the preference's key.
