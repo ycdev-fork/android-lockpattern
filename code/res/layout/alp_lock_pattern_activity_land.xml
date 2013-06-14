@@ -32,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/alp_footer"
             android:gravity="center_horizontal|top"
+            android:padding="5dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textIsSelectable="true" />
 

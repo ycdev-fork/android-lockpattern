@@ -17,7 +17,9 @@
 
 <resources>
 
-    <item name="alp_dialog_height_large" type="dimen">@dimen/alp_dialog_height_large_base</item>
-    <item name="alp_dialog_width_large" type="dimen">@dimen/alp_dialog_width_large_base</item>
+    <item name="aosp_dialog_fixed_width_major" type="dimen">60%</item>
+    <item name="aosp_dialog_fixed_width_minor" type="dimen">90%</item>
+    <item name="aosp_dialog_fixed_height_major" type="dimen">60%</item>
+    <item name="aosp_dialog_fixed_height_minor" type="dimen">90%</item>
 
 </resources>

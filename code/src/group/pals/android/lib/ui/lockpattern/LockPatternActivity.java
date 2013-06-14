@@ -305,8 +305,7 @@ public class LockPatternActivity extends Activity {
          * LOCK EXTRA_PATTERN VIEW
          */
 
-        if (getResources().getBoolean(R.bool.alp_is_large_screen)
-                && !getWindow().isFloating()) {
+        if (getResources().getBoolean(R.bool.alp_is_large_screen)) {
             int size = getResources().getDimensionPixelSize(
                     R.dimen.alp_lockpatternview_size);
             LayoutParams lp = mLockPatternView.getLayoutParams();
