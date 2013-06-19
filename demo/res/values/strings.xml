@@ -19,6 +19,7 @@
 
     <string name="app_name">ALP 2.7b - Demo</string>
     <string name="about">About…</string>
+    <string name="captcha_wired_dots">CAPTCHA wired dots</string>
     <string name="commands">Commands</string>
     <string name="create_pattern">Create pattern</string>
     <string name="dialog_theme">Dialog Theme</string>

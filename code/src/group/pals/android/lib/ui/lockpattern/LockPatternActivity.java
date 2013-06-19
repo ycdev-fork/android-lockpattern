@@ -346,7 +346,7 @@ public class LockPatternActivity extends Activity {
 
         mLockPatternView.setInStealthMode(DisplayPrefs.isStealthMode(this)
                 && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()));
-        mLockPatternView.setOnPatternListener(mPatternViewListener);
+        mLockPatternView.setOnPatternListener(mLockPatternViewListener);
         if (lastPattern != null && lastDisplayMode != null
                 && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()))
             mLockPatternView.setPattern(lastDisplayMode, lastPattern);
@@ -501,6 +501,8 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setDisplayMode(DisplayMode.Wrong);
             mTextInfo.setText(getString(R.string.alp_pmsg_connect_x_dots,
                     mMinWiredDots));
+            mLockPatternView.postDelayed(mLockPatternViewReloader,
+                    DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
             return;
         }
 
@@ -513,6 +515,8 @@ public class LockPatternActivity extends Activity {
                 mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
                 mBtnConfirm.setEnabled(false);
                 mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+                mLockPatternView.postDelayed(mLockPatternViewReloader,
+                        DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
             }
         } else {
             getIntent().putExtra(EXTRA_PATTERN, encodePattern(pattern));
@@ -627,7 +631,7 @@ public class LockPatternActivity extends Activity {
      * LISTENERS
      */
 
-    private final LockPatternView.OnPatternListener mPatternViewListener = new LockPatternView.OnPatternListener() {
+    private final LockPatternView.OnPatternListener mLockPatternViewListener = new LockPatternView.OnPatternListener() {
 
         @Override
         public void onPatternStart() {
@@ -645,13 +649,19 @@ public class LockPatternActivity extends Activity {
         public void onPatternDetected(List<Cell> pattern) {
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
                 doCheckAndCreatePattern(pattern);
-            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())
-                    || ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()))
+            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction()))
                 doComparePattern(pattern);
+            else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
+                if (!DisplayMode.Animate.equals(mLockPatternView
+                        .getDisplayMode()))
+                    doComparePattern(pattern);
+            }
         }// onPatternDetected()
 
         @Override
         public void onPatternCleared() {
+            mLockPatternView.removeCallbacks(mLockPatternViewReloader);
+
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
                 mLockPatternView.setDisplayMode(DisplayMode.Correct);
                 mBtnConfirm.setEnabled(false);
@@ -667,7 +677,10 @@ public class LockPatternActivity extends Activity {
                 mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
             }// ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-                mLockPatternView.post(mLockPatternViewReloader);
+                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                List<Cell> pattern = getIntent().getParcelableArrayListExtra(
+                        EXTRA_PATTERN);
+                mLockPatternView.setPattern(DisplayMode.Animate, pattern);
             }// ACTION_VERIFY_CAPTCHA
         }// onPatternCleared()
 
@@ -675,7 +688,7 @@ public class LockPatternActivity extends Activity {
         public void onPatternCellAdded(List<Cell> pattern) {
             // TODO Auto-generated method stub
         }// onPatternCellAdded()
-    };// mPatternViewListener
+    };// mLockPatternViewListener
 
     private final View.OnClickListener mBtnCancelOnClickListener = new View.OnClickListener() {
 
@@ -712,13 +725,8 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void run() {
-            if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
-                List<Cell> pattern = getIntent().getParcelableArrayListExtra(
-                        EXTRA_PATTERN);
-                mLockPatternView.setPattern(DisplayMode.Animate, pattern);
-            } else
-                mLockPatternView.clearPattern();
+            mLockPatternView.clearPattern();
+            mLockPatternViewListener.onPatternCleared();
         }// run()
     };// mLockPatternViewReloader
 

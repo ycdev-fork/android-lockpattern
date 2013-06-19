@@ -34,16 +34,23 @@
             android:title="@string/stealth_mode" />
 
         <group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference
-            android:defaultValue="4"
+            android:defaultValue="@integer/alp_pkey_display_min_wired_dots_default"
             android:key="@string/alp_pkey_display_min_wired_dots"
             android:title="@string/min_wired_dots"
             demo:increment="1"
             demo:max="9"
             demo:min="1" />
         <group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference
-            android:defaultValue="5"
+            android:defaultValue="@integer/alp_pkey_display_max_retry_default"
             android:key="@string/alp_pkey_display_max_retry"
             android:title="@string/max_retry"
+            demo:increment="1"
+            demo:max="9"
+            demo:min="1" />
+        <group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference
+            android:defaultValue="@integer/alp_pkey_display_captcha_wired_dots_default"
+            android:key="@string/alp_pkey_display_captcha_wired_dots"
+            android:title="@string/captcha_wired_dots"
             demo:increment="1"
             demo:max="9"
             demo:min="1" />
