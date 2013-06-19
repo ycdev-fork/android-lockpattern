@@ -16,20 +16,21 @@
 
 package group.pals.android.lib.ui.lockpattern.prefs;
 
-import android.content.Context;
 import group.pals.android.lib.ui.lockpattern.R;
+import android.content.Context;
 
 /**
  * Display Preferences.
- *
+ * 
  * @author Hai Bison
  */
 public class DisplayPrefs extends Prefs {
 
     /**
      * Checks if the library is using stealth mode or not.
-     *
-     * @param context the context.
+     * 
+     * @param context
+     *            the context.
      * @return {@code true} or {@code false}. Default is {@code false}.
      */
     public static boolean isStealthMode(Context context) {
@@ -41,9 +42,11 @@ public class DisplayPrefs extends Prefs {
 
     /**
      * Sets stealth mode.
-     *
-     * @param context the context.
-     * @param v       the value.
+     * 
+     * @param context
+     *            the context.
+     * @param v
+     *            the value.
      */
     public static void setStealthMode(Context context, boolean v) {
         p(context)
@@ -55,8 +58,9 @@ public class DisplayPrefs extends Prefs {
 
     /**
      * Gets minimum wired dots allowed for a pattern.
-     *
-     * @param context the context.
+     * 
+     * @param context
+     *            the context.
      * @return the minimum wired dots allowed for a pattern. Default is
      *         {@code 4}.
      */
@@ -68,10 +72,12 @@ public class DisplayPrefs extends Prefs {
     }// getMinWiredDots()
 
     /**
-     * Gets minimum wired dots allowed for a pattern.
-     *
-     * @param context the context.
-     * @param v       the minimum wired dots allowed for a pattern.
+     * Sets minimum wired dots allowed for a pattern.
+     * 
+     * @param context
+     *            the context.
+     * @param v
+     *            the minimum wired dots allowed for a pattern.
      */
     public static void setMinWiredDots(Context context, int v) {
         if (v <= 0 || v > 9)
@@ -86,8 +92,9 @@ public class DisplayPrefs extends Prefs {
 
     /**
      * Gets max retry allowed in mode comparing pattern.
-     *
-     * @param context the context.
+     * 
+     * @param context
+     *            the context.
      * @return the max retry allowed in mode comparing pattern. Default is
      *         {@code 5}.
      */
@@ -100,9 +107,11 @@ public class DisplayPrefs extends Prefs {
 
     /**
      * Sets max retry allowed in mode comparing pattern.
-     *
-     * @param context the context.
-     * @param v       the max retry allowed in mode comparing pattern.
+     * 
+     * @param context
+     *            the context.
+     * @param v
+     *            the max retry allowed in mode comparing pattern.
      */
     public static void setMaxRetry(Context context, int v) {
         if (v <= 0)
@@ -113,4 +122,40 @@ public class DisplayPrefs extends Prefs {
                 .putInt(context.getString(R.string.alp_pkey_display_max_retry),
                         v).commit();
     }// setMaxRetry()
+
+    /**
+     * Gets wired dots for a "CAPTCHA" pattern.
+     * 
+     * @param context
+     *            the context.
+     * @return the wired dots for a "CAPTCHA" pattern. Default is {@code 4}.
+     */
+    public static int getCaptchaWiredDots(Context context) {
+        return p(context)
+                .getInt(context
+                        .getString(R.string.alp_pkey_display_captcha_wired_dots),
+                        context.getResources()
+                                .getInteger(
+                                        R.integer.alp_pkey_display_captcha_wired_dots_default));
+    }// getCaptchaWiredDots()
+
+    /**
+     * Sets wired dots for a "CAPTCHA" pattern.
+     * 
+     * @param context
+     *            the context.
+     * @param v
+     *            the wired dots for a "CAPTCHA" pattern.
+     */
+    public static void setCaptchaWiredDots(Context context, int v) {
+        if (v <= 0 || v > 9)
+            v = context.getResources().getInteger(
+                    R.integer.alp_pkey_display_captcha_wired_dots_default);
+        p(context)
+                .edit()
+                .putInt(context
+                        .getString(R.string.alp_pkey_display_captcha_wired_dots),
+                        v).commit();
+    }// setCaptchaWiredDots()
+
 }

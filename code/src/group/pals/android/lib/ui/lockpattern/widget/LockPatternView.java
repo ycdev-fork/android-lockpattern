@@ -59,13 +59,19 @@ public class LockPatternView extends View {
     // be minimum of (w,h)
 
     /**
-     * This is the number of dots per row and column. Change this value to
-     * change the dimension of the pattern matrix.
+     * This is the width of the matrix (the number of dots per mRow and
+     * mColumn). Change this value to change the dimension of the pattern's
+     * matrix.
      * 
      * @since v2.7 beta
      * @author Thomas Breitbach
      */
-    private static final int DOTS_COUNT = 3;
+    public static final int MATRIX_WIDTH = 3;
+
+    /**
+     * The size of the pattern's matrix.
+     */
+    public static final int MATRIX_SIZE = MATRIX_WIDTH * MATRIX_WIDTH;
 
     private static final boolean PROFILE_DRAWING = false;
     private boolean mDrawingProfilingStarted = false;
@@ -84,8 +90,7 @@ public class LockPatternView extends View {
     private static final int MILLIS_PER_CIRCLE_ANIMATING = 700;
 
     private OnPatternListener mOnPatternListener;
-    private ArrayList<Cell> mPattern = new ArrayList<Cell>((int) Math.pow(
-            DOTS_COUNT, 2));
+    private ArrayList<Cell> mPattern = new ArrayList<Cell>(MATRIX_SIZE);
 
     /**
      * Lookup table for the circles of the pattern we are currently drawing.
@@ -93,7 +98,7 @@ public class LockPatternView extends View {
      * in which case we use this to hold the cells we are drawing for the in
      * progress animation.
      */
-    private boolean[][] mPatternDrawLookup = new boolean[DOTS_COUNT][DOTS_COUNT];
+    private boolean[][] mPatternDrawLookup = new boolean[MATRIX_WIDTH][MATRIX_WIDTH];
 
     /**
      * the in progress point: - during interaction: where the user's finger is -
@@ -143,70 +148,137 @@ public class LockPatternView extends View {
     private final int mPaddingBottom = mPadding;
 
     /**
-     * Represents a cell in the DOTS_COUNT x DOTS_COUNT matrix of the unlock
+     * Represents a cell in the MATRIX_WIDTH x MATRIX_WIDTH matrix of the unlock
      * pattern view.
      */
-    public static class Cell {
+    public static class Cell implements Parcelable {
 
-        int row;
-        int column;
+        int mRow;
+        int mColumn;
 
-        // keep # objects limited to 9
-        static Cell[][] sCells = new Cell[DOTS_COUNT][DOTS_COUNT];
+        // keep # objects limited to MATRIX_SIZE
+        static Cell[][] sCells = new Cell[MATRIX_WIDTH][MATRIX_WIDTH];
         static {
-            for (int i = 0; i < DOTS_COUNT; i++) {
-                for (int j = 0; j < DOTS_COUNT; j++) {
+            for (int i = 0; i < MATRIX_WIDTH; i++) {
+                for (int j = 0; j < MATRIX_WIDTH; j++) {
                     sCells[i][j] = new Cell(i, j);
                 }
             }
         }
 
         /**
-         * @param row
-         *            The row of the cell.
-         * @param column
-         *            The column of the cell.
+         * @param mRow
+         *            The mRow of the cell.
+         * @param mColumn
+         *            The mColumn of the cell.
          */
         private Cell(int row, int column) {
             checkRange(row, column);
-            this.row = row;
-            this.column = column;
+            this.mRow = row;
+            this.mColumn = column;
         }
 
         public int getRow() {
-            return row;
+            return mRow;
         }
 
         public int getColumn() {
-            return column;
+            return mColumn;
         }
 
         /**
-         * @param row
-         *            The row of the cell.
-         * @param column
-         *            The column of the cell.
+         * @param mRow
+         *            The mRow of the cell.
+         * @param mColumn
+         *            The mColumn of the cell.
          */
         public static synchronized Cell of(int row, int column) {
             checkRange(row, column);
             return sCells[row][column];
         }
 
+        /**
+         * Gets a cell from its ID. The ID is counted from left to right, top to
+         * bottom of the matrix, starting by zero.
+         * 
+         * @param id
+         *            the cell ID.
+         * @return the cell.
+         * @since v2.7 beta
+         * @author Hai Bison
+         */
+        public static synchronized Cell of(int id) {
+            int column = id % MATRIX_WIDTH;
+            int row = id / MATRIX_WIDTH;
+            checkRange(row, column);
+            return sCells[row][column];
+        }// of()
+
         private static void checkRange(int row, int column) {
-            if (row < 0 || row > DOTS_COUNT - 1) {
-                throw new IllegalArgumentException("row must be in range 0-"
-                        + (DOTS_COUNT - 1));
+            if (row < 0 || row > MATRIX_WIDTH - 1) {
+                throw new IllegalArgumentException("mRow must be in range 0-"
+                        + (MATRIX_WIDTH - 1));
             }
-            if (column < 0 || column > DOTS_COUNT - 1) {
-                throw new IllegalArgumentException("column must be in range 0-"
-                        + (DOTS_COUNT - 1));
+            if (column < 0 || column > MATRIX_WIDTH - 1) {
+                throw new IllegalArgumentException(
+                        "mColumn must be in range 0-" + (MATRIX_WIDTH - 1));
             }
         }
 
+        @Override
         public String toString() {
-            return "(row=" + row + ",clmn=" + column + ")";
-        }
-    }
+            return "(ROW=" + getRow() + ",COL=" + getColumn() + ")";
+        }// toString()
+
+        @Override
+        public boolean equals(Object object) {
+            if (object instanceof Cell)
+                return getColumn() == ((Cell) object).getColumn()
+                        && getRow() == ((Cell) object).getRow();
+            return super.equals(object);
+        }// equals()
+
+        /*
+         * PARCELABLE
+         */
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }// describeContents()
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(getColumn());
+            dest.writeInt(getRow());
+        }// writeToParcel()
+
+        /**
+         * Reads data from parcel.
+         * 
+         * @param in
+         *            the parcel.
+         */
+        public void readFromParcel(Parcel in) {
+            mColumn = in.readInt();
+            mRow = in.readInt();
+        }// readFromParcel()
+
+        public static final Parcelable.Creator<Cell> CREATOR = new Parcelable.Creator<Cell>() {
+
+            public Cell createFromParcel(Parcel in) {
+                return new Cell(in);
+            }// createFromParcel()
+
+            public Cell[] newArray(int size) {
+                return new Cell[size];
+            }// newArray()
+        };// CREATOR
+
+        private Cell(Parcel in) {
+            readFromParcel(in);
+        }// Cell()
+    }// Cell
 
     /**
      * How to display the current pattern.
@@ -495,8 +567,8 @@ public class LockPatternView extends View {
      * Clear the pattern lookup table.
      */
     private void clearPatternDrawLookup() {
-        for (int i = 0; i < DOTS_COUNT; i++) {
-            for (int j = 0; j < DOTS_COUNT; j++) {
+        for (int i = 0; i < MATRIX_WIDTH; i++) {
+            for (int j = 0; j < MATRIX_WIDTH; j++) {
                 mPatternDrawLookup[i][j] = false;
             }
         }
@@ -520,10 +592,10 @@ public class LockPatternView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         final int width = w - mPaddingLeft - mPaddingRight;
-        mSquareWidth = width / (float) DOTS_COUNT;
+        mSquareWidth = width / (float) MATRIX_WIDTH;
 
         final int height = h - mPaddingTop - mPaddingBottom;
-        mSquareHeight = height / (float) DOTS_COUNT;
+        mSquareHeight = height / (float) MATRIX_WIDTH;
     }
 
     private int resolveMeasured(int measureSpec, int desired) {
@@ -545,16 +617,18 @@ public class LockPatternView extends View {
 
     @Override
     protected int getSuggestedMinimumWidth() {
-        // View should be large enough to contain DOTS_COUNT side-by-side target
+        // View should be large enough to contain MATRIX_WIDTH side-by-side
+        // target
         // bitmaps
-        return DOTS_COUNT * mBitmapWidth;
+        return MATRIX_WIDTH * mBitmapWidth;
     }
 
     @Override
     protected int getSuggestedMinimumHeight() {
-        // View should be large enough to contain DOTS_COUNT side-by-side target
+        // View should be large enough to contain MATRIX_WIDTH side-by-side
+        // target
         // bitmaps
-        return DOTS_COUNT * mBitmapWidth;
+        return MATRIX_WIDTH * mBitmapWidth;
     }
 
     @Override
@@ -599,25 +673,25 @@ public class LockPatternView extends View {
             final ArrayList<Cell> pattern = mPattern;
             if (!pattern.isEmpty()) {
                 final Cell lastCell = pattern.get(pattern.size() - 1);
-                int dRow = cell.row - lastCell.row;
-                int dColumn = cell.column - lastCell.column;
+                int dRow = cell.mRow - lastCell.mRow;
+                int dColumn = cell.mColumn - lastCell.mColumn;
 
-                int fillInRow = lastCell.row;
-                int fillInColumn = lastCell.column;
+                int fillInRow = lastCell.mRow;
+                int fillInColumn = lastCell.mColumn;
 
                 if (Math.abs(dRow) == 2 && Math.abs(dColumn) != 1) {
-                    fillInRow = lastCell.row + ((dRow > 0) ? 1 : -1);
+                    fillInRow = lastCell.mRow + ((dRow > 0) ? 1 : -1);
                 }
 
                 if (Math.abs(dColumn) == 2 && Math.abs(dRow) != 1) {
-                    fillInColumn = lastCell.column + ((dColumn > 0) ? 1 : -1);
+                    fillInColumn = lastCell.mColumn + ((dColumn > 0) ? 1 : -1);
                 }
 
                 fillInGapCell = Cell.of(fillInRow, fillInColumn);
             }
 
             if (fillInGapCell != null
-                    && !mPatternDrawLookup[fillInGapCell.row][fillInGapCell.column]) {
+                    && !mPatternDrawLookup[fillInGapCell.mRow][fillInGapCell.mColumn]) {
                 addCellToPattern(fillInGapCell);
             }
             addCellToPattern(cell);
@@ -657,11 +731,11 @@ public class LockPatternView extends View {
     }
 
     /**
-     * Helper method to find the row that y falls into.
+     * Helper method to find the mRow that y falls into.
      * 
      * @param y
      *            The y coordinate
-     * @return The row that y falls in, or -1 if it falls in no row.
+     * @return The mRow that y falls in, or -1 if it falls in no mRow.
      */
     private int getRowHit(float y) {
 
@@ -669,7 +743,7 @@ public class LockPatternView extends View {
         float hitSize = squareHeight * mHitFactor;
 
         float offset = mPaddingTop + (squareHeight - hitSize) / 2f;
-        for (int i = 0; i < DOTS_COUNT; i++) {
+        for (int i = 0; i < MATRIX_WIDTH; i++) {
 
             final float hitTop = offset + squareHeight * i;
             if (y >= hitTop && y <= hitTop + hitSize) {
@@ -680,18 +754,18 @@ public class LockPatternView extends View {
     }
 
     /**
-     * Helper method to find the column x fallis into.
+     * Helper method to find the mColumn x fallis into.
      * 
      * @param x
      *            The x coordinate.
-     * @return The column that x falls in, or -1 if it falls in no column.
+     * @return The mColumn that x falls in, or -1 if it falls in no mColumn.
      */
     private int getColumnHit(float x) {
         final float squareWidth = mSquareWidth;
         float hitSize = squareWidth * mHitFactor;
 
         float offset = mPaddingLeft + (squareWidth - hitSize) / 2f;
-        for (int i = 0; i < DOTS_COUNT; i++) {
+        for (int i = 0; i < MATRIX_WIDTH; i++) {
 
             final float hitLeft = offset + squareWidth * i;
             if (x >= hitLeft && x <= hitLeft + hitSize) {
@@ -773,8 +847,8 @@ public class LockPatternView extends View {
 
                     final Cell lastCell = pattern.get(patternSize - 1);
 
-                    float startX = getCenterXForColumn(lastCell.column);
-                    float startY = getCenterYForRow(lastCell.row);
+                    float startX = getCenterXForColumn(lastCell.mColumn);
+                    float startY = getCenterYForRow(lastCell.mRow);
 
                     float left;
                     float top;
@@ -830,15 +904,15 @@ public class LockPatternView extends View {
                     // Invalidate between the pattern's new cell and the
                     // pattern's previous cell
                     if (hitCell != null) {
-                        startX = getCenterXForColumn(hitCell.column);
-                        startY = getCenterYForRow(hitCell.row);
+                        startX = getCenterXForColumn(hitCell.mColumn);
+                        startY = getCenterYForRow(hitCell.mRow);
 
                         if (patternSize >= 2) {
                             // (re-using hitcell for old cell)
                             hitCell = pattern.get(patternSize - 1
                                     - (patternSize - patternSizePreHitDetect));
-                            oldX = getCenterXForColumn(hitCell.column);
-                            oldY = getCenterYForRow(hitCell.row);
+                            oldX = getCenterXForColumn(hitCell.mColumn);
+                            oldY = getCenterYForRow(hitCell.mRow);
 
                             if (startX < oldX) {
                                 left = startX;
@@ -923,8 +997,8 @@ public class LockPatternView extends View {
             notifyPatternCleared();
         }
         if (hitCell != null) {
-            final float startX = getCenterXForColumn(hitCell.column);
-            final float startY = getCenterYForRow(hitCell.row);
+            final float startX = getCenterXForColumn(hitCell.mColumn);
+            final float startY = getCenterYForRow(hitCell.mRow);
 
             final float widthOffset = mSquareWidth / 2f;
             final float heightOffset = mSquareHeight / 2f;
@@ -983,14 +1057,14 @@ public class LockPatternView extends View {
                         / MILLIS_PER_CIRCLE_ANIMATING;
 
                 final Cell currentCell = pattern.get(numCircles - 1);
-                final float centerX = getCenterXForColumn(currentCell.column);
-                final float centerY = getCenterYForRow(currentCell.row);
+                final float centerX = getCenterXForColumn(currentCell.mColumn);
+                final float centerY = getCenterYForRow(currentCell.mRow);
 
                 final Cell nextCell = pattern.get(numCircles);
                 final float dx = percentageOfNextCircle
-                        * (getCenterXForColumn(nextCell.column) - centerX);
+                        * (getCenterXForColumn(nextCell.mColumn) - centerX);
                 final float dy = percentageOfNextCircle
-                        * (getCenterYForRow(nextCell.row) - centerY);
+                        * (getCenterYForRow(nextCell.mRow) - centerY);
                 mInProgressX = centerX + dx;
                 mInProgressY = centerY + dy;
             }
@@ -1011,11 +1085,11 @@ public class LockPatternView extends View {
         final int paddingTop = mPaddingTop;
         final int paddingLeft = mPaddingLeft;
 
-        for (int i = 0; i < DOTS_COUNT; i++) {
+        for (int i = 0; i < MATRIX_WIDTH; i++) {
             float topY = paddingTop + i * squareHeight;
             // float centerY = mPaddingTop + i * mSquareHeight + (mSquareHeight
             // / 2);
-            for (int j = 0; j < DOTS_COUNT; j++) {
+            for (int j = 0; j < MATRIX_WIDTH; j++) {
                 float leftX = paddingLeft + j * squareWidth;
                 drawCircle(canvas, (int) leftX, (int) topY, drawLookup[i][j]);
             }
@@ -1042,12 +1116,12 @@ public class LockPatternView extends View {
                 // only draw the part of the pattern stored in
                 // the lookup table (this is only different in the case
                 // of animation).
-                if (!drawLookup[next.row][next.column]) {
+                if (!drawLookup[next.mRow][next.mColumn]) {
                     break;
                 }
 
-                float leftX = paddingLeft + cell.column * squareWidth;
-                float topY = paddingTop + cell.row * squareHeight;
+                float leftX = paddingLeft + cell.mColumn * squareWidth;
+                float topY = paddingTop + cell.mRow * squareHeight;
 
                 drawArrow(canvas, leftX, topY, cell, next);
             }
@@ -1061,13 +1135,13 @@ public class LockPatternView extends View {
                 // only draw the part of the pattern stored in
                 // the lookup table (this is only different in the case
                 // of animation).
-                if (!drawLookup[cell.row][cell.column]) {
+                if (!drawLookup[cell.mRow][cell.mColumn]) {
                     break;
                 }
                 anyCircles = true;
 
-                float centerX = getCenterXForColumn(cell.column);
-                float centerY = getCenterYForRow(cell.row);
+                float centerX = getCenterXForColumn(cell.mColumn);
+                float centerY = getCenterYForRow(cell.mRow);
                 if (i == 0) {
                     currentPath.moveTo(centerX, centerY);
                 } else {
@@ -1090,10 +1164,10 @@ public class LockPatternView extends View {
             Cell end) {
         boolean green = mPatternDisplayMode != DisplayMode.Wrong;
 
-        final int endRow = end.row;
-        final int startRow = start.row;
-        final int endColumn = end.column;
-        final int startColumn = start.column;
+        final int endRow = end.mRow;
+        final int startRow = start.mRow;
+        final int endColumn = end.mColumn;
+        final int startColumn = start.mColumn;
 
         // offsets for centering the bitmap in the cell
         final int offsetX = ((int) mSquareWidth - mBitmapWidth) / 2;
