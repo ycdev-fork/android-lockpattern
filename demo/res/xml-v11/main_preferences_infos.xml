@@ -17,16 +17,17 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:demo="http://schemas.android.com/apk/res-auto"
-    android:title="@string/commands" >
+    android:title="@string/information" >
+
+    <PreferenceCategory android:title="@string/open_source_licenses" >
+        <Preference
+            android:key="@string/pkey_licenses_android_lockpattern"
+            android:title="@string/alp_lib_name" />
+    </PreferenceCategory>
 
     <Preference
-        android:key="@string/pkey_create_pattern"
-        android:title="@string/create_pattern" />
-    <Preference
-        android:key="@string/pkey_enter_pattern"
-        android:title="@string/enter_pattern" />
-    <Preference
-        android:key="@string/pkey_verify_captcha"
-        android:title="@string/verify_captcha" />
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:key="@string/pkey_about"
+        android:title="@string/about" />
 
 </PreferenceScreen>

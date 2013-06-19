@@ -65,6 +65,14 @@
         <Preference
             android:key="@string/pkey_verify_captcha"
             android:title="@string/verify_captcha" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/information" >
+        <PreferenceScreen android:title="@string/open_source_licenses" >
+            <Preference
+                android:key="@string/pkey_licenses_android_lockpattern"
+                android:title="@string/alp_lib_name" />
+        </PreferenceScreen>
+
         <Preference
             android:icon="@android:drawable/ic_menu_info_details"
             android:key="@string/pkey_about"

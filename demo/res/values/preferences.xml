@@ -26,6 +26,7 @@
     <string name="pkey_create_pattern">pkey.create_pattern</string>
     <string name="pkey_enter_pattern">pkey.enter_pattern</string>
     <string name="pkey_verify_captcha">pkey.verify_captcha</string>
+    <string name="pkey_licenses_android_lockpattern">pkey.licenses.android_lockpattern</string>
     <string name="pkey_about">pkey.about</string>
 
 </resources>

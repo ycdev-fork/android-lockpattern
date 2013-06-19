@@ -70,4 +70,18 @@ public class PrefsActivity_v11 extends PrefsActivity {
             new CommandsPrefsHelper(getActivity(), this).init();
         }// onCreate()
     }// Fragment_Prefs_Commands
+
+    /**
+     * This fragment shows the commands for Informations.
+     */
+    public static class Fragment_Prefs_Infos extends PreferenceFragment
+            implements PreferenceHolder {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.main_preferences_infos);
+            new InfosPrefsHelper(getActivity(), this).init();
+        }// onCreate()
+    }// Fragment_Prefs_Infos
 }

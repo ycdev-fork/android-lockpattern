@@ -18,18 +18,12 @@ package group.pals.android.lib.ui.lockpattern.demo;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import group.pals.android.lib.ui.lockpattern.prefs.Prefs;
-import group.pals.android.lib.ui.lockpattern.util.UI;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.Preference;
-import android.view.View;
-import android.view.Window;
-import android.widget.TextView;
 
 /**
  * Helper class for {@link PrefsActivity} and {@link PrefsActivity_v11}.
@@ -73,9 +67,6 @@ public class CommandsPrefsHelper {
         mPreferenceHolder.findPreference(
                 mActivity.getString(R.string.pkey_verify_captcha))
                 .setOnPreferenceClickListener(mCmdVerifyCaptchaListener);
-        mPreferenceHolder.findPreference(
-                mActivity.getString(R.string.pkey_about))
-                .setOnPreferenceClickListener(mCmdAboutListener);
     }// init()
 
     /*
@@ -126,56 +117,6 @@ public class CommandsPrefsHelper {
             return true;
         }// onPreferenceClick()
     };// mCmdVerifyCaptchaListener
-
-    private final Preference.OnPreferenceClickListener mCmdAboutListener = new Preference.OnPreferenceClickListener() {
-
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-            /*
-             * Build the dialog.
-             */
-            Dialog dialog = new Dialog(mActivity, UI.resolveAttribute(
-                    mActivity, R.attr.alp_theme_dialog));
-            dialog.setTitle(R.string.about);
-            dialog.requestWindowFeature(Window.FEATURE_LEFT_ICON);
-            dialog.setCanceledOnTouchOutside(true);
-
-            dialog.setContentView(R.layout.dialog_about);
-
-            dialog.setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,
-                    android.R.drawable.ic_dialog_info);
-
-            /*
-             * Set text...
-             */
-            TextView textInfo = (TextView) dialog
-                    .findViewById(R.id.textview_info);
-            textInfo.setText(mActivity.getString(R.string.pmsg_about_info,
-                    mActivity.getString(R.string.alp_lib_name),
-                    mActivity.getString(R.string.alp_lib_version_name)));
-            textInfo.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    try {
-                        mActivity.startActivity(new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.haibison.com")));
-                    } catch (Throwable t) {
-                        /*
-                         * Ignore it.
-                         */
-                    }
-                }// onClick()
-            });
-
-            /*
-             * Show the dialog.
-             */
-            dialog.show();
-
-            return true;
-        }// onPreferenceClick()
-    };// mCmdAboutListener
 
     /*
      * UTILITIES

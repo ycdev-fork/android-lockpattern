@@ -43,6 +43,7 @@ public class PrefsActivity extends PreferenceActivity implements
 
             addPreferencesFromResource(R.xml.main_preferences);
             new CommandsPrefsHelper(this, this).init();
+            new InfosPrefsHelper(this, this).init();
 
             getListView().setCacheColorHint(
                     getResources().getColor(android.R.color.transparent));
