@@ -67,7 +67,7 @@ public class PrefsActivity_v11 extends PrefsActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.main_preferences_commands);
-            CommandsPrefsHelper.init(getActivity(), this);
+            new CommandsPrefsHelper(getActivity(), this).init();
         }// onCreate()
     }// Fragment_Prefs_Commands
 }

@@ -221,7 +221,7 @@ public class LockPatternActivity extends Activity {
     /*
      * CONTROLS
      */
-    private TextView mTxtInfo;
+    private TextView mTextInfo;
     private LockPatternView mLockPatternView;
     private View mFooter;
     private Button mBtnCancel;
@@ -298,7 +298,7 @@ public class LockPatternActivity extends Activity {
         /*
          * Save all controls' state to restore later.
          */
-        CharSequence infoText = mTxtInfo != null ? mTxtInfo.getText() : null;
+        CharSequence infoText = mTextInfo != null ? mTextInfo.getText() : null;
         Boolean btnOkEnabled = mBtnConfirm != null ? mBtnConfirm.isEnabled()
                 : null;
         LockPatternView.DisplayMode lastDisplayMode = mLockPatternView != null ? mLockPatternView
@@ -309,7 +309,7 @@ public class LockPatternActivity extends Activity {
         setContentView(R.layout.alp_lock_pattern_activity);
         UI.adjustDialogSizeForLargeScreen(getWindow());
 
-        mTxtInfo = (TextView) findViewById(R.id.alp_info);
+        mTextInfo = (TextView) findViewById(R.id.alp_info);
         mLockPatternView = (LockPatternView) findViewById(R.id.alp_lock_pattern);
 
         mFooter = findViewById(R.id.alp_footer);
@@ -362,9 +362,9 @@ public class LockPatternActivity extends Activity {
             mFooter.setVisibility(View.VISIBLE);
 
             if (infoText != null)
-                mTxtInfo.setText(infoText);
+                mTextInfo.setText(infoText);
             else
-                mTxtInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
+                mTextInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
 
             /*
              * BUTTON OK
@@ -384,13 +384,12 @@ public class LockPatternActivity extends Activity {
         }// ACTION_CREATE_PATTERN
         else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
             if (TextUtils.isEmpty(infoText))
-                mTxtInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
             else
-                mTxtInfo.setText(infoText);
+                mTextInfo.setText(infoText);
         }// ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-            mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
-            mLockPatternView.setDisplayMode(DisplayMode.Animate);
+            mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
 
             final ArrayList<Cell> pattern;
             if (getIntent().hasExtra(EXTRA_PATTERN))
@@ -484,7 +483,7 @@ public class LockPatternActivity extends Activity {
                 finishWithNegativeResult(RESULT_FAILED);
             else {
                 mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-                mTxtInfo.setText(R.string.alp_msg_try_again);
+                mTextInfo.setText(R.string.alp_msg_try_again);
                 mLockPatternView.postDelayed(mLockPatternViewReloader,
                         DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
             }
@@ -500,7 +499,7 @@ public class LockPatternActivity extends Activity {
     private void doCheckAndCreatePattern(List<Cell> pattern) {
         if (pattern.size() < mMinWiredDots) {
             mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-            mTxtInfo.setText(getString(R.string.alp_pmsg_connect_x_dots,
+            mTextInfo.setText(getString(R.string.alp_pmsg_connect_x_dots,
                     mMinWiredDots));
             return;
         }
@@ -508,16 +507,16 @@ public class LockPatternActivity extends Activity {
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
             if (Arrays.equals(getIntent().getCharArrayExtra(EXTRA_PATTERN),
                     encodePattern(pattern))) {
-                mTxtInfo.setText(R.string.alp_msg_your_new_unlock_pattern);
+                mTextInfo.setText(R.string.alp_msg_your_new_unlock_pattern);
                 mBtnConfirm.setEnabled(true);
             } else {
-                mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
                 mBtnConfirm.setEnabled(false);
                 mLockPatternView.setDisplayMode(DisplayMode.Wrong);
             }
         } else {
             getIntent().putExtra(EXTRA_PATTERN, encodePattern(pattern));
-            mTxtInfo.setText(R.string.alp_msg_pattern_recorded);
+            mTextInfo.setText(R.string.alp_msg_pattern_recorded);
             mBtnConfirm.setEnabled(true);
         }
     }// doCheckAndCreatePattern()
@@ -635,7 +634,7 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
-                mTxtInfo.setText(R.string.alp_msg_release_finger_when_done);
+                mTextInfo.setText(R.string.alp_msg_release_finger_when_done);
                 mBtnConfirm.setEnabled(false);
                 if (mBtnOkCmd == ButtonOkCommand.CONTINUE)
                     getIntent().removeExtra(EXTRA_PATTERN);
@@ -658,17 +657,17 @@ public class LockPatternActivity extends Activity {
                 mBtnConfirm.setEnabled(false);
                 if (mBtnOkCmd == ButtonOkCommand.CONTINUE) {
                     getIntent().removeExtra(EXTRA_PATTERN);
-                    mTxtInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
+                    mTextInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
                 } else
-                    mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                    mTextInfo
+                            .setText(R.string.alp_msg_redraw_pattern_to_confirm);
             }// ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 mLockPatternView.setDisplayMode(DisplayMode.Correct);
-                mTxtInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
             }// ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                 mLockPatternView.post(mLockPatternViewReloader);
-                mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
             }// ACTION_VERIFY_CAPTCHA
         }// onPatternCleared()
 
@@ -693,7 +692,7 @@ public class LockPatternActivity extends Activity {
             if (mBtnOkCmd == ButtonOkCommand.CONTINUE) {
                 mBtnOkCmd = ButtonOkCommand.DONE;
                 mLockPatternView.clearPattern();
-                mTxtInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
                 mBtnConfirm.setText(R.string.alp_cmd_confirm);
                 mBtnConfirm.setEnabled(false);
             } else {
@@ -714,6 +713,7 @@ public class LockPatternActivity extends Activity {
         @Override
         public void run() {
             if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
+                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
                 List<Cell> pattern = getIntent().getParcelableArrayListExtra(
                         EXTRA_PATTERN);
                 mLockPatternView.setPattern(DisplayMode.Animate, pattern);

@@ -16,6 +16,7 @@
 
 package group.pals.android.lib.ui.lockpattern.widget;
 
+import group.pals.android.lib.ui.lockpattern.BuildConfig;
 import group.pals.android.lib.ui.lockpattern.collect.Lists;
 
 import java.io.UnsupportedEncodingException;
@@ -23,15 +24,21 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import android.util.Log;
 
 /**
  * Utilities for the lock pattern and its settings.
  */
 public class LockPatternUtils {
+
+    /**
+     * Used for debugging...
+     */
+    private static final String CLASSNAME = LockPatternUtils.class.getName();
 
     /**
      * "UTF-8"
@@ -121,6 +128,12 @@ public class LockPatternUtils {
     /**
      * Generates a random "CAPTCHA" pattern. By saying "CAPTCHA", this method
      * ensures that the generated pattern is easy for the user to re-draw.
+     * <p>
+     * <b>Notes:</b> This method is <b>not</b> optimized and <b>not</b>
+     * benchmarked yet for large size of the pattern's matrix. Currently it
+     * works fine with a matrix of {@code 3x3} cells. Be careful when the size
+     * increases.
+     * </p>
      * 
      * @param size
      *            the size of the pattern to be generated.
@@ -129,46 +142,115 @@ public class LockPatternUtils {
      * @author Hai Bison
      */
     public static ArrayList<LockPatternView.Cell> genCaptchaPattern(int size) {
-        /*
-         * GENERATE RANDOM CELL IDS
-         */
-
-        final LinkedList<Integer> cellIds = new LinkedList<Integer>();
-        Random random = new Random();
-
-        int matrixSize = LockPatternView.MATRIX_SIZE;
-        for (int i = 0; i < LockPatternView.MATRIX_SIZE; i++) {
-            int id = random.nextInt((int) System.currentTimeMillis())
-                    % matrixSize;
-            if (!cellIds.contains(id)) {
-                cellIds.add(id);
-                if (id + 1 == matrixSize)
-                    matrixSize--;
-            }
-        }// for
+        final List<Integer> usedIds = Lists.newArrayList();
+        final Random random = new Random();
 
         /*
          * FILL THE RESULT WITH GENERATED RANDOM CELLS
          */
 
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
-        int lastId = -1;
-        while (result.size() < size) {
-            if (lastId < 0) {
-                lastId = cellIds.poll();
-                result.add(LockPatternView.Cell.of(lastId));
-            } else {
+        int lastId = random
+                .nextInt((int) (System.nanoTime() % Integer.MAX_VALUE))
+                % LockPatternView.MATRIX_SIZE;
+        do {
+            if (BuildConfig.DEBUG)
+                Log.d(CLASSNAME, " >> lastId = " + lastId);
+
+            result.add(LockPatternView.Cell.of(lastId));
+            usedIds.add(lastId);
+
+            /*
+             * Starting from delta == 1, find the closest neighbour value of
+             * `lastId`.
+             */
+
+            final int row = lastId / LockPatternView.MATRIX_WIDTH;
+            final int col = lastId % LockPatternView.MATRIX_WIDTH;
+
+            /*
+             * This is the max available rows/ columns that we can reach from
+             * the cell of `lastId` to the border of the matrix.
+             */
+            final int maxDelta = Math.max(
+                    Math.max(row, LockPatternView.MATRIX_WIDTH - row),
+                    Math.max(col, LockPatternView.MATRIX_WIDTH - col));
+            for (int delta = 1; delta < maxDelta; delta++) {
+                List<Integer> possibleIds = Lists.newArrayList();
+
                 /*
-                 * Check to see if there are any cell IDs between the next one
-                 * and the last one. If so, add them to the result in the RIGHT
-                 * direction. For example, if the matrix size is 16, the last
-                 * cell ID is 0, and the next cell ID is 15, then the right
-                 * direction must be: 0-5-10-15.
+                 * Now we have a square surrounding the current cell. We call it
+                 * ABCD, in which A is top-left, and C is bottom-right.
+                 * 
+                 * We add all available points in AB, BC, CD, DA to the list.
                  */
 
-                int nextId = cellIds.peek();
-            }
-        }// while
+                final int rowA = row - delta;
+                final int colA = col - delta;
+                final int rowC = row + delta;
+                final int colC = col + delta;
+
+                int id;
+
+                /*
+                 * AB
+                 */
+                if (rowA >= 0) {
+                    for (int c = Math.max(0, colA); c < Math.min(
+                            LockPatternView.MATRIX_WIDTH, colC + 1); c++) {
+                        id = rowA * LockPatternView.MATRIX_WIDTH + c;
+                        if (!usedIds.contains(id))
+                            possibleIds.add(id);
+                    }
+                }
+
+                /*
+                 * BC
+                 */
+                if (colC < LockPatternView.MATRIX_WIDTH) {
+                    for (int r = Math.max(0, rowA + 1); r < Math.min(
+                            LockPatternView.MATRIX_WIDTH, rowC + 1); r++) {
+                        id = r * LockPatternView.MATRIX_WIDTH + colC;
+                        if (!usedIds.contains(id))
+                            possibleIds.add(id);
+                    }
+                }
+
+                /*
+                 * DC
+                 */
+                if (rowC < LockPatternView.MATRIX_WIDTH) {
+                    for (int c = Math.max(0, colA); c < Math.min(
+                            LockPatternView.MATRIX_WIDTH, colC); c++) {
+                        id = rowC * LockPatternView.MATRIX_WIDTH + c;
+                        if (!usedIds.contains(id))
+                            possibleIds.add(id);
+                    }
+                }
+
+                /*
+                 * AD
+                 */
+                if (colA >= 0) {
+                    for (int r = Math.max(0, rowA + 1); r < Math.min(
+                            LockPatternView.MATRIX_WIDTH, rowC); r++) {
+                        id = r * LockPatternView.MATRIX_WIDTH + colA;
+                        if (!usedIds.contains(id))
+                            possibleIds.add(id);
+                    }
+                }
+
+                if (possibleIds.isEmpty())
+                    continue;
+
+                /*
+                 * NOW GET ONE OF POSSIBLE IDS AND ASSIGN IT TO `lastId`
+                 */
+                lastId = possibleIds.get(random.nextInt((int) (System
+                        .nanoTime() % Integer.MAX_VALUE)) % possibleIds.size());
+                break;
+            }// for delta
+        } while (result.size() < size);
 
         return result;
     }// genCaptchaPattern()

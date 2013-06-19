@@ -42,7 +42,7 @@ public class PrefsActivity extends PreferenceActivity implements
             Prefs.setupPreferenceManager(this, getPreferenceManager());
 
             addPreferencesFromResource(R.xml.main_preferences);
-            CommandsPrefsHelper.init(this, this);
+            new CommandsPrefsHelper(this, this).init();
 
             getListView().setCacheColorHint(
                     getResources().getColor(android.R.color.transparent));
@@ -62,7 +62,8 @@ public class PrefsActivity extends PreferenceActivity implements
             break;
         }// REQ_CREATE_PATTERN
 
-        case CommandsPrefsHelper.REQ_ENTER_PATTERN: {
+        case CommandsPrefsHelper.REQ_ENTER_PATTERN:
+        case CommandsPrefsHelper.REQ_VERIFY_CAPTCHA: {
             int msgId = 0;
 
             /*
@@ -95,7 +96,7 @@ public class PrefsActivity extends PreferenceActivity implements
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
             break;
-        }// REQ_ENTER_PATTERN
+        }// REQ_ENTER_PATTERN && REQ_VERIFY_CAPTCHA
         }
     }// onActivityResult()
 }
