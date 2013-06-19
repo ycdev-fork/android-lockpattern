@@ -145,10 +145,6 @@ public class LockPatternUtils {
         final List<Integer> usedIds = Lists.newArrayList();
         final Random random = new Random();
 
-        /*
-         * FILL THE RESULT WITH GENERATED RANDOM CELLS
-         */
-
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
         int lastId = random
                 .nextInt((int) (System.nanoTime() % Integer.MAX_VALUE))
@@ -172,11 +168,11 @@ public class LockPatternUtils {
              * This is the max available rows/ columns that we can reach from
              * the cell of `lastId` to the border of the matrix.
              */
-            final int maxDelta = Math.max(
+            final int maxDistance = Math.max(
                     Math.max(row, LockPatternView.MATRIX_WIDTH - row),
                     Math.max(col, LockPatternView.MATRIX_WIDTH - col));
-            for (int delta = 1; delta < maxDelta; delta++) {
-                List<Integer> possibleIds = Lists.newArrayList();
+            for (int distance = 1; distance <= maxDistance; distance++) {
+                final List<Integer> possibleIds = Lists.newArrayList();
 
                 /*
                  * Now we have a square surrounding the current cell. We call it
@@ -185,10 +181,10 @@ public class LockPatternUtils {
                  * We add all available points in AB, BC, CD, DA to the list.
                  */
 
-                final int rowA = row - delta;
-                final int colA = col - delta;
-                final int rowC = row + delta;
-                final int colC = col + delta;
+                final int rowA = row - distance;
+                final int colA = col - distance;
+                final int rowC = row + distance;
+                final int colC = col + distance;
 
                 int id;
 
