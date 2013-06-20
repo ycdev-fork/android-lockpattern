@@ -245,7 +245,7 @@ public class LockPatternUtils {
                 lastId = possibleIds.get(random.nextInt((int) (System
                         .nanoTime() % Integer.MAX_VALUE)) % possibleIds.size());
                 break;
-            }// for delta
+            }// for distance
         } while (result.size() < size);
 
         return result;

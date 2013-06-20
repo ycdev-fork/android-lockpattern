@@ -207,9 +207,7 @@ public class LockPatternView extends View {
          * @author Hai Bison
          */
         public static synchronized Cell of(int id) {
-            int column = id % MATRIX_WIDTH;
-            int row = id / MATRIX_WIDTH;
-            return of(row, column);
+            return of(id / MATRIX_WIDTH, id % MATRIX_WIDTH);
         }// of()
 
         private static void checkRange(int row, int column) {
