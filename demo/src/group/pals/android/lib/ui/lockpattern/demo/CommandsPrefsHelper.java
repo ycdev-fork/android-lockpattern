@@ -111,6 +111,8 @@ public class CommandsPrefsHelper {
             Intent intentActivity = new Intent(
                     LockPatternActivity.ACTION_VERIFY_CAPTCHA, null, mActivity,
                     LockPatternActivity.class);
+            intentActivity.putExtra(LockPatternActivity.EXTRA_THEME,
+                    getThemeForLockPatternActivity(mActivity));
             mActivity
                     .startActivityForResult(intentActivity, REQ_VERIFY_CAPTCHA);
 

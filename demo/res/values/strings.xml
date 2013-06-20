@@ -17,7 +17,7 @@
 
 <resources>
 
-    <string name="app_name">ALP 2.7 - Demo</string>
+    <string name="app_name">ALP 2.8b - Demo</string>
     <string name="about">About…</string>
     <string name="captcha_wired_dots">CAPTCHA wired dots</string>
     <string name="commands">Commands</string>
