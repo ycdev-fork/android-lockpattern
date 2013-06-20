@@ -15,16 +15,22 @@
    limitations under the License.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:padding="10dp" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textview_info"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textIsSelectable="false" />
+        android:layout_margin="10dp"
+        android:padding="10dp" >
 
-</ScrollView>
+        <TextView
+            android:id="@+id/textview_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false" />
+    </ScrollView>
+
+</LinearLayout>

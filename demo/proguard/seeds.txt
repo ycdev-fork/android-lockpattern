@@ -15,16 +15,12 @@ group.pals.android.lib.ui.lockpattern.R$bool: int alp_pkey_display_stealth_mode_
 group.pals.android.lib.ui.lockpattern.R$bool: int alp_pkey_sys_auto_save_pattern_default
 group.pals.android.lib.ui.lockpattern.R$color: int alp_pattern_path_dark
 group.pals.android.lib.ui.lockpattern.R$color: int alp_pattern_path_light
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_height_large
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_height_large_base
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_height_large_land_base
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_height_xlarge_land_base
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_width_large
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_width_large_base
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_width_large_land_base
-group.pals.android.lib.ui.lockpattern.R$dimen: int alp_dialog_width_xlarge_land_base
 group.pals.android.lib.ui.lockpattern.R$dimen: int alp_lockpatternview_size
 group.pals.android.lib.ui.lockpattern.R$dimen: int alp_separator_size
+group.pals.android.lib.ui.lockpattern.R$dimen: int aosp_dialog_fixed_height_major
+group.pals.android.lib.ui.lockpattern.R$dimen: int aosp_dialog_fixed_height_minor
+group.pals.android.lib.ui.lockpattern.R$dimen: int aosp_dialog_fixed_width_major
+group.pals.android.lib.ui.lockpattern.R$dimen: int aosp_dialog_fixed_width_minor
 group.pals.android.lib.ui.lockpattern.R$drawable: int alp_btn_code_lock_default_holo_dark
 group.pals.android.lib.ui.lockpattern.R$drawable: int alp_btn_code_lock_default_holo_light
 group.pals.android.lib.ui.lockpattern.R$drawable: int alp_btn_code_lock_touched_holo_dark
@@ -46,6 +42,7 @@ group.pals.android.lib.ui.lockpattern.R$id: int alp_footer
 group.pals.android.lib.ui.lockpattern.R$id: int alp_info
 group.pals.android.lib.ui.lockpattern.R$id: int alp_lock_pattern
 group.pals.android.lib.ui.lockpattern.R$integer: int alp_lib_version_code
+group.pals.android.lib.ui.lockpattern.R$integer: int alp_pkey_display_captcha_wired_dots_default
 group.pals.android.lib.ui.lockpattern.R$integer: int alp_pkey_display_max_retry_default
 group.pals.android.lib.ui.lockpattern.R$integer: int alp_pkey_display_min_wired_dots_default
 group.pals.android.lib.ui.lockpattern.R$layout: int alp_lock_pattern_activity
@@ -68,6 +65,7 @@ group.pals.android.lib.ui.lockpattern.R$string: int alp_msg_redraw_pattern_to_co
 group.pals.android.lib.ui.lockpattern.R$string: int alp_msg_release_finger_when_done
 group.pals.android.lib.ui.lockpattern.R$string: int alp_msg_try_again
 group.pals.android.lib.ui.lockpattern.R$string: int alp_msg_your_new_unlock_pattern
+group.pals.android.lib.ui.lockpattern.R$string: int alp_pkey_display_captcha_wired_dots
 group.pals.android.lib.ui.lockpattern.R$string: int alp_pkey_display_max_retry
 group.pals.android.lib.ui.lockpattern.R$string: int alp_pkey_display_min_wired_dots
 group.pals.android.lib.ui.lockpattern.R$string: int alp_pkey_display_stealth_mode
@@ -103,6 +101,9 @@ group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11: PrefsActivity_v11(
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Commands
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Commands: PrefsActivity_v11$Fragment_Prefs_Commands()
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Commands: void onCreate(android.os.Bundle)
+group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Infos
+group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Infos: PrefsActivity_v11$Fragment_Prefs_Infos()
+group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Infos: void onCreate(android.os.Bundle)
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings: PrefsActivity_v11$Fragment_Prefs_Settings()
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings: void onCreate(android.os.Bundle)
@@ -127,16 +128,12 @@ group.pals.android.lib.ui.lockpattern.demo.R$bool: int pkey_lockpattern_activity
 group.pals.android.lib.ui.lockpattern.demo.R$bool: int pkey_lockpattern_activity_light_theme_default
 group.pals.android.lib.ui.lockpattern.demo.R$color: int alp_pattern_path_dark
 group.pals.android.lib.ui.lockpattern.demo.R$color: int alp_pattern_path_light
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_height_large
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_height_large_base
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_height_large_land_base
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_height_xlarge_land_base
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_width_large
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_width_large_base
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_width_large_land_base
-group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_dialog_width_xlarge_land_base
 group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_lockpatternview_size
 group.pals.android.lib.ui.lockpattern.demo.R$dimen: int alp_separator_size
+group.pals.android.lib.ui.lockpattern.demo.R$dimen: int aosp_dialog_fixed_height_major
+group.pals.android.lib.ui.lockpattern.demo.R$dimen: int aosp_dialog_fixed_height_minor
+group.pals.android.lib.ui.lockpattern.demo.R$dimen: int aosp_dialog_fixed_width_major
+group.pals.android.lib.ui.lockpattern.demo.R$dimen: int aosp_dialog_fixed_width_minor
 group.pals.android.lib.ui.lockpattern.demo.R$dimen: int button_navi_size
 group.pals.android.lib.ui.lockpattern.demo.R$dimen: int control_margin
 group.pals.android.lib.ui.lockpattern.demo.R$dimen: int progress_bar_width
@@ -181,11 +178,10 @@ group.pals.android.lib.ui.lockpattern.demo.R$id: int alp_info
 group.pals.android.lib.ui.lockpattern.demo.R$id: int alp_lock_pattern
 group.pals.android.lib.ui.lockpattern.demo.R$id: int button_decrease
 group.pals.android.lib.ui.lockpattern.demo.R$id: int button_increase
-group.pals.android.lib.ui.lockpattern.demo.R$id: int main_preferences_header_commands
-group.pals.android.lib.ui.lockpattern.demo.R$id: int main_preferences_header_settings
 group.pals.android.lib.ui.lockpattern.demo.R$id: int text_number
 group.pals.android.lib.ui.lockpattern.demo.R$id: int textview_info
 group.pals.android.lib.ui.lockpattern.demo.R$integer: int alp_lib_version_code
+group.pals.android.lib.ui.lockpattern.demo.R$integer: int alp_pkey_display_captcha_wired_dots_default
 group.pals.android.lib.ui.lockpattern.demo.R$integer: int alp_pkey_display_max_retry_default
 group.pals.android.lib.ui.lockpattern.demo.R$integer: int alp_pkey_display_min_wired_dots_default
 group.pals.android.lib.ui.lockpattern.demo.R$layout: int alp_lock_pattern_activity
@@ -193,6 +189,7 @@ group.pals.android.lib.ui.lockpattern.demo.R$layout: int alp_lock_pattern_activi
 group.pals.android.lib.ui.lockpattern.demo.R$layout: int alp_lock_pattern_view
 group.pals.android.lib.ui.lockpattern.demo.R$layout: int dialog_about
 group.pals.android.lib.ui.lockpattern.demo.R$layout: int dialog_number_picker
+group.pals.android.lib.ui.lockpattern.demo.R$raw: int android_lockpattern_license
 group.pals.android.lib.ui.lockpattern.demo.R$string: int about
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_cmd_confirm
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_cmd_continue
@@ -211,6 +208,7 @@ group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_msg_redraw_pattern_
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_msg_release_finger_when_done
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_msg_try_again
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_msg_your_new_unlock_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_display_captcha_wired_dots
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_display_max_retry
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_display_min_wired_dots
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_display_stealth_mode
@@ -219,22 +217,28 @@ group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_sys_encrypter_
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pkey_sys_pattern
 group.pals.android.lib.ui.lockpattern.demo.R$string: int alp_pmsg_connect_x_dots
 group.pals.android.lib.ui.lockpattern.demo.R$string: int app_name
+group.pals.android.lib.ui.lockpattern.demo.R$string: int captcha_wired_dots
 group.pals.android.lib.ui.lockpattern.demo.R$string: int commands
-group.pals.android.lib.ui.lockpattern.demo.R$string: int create_lock_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int create_pattern
 group.pals.android.lib.ui.lockpattern.demo.R$string: int dialog_theme
-group.pals.android.lib.ui.lockpattern.demo.R$string: int enter_lock_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int enter_pattern
 group.pals.android.lib.ui.lockpattern.demo.R$string: int failed
+group.pals.android.lib.ui.lockpattern.demo.R$string: int information
 group.pals.android.lib.ui.lockpattern.demo.R$string: int light_theme
 group.pals.android.lib.ui.lockpattern.demo.R$string: int max_retry
 group.pals.android.lib.ui.lockpattern.demo.R$string: int min_wired_dots
+group.pals.android.lib.ui.lockpattern.demo.R$string: int open_source_licenses
 group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_about
-group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_create_lock_pattern
-group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_enter_lock_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_create_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_enter_pattern
+group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_licenses_android_lockpattern
 group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_lockpattern_activity_dialog_theme
 group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_lockpattern_activity_light_theme
+group.pals.android.lib.ui.lockpattern.demo.R$string: int pkey_verify_captcha
 group.pals.android.lib.ui.lockpattern.demo.R$string: int pmsg_about_info
 group.pals.android.lib.ui.lockpattern.demo.R$string: int settings
 group.pals.android.lib.ui.lockpattern.demo.R$string: int stealth_mode
+group.pals.android.lib.ui.lockpattern.demo.R$string: int verify_captcha
 group.pals.android.lib.ui.lockpattern.demo.R$style: int AOSP_DialogWindowTitle
 group.pals.android.lib.ui.lockpattern.demo.R$style: int Alp_BaseTheme_Dark
 group.pals.android.lib.ui.lockpattern.demo.R$style: int Alp_BaseTheme_Dialog_Dark
@@ -264,6 +268,7 @@ group.pals.android.lib.ui.lockpattern.demo.R$styleable: int NumberPickerPreferen
 group.pals.android.lib.ui.lockpattern.demo.R$xml: int main_preferences
 group.pals.android.lib.ui.lockpattern.demo.R$xml: int main_preferences_commands
 group.pals.android.lib.ui.lockpattern.demo.R$xml: int main_preferences_headers
+group.pals.android.lib.ui.lockpattern.demo.R$xml: int main_preferences_infos
 group.pals.android.lib.ui.lockpattern.demo.R$xml: int main_preferences_settings
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView: LockPatternView(android.content.Context)
@@ -276,6 +281,8 @@ group.pals.android.lib.ui.lockpattern.widget.LockPatternView: group.pals.android
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView: java.util.List getPattern()
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView: int getSuggestedMinimumWidth()
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView: int getSuggestedMinimumHeight()
+group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell
+group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell: android.os.Parcelable$Creator CREATOR
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode: group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode[] values()
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode: group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode valueOf(java.lang.String)
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView$SavedState

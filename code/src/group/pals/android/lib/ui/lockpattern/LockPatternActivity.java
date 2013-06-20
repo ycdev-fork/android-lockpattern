@@ -494,7 +494,7 @@ public class LockPatternActivity extends Activity {
      * Checks and creates the pattern.
      * 
      * @param pattern
-     *            the currently pattern of lock pattern view.
+     *            the current pattern of lock pattern view.
      */
     private void doCheckAndCreatePattern(List<Cell> pattern) {
         if (pattern.size() < mMinWiredDots) {
@@ -635,6 +635,7 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onPatternStart() {
+            mLockPatternView.removeCallbacks(mLockPatternViewReloader);
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
@@ -642,20 +643,28 @@ public class LockPatternActivity extends Activity {
                 mBtnConfirm.setEnabled(false);
                 if (mBtnOkCmd == ButtonOkCommand.CONTINUE)
                     getIntent().removeExtra(EXTRA_PATTERN);
-            }
+            }// ACTION_CREATE_PATTERN
+            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
+                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+            }// ACTION_COMPARE_PATTERN
+            else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
+                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+            }// ACTION_VERIFY_CAPTCHA
         }// onPatternStart()
 
         @Override
         public void onPatternDetected(List<Cell> pattern) {
-            if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
+            if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
                 doCheckAndCreatePattern(pattern);
-            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction()))
+            }// ACTION_CREATE_PATTERN
+            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 doComparePattern(pattern);
+            }// ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                 if (!DisplayMode.Animate.equals(mLockPatternView
                         .getDisplayMode()))
                     doComparePattern(pattern);
-            }
+            }// ACTION_VERIFY_CAPTCHA
         }// onPatternDetected()
 
         @Override

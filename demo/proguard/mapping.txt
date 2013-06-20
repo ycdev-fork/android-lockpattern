@@ -1,52 +1,52 @@
 group.pals.android.lib.ui.lockpattern.LockPatternActivity -> group.pals.android.lib.ui.lockpattern.LockPatternActivity:
-    java.lang.String CLASS_NAME -> i
+    java.lang.String CLASSNAME -> j
     java.lang.String ACTION_CREATE_PATTERN -> a
     java.lang.String ACTION_COMPARE_PATTERN -> b
-    java.lang.String EXTRA_RETRY_COUNT -> c
-    java.lang.String EXTRA_THEME -> d
-    java.lang.String EXTRA_PATTERN -> e
-    java.lang.String EXTRA_RESULT_RECEIVER -> f
-    java.lang.String EXTRA_OK_PENDING_INTENT -> g
-    java.lang.String EXTRA_CANCELLED_PENDING_INTENT -> h
-    int mMaxRetry -> j
-    boolean mAutoSave -> k
-    group.pals.android.lib.ui.lockpattern.util.IEncrypter mEncrypter -> l
-    int mMinWiredDots -> m
-    group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand mBtnOkCmd -> n
-    android.content.Intent mIntentResult -> o
-    android.widget.TextView mTxtInfo -> p
-    group.pals.android.lib.ui.lockpattern.widget.LockPatternView mLockPatternView -> q
-    android.view.View mFooter -> r
-    android.widget.Button mBtnCancel -> s
-    android.widget.Button mBtnConfirm -> t
-    int mRetryCount -> u
-    java.util.List mLastPattern -> v
-    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$OnPatternListener mPatternViewListener -> w
+    java.lang.String ACTION_VERIFY_CAPTCHA -> c
+    java.lang.String EXTRA_RETRY_COUNT -> d
+    java.lang.String EXTRA_THEME -> e
+    java.lang.String EXTRA_PATTERN -> f
+    java.lang.String EXTRA_RESULT_RECEIVER -> g
+    java.lang.String EXTRA_OK_PENDING_INTENT -> h
+    java.lang.String EXTRA_CANCELLED_PENDING_INTENT -> i
+    int mMaxRetry -> k
+    boolean mAutoSave -> l
+    group.pals.android.lib.ui.lockpattern.util.IEncrypter mEncrypter -> m
+    int mMinWiredDots -> n
+    group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand mBtnOkCmd -> o
+    android.content.Intent mIntentResult -> p
+    android.widget.TextView mTextInfo -> q
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView mLockPatternView -> r
+    android.view.View mFooter -> s
+    android.widget.Button mBtnCancel -> t
+    android.widget.Button mBtnConfirm -> u
+    int mRetryCount -> v
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$OnPatternListener mLockPatternViewListener -> w
     android.view.View$OnClickListener mBtnCancelOnClickListener -> x
     android.view.View$OnClickListener mBtnConfirmOnClickListener -> y
-    int[] $SWITCH_TABLE$group$pals$android$lib$ui$lockpattern$LockPatternActivity$ButtonOkCommand -> z
+    java.lang.Runnable mLockPatternViewReloader -> z
+    int[] $SWITCH_TABLE$group$pals$android$lib$ui$lockpattern$LockPatternActivity$ButtonOkCommand -> A
     void onCreate(android.os.Bundle) -> onCreate
     void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void initContentView() -> b
     char[] encodePattern(java.util.List) -> a
     void doComparePattern(java.util.List) -> b
-    void doCreatePattern(java.util.List) -> c
+    void doCheckAndCreatePattern(java.util.List) -> c
     void finishWithResultOk(char[]) -> a
     void finishWithNegativeResult(int) -> a
     group.pals.android.lib.ui.lockpattern.widget.LockPatternView access$0(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> a
-    android.widget.TextView access$1(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> b
-    android.widget.Button access$2(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> c
-    group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand access$3(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> d
-    void access$4(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> a
-    void access$5(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> b
-    void access$6(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> c
+    java.lang.Runnable access$1(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> b
+    android.widget.TextView access$2(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> c
+    android.widget.Button access$3(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> d
+    group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand access$4(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> e
+    void access$5(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> a
+    void access$6(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> b
     void access$7(group.pals.android.lib.ui.lockpattern.LockPatternActivity,int) -> a
     void access$8(group.pals.android.lib.ui.lockpattern.LockPatternActivity,group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand) -> a
-    java.util.List access$9(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> e
-    char[] access$10(group.pals.android.lib.ui.lockpattern.LockPatternActivity,java.util.List) -> d
-    boolean access$11(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> f
-    void access$12(group.pals.android.lib.ui.lockpattern.LockPatternActivity,char[]) -> a
+    boolean access$9(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> f
+    void access$10(group.pals.android.lib.ui.lockpattern.LockPatternActivity,char[]) -> a
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$OnPatternListener access$11(group.pals.android.lib.ui.lockpattern.LockPatternActivity) -> g
     int[] $SWITCH_TABLE$group$pals$android$lib$ui$lockpattern$LockPatternActivity$ButtonOkCommand() -> a
 group.pals.android.lib.ui.lockpattern.LockPatternActivity$1 -> group.pals.android.lib.ui.lockpattern.a:
     group.pals.android.lib.ui.lockpattern.LockPatternActivity this$0 -> a
@@ -60,14 +60,17 @@ group.pals.android.lib.ui.lockpattern.LockPatternActivity$2 -> group.pals.androi
 group.pals.android.lib.ui.lockpattern.LockPatternActivity$3 -> group.pals.android.lib.ui.lockpattern.c:
     group.pals.android.lib.ui.lockpattern.LockPatternActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand -> group.pals.android.lib.ui.lockpattern.d:
+group.pals.android.lib.ui.lockpattern.LockPatternActivity$4 -> group.pals.android.lib.ui.lockpattern.d:
+    group.pals.android.lib.ui.lockpattern.LockPatternActivity this$0 -> a
+    void run() -> run
+group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand -> group.pals.android.lib.ui.lockpattern.e:
     group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand CONTINUE -> a
     group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand DONE -> b
     group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand[] ENUM$VALUES -> c
     group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand[] values() -> values
     group.pals.android.lib.ui.lockpattern.LockPatternActivity$ButtonOkCommand valueOf(java.lang.String) -> valueOf
-group.pals.android.lib.ui.lockpattern.R -> group.pals.android.lib.ui.lockpattern.e:
-group.pals.android.lib.ui.lockpattern.R$attr -> group.pals.android.lib.ui.lockpattern.f:
+group.pals.android.lib.ui.lockpattern.R -> group.pals.android.lib.ui.lockpattern.f:
+group.pals.android.lib.ui.lockpattern.R$attr -> group.pals.android.lib.ui.lockpattern.g:
     int alp_button_bar_button_style -> alp_button_bar_button_style
     int alp_button_bar_style -> alp_button_bar_style
     int alp_color_pattern_path -> alp_color_pattern_path
@@ -76,22 +79,18 @@ group.pals.android.lib.ui.lockpattern.R$attr -> group.pals.android.lib.ui.lockpa
     int alp_drawable_indicator_code_lock_point_area_default_holo -> alp_drawable_indicator_code_lock_point_area_default_holo
     int alp_theme_dialog -> alp_theme_dialog
     int aosp_drawable_indicator_code_lock_point_area_normal -> aosp_drawable_indicator_code_lock_point_area_normal
-group.pals.android.lib.ui.lockpattern.R$bool -> group.pals.android.lib.ui.lockpattern.g:
+group.pals.android.lib.ui.lockpattern.R$bool -> group.pals.android.lib.ui.lockpattern.h:
     int alp_is_large_screen -> alp_is_large_screen
     int alp_pkey_display_stealth_mode_default -> alp_pkey_display_stealth_mode_default
     int alp_pkey_sys_auto_save_pattern_default -> alp_pkey_sys_auto_save_pattern_default
-group.pals.android.lib.ui.lockpattern.R$dimen -> group.pals.android.lib.ui.lockpattern.h:
-    int alp_dialog_height_large -> alp_dialog_height_large
-    int alp_dialog_height_large_base -> alp_dialog_height_large_base
-    int alp_dialog_height_large_land_base -> alp_dialog_height_large_land_base
-    int alp_dialog_height_xlarge_land_base -> alp_dialog_height_xlarge_land_base
-    int alp_dialog_width_large -> alp_dialog_width_large
-    int alp_dialog_width_large_base -> alp_dialog_width_large_base
-    int alp_dialog_width_large_land_base -> alp_dialog_width_large_land_base
-    int alp_dialog_width_xlarge_land_base -> alp_dialog_width_xlarge_land_base
+group.pals.android.lib.ui.lockpattern.R$dimen -> group.pals.android.lib.ui.lockpattern.i:
     int alp_lockpatternview_size -> alp_lockpatternview_size
     int alp_separator_size -> alp_separator_size
-group.pals.android.lib.ui.lockpattern.R$drawable -> group.pals.android.lib.ui.lockpattern.i:
+    int aosp_dialog_fixed_height_major -> aosp_dialog_fixed_height_major
+    int aosp_dialog_fixed_height_minor -> aosp_dialog_fixed_height_minor
+    int aosp_dialog_fixed_width_major -> aosp_dialog_fixed_width_major
+    int aosp_dialog_fixed_width_minor -> aosp_dialog_fixed_width_minor
+group.pals.android.lib.ui.lockpattern.R$drawable -> group.pals.android.lib.ui.lockpattern.j:
     int alp_btn_code_lock_default_holo_dark -> alp_btn_code_lock_default_holo_dark
     int alp_btn_code_lock_default_holo_light -> alp_btn_code_lock_default_holo_light
     int alp_btn_code_lock_touched_holo_dark -> alp_btn_code_lock_touched_holo_dark
@@ -107,21 +106,22 @@ group.pals.android.lib.ui.lockpattern.R$drawable -> group.pals.android.lib.ui.lo
     int aosp_indicator_code_lock_point_area_blue_holo -> aosp_indicator_code_lock_point_area_blue_holo
     int aosp_indicator_code_lock_point_area_green_holo -> aosp_indicator_code_lock_point_area_green_holo
     int aosp_indicator_code_lock_point_area_red_holo -> aosp_indicator_code_lock_point_area_red_holo
-group.pals.android.lib.ui.lockpattern.R$id -> group.pals.android.lib.ui.lockpattern.j:
+group.pals.android.lib.ui.lockpattern.R$id -> group.pals.android.lib.ui.lockpattern.k:
     int alp_cancel -> alp_cancel
     int alp_confirm -> alp_confirm
     int alp_footer -> alp_footer
     int alp_info -> alp_info
     int alp_lock_pattern -> alp_lock_pattern
-group.pals.android.lib.ui.lockpattern.R$integer -> group.pals.android.lib.ui.lockpattern.k:
+group.pals.android.lib.ui.lockpattern.R$integer -> group.pals.android.lib.ui.lockpattern.l:
     int alp_lib_version_code -> alp_lib_version_code
+    int alp_pkey_display_captcha_wired_dots_default -> alp_pkey_display_captcha_wired_dots_default
     int alp_pkey_display_max_retry_default -> alp_pkey_display_max_retry_default
     int alp_pkey_display_min_wired_dots_default -> alp_pkey_display_min_wired_dots_default
-group.pals.android.lib.ui.lockpattern.R$layout -> group.pals.android.lib.ui.lockpattern.l:
+group.pals.android.lib.ui.lockpattern.R$layout -> group.pals.android.lib.ui.lockpattern.m:
     int alp_lock_pattern_activity -> alp_lock_pattern_activity
     int alp_lock_pattern_activity_land -> alp_lock_pattern_activity_land
     int alp_lock_pattern_view -> alp_lock_pattern_view
-group.pals.android.lib.ui.lockpattern.R$string -> group.pals.android.lib.ui.lockpattern.m:
+group.pals.android.lib.ui.lockpattern.R$string -> group.pals.android.lib.ui.lockpattern.n:
     int alp_cmd_confirm -> alp_cmd_confirm
     int alp_cmd_continue -> alp_cmd_continue
     int alp_cmd_retry -> alp_cmd_retry
@@ -139,6 +139,7 @@ group.pals.android.lib.ui.lockpattern.R$string -> group.pals.android.lib.ui.lock
     int alp_msg_release_finger_when_done -> alp_msg_release_finger_when_done
     int alp_msg_try_again -> alp_msg_try_again
     int alp_msg_your_new_unlock_pattern -> alp_msg_your_new_unlock_pattern
+    int alp_pkey_display_captcha_wired_dots -> alp_pkey_display_captcha_wired_dots
     int alp_pkey_display_max_retry -> alp_pkey_display_max_retry
     int alp_pkey_display_min_wired_dots -> alp_pkey_display_min_wired_dots
     int alp_pkey_display_stealth_mode -> alp_pkey_display_stealth_mode
@@ -146,7 +147,7 @@ group.pals.android.lib.ui.lockpattern.R$string -> group.pals.android.lib.ui.lock
     int alp_pkey_sys_encrypter_class -> alp_pkey_sys_encrypter_class
     int alp_pkey_sys_pattern -> alp_pkey_sys_pattern
     int alp_pmsg_connect_x_dots -> alp_pmsg_connect_x_dots
-group.pals.android.lib.ui.lockpattern.R$style -> group.pals.android.lib.ui.lockpattern.n:
+group.pals.android.lib.ui.lockpattern.R$style -> group.pals.android.lib.ui.lockpattern.o:
     int AOSP_DialogWindowTitle -> AOSP_DialogWindowTitle
     int Alp_BaseThemeHelper_Dark -> Alp_BaseThemeHelper_Dark
     int Alp_BaseThemeHelper_Dialog_Dark -> Alp_BaseThemeHelper_Dialog_Dark
@@ -165,22 +166,53 @@ group.pals.android.lib.ui.lockpattern.R$style -> group.pals.android.lib.ui.lockp
 group.pals.android.lib.ui.lockpattern.collect.Lists -> group.pals.android.lib.ui.lockpattern.a.a:
     java.util.ArrayList newArrayList() -> a
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper -> group.pals.android.lib.ui.lockpattern.demo.a:
-    void init(android.app.Activity,group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder) -> a
+    android.app.Activity mActivity -> a
+    group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder mPreferenceHolder -> b
+    android.preference.Preference$OnPreferenceClickListener mCmdCreatePatternListener -> c
+    android.preference.Preference$OnPreferenceClickListener mCmdEnterPatternListener -> d
+    android.preference.Preference$OnPreferenceClickListener mCmdVerifyCaptchaListener -> e
+    void init() -> a
     int getThemeForLockPatternActivity(android.content.Context) -> a
+    android.app.Activity access$0(group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper) -> a
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$1 -> group.pals.android.lib.ui.lockpattern.demo.b:
-    android.app.Activity val$activity -> a
+    group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$2 -> group.pals.android.lib.ui.lockpattern.demo.c:
-    android.app.Activity val$activity -> a
+    group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
 group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3 -> group.pals.android.lib.ui.lockpattern.demo.d:
-    android.app.Activity val$activity -> a
+    group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3$1 -> group.pals.android.lib.ui.lockpattern.demo.e:
-    group.pals.android.lib.ui.lockpattern.demo.CommandsPrefsHelper$3 this$1 -> a
-    android.app.Activity val$activity -> b
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper -> group.pals.android.lib.ui.lockpattern.demo.e:
+    java.lang.String CLASSNAME -> a
+    android.content.Context mContext -> b
+    group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder mPreferenceHolder -> c
+    android.preference.Preference$OnPreferenceClickListener mCmdShowAlpLicense -> d
+    android.preference.Preference$OnPreferenceClickListener mCmdAboutListener -> e
+    void init() -> a
+    android.content.Context access$0(group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper) -> a
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1 -> group.pals.android.lib.ui.lockpattern.demo.f:
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper this$0 -> a
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper access$0(group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1) -> a
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1$1 -> group.pals.android.lib.ui.lockpattern.demo.g:
+    int mOrientation -> a
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1 this$1 -> b
+    android.app.Dialog val$dialog -> c
+    void onGlobalLayout() -> onGlobalLayout
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1$2 -> group.pals.android.lib.ui.lockpattern.demo.h:
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$1 this$1 -> a
+    android.app.Dialog val$dialog -> b
+    android.view.ViewTreeObserver$OnGlobalLayoutListener val$dialogOnGlobalLayoutListener -> c
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$2 -> group.pals.android.lib.ui.lockpattern.demo.i:
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper this$0 -> a
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper access$0(group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$2) -> a
+group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$2$1 -> group.pals.android.lib.ui.lockpattern.demo.j:
+    group.pals.android.lib.ui.lockpattern.demo.InfosPrefsHelper$2 this$1 -> a
     void onClick(android.view.View) -> onClick
-group.pals.android.lib.ui.lockpattern.demo.LPEncrypter -> group.pals.android.lib.ui.lockpattern.demo.f:
+group.pals.android.lib.ui.lockpattern.demo.LPEncrypter -> group.pals.android.lib.ui.lockpattern.demo.k:
     char[] encrypt(android.content.Context,char[]) -> a
 group.pals.android.lib.ui.lockpattern.demo.MainActivity -> group.pals.android.lib.ui.lockpattern.demo.MainActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -207,19 +239,19 @@ group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference -> group.pals.
     int access$1(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference) -> b
     void access$2(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference,int) -> a
     void access$3(group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference) -> c
-group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$1 -> group.pals.android.lib.ui.lockpattern.demo.g:
+group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$1 -> group.pals.android.lib.ui.lockpattern.demo.l:
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference this$0 -> a
     void onClick(android.view.View) -> onClick
 group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState -> group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState:
     int mValue -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState$1 -> group.pals.android.lib.ui.lockpattern.demo.h:
+group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState$1 -> group.pals.android.lib.ui.lockpattern.demo.m:
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState createFromParcel(android.os.Parcel) -> a
     group.pals.android.lib.ui.lockpattern.demo.NumberPickerPreference$SavedState[] newArray(int) -> a
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
     java.lang.Object[] newArray(int) -> newArray
-group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder -> group.pals.android.lib.ui.lockpattern.demo.i:
+group.pals.android.lib.ui.lockpattern.demo.PreferenceHolder -> group.pals.android.lib.ui.lockpattern.demo.n:
     android.preference.Preference findPreference(java.lang.CharSequence) -> findPreference
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -228,21 +260,26 @@ group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11 -> group.pals.andro
     void onBuildHeaders(java.util.List) -> onBuildHeaders
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Commands -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Commands:
     void onCreate(android.os.Bundle) -> onCreate
+group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Infos -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Infos:
+    void onCreate(android.os.Bundle) -> onCreate
 group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings -> group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11$Fragment_Prefs_Settings:
     void onCreate(android.os.Bundle) -> onCreate
-group.pals.android.lib.ui.lockpattern.demo.R -> group.pals.android.lib.ui.lockpattern.demo.j:
-group.pals.android.lib.ui.lockpattern.demo.R$styleable -> group.pals.android.lib.ui.lockpattern.demo.k:
+group.pals.android.lib.ui.lockpattern.demo.R -> group.pals.android.lib.ui.lockpattern.demo.o:
+group.pals.android.lib.ui.lockpattern.demo.R$styleable -> group.pals.android.lib.ui.lockpattern.demo.p:
     int[] NumberPickerPreference -> NumberPickerPreference
     int NumberPickerPreference_increment -> NumberPickerPreference_increment
     int NumberPickerPreference_max -> NumberPickerPreference_max
     int NumberPickerPreference_min -> NumberPickerPreference_min
+group.pals.android.lib.ui.lockpattern.demo.ViewTreeObserverCompat_v16 -> group.pals.android.lib.ui.lockpattern.demo.q:
+    void removeOnGlobalLayoutListener(android.view.ViewTreeObserver,android.view.ViewTreeObserver$OnGlobalLayoutListener) -> a
 group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs -> group.pals.android.lib.ui.lockpattern.b.a:
     boolean isStealthMode(android.content.Context) -> a
     int getMinWiredDots(android.content.Context) -> b
     int getMaxRetry(android.content.Context) -> c
+    int getCaptchaWiredDots(android.content.Context) -> d
 group.pals.android.lib.ui.lockpattern.prefs.Prefs -> group.pals.android.lib.ui.lockpattern.b.b:
-    java.lang.String genPreferenceFilename(android.content.Context) -> d
-    android.content.SharedPreferences p(android.content.Context) -> e
+    java.lang.String genPreferenceFilename(android.content.Context) -> e
+    android.content.SharedPreferences p(android.content.Context) -> f
     void setupPreferenceManager(android.content.Context,android.preference.PreferenceManager) -> a
 group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs -> group.pals.android.lib.ui.lockpattern.b.c:
     boolean isAutoSavePattern(android.content.Context) -> a
@@ -256,12 +293,16 @@ group.pals.android.lib.ui.lockpattern.util.IEncrypter -> group.pals.android.lib.
     char[] encrypt(android.content.Context,char[]) -> a
 group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException -> group.pals.android.lib.ui.lockpattern.c.b:
 group.pals.android.lib.ui.lockpattern.util.UI -> group.pals.android.lib.ui.lockpattern.c.c:
+    java.lang.String CLASSNAME -> a
+    void adjustDialogSizeForLargeScreen(android.app.Dialog) -> a
     void adjustDialogSizeForLargeScreen(android.view.Window) -> a
     int resolveAttribute(android.content.Context,int) -> a
 group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils -> group.pals.android.lib.ui.lockpattern.widget.a:
+    java.lang.String CLASSNAME -> a
     java.util.List stringToPattern(java.lang.String) -> a
     java.lang.String patternToString(java.util.List) -> a
     java.lang.String patternToSha1(java.util.List) -> b
+    java.util.ArrayList genCaptchaPattern(int) -> a
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView -> group.pals.android.lib.ui.lockpattern.widget.LockPatternView:
     boolean mDrawingProfilingStarted -> a
     android.graphics.Paint mPaint -> b
@@ -339,15 +380,26 @@ group.pals.android.lib.ui.lockpattern.widget.LockPatternView -> group.pals.andro
     void drawCircle(android.graphics.Canvas,int,int,boolean) -> a
     android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
     void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
-group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell -> group.pals.android.lib.ui.lockpattern.widget.b:
-    int row -> a
-    int column -> b
+group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell -> group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell:
+    int mRow -> a
+    int mColumn -> b
     group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell[][] sCells -> c
+    android.os.Parcelable$Creator CREATOR -> CREATOR
     int getRow() -> a
     int getColumn() -> b
     group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell of(int,int) -> a
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell of(int) -> a
     void checkRange(int,int) -> b
     java.lang.String toString() -> toString
+    boolean equals(java.lang.Object) -> equals
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+    void readFromParcel(android.os.Parcel) -> a
+group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell$1 -> group.pals.android.lib.ui.lockpattern.widget.b:
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell createFromParcel(android.os.Parcel) -> a
+    group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell[] newArray(int) -> a
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+    java.lang.Object[] newArray(int) -> newArray
 group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode -> group.pals.android.lib.ui.lockpattern.widget.c:
     group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode Correct -> a
     group.pals.android.lib.ui.lockpattern.widget.LockPatternView$DisplayMode Animate -> b
