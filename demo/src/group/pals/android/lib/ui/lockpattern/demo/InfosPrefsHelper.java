@@ -22,10 +22,14 @@ import java.io.InputStream;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.Preference;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -36,6 +40,11 @@ import android.widget.TextView;
  * 
  */
 public class InfosPrefsHelper {
+
+    /**
+     * Used for debugging...
+     */
+    private static final String CLASSNAME = InfosPrefsHelper.class.getName();
 
     private final Context mContext;
     private final PreferenceHolder mPreferenceHolder;
@@ -76,11 +85,51 @@ public class InfosPrefsHelper {
             /*
              * Build the dialog.
              */
-            Dialog dialog = new Dialog(mContext, UI.resolveAttribute(mContext,
-                    R.attr.alp_theme_dialog));
+            final Dialog dialog = new Dialog(mContext, UI.resolveAttribute(
+                    mContext, R.attr.alp_theme_dialog));
+
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCanceledOnTouchOutside(true);
             dialog.setContentView(R.layout.dialog_about);
+
+            UI.adjustDialogSizeForLargeScreen(dialog);
+
+            final ViewTreeObserver.OnGlobalLayoutListener dialogOnGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                int mOrientation = mContext.getResources().getConfiguration().orientation;
+
+                @Override
+                public void onGlobalLayout() {
+                    if (BuildConfig.DEBUG)
+                        Log.d(CLASSNAME, "ViewTreeObserver >> onGlobalLayout()");
+                    if (mContext.getResources().getConfiguration().orientation != mOrientation) {
+                        mOrientation = mContext.getResources()
+                                .getConfiguration().orientation;
+                        UI.adjustDialogSizeForLargeScreen(dialog);
+                    }
+                }// onGlobalLayout()
+            };
+            dialog.getWindow().getDecorView().getViewTreeObserver()
+                    .addOnGlobalLayoutListener(dialogOnGlobalLayoutListener);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+                        dialog.getWindow()
+                                .getDecorView()
+                                .getViewTreeObserver()
+                                .removeGlobalOnLayoutListener(
+                                        dialogOnGlobalLayoutListener);
+                    else
+                        ViewTreeObserverCompat_v16
+                                .removeOnGlobalLayoutListener(dialog
+                                        .getWindow().getDecorView()
+                                        .getViewTreeObserver(),
+                                        dialogOnGlobalLayoutListener);
+                }// onDismiss()
+            });
 
             /*
              * Load license...
