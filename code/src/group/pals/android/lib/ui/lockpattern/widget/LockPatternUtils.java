@@ -156,11 +156,6 @@ public class LockPatternUtils {
             result.add(LockPatternView.Cell.of(lastId));
             usedIds.add(lastId);
 
-            /*
-             * Starting from delta == 1, find the closest neighbour value of
-             * `lastId`.
-             */
-
             final int row = lastId / LockPatternView.MATRIX_WIDTH;
             final int col = lastId % LockPatternView.MATRIX_WIDTH;
 
@@ -171,6 +166,11 @@ public class LockPatternUtils {
             final int maxDistance = Math.max(
                     Math.max(row, LockPatternView.MATRIX_WIDTH - row),
                     Math.max(col, LockPatternView.MATRIX_WIDTH - col));
+
+            /*
+             * Starting from `distance` = 1, find the closest-available
+             * neighbour value of `lastId`.
+             */
             for (int distance = 1; distance <= maxDistance; distance++) {
                 final List<Integer> possibleIds = Lists.newArrayList();
 

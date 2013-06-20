@@ -59,9 +59,8 @@ public class LockPatternView extends View {
     // be minimum of (w,h)
 
     /**
-     * This is the width of the matrix (the number of dots per mRow and
-     * mColumn). Change this value to change the dimension of the pattern's
-     * matrix.
+     * This is the width of the matrix (the number of dots per row and column).
+     * Change this value to change the dimension of the pattern's matrix.
      * 
      * @since v2.7 beta
      * @author Thomas Breitbach
@@ -167,10 +166,10 @@ public class LockPatternView extends View {
         }
 
         /**
-         * @param mRow
-         *            The mRow of the cell.
-         * @param mColumn
-         *            The mColumn of the cell.
+         * @param row
+         *            The row of the cell.
+         * @param column
+         *            The column of the cell.
          */
         private Cell(int row, int column) {
             checkRange(row, column);
@@ -187,10 +186,10 @@ public class LockPatternView extends View {
         }
 
         /**
-         * @param mRow
-         *            The mRow of the cell.
-         * @param mColumn
-         *            The mColumn of the cell.
+         * @param row
+         *            The row of the cell.
+         * @param column
+         *            The column of the cell.
          */
         public static synchronized Cell of(int row, int column) {
             checkRange(row, column);
@@ -210,18 +209,17 @@ public class LockPatternView extends View {
         public static synchronized Cell of(int id) {
             int column = id % MATRIX_WIDTH;
             int row = id / MATRIX_WIDTH;
-            checkRange(row, column);
-            return sCells[row][column];
+            return of(row, column);
         }// of()
 
         private static void checkRange(int row, int column) {
             if (row < 0 || row > MATRIX_WIDTH - 1) {
-                throw new IllegalArgumentException("mRow must be in range 0-"
+                throw new IllegalArgumentException("row must be in range 0-"
                         + (MATRIX_WIDTH - 1));
             }
             if (column < 0 || column > MATRIX_WIDTH - 1) {
-                throw new IllegalArgumentException(
-                        "mColumn must be in range 0-" + (MATRIX_WIDTH - 1));
+                throw new IllegalArgumentException("column must be in range 0-"
+                        + (MATRIX_WIDTH - 1));
             }
         }
 
@@ -731,11 +729,11 @@ public class LockPatternView extends View {
     }
 
     /**
-     * Helper method to find the mRow that y falls into.
+     * Helper method to find the row that y falls into.
      * 
      * @param y
      *            The y coordinate
-     * @return The mRow that y falls in, or -1 if it falls in no mRow.
+     * @return The row that y falls in, or -1 if it falls in no row.
      */
     private int getRowHit(float y) {
 
@@ -754,11 +752,11 @@ public class LockPatternView extends View {
     }
 
     /**
-     * Helper method to find the mColumn x fallis into.
+     * Helper method to find the column x fallis into.
      * 
      * @param x
      *            The x coordinate.
-     * @return The mColumn that x falls in, or -1 if it falls in no mColumn.
+     * @return The column that x falls in, or -1 if it falls in no column.
      */
     private int getColumnHit(float x) {
         final float squareWidth = mSquareWidth;
