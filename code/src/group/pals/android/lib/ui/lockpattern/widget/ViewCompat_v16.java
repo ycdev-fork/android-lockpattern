@@ -16,30 +16,27 @@
 
 package group.pals.android.lib.ui.lockpattern.widget;
 
-import android.content.Context;
 import android.view.View;
 
 /**
- * Helper class for {@link LockPatternView} in API 16+.
- * <p>
- * <b>Minimum API: 16</b>
- * </p>
- *
+ * Helper class for {@link View} in API 16+.
+ * 
  * @author Hai Bison
  * @since v2.4 beta
  */
-public class LockPatternViewCompat {
+public class ViewCompat_v16 {
 
     /**
      * Wrapper for {@link View#announceForAccessibility(CharSequence)}.
-     *
-     * @param view    a view.
-     * @param context the context.
-     * @param resId   String resource ID.
+     * 
+     * @param view
+     *            a view.
+     * @param text
+     *            The announcement text.
      * @see View#announceForAccessibility(CharSequence)
      */
-    public static void announceForAccessibility(View view, Context context,
-                                                int resId) {
-        view.announceForAccessibility(context.getString(resId));
-    }
+    public static void announceForAccessibility(View view, CharSequence text) {
+        view.announceForAccessibility(text);
+    }// announceForAccessibility()
+
 }

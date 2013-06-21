@@ -953,8 +953,8 @@ public class LockPatternView extends View {
             sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
             setContentDescription(null);
         } else
-            LockPatternViewCompat.announceForAccessibility(this, mContext,
-                    resId);
+            ViewCompat_v16.announceForAccessibility(this,
+                    mContext.getString(resId));
     }
 
     private void handleActionUp(MotionEvent event) {
