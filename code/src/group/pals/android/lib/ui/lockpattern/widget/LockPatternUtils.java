@@ -18,6 +18,7 @@ package group.pals.android.lib.ui.lockpattern.widget;
 
 import group.pals.android.lib.ui.lockpattern.BuildConfig;
 import group.pals.android.lib.ui.lockpattern.collect.Lists;
+import group.pals.android.lib.ui.lockpattern.util.Randoms;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -26,7 +27,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import android.util.Log;
 
@@ -138,17 +138,22 @@ public class LockPatternUtils {
      * @param size
      *            the size of the pattern to be generated.
      * @return the generated pattern.
+     * @throws IndexOutOfBoundsException
+     *             if {@code size <= 0} or {@code size > }
+     *             {@link LockPatternView#MATRIX_SIZE}.
      * @since v2.7 beta
      * @author Hai Bison
      */
-    public static ArrayList<LockPatternView.Cell> genCaptchaPattern(int size) {
+    public static ArrayList<LockPatternView.Cell> genCaptchaPattern(int size)
+            throws IndexOutOfBoundsException {
+        if (size <= 0 || size > LockPatternView.MATRIX_SIZE)
+            throw new IndexOutOfBoundsException(
+                    "`size` must be in range [1, `LockPatternView.MATRIX_SIZE`]");
+
         final List<Integer> usedIds = Lists.newArrayList();
-        final Random random = new Random();
 
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
-        int lastId = random
-                .nextInt((int) (System.nanoTime() % Integer.MAX_VALUE))
-                % LockPatternView.MATRIX_SIZE;
+        int lastId = Randoms.randInt() % LockPatternView.MATRIX_SIZE;
         do {
             if (BuildConfig.DEBUG)
                 Log.d(CLASSNAME, " >> lastId = " + lastId);
@@ -167,13 +172,13 @@ public class LockPatternUtils {
                     Math.max(row, LockPatternView.MATRIX_WIDTH - row),
                     Math.max(col, LockPatternView.MATRIX_WIDTH - col));
 
+            lastId = -1;
+
             /*
              * Starting from `distance` = 1, find the closest-available
              * neighbour value of `lastId`.
              */
             for (int distance = 1; distance <= maxDistance; distance++) {
-                final List<Integer> possibleIds = Lists.newArrayList();
-
                 /*
                  * Now we have a square surrounding the current cell. We call it
                  * ABCD, in which A is top-left, and C is bottom-right.
@@ -186,66 +191,94 @@ public class LockPatternUtils {
                 final int rowC = row + distance;
                 final int colC = col + distance;
 
-                int id;
+                int[] randomValues;
 
                 /*
-                 * AB
+                 * Process randomly AB, BC, CD, and DA. Break the loop as soon
+                 * as we find one value.
                  */
-                if (rowA >= 0) {
-                    for (int c = Math.max(0, colA); c < Math.min(
-                            LockPatternView.MATRIX_WIDTH, colC + 1); c++) {
-                        id = rowA * LockPatternView.MATRIX_WIDTH + c;
-                        if (!usedIds.contains(id))
-                            possibleIds.add(id);
+                int[] lines = Randoms.randIntArray(4);
+                for (int line : lines) {
+                    switch (line) {
+                    case 0: {
+                        if (rowA >= 0) {
+                            randomValues = Randoms.randIntArray(Math.max(0,
+                                    colA), Math.min(
+                                    LockPatternView.MATRIX_WIDTH, colC + 1));
+                            for (int c : randomValues) {
+                                lastId = rowA * LockPatternView.MATRIX_WIDTH
+                                        + c;
+                                if (usedIds.contains(lastId))
+                                    lastId = -1;
+                                else
+                                    break;
+                            }
+                        }
+                        break;
+                    }// AB
+                    case 1: {
+                        if (colC < LockPatternView.MATRIX_WIDTH) {
+                            randomValues = Randoms.randIntArray(Math.max(0,
+                                    rowA + 1), Math.min(
+                                    LockPatternView.MATRIX_WIDTH, rowC + 1));
+                            for (int r : randomValues) {
+                                lastId = r * LockPatternView.MATRIX_WIDTH
+                                        + colC;
+                                if (usedIds.contains(lastId))
+                                    lastId = -1;
+                                else
+                                    break;
+                            }
+                        }
+                        break;
+                    }// BC
+                    case 2: {
+                        if (rowC < LockPatternView.MATRIX_WIDTH) {
+                            randomValues = Randoms.randIntArray(Math.max(0,
+                                    colA), Math.min(
+                                    LockPatternView.MATRIX_WIDTH, colC));
+                            for (int c : randomValues) {
+                                lastId = rowC * LockPatternView.MATRIX_WIDTH
+                                        + c;
+                                if (usedIds.contains(lastId))
+                                    lastId = -1;
+                                else
+                                    break;
+                            }
+                        }
+                        break;
+                    }// DC
+                    case 3: {
+                        if (colA >= 0) {
+                            randomValues = Randoms.randIntArray(Math.max(0,
+                                    rowA + 1), Math.min(
+                                    LockPatternView.MATRIX_WIDTH, rowC));
+                            for (int r : randomValues) {
+                                lastId = r * LockPatternView.MATRIX_WIDTH
+                                        + colA;
+                                if (usedIds.contains(lastId))
+                                    lastId = -1;
+                                else
+                                    break;
+                            }
+                        }
+                        break;
+                    }// AD
                     }
-                }
 
-                /*
-                 * BC
-                 */
-                if (colC < LockPatternView.MATRIX_WIDTH) {
-                    for (int r = Math.max(0, rowA + 1); r < Math.min(
-                            LockPatternView.MATRIX_WIDTH, rowC + 1); r++) {
-                        id = r * LockPatternView.MATRIX_WIDTH + colC;
-                        if (!usedIds.contains(id))
-                            possibleIds.add(id);
-                    }
-                }
+                    if (lastId >= 0)
+                        break;
+                }// for line
 
-                /*
-                 * DC
-                 */
-                if (rowC < LockPatternView.MATRIX_WIDTH) {
-                    for (int c = Math.max(0, colA); c < Math.min(
-                            LockPatternView.MATRIX_WIDTH, colC); c++) {
-                        id = rowC * LockPatternView.MATRIX_WIDTH + c;
-                        if (!usedIds.contains(id))
-                            possibleIds.add(id);
-                    }
-                }
-
-                /*
-                 * AD
-                 */
-                if (colA >= 0) {
-                    for (int r = Math.max(0, rowA + 1); r < Math.min(
-                            LockPatternView.MATRIX_WIDTH, rowC); r++) {
-                        id = r * LockPatternView.MATRIX_WIDTH + colA;
-                        if (!usedIds.contains(id))
-                            possibleIds.add(id);
-                    }
-                }
-
-                if (possibleIds.isEmpty())
+                if (lastId < 0)
                     continue;
-
-                /*
-                 * NOW GET ONE OF POSSIBLE IDS AND ASSIGN IT TO `lastId`
-                 */
-                lastId = possibleIds.get(random.nextInt((int) (System
-                        .nanoTime() % Integer.MAX_VALUE)) % possibleIds.size());
                 break;
             }// for distance
+
+            /*
+             * We start from an empty matrix, so there's always a break point to
+             * exit this loop.
+             */
         } while (result.size() < size);
 
         return result;
