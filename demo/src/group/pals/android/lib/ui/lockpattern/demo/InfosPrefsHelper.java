@@ -24,6 +24,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.Preference;
@@ -154,6 +155,7 @@ public class InfosPrefsHelper {
 
             TextView textInfo = (TextView) dialog
                     .findViewById(R.id.textview_info);
+            textInfo.setTypeface(Typeface.MONOSPACE);
             textInfo.setText(license);
 
             /*

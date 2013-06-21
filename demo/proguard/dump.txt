@@ -4995,7 +4995,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/preference/Preference$OnPreferenceClickListener]
 
-Constant Pool (count = 41):
+Constant Pool (count = 51):
   + Class [android/app/Activity]
   + Class [android/content/Intent]
   + Class [android/preference/Preference$OnPreferenceClickListener]
@@ -5004,22 +5004,30 @@ Constant Pool (count = 41):
   + Class [group/pals/android/lib/ui/lockpattern/demo/d]
   + Class [java/lang/Object]
   + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.c Ljava/lang/String;]
+  + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.e Ljava/lang/String;]
   + Fieldref [group/pals/android/lib/ui/lockpattern/demo/d.a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
   + Methodref [android/app/Activity.startActivityForResult (Landroid/content/Intent;I)V]
   + Methodref [android/content/Intent.<init> (Ljava/lang/String;Landroid/net/Uri;Landroid/content/Context;Ljava/lang/Class;)V]
+  + Methodref [android/content/Intent.putExtra (Ljava/lang/String;I)Landroid/content/Intent;]
+  + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Landroid/content/Context;)I]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
   + Methodref [java/lang/Object.<init> ()V]
   + NameAndType [<init> ()V]
   + NameAndType [<init> (Ljava/lang/String;Landroid/net/Uri;Landroid/content/Context;Ljava/lang/Class;)V]
+  + NameAndType [a (Landroid/content/Context;)I]
   + NameAndType [a (Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
   + NameAndType [a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
   + NameAndType [c Ljava/lang/String;]
+  + NameAndType [e Ljava/lang/String;]
+  + NameAndType [putExtra (Ljava/lang/String;I)Landroid/content/Intent;]
   + NameAndType [startActivityForResult (Landroid/content/Intent;I)V]
   + Utf8 [()V]
+  + Utf8 [(Landroid/content/Context;)I]
   + Utf8 [(Landroid/content/Intent;I)V]
   + Utf8 [(Landroid/preference/Preference;)Z]
   + Utf8 [(Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
   + Utf8 [(Lgroup/pals/android/lib/ui/lockpattern/demo/a;)V]
+  + Utf8 [(Ljava/lang/String;I)Landroid/content/Intent;]
   + Utf8 [(Ljava/lang/String;Landroid/net/Uri;Landroid/content/Context;Ljava/lang/Class;)V]
   + Utf8 [<init>]
   + Utf8 [Code]
@@ -5030,11 +5038,13 @@ Constant Pool (count = 41):
   + Utf8 [android/content/Intent]
   + Utf8 [android/preference/Preference$OnPreferenceClickListener]
   + Utf8 [c]
+  + Utf8 [e]
   + Utf8 [group/pals/android/lib/ui/lockpattern/LockPatternActivity]
   + Utf8 [group/pals/android/lib/ui/lockpattern/demo/a]
   + Utf8 [group/pals/android/lib/ui/lockpattern/demo/d]
   + Utf8 [java/lang/Object]
   + Utf8 [onPreferenceClick]
+  + Utf8 [putExtra]
   + Utf8 [startActivityForResult]
 
 Fields (count = 1):
@@ -5050,10 +5060,10 @@ Methods (count = 2):
     + Code attribute instructions (code length = 10, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #9
+      [2] putfield #10
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/d.a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
       [5] aload_0 v0
-      [6] invokespecial #13
+      [6] invokespecial #16
         + Methodref [java/lang/Object.<init> ()V]
       [9] return
       Code attribute exceptions (count = 0):
@@ -5062,7 +5072,7 @@ Methods (count = 2):
     Access flags: 0x1
       = public boolean onPreferenceClick(android.preference.Preference)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 35, locals = 3, stack = 6):
+    + Code attribute instructions (code length = 53, locals = 3, stack = 6):
       [0] new #2
         + Class [android/content/Intent]
       [3] dup
@@ -5070,26 +5080,39 @@ Methods (count = 2):
         + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.c Ljava/lang/String;]
       [7] aconst_null
       [8] aload_0 v0
-      [9] getfield #9
+      [9] getfield #10
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/d.a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
-      [12] invokestatic #12
+      [12] invokestatic #15
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
       [15] ldc #4
         + Class [group/pals/android/lib/ui/lockpattern/LockPatternActivity]
-      [17] invokespecial #11
+      [17] invokespecial #12
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;Landroid/net/Uri;Landroid/content/Context;Ljava/lang/Class;)V]
       [20] astore_2 v2
-      [21] aload_0 v0
-      [22] getfield #9
+      [21] aload_2 v2
+      [22] getstatic #9
+        + Fieldref [group/pals/android/lib/ui/lockpattern/LockPatternActivity.e Ljava/lang/String;]
+      [25] aload_0 v0
+      [26] getfield #10
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/d.a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
-      [25] invokestatic #12
+      [29] invokestatic #15
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
-      [28] aload_2 v2
-      [29] iconst_2
-      [30] invokevirtual #10
+      [32] invokestatic #14
+        + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Landroid/content/Context;)I]
+      [35] invokevirtual #13
+        + Methodref [android/content/Intent.putExtra (Ljava/lang/String;I)Landroid/content/Intent;]
+      [38] pop
+      [39] aload_0 v0
+      [40] getfield #10
+        + Fieldref [group/pals/android/lib/ui/lockpattern/demo/d.a Lgroup/pals/android/lib/ui/lockpattern/demo/a;]
+      [43] invokestatic #15
+        + Methodref [group/pals/android/lib/ui/lockpattern/demo/a.a (Lgroup/pals/android/lib/ui/lockpattern/demo/a;)Landroid/app/Activity;]
+      [46] aload_2 v2
+      [47] iconst_2
+      [48] invokevirtual #11
         + Methodref [android/app/Activity.startActivityForResult (Landroid/content/Intent;I)V]
-      [33] iconst_1
-      [34] ireturn
+      [51] iconst_1
+      [52] ireturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
 
@@ -5308,7 +5331,7 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/preference/Preference$OnPreferenceClickListener]
 
-Constant Pool (count = 145):
+Constant Pool (count = 155):
   + Integer [2130771975]
   + Integer [2130903043]
   + Integer [2131034112]
@@ -5317,6 +5340,7 @@ Constant Pool (count = 145):
   + Class [android/app/Dialog]
   + Class [android/content/Context]
   + Class [android/content/res/Resources]
+  + Class [android/graphics/Typeface]
   + Class [android/preference/Preference]
   + Class [android/preference/Preference$OnPreferenceClickListener]
   + Class [android/view/View]
@@ -5334,6 +5358,7 @@ Constant Pool (count = 145):
   + Class [java/lang/String]
   + Class [java/lang/StringBuilder]
   + Class [java/lang/Throwable]
+  + Fieldref [android/graphics/Typeface.MONOSPACE Landroid/graphics/Typeface;]
   + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
   + Methodref [android/app/Dialog.<init> (Landroid/content/Context;I)V]
   + Methodref [android/app/Dialog.findViewById (I)Landroid/view/View;]
@@ -5349,6 +5374,7 @@ Constant Pool (count = 145):
   + Methodref [android/view/ViewTreeObserver.addOnGlobalLayoutListener (Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V]
   + Methodref [android/view/Window.getDecorView ()Landroid/view/View;]
   + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
+  + Methodref [android/widget/TextView.setTypeface (Landroid/graphics/Typeface;)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/c/c.a (Landroid/app/Dialog;)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/c/c.a (Landroid/content/Context;I)I]
   + Methodref [group/pals/android/lib/ui/lockpattern/demo/e.a (Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
@@ -5365,6 +5391,7 @@ Constant Pool (count = 145):
   + NameAndType [<init> (Lgroup/pals/android/lib/ui/lockpattern/demo/f;Landroid/app/Dialog;)V]
   + NameAndType [<init> (Lgroup/pals/android/lib/ui/lockpattern/demo/f;Landroid/app/Dialog;Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V]
   + NameAndType [<init> ([BII)V]
+  + NameAndType [MONOSPACE Landroid/graphics/Typeface;]
   + NameAndType [a (Landroid/app/Dialog;)V]
   + NameAndType [a (Landroid/content/Context;I)I]
   + NameAndType [a (Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
@@ -5384,6 +5411,7 @@ Constant Pool (count = 145):
   + NameAndType [setContentView (I)V]
   + NameAndType [setOnDismissListener (Landroid/content/DialogInterface$OnDismissListener;)V]
   + NameAndType [setText (Ljava/lang/CharSequence;)V]
+  + NameAndType [setTypeface (Landroid/graphics/Typeface;)V]
   + NameAndType [show ()V]
   + Utf8 [()Landroid/content/res/Resources;]
   + Utf8 [()Landroid/view/View;]
@@ -5398,6 +5426,7 @@ Constant Pool (count = 145):
   + Utf8 [(Landroid/content/Context;I)I]
   + Utf8 [(Landroid/content/Context;I)V]
   + Utf8 [(Landroid/content/DialogInterface$OnDismissListener;)V]
+  + Utf8 [(Landroid/graphics/Typeface;)V]
   + Utf8 [(Landroid/preference/Preference;)Z]
   + Utf8 [(Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V]
   + Utf8 [(Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
@@ -5412,7 +5441,9 @@ Constant Pool (count = 145):
   + Utf8 [([BII)V]
   + Utf8 [<init>]
   + Utf8 [Code]
+  + Utf8 [Landroid/graphics/Typeface;]
   + Utf8 [Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
+  + Utf8 [MONOSPACE]
   + Utf8 [StackMapTable]
   + Utf8 [[B]
   + Utf8 [a]
@@ -5420,6 +5451,7 @@ Constant Pool (count = 145):
   + Utf8 [android/app/Dialog]
   + Utf8 [android/content/Context]
   + Utf8 [android/content/res/Resources]
+  + Utf8 [android/graphics/Typeface]
   + Utf8 [android/preference/Preference]
   + Utf8 [android/preference/Preference$OnPreferenceClickListener]
   + Utf8 [android/view/View]
@@ -5452,6 +5484,7 @@ Constant Pool (count = 145):
   + Utf8 [setContentView]
   + Utf8 [setOnDismissListener]
   + Utf8 [setText]
+  + Utf8 [setTypeface]
   + Utf8 [show]
 
 Fields (count = 1):
@@ -5467,10 +5500,10 @@ Methods (count = 3):
     + Code attribute instructions (code length = 10, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #26
+      [2] putfield #28
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
       [5] aload_0 v0
-      [6] invokespecial #48
+      [6] invokespecial #51
         + Methodref [java/lang/Object.<init> ()V]
       [9] return
       Code attribute exceptions (count = 0):
@@ -5479,89 +5512,89 @@ Methods (count = 3):
     Access flags: 0x1
       = public boolean onPreferenceClick(android.preference.Preference)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 200, locals = 9, stack = 6):
+    + Code attribute instructions (code length = 208, locals = 9, stack = 6):
       [0] new #6
         + Class [android/app/Dialog]
       [3] dup
       [4] aload_0 v0
-      [5] getfield #26
+      [5] getfield #28
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
-      [8] invokestatic #43
+      [8] invokestatic #46
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/e.a (Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
       [11] aload_0 v0
-      [12] getfield #26
+      [12] getfield #28
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
-      [15] invokestatic #43
+      [15] invokestatic #46
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/e.a (Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
       [18] ldc #1
         + Integer [2130771975]
-      [20] invokestatic #42
+      [20] invokestatic #45
         + Methodref [group/pals/android/lib/ui/lockpattern/c/c.a (Landroid/content/Context;I)I]
-      [23] invokespecial #27
+      [23] invokespecial #29
         + Methodref [android/app/Dialog.<init> (Landroid/content/Context;I)V]
       [26] astore_2 v2
       [27] aload_2 v2
       [28] iconst_1
-      [29] invokevirtual #30
+      [29] invokevirtual #32
         + Methodref [android/app/Dialog.requestWindowFeature (I)Z]
       [32] pop
       [33] aload_2 v2
       [34] iconst_1
-      [35] invokevirtual #31
+      [35] invokevirtual #33
         + Methodref [android/app/Dialog.setCanceledOnTouchOutside (Z)V]
       [38] aload_2 v2
       [39] ldc #2
         + Integer [2130903043]
-      [41] invokevirtual #32
+      [41] invokevirtual #34
         + Methodref [android/app/Dialog.setContentView (I)V]
       [44] aload_2 v2
-      [45] invokestatic #41
+      [45] invokestatic #44
         + Methodref [group/pals/android/lib/ui/lockpattern/c/c.a (Landroid/app/Dialog;)V]
-      [48] new #19
+      [48] new #20
         + Class [group/pals/android/lib/ui/lockpattern/demo/g]
       [51] dup
       [52] aload_0 v0
       [53] aload_2 v2
-      [54] invokespecial #44
+      [54] invokespecial #47
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/g.<init> (Lgroup/pals/android/lib/ui/lockpattern/demo/f;Landroid/app/Dialog;)V]
       [57] astore_3 v3
       [58] aload_2 v2
-      [59] invokevirtual #29
+      [59] invokevirtual #31
         + Methodref [android/app/Dialog.getWindow ()Landroid/view/Window;]
-      [62] invokevirtual #39
+      [62] invokevirtual #41
         + Methodref [android/view/Window.getDecorView ()Landroid/view/View;]
-      [65] invokevirtual #37
+      [65] invokevirtual #39
         + Methodref [android/view/View.getViewTreeObserver ()Landroid/view/ViewTreeObserver;]
       [68] aload_3 v3
-      [69] invokevirtual #38
+      [69] invokevirtual #40
         + Methodref [android/view/ViewTreeObserver.addOnGlobalLayoutListener (Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V]
       [72] aload_2 v2
-      [73] new #20
+      [73] new #21
         + Class [group/pals/android/lib/ui/lockpattern/demo/h]
       [76] dup
       [77] aload_0 v0
       [78] aload_2 v2
       [79] aload_3 v3
-      [80] invokespecial #45
+      [80] invokespecial #48
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/h.<init> (Lgroup/pals/android/lib/ui/lockpattern/demo/f;Landroid/app/Dialog;Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V]
-      [83] invokevirtual #33
+      [83] invokevirtual #35
         + Methodref [android/app/Dialog.setOnDismissListener (Landroid/content/DialogInterface$OnDismissListener;)V]
-      [86] new #24
+      [86] new #25
         + Class [java/lang/StringBuilder]
       [89] dup
-      [90] invokespecial #50
+      [90] invokespecial #53
         + Methodref [java/lang/StringBuilder.<init> ()V]
       [93] astore v4
       [95] aload_0 v0
-      [96] getfield #26
+      [96] getfield #28
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
-      [99] invokestatic #43
+      [99] invokestatic #46
         + Methodref [group/pals/android/lib/ui/lockpattern/demo/e.a (Lgroup/pals/android/lib/ui/lockpattern/demo/e;)Landroid/content/Context;]
-      [102] invokevirtual #35
+      [102] invokevirtual #37
         + Methodref [android/content/Context.getResources ()Landroid/content/res/Resources;]
       [105] ldc #3
         + Integer [2131034112]
-      [107] invokevirtual #36
+      [107] invokevirtual #38
         + Methodref [android/content/res/Resources.openRawResource (I)Ljava/io/InputStream;]
       [110] astore v5
       [112] sipush 1024
@@ -5569,20 +5602,20 @@ Methods (count = 3):
       [117] astore v7
       [119] goto +21 (target=140)
       [122] aload v4
-      [124] new #23
+      [124] new #24
         + Class [java/lang/String]
       [127] dup
       [128] aload v7
       [130] iconst_0
       [131] iload v6
-      [133] invokespecial #49
+      [133] invokespecial #52
         + Methodref [java/lang/String.<init> ([BII)V]
-      [136] invokevirtual #51
+      [136] invokevirtual #54
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [139] pop
       [140] aload v5
       [142] aload v7
-      [144] invokevirtual #47
+      [144] invokevirtual #50
         + Methodref [java/io/InputStream.read ([B)I]
       [147] dup
       [148] istore v6
@@ -5590,32 +5623,37 @@ Methods (count = 3):
       [153] goto +13 (target=166)
       [156] astore v8
       [158] aload v5
-      [160] invokevirtual #46
+      [160] invokevirtual #49
         + Methodref [java/io/InputStream.close ()V]
       [163] aload v8
       [165] athrow
       [166] aload v5
-      [168] invokevirtual #46
+      [168] invokevirtual #49
         + Methodref [java/io/InputStream.close ()V]
       [171] goto +5 (target=176)
       [174] astore v6
       [176] aload_2 v2
       [177] ldc #4
         + Integer [2131492869]
-      [179] invokevirtual #28
+      [179] invokevirtual #30
         + Methodref [android/app/Dialog.findViewById (I)Landroid/view/View;]
-      [182] checkcast #15
+      [182] checkcast #16
         + Class [android/widget/TextView]
       [185] astore v6
       [187] aload v6
-      [189] aload v4
-      [191] invokevirtual #40
+      [189] getstatic #27
+        + Fieldref [android/graphics/Typeface.MONOSPACE Landroid/graphics/Typeface;]
+      [192] invokevirtual #43
+        + Methodref [android/widget/TextView.setTypeface (Landroid/graphics/Typeface;)V]
+      [195] aload v6
+      [197] aload v4
+      [199] invokevirtual #42
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
-      [194] aload_2 v2
-      [195] invokevirtual #34
+      [202] aload_2 v2
+      [203] invokevirtual #36
         + Methodref [android/app/Dialog.show ()V]
-      [198] iconst_1
-      [199] ireturn
+      [206] iconst_1
+      [207] ireturn
       Code attribute exceptions (count = 2):
       - ExceptionInfo (112 -> 156: 156):
       - ExceptionInfo (112 -> 171: 174):
@@ -5634,7 +5672,7 @@ Methods (count = 3):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #26
+      [1] getfield #28
         + Fieldref [group/pals/android/lib/ui/lockpattern/demo/f.a Lgroup/pals/android/lib/ui/lockpattern/demo/e;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -14101,12 +14139,12 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/os/Parcelable]
 
-Constant Pool (count = 96):
+Constant Pool (count = 98):
   + String [(ROW=]
   + String [)]
   + String [,COL=]
-  + String [mColumn must be in range 0-2]
-  + String [mRow must be in range 0-2]
+  + String [column must be in range 0-2]
+  + String [row must be in range 0-2]
   + Class [[[Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
   + Class [android/os/Parcel]
   + Class [android/os/Parcelable]
@@ -14124,6 +14162,7 @@ Constant Pool (count = 96):
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.<init> (II)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.<init> (Landroid/os/Parcel;)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a ()I]
+  + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a (II)Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a (Landroid/os/Parcel;)V]
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b ()I]
   + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b (II)V]
@@ -14141,6 +14180,7 @@ Constant Pool (count = 96):
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [CREATOR Landroid/os/Parcelable$Creator;]
   + NameAndType [a ()I]
+  + NameAndType [a (II)Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
   + NameAndType [a (Landroid/os/Parcel;)V]
   + NameAndType [a I]
   + NameAndType [append (I)Ljava/lang/StringBuilder;]
@@ -14184,6 +14224,7 @@ Constant Pool (count = 96):
   + Utf8 [append]
   + Utf8 [b]
   + Utf8 [c]
+  + Utf8 [column must be in range 0-2]
   + Utf8 [describeContents]
   + Utf8 [equals]
   + Utf8 [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell]
@@ -14191,9 +14232,8 @@ Constant Pool (count = 96):
   + Utf8 [java/lang/IllegalArgumentException]
   + Utf8 [java/lang/Object]
   + Utf8 [java/lang/StringBuilder]
-  + Utf8 [mColumn must be in range 0-2]
-  + Utf8 [mRow must be in range 0-2]
   + Utf8 [readInt]
+  + Utf8 [row must be in range 0-2]
   + Utf8 [toString]
   + Utf8 [writeInt]
   + Utf8 [writeToParcel]
@@ -14254,7 +14294,7 @@ Methods (count = 14):
       [51] new #10
         + Class [group/pals/android/lib/ui/lockpattern/widget/b]
       [54] dup
-      [55] invokespecial #26
+      [55] invokespecial #27
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/b.<init> ()V]
       [58] putstatic #14
         + Fieldref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.CREATOR Landroid/os/Parcelable$Creator;]
@@ -14272,11 +14312,11 @@ Methods (count = 14):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 20, locals = 3, stack = 2):
       [0] aload_0 v0
-      [1] invokespecial #28
+      [1] invokespecial #29
         + Methodref [java/lang/Object.<init> ()V]
       [4] iload_1 v1
       [5] iload_2 v2
-      [6] invokestatic #25
+      [6] invokestatic #26
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b (II)V]
       [9] aload_0 v0
       [10] iload_1 v1
@@ -14318,7 +14358,7 @@ Methods (count = 14):
     + Code attribute instructions (code length = 13, locals = 2, stack = 2):
       [0] iload_0 v0
       [1] iload_1 v1
-      [2] invokestatic #25
+      [2] invokestatic #26
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b (II)V]
       [5] getstatic #17
         + Fieldref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.c [[Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
@@ -14333,26 +14373,16 @@ Methods (count = 14):
     Access flags: 0x29
       = public static synchronized group.pals.android.lib.ui.lockpattern.widget.LockPatternView$Cell a(int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 21, locals = 3, stack = 2):
+    + Code attribute instructions (code length = 10, locals = 1, stack = 3):
       [0] iload_0 v0
       [1] iconst_3
-      [2] irem
-      [3] istore_1 v1
-      [4] iload_0 v0
-      [5] iconst_3
-      [6] idiv
-      [7] istore_2 v2
-      [8] iload_2 v2
-      [9] iload_1 v1
-      [10] invokestatic #25
-        + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b (II)V]
-      [13] getstatic #17
-        + Fieldref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.c [[Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
-      [16] iload_2 v2
-      [17] aaload
-      [18] iload_1 v1
-      [19] aaload
-      [20] areturn
+      [2] idiv
+      [3] iload_0 v0
+      [4] iconst_3
+      [5] irem
+      [6] invokestatic #23
+        + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a (II)Lgroup/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell;]
+      [9] areturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       b(II)V
@@ -14369,8 +14399,8 @@ Methods (count = 14):
         + Class [java/lang/IllegalArgumentException]
       [12] dup
       [13] ldc #5
-        + String [mRow must be in range 0-2]
-      [15] invokespecial #27
+        + String [row must be in range 0-2]
+      [15] invokespecial #28
         + Methodref [java/lang/IllegalArgumentException.<init> (Ljava/lang/String;)V]
       [18] athrow
       [19] iload_1 v1
@@ -14382,8 +14412,8 @@ Methods (count = 14):
         + Class [java/lang/IllegalArgumentException]
       [31] dup
       [32] ldc #4
-        + String [mColumn must be in range 0-2]
-      [34] invokespecial #27
+        + String [column must be in range 0-2]
+      [34] invokespecial #28
         + Methodref [java/lang/IllegalArgumentException.<init> (Ljava/lang/String;)V]
       [37] athrow
       [38] return
@@ -14404,27 +14434,27 @@ Methods (count = 14):
       [3] dup
       [4] ldc #1
         + String [(ROW=]
-      [6] invokespecial #30
+      [6] invokespecial #31
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [9] aload_0 v0
       [10] invokevirtual #22
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a ()I]
-      [13] invokevirtual #31
+      [13] invokevirtual #32
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [16] ldc #3
         + String [,COL=]
-      [18] invokevirtual #32
+      [18] invokevirtual #33
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [21] aload_0 v0
-      [22] invokevirtual #24
+      [22] invokevirtual #25
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b ()I]
-      [25] invokevirtual #31
+      [25] invokevirtual #32
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [28] ldc #2
         + String [)]
-      [30] invokevirtual #32
+      [30] invokevirtual #33
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [33] invokevirtual #33
+      [33] invokevirtual #34
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [36] areturn
       Code attribute exceptions (count = 0):
@@ -14439,12 +14469,12 @@ Methods (count = 14):
         + Class [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell]
       [4] ifeq +35 (target=39)
       [7] aload_0 v0
-      [8] invokevirtual #24
+      [8] invokevirtual #25
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b ()I]
       [11] aload_1 v1
       [12] checkcast #9
         + Class [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell]
-      [15] invokevirtual #24
+      [15] invokevirtual #25
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b ()I]
       [18] ificmpne +19 (target=37)
       [21] aload_0 v0
@@ -14462,7 +14492,7 @@ Methods (count = 14):
       [38] ireturn
       [39] aload_0 v0
       [40] aload_1 v1
-      [41] invokespecial #29
+      [41] invokespecial #30
         + Methodref [java/lang/Object.equals (Ljava/lang/Object;)Z]
       [44] ireturn
       Code attribute exceptions (count = 0):
@@ -14486,7 +14516,7 @@ Methods (count = 14):
     + Code attribute instructions (code length = 17, locals = 3, stack = 2):
       [0] aload_1 v1
       [1] aload_0 v0
-      [2] invokevirtual #24
+      [2] invokevirtual #25
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.b ()I]
       [5] invokevirtual #19
         + Methodref [android/os/Parcel.writeInt (I)V]
@@ -14525,11 +14555,11 @@ Methods (count = 14):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 10, locals = 2, stack = 2):
       [0] aload_0 v0
-      [1] invokespecial #28
+      [1] invokespecial #29
         + Methodref [java/lang/Object.<init> ()V]
       [4] aload_0 v0
       [5] aload_1 v1
-      [6] invokevirtual #23
+      [6] invokevirtual #24
         + Methodref [group/pals/android/lib/ui/lockpattern/widget/LockPatternView$Cell.a (Landroid/os/Parcel;)V]
       [9] return
       Code attribute exceptions (count = 0):

@@ -76,9 +76,9 @@ group.pals.android.lib.ui.lockpattern.widget.LockPatternView:
     private static final boolean PROFILE_DRAWING
     static final int STATUS_BAR_HEIGHT
     private static final int MILLIS_PER_CIRCLE_ANIMATING
-    410:410:public boolean isInStealthMode()
-    417:417:public boolean isTactileFeedbackEnabled()
-    582:583:public void disableInput()
-    589:590:public void enableInput()
+    406:406:public boolean isInStealthMode()
+    413:413:public boolean isTactileFeedbackEnabled()
+    578:579:public void disableInput()
+    585:586:public void enableInput()
 group.pals.android.lib.ui.lockpattern.widget.LockPatternViewCompat:
     31:31:public LockPatternViewCompat()
