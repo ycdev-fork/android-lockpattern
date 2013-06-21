@@ -151,15 +151,20 @@ public class LockPatternUtils {
                     "`size` must be in range [1, `LockPatternView.MATRIX_SIZE`]");
 
         final List<Integer> usedIds = Lists.newArrayList();
-
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
-        int lastId = Randoms.randInt() % LockPatternView.MATRIX_SIZE;
-        do {
+
+        int lastId = Randoms.randInt(LockPatternView.MATRIX_SIZE);
+        result.add(LockPatternView.Cell.of(lastId));
+        usedIds.add(lastId);
+
+        while (result.size() < size) {
+            /*
+             * We start from an empty matrix, so there's always a break point to
+             * exit this loop.
+             */
+
             if (BuildConfig.DEBUG)
                 Log.d(CLASSNAME, " >> lastId = " + lastId);
-
-            result.add(LockPatternView.Cell.of(lastId));
-            usedIds.add(lastId);
 
             final int lastRow = lastId / LockPatternView.MATRIX_WIDTH;
             final int lastCol = lastId % LockPatternView.MATRIX_WIDTH;
@@ -272,11 +277,9 @@ public class LockPatternUtils {
                     break;
             }// for distance
 
-            /*
-             * We start from an empty matrix, so there's always a break point to
-             * exit this loop.
-             */
-        } while (result.size() < size);
+            result.add(LockPatternView.Cell.of(lastId));
+            usedIds.add(lastId);
+        }// while
 
         return result;
     }// genCaptchaPattern()
