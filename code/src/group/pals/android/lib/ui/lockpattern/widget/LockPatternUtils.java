@@ -161,35 +161,33 @@ public class LockPatternUtils {
             result.add(LockPatternView.Cell.of(lastId));
             usedIds.add(lastId);
 
-            final int row = lastId / LockPatternView.MATRIX_WIDTH;
-            final int col = lastId % LockPatternView.MATRIX_WIDTH;
+            final int lastRow = lastId / LockPatternView.MATRIX_WIDTH;
+            final int lastCol = lastId % LockPatternView.MATRIX_WIDTH;
 
             /*
              * This is the max available rows/ columns that we can reach from
              * the cell of `lastId` to the border of the matrix.
              */
             final int maxDistance = Math.max(
-                    Math.max(row, LockPatternView.MATRIX_WIDTH - row),
-                    Math.max(col, LockPatternView.MATRIX_WIDTH - col));
+                    Math.max(lastRow, LockPatternView.MATRIX_WIDTH - lastRow),
+                    Math.max(lastCol, LockPatternView.MATRIX_WIDTH - lastCol));
 
             lastId = -1;
 
             /*
              * Starting from `distance` = 1, find the closest-available
-             * neighbour value of `lastId`.
+             * neighbour value of the cell [lastRow, lastCol].
              */
             for (int distance = 1; distance <= maxDistance; distance++) {
                 /*
                  * Now we have a square surrounding the current cell. We call it
                  * ABCD, in which A is top-left, and C is bottom-right.
-                 * 
-                 * We add all available points in AB, BC, CD, DA to the list.
                  */
 
-                final int rowA = row - distance;
-                final int colA = col - distance;
-                final int rowC = row + distance;
-                final int colC = col + distance;
+                final int rowA = lastRow - distance;
+                final int colA = lastCol - distance;
+                final int rowC = lastRow + distance;
+                final int colC = lastCol + distance;
 
                 int[] randomValues;
 
@@ -197,7 +195,7 @@ public class LockPatternUtils {
                  * Process randomly AB, BC, CD, and DA. Break the loop as soon
                  * as we find one value.
                  */
-                int[] lines = Randoms.randIntArray(4);
+                final int[] lines = Randoms.randIntArray(4);
                 for (int line : lines) {
                     switch (line) {
                     case 0: {
