@@ -268,9 +268,8 @@ public class LockPatternUtils {
                         break;
                 }// for line
 
-                if (lastId < 0)
-                    continue;
-                break;
+                if (lastId >= 0)
+                    break;
             }// for distance
 
             /*
