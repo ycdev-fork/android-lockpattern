@@ -19,6 +19,7 @@
 
     <string name="alp_cmd_confirm">Xác nhận</string>
     <string name="alp_cmd_continue">Tiếp tục</string>
+    <string name="alp_cmd_forgot_pattern">Quên rồi?</string>
     <string name="alp_cmd_retry">Thử lại</string>
     <string name="alp_lockscreen_access_pattern_cell_added">Cell added</string>
     <string name="alp_lockscreen_access_pattern_cleared">Pattern cleared</string>

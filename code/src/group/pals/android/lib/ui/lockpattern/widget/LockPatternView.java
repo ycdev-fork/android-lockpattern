@@ -177,13 +177,33 @@ public class LockPatternView extends View {
             this.mColumn = column;
         }
 
+        /**
+         * Gets the row index.
+         * 
+         * @return the row index.
+         */
         public int getRow() {
             return mRow;
-        }
+        }// getRow()
 
+        /**
+         * Gets the column index.
+         * 
+         * @return the column index.
+         */
         public int getColumn() {
             return mColumn;
-        }
+        }// getColumn()
+
+        /**
+         * Gets the ID.It is counted from left to right, top to bottom of the
+         * matrix, starting by zero.
+         * 
+         * @return the ID.
+         */
+        public int getId() {
+            return mRow * MATRIX_WIDTH + mColumn;
+        }// getId()
 
         /**
          * @param row
@@ -197,8 +217,7 @@ public class LockPatternView extends View {
         }
 
         /**
-         * Gets a cell from its ID. The ID is counted from left to right, top to
-         * bottom of the matrix, starting by zero.
+         * Gets a cell from its ID.
          * 
          * @param id
          *            the cell ID.

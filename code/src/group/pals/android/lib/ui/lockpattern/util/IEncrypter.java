@@ -16,11 +16,15 @@
 
 package group.pals.android.lib.ui.lockpattern.util;
 
+import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
+
+import java.util.List;
+
 import android.content.Context;
 
 /**
  * Interface for encrypter.
- *
+ * 
  * @author Hai Bison
  * @since v2 beta
  */
@@ -28,11 +32,13 @@ public interface IEncrypter {
 
     /**
      * Encrypt {@code s}.
-     *
-     * @param context the context.
-     * @param pattern the char array of the pattern.
-     * @return the encrypted char array.
+     * 
+     * @param context
+     *            the context.
+     * @param pattern
+     *            the pattern in the form of a list of {@link Cell}.
+     * @return the encrypted char array of the pattern.
      * @since v2.1 beta
      */
-    char[] encrypt(Context context, char[] pattern);
+    char[] encrypt(Context context, List<Cell> pattern);
 }

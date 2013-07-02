@@ -49,6 +49,11 @@
             android:name="group.pals.android.lib.ui.lockpattern.demo.PrefsActivity_v11"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard"
             android:screenOrientation="user" />
+        <activity
+            android:name="group.pals.android.lib.ui.lockpattern.demo.PatternRecoveryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|keyboard"
+            android:screenOrientation="user"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- android-lockpattern -->
 

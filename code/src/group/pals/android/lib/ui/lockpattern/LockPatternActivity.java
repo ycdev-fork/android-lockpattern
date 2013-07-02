@@ -55,19 +55,23 @@ import android.widget.TextView;
  * </p>
  * <p>
  * You can deliver result to {@link PendingIntent}s and/ or
- * {@link ResultReceiver} too. See {@link #EXTRA_OK_PENDING_INTENT},
- * {@link #EXTRA_CANCELLED_PENDING_INTENT} and {@link #EXTRA_RESULT_RECEIVER}
+ * {@link ResultReceiver} too. See {@link #EXTRA_PENDING_INTENT_OK},
+ * {@link #EXTRA_PENDING_INTENT_CANCELLED} and {@link #EXTRA_RESULT_RECEIVER}
  * for more details.
  * </p>
- * <p>
- * <strong>NOTES</strong>
+ * 
+ * <h1>NOTES</h1>
+ * <ul>
  * <li>You must use one of the themes that this library provides. They start
  * with {@code R.style.Alp_Theme_*}. The reason is the themes contain resources
  * that the library needs.</li>
- * <li>In mode comparing pattern, there are <strong><i>3 possible result
- * codes</i></strong>: {@link Activity#RESULT_OK},
- * {@link Activity#RESULT_CANCELED} and {@link #RESULT_FAILED}.</li>
- * </p>
+ * <li>With {@link #ACTION_COMPARE_PATTERN}, there are <b><i>4 possible result
+ * codes</i></b>: {@link Activity#RESULT_OK}, {@link Activity#RESULT_CANCELED},
+ * {@link #RESULT_FAILED} and {@link #RESULT_FORGOT_PATTERN}.</li>
+ * <li>With {@link #ACTION_VERIFY_CAPTCHA}, there are <b><i>3 possible result
+ * codes</i></b>: {@link Activity#RESULT_OK}, {@link Activity#RESULT_CANCELED},
+ * and {@link #RESULT_FAILED}.</li>
+ * </ul>
  * 
  * @author Hai Bison
  * @since v1.0
@@ -86,8 +90,8 @@ public class LockPatternActivity extends Activity {
      * </p>
      * 
      * @see #_EncrypterClass
-     * @see #EXTRA_OK_PENDING_INTENT
-     * @see #EXTRA_CANCELLED_PENDING_INTENT
+     * @see #EXTRA_PENDING_INTENT_OK
+     * @see #EXTRA_PENDING_INTENT_CANCELLED
      * @since v2.4 beta
      */
     public static final String ACTION_CREATE_PATTERN = CLASSNAME
@@ -96,6 +100,10 @@ public class LockPatternActivity extends Activity {
     /**
      * Use this action to compare pattern. You provide the pattern to be
      * compared with {@link #EXTRA_PATTERN}.
+     * <p>
+     * You can use {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN} to help your
+     * users in case they forgot the patterns.
+     * </p>
      * <p>
      * If the user passes, {@link Activity#RESULT_OK} returns. If not,
      * {@link #RESULT_FAILED} returns.
@@ -110,8 +118,8 @@ public class LockPatternActivity extends Activity {
      * 
      * @see #EXTRA_PATTERN
      * @see #_EncrypterClass
-     * @see #EXTRA_OK_PENDING_INTENT
-     * @see #EXTRA_CANCELLED_PENDING_INTENT
+     * @see #EXTRA_PENDING_INTENT_OK
+     * @see #EXTRA_PENDING_INTENT_CANCELLED
      * @see #RESULT_FAILED
      * @see #EXTRA_RETRY_COUNT
      * @since v2.4 beta
@@ -138,10 +146,22 @@ public class LockPatternActivity extends Activity {
      * after a number of tries, this activity will finish with this result code.
      * 
      * @see #ACTION_COMPARE_PATTERN
-     * @see #_MaxRetry
      * @see #EXTRA_RETRY_COUNT
      */
     public static final int RESULT_FAILED = RESULT_FIRST_USER + 1;
+
+    /**
+     * If you use {@link #ACTION_COMPARE_PATTERN} and the user forgot his/ her
+     * pattern and decided to ask for your help with recovering the pattern (
+     * {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN}), this activity will finish
+     * with this result code.
+     * 
+     * @see #ACTION_COMPARE_PATTERN
+     * @see #EXTRA_RETRY_COUNT
+     * @see #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN
+     * @since v2.8 beta
+     */
+    public static final int RESULT_FORGOT_PATTERN = RESULT_FIRST_USER + 2;
 
     /**
      * If you use {@link #ACTION_COMPARE_PATTERN}, and the user fails to "login"
@@ -182,16 +202,53 @@ public class LockPatternActivity extends Activity {
      * {@link Activity#RESULT_OK} will be returning. If you were calling this
      * activity with {@link #ACTION_CREATE_PATTERN}, key {@link #EXTRA_PATTERN}
      * will be attached to the original intent which the pending intent holds.
+     * 
+     * <h1>Notes</h1>
+     * <ul>
+     * <li>If you're going to use an activity, you don't need
+     * {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library
+     * will call it inside {@link LockPatternActivity} .</li>
+     * </ul>
      */
-    public static final String EXTRA_OK_PENDING_INTENT = CLASSNAME
-            + ".ok_pending_intent";
+    public static final String EXTRA_PENDING_INTENT_OK = CLASSNAME
+            + ".pending_intent_ok";
 
     /**
      * Put a {@link PendingIntent} into this key. It will be sent before
      * {@link Activity#RESULT_CANCELED} will be returning.
+     * 
+     * <h1>Notes</h1>
+     * <ul>
+     * <li>If you're going to use an activity, you don't need
+     * {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library
+     * will call it inside {@link LockPatternActivity} .</li>
+     * </ul>
      */
-    public static final String EXTRA_CANCELLED_PENDING_INTENT = CLASSNAME
-            + ".cancelled_pending_intent";
+    public static final String EXTRA_PENDING_INTENT_CANCELLED = CLASSNAME
+            + ".pending_intent_cancelled";
+
+    /**
+     * You put a {@link Intent} of <i>{@link Activity}</i> into this extra. The
+     * library will show a button <i>"Forgot pattern?"</i> and call your intent
+     * later when the user taps it.
+     * 
+     * <h1>Notes</h1>
+     * <ul>
+     * <li>You don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent,
+     * since the library will call it inside {@link LockPatternActivity} .</li>
+     * <li>{@link LockPatternActivity} will finish with
+     * {@link #RESULT_FORGOT_PATTERN} <i><b>after</b> making a call</i> to start
+     * your activity.</li>
+     * <li>It is your responsibility to make sure the Intent is good. The
+     * library doesn't cover any errors when calling your intent.</li>
+     * </ul>
+     * 
+     * @see #ACTION_COMPARE_PATTERN
+     * @since v2.8 beta
+     * @author Thanks to Yan Cheng Cheok for his idea.
+     */
+    public static final String EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN = CLASSNAME
+            + ".intent_activity_forgot_pattern";
 
     /**
      * Helper enum for button OK commands. (Because we use only one "OK" button
@@ -200,7 +257,7 @@ public class LockPatternActivity extends Activity {
      * @author Hai Bison
      */
     private static enum ButtonOkCommand {
-        CONTINUE, DONE
+        CONTINUE, FORGOT_PATTERN, DONE
     }// ButtonOkCommand
 
     /**
@@ -291,6 +348,13 @@ public class LockPatternActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }// onKeyDown()
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (BuildConfig.DEBUG)
+            Log.d(CLASSNAME, "onDestroy()");
+    }// onDestroy()
+
     /**
      * Initializes UI...
      */
@@ -309,12 +373,12 @@ public class LockPatternActivity extends Activity {
         setContentView(R.layout.alp_lock_pattern_activity);
         UI.adjustDialogSizeForLargeScreen(getWindow());
 
-        mTextInfo = (TextView) findViewById(R.id.alp_info);
-        mLockPatternView = (LockPatternView) findViewById(R.id.alp_lock_pattern);
+        mTextInfo = (TextView) findViewById(R.id.alp_textview_info);
+        mLockPatternView = (LockPatternView) findViewById(R.id.alp_view_lock_pattern);
 
-        mFooter = findViewById(R.id.alp_footer);
-        mBtnCancel = (Button) findViewById(R.id.alp_cancel);
-        mBtnConfirm = (Button) findViewById(R.id.alp_confirm);
+        mFooter = findViewById(R.id.alp_viewgroup_footer);
+        mBtnCancel = (Button) findViewById(R.id.alp_button_cancel);
+        mBtnConfirm = (Button) findViewById(R.id.alp_button_confirm);
 
         /*
          * LOCK PATTERN VIEW
@@ -359,6 +423,7 @@ public class LockPatternActivity extends Activity {
             mBtnCancel.setOnClickListener(mBtnCancelOnClickListener);
             mBtnConfirm.setOnClickListener(mBtnConfirmOnClickListener);
 
+            mBtnCancel.setVisibility(View.VISIBLE);
             mFooter.setVisibility(View.VISIBLE);
 
             if (infoText != null)
@@ -378,6 +443,11 @@ public class LockPatternActivity extends Activity {
             case DONE:
                 mBtnConfirm.setText(R.string.alp_cmd_confirm);
                 break;
+            default:
+                /*
+                 * Do nothing.
+                 */
+                break;
             }
             if (btnOkEnabled != null)
                 mBtnConfirm.setEnabled(btnOkEnabled);
@@ -387,6 +457,12 @@ public class LockPatternActivity extends Activity {
                 mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
             else
                 mTextInfo.setText(infoText);
+            if (getIntent().hasExtra(EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN)) {
+                mBtnConfirm.setOnClickListener(mBtnConfirmOnClickListener);
+                mBtnConfirm.setText(R.string.alp_cmd_forgot_pattern);
+                mBtnConfirm.setEnabled(true);
+                mFooter.setVisibility(View.VISIBLE);
+            }
         }// ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
             mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
@@ -408,30 +484,15 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Encodes {@code pattern} to a string.
-     * <p>
-     * <li>If {@link #_EncrypterClass} is not set, returns SHA-1 of
-     * {@code pattern}.</li>
-     * <p/>
-     * <li>If {@link #_EncrypterClass} is set, calculates SHA-1 of
-     * {@code pattern}, then encrypts the SHA-1 value and returns the result.</li>
-     * </p>
      * 
      * @param pattern
      *            the pattern.
-     * @return SHA-1 of {@code pattern}, or encrypted string of its.
+     * @return the encoded chars of {@code pattern}.
      * @since v2 beta
      */
     private char[] encodePattern(List<Cell> pattern) {
-        if (mEncrypter == null) {
-            return LockPatternUtils.patternToSha1(pattern).toCharArray();
-        } else {
-            try {
-                return mEncrypter.encrypt(this,
-                        LockPatternUtils.patternToSha1(pattern).toCharArray());
-            } catch (Throwable t) {
-                throw new InvalidEncrypterException();
-            }
-        }
+        return mEncrypter != null ? mEncrypter.encrypt(this, pattern)
+                : LockPatternUtils.patternToSha1(pattern).toCharArray();
     }// encodePattern()
 
     private int mRetryCount = 0;
@@ -567,7 +628,7 @@ public class LockPatternActivity extends Activity {
          * PendingIntent
          */
         PendingIntent pi = getIntent().getParcelableExtra(
-                EXTRA_OK_PENDING_INTENT);
+                EXTRA_PENDING_INTENT_OK);
         if (pi != null) {
             try {
                 pi.send(this, RESULT_OK, mIntentResult);
@@ -611,7 +672,7 @@ public class LockPatternActivity extends Activity {
          * PendingIntent
          */
         PendingIntent pi = getIntent().getParcelableExtra(
-                EXTRA_CANCELLED_PENDING_INTENT);
+                EXTRA_PENDING_INTENT_CANCELLED);
         if (pi != null) {
             try {
                 pi.send(this, resultCode, mIntentResult);
@@ -711,19 +772,34 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (mBtnOkCmd == ButtonOkCommand.CONTINUE) {
-                mBtnOkCmd = ButtonOkCommand.DONE;
-                mLockPatternView.clearPattern();
-                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
-                mBtnConfirm.setText(R.string.alp_cmd_confirm);
-                mBtnConfirm.setEnabled(false);
-            } else {
-                final char[] pattern = getIntent().getCharArrayExtra(
-                        EXTRA_PATTERN);
-                if (mAutoSave)
-                    SecurityPrefs.setPattern(LockPatternActivity.this, pattern);
-                finishWithResultOk(pattern);
-            }
+            if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
+                if (mBtnOkCmd == ButtonOkCommand.CONTINUE) {
+                    mBtnOkCmd = ButtonOkCommand.DONE;
+                    mLockPatternView.clearPattern();
+                    mTextInfo
+                            .setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                    mBtnConfirm.setText(R.string.alp_cmd_confirm);
+                    mBtnConfirm.setEnabled(false);
+                } else {
+                    final char[] pattern = getIntent().getCharArrayExtra(
+                            EXTRA_PATTERN);
+                    if (mAutoSave)
+                        SecurityPrefs.setPattern(LockPatternActivity.this,
+                                pattern);
+                    finishWithResultOk(pattern);
+                }
+            }// ACTION_CREATE_PATTERN
+            else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
+                /*
+                 * We don't need to verify the extra. First, this button is only
+                 * visible if there is this extra in the intent. Second, it is
+                 * the responsibility of the caller to make sure the extra is an
+                 * Intent of Activity.
+                 */
+                startActivity((Intent) getIntent().getParcelableExtra(
+                        EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN));
+                finishWithNegativeResult(RESULT_FORGOT_PATTERN);
+            }// ACTION_COMPARE_PATTERN
         }// onClick()
     };// mBtnConfirmOnClickListener
 

@@ -98,6 +98,15 @@ public class CommandsPrefsHelper {
                     mActivity, LockPatternActivity.class);
             intentActivity.putExtra(LockPatternActivity.EXTRA_THEME,
                     getThemeForLockPatternActivity(mActivity));
+
+            /*
+             * In case the user forgot the pattern, we call
+             * PatternRecoveryActivity.
+             */
+            intentActivity.putExtra(
+                    LockPatternActivity.EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN,
+                    new Intent(mActivity, PatternRecoveryActivity.class));
+
             mActivity.startActivityForResult(intentActivity, REQ_ENTER_PATTERN);
 
             return true;
@@ -115,7 +124,6 @@ public class CommandsPrefsHelper {
                     getThemeForLockPatternActivity(mActivity));
             mActivity
                     .startActivityForResult(intentActivity, REQ_VERIFY_CAPTCHA);
-
             return true;
         }// onPreferenceClick()
     };// mCmdVerifyCaptchaListener
