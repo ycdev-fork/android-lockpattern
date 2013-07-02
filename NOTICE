@@ -37,7 +37,7 @@ And here is history:
  - Add new extra `EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN` to help ther user
    recover the pattern if he/ she forgot it.
  - Change `char[] IEncrypter.encrypt(Context, char[])` to
-   `char[] IEncrypter.encrypt(Context, List<Cell>)'.
+   `char[] IEncrypter.encrypt(Context, List<Cell>)`.
  - Rename `EXTRA_OK_PENDING_INTENT`, `EXTRA_CANCELLED_PENDING_INTENT` to
    `EXTRA_PENDING_INTENT_OK` and `EXTRA_PENDING_INTENT_CANCELLED`.
  - Optimize code.
