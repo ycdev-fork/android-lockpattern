@@ -48,8 +48,8 @@ project. We hope this project will be always useful for everyone.
 +++ Version 2.8 +++
  * Release: July 02, 2013
 
- - Add new extra `EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN` to help ther user
-   recover the pattern if he/ she forgot it.
+ - Add new extra `EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN` to help the user recover
+   the pattern if he/ she forgot it.
  - Change `char[] IEncrypter.encrypt(Context, char[])` to
    `char[] IEncrypter.encrypt(Context, List<Cell>)`.
  - Rename `EXTRA_OK_PENDING_INTENT`, `EXTRA_CANCELLED_PENDING_INTENT` to
