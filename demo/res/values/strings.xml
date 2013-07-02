@@ -17,7 +17,7 @@
 
 <resources>
 
-    <string name="app_name">ALP 2.8b - Demo</string>
+    <string name="app_name">android-lockpattern [demo]</string>
     <string name="about">About…</string>
     <string name="captcha_wired_dots">CAPTCHA wired dots</string>
     <string name="commands">Commands</string>
@@ -27,6 +27,7 @@
     <string name="failed">Failed</string>
     <string name="information">Information</string>
     <string name="light_theme">Light Theme</string>
+    <string name="main_activity_title">ALP 2.8 [demo]</string>
     <string name="max_retry">Maximum retry</string>
     <string name="min_wired_dots">Minimum wired dots</string>
     <string name="msg_pattern_reset">Your pattern has been reset</string>
