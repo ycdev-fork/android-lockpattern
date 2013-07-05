@@ -49,12 +49,7 @@ import android.widget.TextView;
 /**
  * Main activity for this library.
  * <p>
- * You must use either {@link #ACTION_CREATE_PATTERN} or
- * {@link #ACTION_COMPARE_PATTERN}. Otherwise an
- * {@link UnsupportedOperationException} will be thrown.
- * </p>
- * <p>
- * You can deliver result to {@link PendingIntent}s and/ or
+ * You can deliver result to {@link PendingIntent}'s and/ or
  * {@link ResultReceiver} too. See {@link #EXTRA_PENDING_INTENT_OK},
  * {@link #EXTRA_PENDING_INTENT_CANCELLED} and {@link #EXTRA_RESULT_RECEIVER}
  * for more details.
@@ -62,6 +57,10 @@ import android.widget.TextView;
  * 
  * <h1>NOTES</h1>
  * <ul>
+ * <li>
+ * You must use one of built-in actions when calling this activity. They start
+ * with {@code ACTION_*}. Otherwise the library might behave strangely (we don't
+ * cover those cases).</li>
  * <li>You must use one of the themes that this library provides. They start
  * with {@code R.style.Alp_Theme_*}. The reason is the themes contain resources
  * that the library needs.</li>
@@ -82,14 +81,15 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Use this action to create new pattern. You can provide an
-     * {@link IEncrypter} with {@link #_EncrypterClass} to improve security.
+     * {@link IEncrypter} with
+     * {@link SecurityPrefs#setEncrypterClass(android.content.Context, Class)}
+     * to improve security.
      * <p>
-     * If the use created a pattern, {@link Activity#RESULT_OK} returns with the
-     * pattern ({@link #EXTRA_PATTERN}). Otherwise
+     * If the user created a pattern, {@link Activity#RESULT_OK} returns with
+     * the pattern ({@link #EXTRA_PATTERN}). Otherwise
      * {@link Activity#RESULT_CANCELED} returns.
      * </p>
      * 
-     * @see #_EncrypterClass
      * @see #EXTRA_PENDING_INTENT_OK
      * @see #EXTRA_PENDING_INTENT_CANCELLED
      * @since v2.4 beta
@@ -100,6 +100,13 @@ public class LockPatternActivity extends Activity {
     /**
      * Use this action to compare pattern. You provide the pattern to be
      * compared with {@link #EXTRA_PATTERN}.
+     * <p>
+     * If you enabled feature auto-save pattern before (with
+     * {@link SecurityPrefs#setAutoSavePattern(android.content.Context, boolean)}
+     * ), then you don't need {@link #EXTRA_PATTERN} at this time. But if you
+     * use this extra, its priority is higher than the one stored in shared
+     * preferences.
+     * </p>
      * <p>
      * You can use {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN} to help your
      * users in case they forgot the patterns.
@@ -117,7 +124,6 @@ public class LockPatternActivity extends Activity {
      * </p>
      * 
      * @see #EXTRA_PATTERN
-     * @see #_EncrypterClass
      * @see #EXTRA_PENDING_INTENT_OK
      * @see #EXTRA_PENDING_INTENT_CANCELLED
      * @see #RESULT_FAILED
@@ -168,20 +174,20 @@ public class LockPatternActivity extends Activity {
      * after a number of tries, this key holds that number.
      * 
      * @see #ACTION_COMPARE_PATTERN
-     * @see #_MaxRetry
+     * @see DisplayPrefs#setMaxRetry(android.content.Context, int)
      */
     public static final String EXTRA_RETRY_COUNT = CLASSNAME + ".retry_count";
 
     /**
      * Sets value of this key to a theme in {@code R.style.Alp_Theme_*}. Default
-     * is the one you set in AndroidManifest.xml.
+     * is the one you set in your {@code AndroidManifest.xml}.
      * 
      * @since v1.5.3 beta
      */
     public static final String EXTRA_THEME = CLASSNAME + ".theme";
 
     /**
-     * Key to hold the pattern. It must be a char array.
+     * Key to hold the pattern. It must be a {@code char[]} array.
      * 
      * @since v2 beta
      */
@@ -274,6 +280,7 @@ public class LockPatternActivity extends Activity {
     private int mMinWiredDots;
     private ButtonOkCommand mBtnOkCmd;
     private Intent mIntentResult;
+    private int mRetryCount = 0;
 
     /*
      * CONTROLS
@@ -495,8 +502,6 @@ public class LockPatternActivity extends Activity {
                 : LockPatternUtils.patternToSha1(pattern).toCharArray();
     }// encodePattern()
 
-    private int mRetryCount = 0;
-
     /**
      * Compares {@code pattern} to the given pattern (
      * {@link #ACTION_COMPARE_PATTERN}) or to the generated "CAPTCHA" pattern (
@@ -510,7 +515,7 @@ public class LockPatternActivity extends Activity {
         if (pattern == null)
             return;
 
-        boolean okay = false;
+        boolean okey = false;
 
         if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
             char[] currentPattern = getIntent()
@@ -518,23 +523,23 @@ public class LockPatternActivity extends Activity {
             if (currentPattern == null)
                 currentPattern = SecurityPrefs.getPattern(this);
 
-            okay = Arrays.equals(encodePattern(pattern), currentPattern);
+            okey = Arrays.equals(encodePattern(pattern), currentPattern);
         }// ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
             final List<Cell> captchaPattern = getIntent()
                     .getParcelableArrayListExtra(EXTRA_PATTERN);
-            okay = captchaPattern.size() == pattern.size();
-            if (okay) {
+            okey = captchaPattern.size() == pattern.size();
+            if (okey) {
                 for (int i = 0; i < captchaPattern.size(); i++) {
                     if (!captchaPattern.get(i).equals(pattern.get(i))) {
-                        okay = false;
+                        okey = false;
                         break;
                     }
                 }// for
             }
         }// ACTION_VERIFY_CAPTCHA
 
-        if (okay)
+        if (okey)
             finishWithResultOk(null);
         else {
             mRetryCount++;
@@ -646,7 +651,8 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Finishes the activity with negative result (
-     * {@link Activity#RESULT_CANCELED} or {@link #RESULT_FAILED}).
+     * {@link Activity#RESULT_CANCELED}, {@link #RESULT_FAILED} or
+     * {@link #RESULT_FORGOT_PATTERN}).
      */
     private void finishWithNegativeResult(int resultCode) {
         if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction()))
