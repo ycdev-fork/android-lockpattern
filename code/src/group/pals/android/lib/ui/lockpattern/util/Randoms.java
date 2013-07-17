@@ -48,7 +48,7 @@ public class Randoms {
      * @return the random integer.
      */
     public static int randInt(int n) {
-        return randInt() % n;
+        return n > 0 ? randInt() % n : 0;
     }// randInt()
 
     /**
