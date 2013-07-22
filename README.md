@@ -1,7 +1,7 @@
 Feel free to contact us at:
 
 * [Homepage](http://www.haibison.com)
-* E-mails  :
+* E-mails:
     + haibison.apps(@)gmail(.)com
     + support(@)haibison(.)com
 
