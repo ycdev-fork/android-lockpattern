@@ -1,3 +1,7 @@
+# android-lockpattern
+
+* Version: 2.9 beta
+
 Feel free to contact us at:
 
 * [Homepage](http://www.haibison.com)
@@ -24,7 +28,7 @@ project. We hope this project will be always useful for everyone.
 # HISTORY
 
 * Version 2.9 beta
-    + *Release:* July 05, 2013
+    + *Initialize:* July 05, 2013
 
 * Version 2.8
     + *Release:* July 02, 2013
