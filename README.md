@@ -92,7 +92,7 @@ project. We hope this project will be always useful for everyone.
     + New icon set;
     + Optimize code and UI; special thanks to
       [Steven Byle](http://stackoverflow.com/users/1507439/steven-byle):
-        - http://stackoverflow.com/a/15424636/1521536
+        - [http://stackoverflow.com/a/15424636/1521536]()
 
 * Version 2.3
     + Update info: August 28, 2012
