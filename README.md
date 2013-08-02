@@ -6,8 +6,7 @@ Feel free to contact us at:
 
 * [Homepage](http://www.haibison.com)
 * E-mails:
-    + haibison.apps(@)gmail(.)com
-    + support(@)haibison(.)com
+    + haibisonapps[at]gmail.com
 
 In short, you can use this library in your closed source/ commercial apps with
 or without our knowledge. Hope you enjoy it  :-)
