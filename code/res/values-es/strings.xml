@@ -39,6 +39,10 @@
     <string name="alp_msg_release_finger_when_done">Levanta el dedo cuando termines</string>
     <string name="alp_msg_try_again">Lo siento, intentalo de nuevo</string>
     <string name="alp_msg_your_new_unlock_pattern">Nuevo patrón de desbloqueo:</string>
-    <string name="alp_pmsg_connect_x_dots">Conecta al menos %1$d puntos.\nIntentalo de nuevo…</string>
+
+    <plurals name="alp_pmsg_connect_x_dots">
+        <item quantity="one">Conecta al menos %1$d punto.\nIntentalo de nuevo…</item>
+        <item quantity="other">Conecta al menos %1$d puntos.\nIntentalo de nuevo…</item>
+    </plurals>
 
 </resources>

@@ -565,7 +565,8 @@ public class LockPatternActivity extends Activity {
     private void doCheckAndCreatePattern(List<Cell> pattern) {
         if (pattern.size() < mMinWiredDots) {
             mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-            mTextInfo.setText(getString(R.string.alp_pmsg_connect_x_dots,
+            mTextInfo.setText(getResources().getQuantityString(
+                    R.plurals.alp_pmsg_connect_x_dots, mMinWiredDots,
                     mMinWiredDots));
             mLockPatternView.postDelayed(mLockPatternViewReloader,
                     DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
