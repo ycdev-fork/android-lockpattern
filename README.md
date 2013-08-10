@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 2.9 beta
+* Version: 2.9
 
 Feel free to contact us at:
 
@@ -25,6 +25,11 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 2.9
+    + *Release:* August 11, 2013
+    + Fix dialog themes in API 11.
+    + Optimize code.
 
 * Version 2.9 beta
     + *Initialize:* July 05, 2013
