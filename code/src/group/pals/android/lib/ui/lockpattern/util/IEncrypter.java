@@ -31,7 +31,7 @@ import android.content.Context;
 public interface IEncrypter {
 
     /**
-     * Encrypt {@code s}.
+     * Encrypts {@code pattern}.
      * 
      * @param context
      *            the context.
@@ -41,4 +41,16 @@ public interface IEncrypter {
      * @since v2.1 beta
      */
     char[] encrypt(Context context, List<Cell> pattern);
+
+    /**
+     * Decrypts an encrypted pattern.
+     * 
+     * @param context
+     *            the context.
+     * @param encryptedPattern
+     *            the encrypted pattern.
+     * @return the original pattern.
+     */
+    List<Cell> decrypt(Context context, char[] encryptedPattern);
+
 }

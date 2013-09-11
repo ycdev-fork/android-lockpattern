@@ -188,6 +188,13 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Key to hold the pattern. It must be a {@code char[]} array.
+     * <p/>
+     * <ul>
+     * <li>If you use encrypter, it should be an encrypted array.</li>
+     * <li>If you don't use encrypter, it should be the SHA-1 value of the
+     * actual pattern. You can generate the value by
+     * {@link LockPatternUtils#patternToSha1(List)}.</li>
+     * </ul>
      * 
      * @since v2 beta
      */
@@ -474,6 +481,11 @@ public class LockPatternActivity extends Activity {
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
             mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
 
+            /*
+             * NOTE: EXTRA_PATTERN should hold a char[] array. In this case we
+             * use it as a temporary variable to hold a list of Cell.
+             */
+
             final ArrayList<Cell> pattern;
             if (getIntent().hasExtra(EXTRA_PATTERN))
                 pattern = getIntent()
@@ -488,19 +500,6 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setPattern(DisplayMode.Animate, pattern);
         }// ACTION_VERIFY_CAPTCHA
     }// initContentView()
-
-    /**
-     * Encodes {@code pattern} to a string.
-     * 
-     * @param pattern
-     *            the pattern.
-     * @return the encoded chars of {@code pattern}.
-     * @since v2 beta
-     */
-    private char[] encodePattern(List<Cell> pattern) {
-        return mEncrypter != null ? mEncrypter.encrypt(this, pattern)
-                : LockPatternUtils.patternToSha1(pattern).toCharArray();
-    }// encodePattern()
 
     /**
      * Compares {@code pattern} to the given pattern (
@@ -522,21 +521,19 @@ public class LockPatternActivity extends Activity {
                     .getCharArrayExtra(EXTRA_PATTERN);
             if (currentPattern == null)
                 currentPattern = SecurityPrefs.getPattern(this);
-
-            okey = Arrays.equals(encodePattern(pattern), currentPattern);
+            if (currentPattern != null) {
+                if (mEncrypter != null)
+                    okey = pattern.equals(mEncrypter.decrypt(this,
+                            currentPattern));
+                else
+                    okey = Arrays.equals(currentPattern, LockPatternUtils
+                            .patternToSha1(pattern).toCharArray());
+            } else
+                okey = false;
         }// ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-            final List<Cell> captchaPattern = getIntent()
-                    .getParcelableArrayListExtra(EXTRA_PATTERN);
-            okey = captchaPattern.size() == pattern.size();
-            if (okey) {
-                for (int i = 0; i < captchaPattern.size(); i++) {
-                    if (!captchaPattern.get(i).equals(pattern.get(i))) {
-                        okey = false;
-                        break;
-                    }
-                }// for
-            }
+            okey = pattern.equals(getIntent().getParcelableArrayListExtra(
+                    EXTRA_PATTERN));
         }// ACTION_VERIFY_CAPTCHA
 
         if (okey)
@@ -574,8 +571,15 @@ public class LockPatternActivity extends Activity {
         }
 
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
-            if (Arrays.equals(getIntent().getCharArrayExtra(EXTRA_PATTERN),
-                    encodePattern(pattern))) {
+            final boolean okey;
+            if (mEncrypter != null)
+                okey = Arrays.equals(mEncrypter.encrypt(this, pattern),
+                        getIntent().getCharArrayExtra(EXTRA_PATTERN));
+            else
+                okey = Arrays.equals(
+                        getIntent().getCharArrayExtra(EXTRA_PATTERN),
+                        LockPatternUtils.patternToSha1(pattern).toCharArray());
+            if (okey) {
                 mTextInfo.setText(R.string.alp_msg_your_new_unlock_pattern);
                 mBtnConfirm.setEnabled(true);
             } else {
@@ -586,7 +590,11 @@ public class LockPatternActivity extends Activity {
                         DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
             }
         } else {
-            getIntent().putExtra(EXTRA_PATTERN, encodePattern(pattern));
+            getIntent().putExtra(
+                    EXTRA_PATTERN,
+                    mEncrypter != null ? mEncrypter.encrypt(this, pattern)
+                            : LockPatternUtils.patternToSha1(pattern)
+                                    .toCharArray());
             mTextInfo.setText(R.string.alp_msg_pattern_recorded);
             mBtnConfirm.setEnabled(true);
         }
