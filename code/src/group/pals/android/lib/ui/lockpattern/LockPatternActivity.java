@@ -573,8 +573,8 @@ public class LockPatternActivity extends Activity {
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
             final boolean okey;
             if (mEncrypter != null)
-                okey = Arrays.equals(mEncrypter.encrypt(this, pattern),
-                        getIntent().getCharArrayExtra(EXTRA_PATTERN));
+                okey = pattern.equals(mEncrypter.decrypt(this, getIntent()
+                        .getCharArrayExtra(EXTRA_PATTERN)));
             else
                 okey = Arrays.equals(
                         getIntent().getCharArrayExtra(EXTRA_PATTERN),
