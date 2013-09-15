@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 2.9
+* Version: 3.0
 
 Feel free to contact us at:
 
@@ -25,6 +25,10 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0:
+    + *Release:* September 15, 2013
+    + Upgrade IEncrypter.
 
 * Version 2.9
     + *Release:* August 11, 2013
