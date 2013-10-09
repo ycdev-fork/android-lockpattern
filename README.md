@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0
+* Version: 3.0.1
 
 Feel free to contact us at:
 
@@ -25,6 +25,10 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.1:
+    + *Release:* October 10, 2013
+    + Use default icon set (from AOSP).
 
 * Version 3.0:
     + *Release:* September 15, 2013
