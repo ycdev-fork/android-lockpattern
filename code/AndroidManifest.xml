@@ -18,8 +18,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="group.pals.android.lib.ui.lockpattern" >
 
-    <uses-sdk
-        android:minSdkVersion="4"
-        android:targetSdkVersion="18" />
+    <uses-sdk android:minSdkVersion="4" />
 
 </manifest>
