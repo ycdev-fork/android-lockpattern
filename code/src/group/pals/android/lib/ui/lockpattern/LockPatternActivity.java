@@ -387,7 +387,7 @@ public class LockPatternActivity extends Activity {
                 .getPattern() : null;
 
         setContentView(R.layout.alp_lock_pattern_activity);
-        UI.adjustDialogSizeForLargeScreen(getWindow());
+        UI.adjustDialogSizeForLargeScreens(getWindow());
 
         mTextInfo = (TextView) findViewById(R.id.alp_textview_info);
         mLockPatternView = (LockPatternView) findViewById(R.id.alp_view_lock_pattern);
@@ -400,13 +400,19 @@ public class LockPatternActivity extends Activity {
          * LOCK PATTERN VIEW
          */
 
-        if (getResources().getBoolean(R.bool.alp_is_large_screen)) {
-            int size = getResources().getDimensionPixelSize(
+        switch (getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK) {
+        case Configuration.SCREENLAYOUT_SIZE_LARGE:
+        case Configuration.SCREENLAYOUT_SIZE_XLARGE: {
+            final int size = getResources().getDimensionPixelSize(
                     R.dimen.alp_lockpatternview_size);
             LayoutParams lp = mLockPatternView.getLayoutParams();
             lp.width = size;
             lp.height = size;
             mLockPatternView.setLayoutParams(lp);
+
+            break;
+        }// LARGE / XLARGE
         }
 
         /*
