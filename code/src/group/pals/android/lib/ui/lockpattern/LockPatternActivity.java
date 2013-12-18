@@ -180,7 +180,9 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Sets value of this key to a theme in {@code R.style.Alp_Theme_*}. Default
-     * is the one you set in your {@code AndroidManifest.xml}.
+     * is the one you set in your {@code AndroidManifest.xml}. Note that theme
+     * {@link R.style#Alp_Theme_Light_DarkActionBar} is available in API 4+, but
+     * it only works in API 14+.
      * 
      * @since v1.5.3 beta
      */

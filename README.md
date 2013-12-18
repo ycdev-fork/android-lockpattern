@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.1
+* Version: 3.0.2
 
 Feel free to contact us at:
 
@@ -25,6 +25,10 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.2:
+    + *Release:* December 18, 2013
+    + Add theme light with dark action bar (for API 14+).
 
 * Version 3.0.1:
     + *Release:* October 10, 2013
