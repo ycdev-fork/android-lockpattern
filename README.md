@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.4 beta
+* Version: 3.0.4
 
 Feel free to contact us at:
 
@@ -25,6 +25,12 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.4:
+    + *Release:* January 12, 2014
+    + Refactor package `prefs` to a single class `util.Settings`.
+    + Add `LoadingDialog` for the case that implementation of `IEncrypter` takes
+      lots of time to finish.
 
 * Version 3.0.4 beta:
     + *Initialize:* January 11, 2014
