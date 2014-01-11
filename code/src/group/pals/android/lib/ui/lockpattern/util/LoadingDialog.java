@@ -16,6 +16,7 @@
 
 package group.pals.android.lib.ui.lockpattern.util;
 
+import group.pals.android.lib.ui.lockpattern.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,9 +57,26 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      *            it, or by pressing Back button.
      */
     public LoadingDialog(Context context, boolean cancelable) {
+        this(context, context.getString(R.string.alp_loading), cancelable);
+    }// LoadingDialog()
+
+    /**
+     * Creates new instance.
+     * 
+     * @param context
+     *            the context.
+     * @param msg
+     *            the message.
+     * @param cancelable
+     *            whether the user can cancel the dialog by tapping outside of
+     *            it, or by pressing Back button.
+     */
+    public LoadingDialog(Context context, CharSequence msg, boolean cancelable) {
         mDialog = new ProgressDialog(context);
+        mDialog.setMessage(msg);
         mDialog.setIndeterminate(true);
         mDialog.setCancelable(cancelable);
+
         if (cancelable) {
             mDialog.setCanceledOnTouchOutside(true);
             mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

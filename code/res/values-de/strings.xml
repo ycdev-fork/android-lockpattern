@@ -12,8 +12,8 @@
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
-   limitations under the License.
--->
+   limitations under the License.-->
+
 
 <!--
    We sincerely thank Thomas Breitbach - a kind friend who helped us translate
@@ -25,6 +25,7 @@
     <string name="alp_cmd_continue">Weiter</string>
     <string name="alp_cmd_forgot_pattern">Muster vergessen?</string>
     <string name="alp_cmd_retry">Wiederholen</string>
+    <string name="alp_loading">Wird geladen…</string>
     <string name="alp_lockscreen_access_pattern_cell_added">Zelle hinzugefügt</string>
     <string name="alp_lockscreen_access_pattern_cleared">Muster gelöscht</string>
     <string name="alp_lockscreen_access_pattern_detected">Muster abgeschlossen</string>

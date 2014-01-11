@@ -21,6 +21,7 @@
     <string name="alp_cmd_continue">Continue</string>
     <string name="alp_cmd_forgot_pattern">Forgot pattern?</string>
     <string name="alp_cmd_retry">Retry</string>
+    <string name="alp_loading">Loading…</string>
     <string name="alp_lockscreen_access_pattern_cell_added">Cell added</string>
     <string name="alp_lockscreen_access_pattern_cleared">Pattern cleared</string>
     <string name="alp_lockscreen_access_pattern_detected">Pattern completed</string>
