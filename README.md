@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.3
+* Version: 3.0.4 beta
 
 Feel free to contact us at:
 
@@ -25,6 +25,9 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.4 beta:
+    + *Initialize:* January 11, 2014
 
 * Version 3.0.3:
     + *Release:* December 18, 2013

@@ -283,4 +283,5 @@ public class LockPatternUtils {
 
         return result;
     }// genCaptchaPattern()
+
 }

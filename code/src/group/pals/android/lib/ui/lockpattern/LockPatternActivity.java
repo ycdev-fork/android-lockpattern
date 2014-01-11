@@ -16,10 +16,9 @@
 
 package group.pals.android.lib.ui.lockpattern;
 
-import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
-import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
 import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
 import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
+import group.pals.android.lib.ui.lockpattern.util.Settings;
 import group.pals.android.lib.ui.lockpattern.util.UI;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
@@ -36,7 +35,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -318,14 +316,14 @@ public class LockPatternActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        mMinWiredDots = DisplayPrefs.getMinWiredDots(this);
-        mMaxRetry = DisplayPrefs.getMaxRetry(this);
-        mAutoSave = SecurityPrefs.isAutoSavePattern(this);
+        mMinWiredDots = Settings.Display.getMinWiredDots(this);
+        mMaxRetry = Settings.Display.getMaxRetry(this);
+        mAutoSave = Settings.Security.isAutoSavePattern(this);
 
         /*
          * Encrypter.
          */
-        char[] encrypterClass = SecurityPrefs.getEncrypterClass(this);
+        char[] encrypterClass = Settings.Security.getEncrypterClass(this);
         if (encrypterClass != null) {
             try {
                 mEncrypter = (IEncrypter) Class.forName(
@@ -420,9 +418,10 @@ public class LockPatternActivity extends Activity {
          */
         boolean hapticFeedbackEnabled = false;
         try {
-            hapticFeedbackEnabled = Settings.System.getInt(
-                    getContentResolver(),
-                    Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0;
+            hapticFeedbackEnabled = android.provider.Settings.System
+                    .getInt(getContentResolver(),
+                            android.provider.Settings.System.HAPTIC_FEEDBACK_ENABLED,
+                            0) != 0;
         } catch (Throwable t) {
             /*
              * Ignore it.
@@ -430,7 +429,7 @@ public class LockPatternActivity extends Activity {
         }
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
-        mLockPatternView.setInStealthMode(DisplayPrefs.isStealthMode(this)
+        mLockPatternView.setInStealthMode(Settings.Display.isStealthMode(this)
                 && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()));
         mLockPatternView.setOnPatternListener(mLockPatternViewListener);
         if (lastPattern != null && lastDisplayMode != null
@@ -502,7 +501,7 @@ public class LockPatternActivity extends Activity {
                 getIntent().putParcelableArrayListExtra(
                         EXTRA_PATTERN,
                         pattern = LockPatternUtils
-                                .genCaptchaPattern(DisplayPrefs
+                                .genCaptchaPattern(Settings.Display
                                         .getCaptchaWiredDots(this)));
 
             mLockPatternView.setPattern(DisplayMode.Animate, pattern);
@@ -528,7 +527,7 @@ public class LockPatternActivity extends Activity {
             char[] currentPattern = getIntent()
                     .getCharArrayExtra(EXTRA_PATTERN);
             if (currentPattern == null)
-                currentPattern = SecurityPrefs.getPattern(this);
+                currentPattern = Settings.Security.getPattern(this);
             if (currentPattern != null) {
                 if (mEncrypter != null)
                     okey = pattern.equals(mEncrypter.decrypt(this,
@@ -807,7 +806,7 @@ public class LockPatternActivity extends Activity {
                     final char[] pattern = getIntent().getCharArrayExtra(
                             EXTRA_PATTERN);
                     if (mAutoSave)
-                        SecurityPrefs.setPattern(LockPatternActivity.this,
+                        Settings.Security.setPattern(LockPatternActivity.this,
                                 pattern);
                     finishWithResultOk(pattern);
                 }

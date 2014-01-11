@@ -182,4 +182,5 @@ public class UI {
             return typedValue.resourceId;
         return 0;
     }// resolveAttribute()
+
 }
