@@ -57,7 +57,7 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      *            it, or by pressing Back button.
      */
     public LoadingDialog(Context context, boolean cancelable) {
-        this(context, context.getString(R.string.alp_loading), cancelable);
+        this(context, cancelable, R.string.alp_loading);
     }// LoadingDialog()
 
     /**
@@ -65,17 +65,32 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      * 
      * @param context
      *            the context.
-     * @param msg
-     *            the message.
      * @param cancelable
      *            whether the user can cancel the dialog by tapping outside of
      *            it, or by pressing Back button.
+     * @param msgId
+     *            the resource ID of the message to be displayed.
      */
-    public LoadingDialog(Context context, CharSequence msg, boolean cancelable) {
+    public LoadingDialog(Context context, boolean cancelable, int msgId) {
+        this(context, cancelable, context.getString(msgId));
+    }// LoadingDialog()
+
+    /**
+     * Creates new instance.
+     * 
+     * @param context
+     *            the context.
+     * @param cancelable
+     *            whether the user can cancel the dialog by tapping outside of
+     *            it, or by pressing Back button.
+     * @param msg
+     *            the message to display.
+     */
+    public LoadingDialog(Context context, boolean cancelable, CharSequence msg) {
         mDialog = new ProgressDialog(context);
+        mDialog.setCancelable(cancelable);
         mDialog.setMessage(msg);
         mDialog.setIndeterminate(true);
-        mDialog.setCancelable(cancelable);
 
         if (cancelable) {
             mDialog.setCanceledOnTouchOutside(true);
