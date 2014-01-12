@@ -32,11 +32,11 @@ public class Sys {
     /**
      * The library version code.
      */
-    public static final int LIB_VERSION_CODE = 36;
+    public static final int LIB_VERSION_CODE = 37;
 
     /**
      * The library version name.
      */
-    public static final String LIB_VERSION_NAME = "3.0.4";
+    public static final String LIB_VERSION_NAME = "3.0.5 beta";
 
 }

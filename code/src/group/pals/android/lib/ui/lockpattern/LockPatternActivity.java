@@ -173,7 +173,7 @@ public class LockPatternActivity extends Activity {
      * after a number of tries, this key holds that number.
      * 
      * @see #ACTION_COMPARE_PATTERN
-     * @see DisplayPrefs#setMaxRetry(android.content.Context, int)
+     * @see DisplayPrefs#setMaxRetries(android.content.Context, int)
      */
     public static final String EXTRA_RETRY_COUNT = CLASSNAME + ".retry_count";
 
@@ -318,7 +318,7 @@ public class LockPatternActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         mMinWiredDots = Settings.Display.getMinWiredDots(this);
-        mMaxRetry = Settings.Display.getMaxRetry(this);
+        mMaxRetry = Settings.Display.getMaxRetries(this);
         mAutoSave = Settings.Security.isAutoSavePattern(this);
 
         /*

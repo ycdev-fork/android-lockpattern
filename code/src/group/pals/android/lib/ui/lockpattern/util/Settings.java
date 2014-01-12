@@ -167,38 +167,38 @@ public class Settings {
         }// setMinWiredDots()
 
         /**
-         * Gets max retry allowed in mode comparing pattern.
+         * Gets max retries allowed in mode comparing pattern.
          * 
          * @param context
          *            the context.
-         * @return the max retry allowed in mode comparing pattern. Default is
+         * @return the max retries allowed in mode comparing pattern. Default is
          *         {@code 5}.
          */
-        public static int getMaxRetry(Context context) {
+        public static int getMaxRetries(Context context) {
             return p(context).getInt(
-                    context.getString(R.string.alp_pkey_display_max_retry),
+                    context.getString(R.string.alp_pkey_display_max_retries),
                     context.getResources().getInteger(
-                            R.integer.alp_pkey_display_max_retry_default));
-        }// getMaxRetry()
+                            R.integer.alp_pkey_display_max_retries_default));
+        }// getMaxRetries()
 
         /**
-         * Sets max retry allowed in mode comparing pattern.
+         * Sets max retries allowed in mode comparing pattern.
          * 
          * @param context
          *            the context.
          * @param v
-         *            the max retry allowed in mode comparing pattern.
+         *            the max retries allowed in mode comparing pattern.
          */
-        public static void setMaxRetry(Context context, int v) {
+        public static void setMaxRetries(Context context, int v) {
             if (v <= 0)
                 v = context.getResources().getInteger(
-                        R.integer.alp_pkey_display_max_retry_default);
+                        R.integer.alp_pkey_display_max_retries_default);
             p(context)
                     .edit()
                     .putInt(context
-                            .getString(R.string.alp_pkey_display_max_retry),
+                            .getString(R.string.alp_pkey_display_max_retries),
                             v).commit();
-        }// setMaxRetry()
+        }// setMaxRetries()
 
         /**
          * Gets wired dots for a "CAPTCHA" pattern.
