@@ -41,6 +41,12 @@ public class Settings {
     public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
 
     /**
+     * This is singleton class.
+     */
+    private Settings() {
+    }// Settings
+
+    /**
      * Generates global preference filename of this library.
      * 
      * @return the global preference filename.

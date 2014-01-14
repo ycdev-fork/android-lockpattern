@@ -112,6 +112,12 @@ public class UI {
     }// ScreenSize
 
     /**
+     * This is singleton class.
+     */
+    private UI() {
+    }// UI
+
+    /**
      * Uses a fixed size for {@code dialog} in large screens.
      * 
      * @param dialog

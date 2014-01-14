@@ -51,6 +51,12 @@ public class LockPatternUtils {
     public static final String SHA1 = "SHA-1";
 
     /**
+     * This is singleton class.
+     */
+    private LockPatternUtils() {
+    }// LockPatternUtils
+
+    /**
      * Deserialize a pattern.
      * 
      * @param string

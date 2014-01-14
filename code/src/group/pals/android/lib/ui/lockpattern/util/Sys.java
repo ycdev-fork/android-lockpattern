@@ -39,4 +39,10 @@ public class Sys {
      */
     public static final String LIB_VERSION_NAME = "3.0.5 beta";
 
+    /**
+     * This is singleton class.
+     */
+    private Sys() {
+    }// Sys
+
 }

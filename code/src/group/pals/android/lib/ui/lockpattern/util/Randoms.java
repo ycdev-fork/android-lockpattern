@@ -32,6 +32,12 @@ public class Randoms {
     private static final Random RANDOM = new Random();
 
     /**
+     * This is singleton class.
+     */
+    private Randoms() {
+    }// Random()
+
+    /**
      * Generates a random integer.
      * 
      * @return the random integer.

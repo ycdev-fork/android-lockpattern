@@ -20,6 +20,8 @@ import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
 import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
 import group.pals.android.lib.ui.lockpattern.util.LoadingDialog;
 import group.pals.android.lib.ui.lockpattern.util.Settings;
+import group.pals.android.lib.ui.lockpattern.util.Settings.Display;
+import group.pals.android.lib.ui.lockpattern.util.Settings.Security;
 import group.pals.android.lib.ui.lockpattern.util.UI;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
 import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
@@ -60,7 +62,7 @@ import android.widget.TextView;
  * You must use one of built-in actions when calling this activity. They start
  * with {@code ACTION_*}. Otherwise the library might behave strangely (we don't
  * cover those cases).</li>
- * <li>You must use one of the themes that this library provides. They start
+ * <li>You must use one of the themes that this library supports. They start
  * with {@code R.style.Alp_Theme_*}. The reason is the themes contain resources
  * that the library needs.</li>
  * <li>With {@link #ACTION_COMPARE_PATTERN}, there are <b><i>4 possible result
@@ -81,13 +83,12 @@ public class LockPatternActivity extends Activity {
     /**
      * Use this action to create new pattern. You can provide an
      * {@link IEncrypter} with
-     * {@link SecurityPrefs#setEncrypterClass(android.content.Context, Class)}
-     * to improve security.
-     * <p>
+     * {@link Security#setEncrypterClass(android.content.Context, Class)} to
+     * improve security.
+     * <p/>
      * If the user created a pattern, {@link Activity#RESULT_OK} returns with
      * the pattern ({@link #EXTRA_PATTERN}). Otherwise
      * {@link Activity#RESULT_CANCELED} returns.
-     * </p>
      * 
      * @see #EXTRA_PENDING_INTENT_OK
      * @see #EXTRA_PENDING_INTENT_CANCELLED
@@ -99,28 +100,23 @@ public class LockPatternActivity extends Activity {
     /**
      * Use this action to compare pattern. You provide the pattern to be
      * compared with {@link #EXTRA_PATTERN}.
-     * <p>
+     * <p/>
      * If you enabled feature auto-save pattern before (with
-     * {@link SecurityPrefs#setAutoSavePattern(android.content.Context, boolean)}
-     * ), then you don't need {@link #EXTRA_PATTERN} at this time. But if you
-     * use this extra, its priority is higher than the one stored in shared
+     * {@link Security#setAutoSavePattern(android.content.Context, boolean)} ),
+     * then you don't need {@link #EXTRA_PATTERN} at this time. But if you use
+     * this extra, its priority is higher than the one stored in shared
      * preferences.
-     * </p>
-     * <p>
+     * <p/>
      * You can use {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN} to help your
      * users in case they forgot the patterns.
-     * </p>
-     * <p>
+     * <p/>
      * If the user passes, {@link Activity#RESULT_OK} returns. If not,
      * {@link #RESULT_FAILED} returns.
-     * </p>
-     * <p>
+     * <p/>
      * If the user cancels the task, {@link Activity#RESULT_CANCELED} returns.
-     * </p>
-     * <p>
-     * In any case, there will be key {@link #EXTRA_RETRY_COUNT} available in
-     * the intent result.
-     * </p>
+     * <p/>
+     * In any case, there will have extra {@link #EXTRA_RETRY_COUNT} available
+     * in the intent result.
      * 
      * @see #EXTRA_PATTERN
      * @see #EXTRA_PENDING_INTENT_OK
@@ -135,11 +131,10 @@ public class LockPatternActivity extends Activity {
     /**
      * Use this action to let the activity generate a random pattern and ask the
      * user to re-draw it to verify.
-     * <p>
+     * <p/>
      * The default length of the auto-generated pattern is {@code 4}. You can
      * change it with
-     * {@link DisplayPrefs#setCaptchaWiredDots(android.content.Context, int)}.
-     * </p>
+     * {@link Display#setCaptchaWiredDots(android.content.Context, int)}.
      * 
      * @since v2.7 beta
      */
@@ -169,11 +164,9 @@ public class LockPatternActivity extends Activity {
     public static final int RESULT_FORGOT_PATTERN = RESULT_FIRST_USER + 2;
 
     /**
-     * If you use {@link #ACTION_COMPARE_PATTERN}, and the user fails to "login"
-     * after a number of tries, this key holds that number.
-     * 
-     * @see #ACTION_COMPARE_PATTERN
-     * @see DisplayPrefs#setMaxRetries(android.content.Context, int)
+     * For actions {@link #ACTION_COMPARE_PATTERN} and
+     * {@link #ACTION_VERIFY_CAPTCHA}, this key holds the number of tries that
+     * the user attempted to verify the input pattern.
      */
     public static final String EXTRA_RETRY_COUNT = CLASSNAME + ".retry_count";
 
@@ -242,7 +235,7 @@ public class LockPatternActivity extends Activity {
             + ".pending_intent_cancelled";
 
     /**
-     * You put a {@link Intent} of <i>{@link Activity}</i> into this extra. The
+     * You put an {@link Intent} of <i>{@link Activity}</i> into this extra. The
      * library will show a button <i>"Forgot pattern?"</i> and call your intent
      * later when the user taps it.
      * 

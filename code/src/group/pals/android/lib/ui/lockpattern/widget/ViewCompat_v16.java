@@ -27,6 +27,12 @@ import android.view.View;
 public class ViewCompat_v16 {
 
     /**
+     * This is singleton class.
+     */
+    private ViewCompat_v16() {
+    }// ViewCompat_v16
+
+    /**
      * Wrapper for {@link View#announceForAccessibility(CharSequence)}.
      * 
      * @param view
