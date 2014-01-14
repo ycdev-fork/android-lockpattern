@@ -107,6 +107,12 @@ public class Settings {
     public static class Display {
 
         /**
+         * This is singleton class.
+         */
+        private Display() {
+        }// Display
+
+        /**
          * Checks if the library is using stealth mode or not.
          * 
          * @param context
@@ -250,6 +256,12 @@ public class Settings {
      * 
      */
     public static class Security {
+
+        /**
+         * This is singleton class.
+         */
+        private Security() {
+        }// Security
 
         /**
          * Checks if the library is using auto-save pattern mode.
