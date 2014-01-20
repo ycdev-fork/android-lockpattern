@@ -63,8 +63,26 @@ public class UI {
          */
         UNDEFINED(1, 1, 1, 1);
 
-        public final float fixedWidthMinor, fixedWidthMajor, fixedHeightMinor,
-                fixedHeightMajor;
+        /**
+         * The desired fixed width for a dialog along the minor axis (the screen
+         * is in portrait). This is a fraction.
+         */
+        public final float fixedWidthMinor,
+        /**
+         * The desired fixed width for a dialog along the major axis (the screen
+         * is in landscape). This is a fraction.
+         */
+        fixedWidthMajor,
+        /**
+         * The desired fixed height for a dialog along the minor axis (the
+         * screen is in landscape). This is a fraction.
+         */
+        fixedHeightMinor,
+        /**
+         * The desired fixed height for a dialog along the major axis (the
+         * screen is in portrait). This is a fraction.
+         */
+        fixedHeightMajor;
 
         /**
          * Creates new instance.
