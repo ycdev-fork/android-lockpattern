@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.5 beta
+* Version: 3.0.5
 
 Feel free to contact us at:
 
@@ -25,6 +25,13 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.5:
+    + *Release:* Feburary 12, 2014
+    + Add `SimpleWeakEncryption`.
+    + Update `LockPatternView` to branch `kitkat-release` (commit:
+      `c46c4a6765196bcabf3ea89771a1f9067b22baad`).
+    + Update Javadocs, some minor changes...
 
 * Version 3.0.5 beta:
     + *Initialize:* January 12, 2014
