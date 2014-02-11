@@ -23,6 +23,7 @@ import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
@@ -49,6 +50,7 @@ public class SimpleWeakEncryption {
     private static final String SECRET_KEY_SPEC_ALGORITHM = "AES";
 
     private static final int KEY_LEN = 256;
+    private static final int IV_LEN = 16;
     private static final int ITERATION_COUNT = 512;
     private static final char SEPARATOR = '@';
 
@@ -97,16 +99,25 @@ public class SimpleWeakEncryption {
             throw new RuntimeException(e);
         }
 
+        /*
+         * cipher.getIV() doesn't work the same for different API levels. So
+         * we're using this technique.
+         */
+        final byte[] iv = SecureRandom.getSeed(IV_LEN);
+
         try {
-            cipher.init(Cipher.ENCRYPT_MODE, genKey(password, salt));
+            cipher.init(Cipher.ENCRYPT_MODE, genKey(password, salt),
+                    new IvParameterSpec(iv));
         } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidAlgorithmParameterException e) {
             throw new RuntimeException(e);
         }
 
         try {
             bytes = cipher.doFinal(bytes);
-            return String.format("%s%s%s", Base36.toBase36(cipher.getIV()),
-                    SEPARATOR, Base36.toBase36(bytes));
+            return String.format("%s%s%s", Base36.toBase36(iv), SEPARATOR,
+                    Base36.toBase36(bytes));
         } catch (IllegalBlockSizeException e) {
             throw new RuntimeException(e);
         } catch (BadPaddingException e) {
