@@ -35,6 +35,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -275,13 +277,11 @@ public class LockPatternActivity extends Activity {
     /*
      * FIELDS
      */
-    private int mMaxRetry;
-    private boolean mAutoSave;
+    private int mMaxRetry, mMinWiredDots, mRetryCount = 0, mCaptchaWiredDots;
+    private boolean mAutoSave, mStealthMode;
     private IEncrypter mEncrypter;
-    private int mMinWiredDots;
     private ButtonOkCommand mBtnOkCmd;
     private Intent mIntentResult;
-    private int mRetryCount = 0;
 
     /*
      * CONTROLS
@@ -310,23 +310,7 @@ public class LockPatternActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        mMinWiredDots = Settings.Display.getMinWiredDots(this);
-        mMaxRetry = Settings.Display.getMaxRetries(this);
-        mAutoSave = Settings.Security.isAutoSavePattern(this);
-
-        /*
-         * Encrypter.
-         */
-        char[] encrypterClass = Settings.Security.getEncrypterClass(this);
-        if (encrypterClass != null) {
-            try {
-                mEncrypter = (IEncrypter) Class.forName(
-                        new String(encrypterClass), false, getClassLoader())
-                        .newInstance();
-            } catch (Throwable t) {
-                throw new InvalidEncrypterException();
-            }
-        }
+        loadSettings();
 
         mIntentResult = new Intent();
         setResult(RESULT_CANCELED, mIntentResult);
@@ -362,6 +346,74 @@ public class LockPatternActivity extends Activity {
         if (BuildConfig.DEBUG)
             Log.d(CLASSNAME, "onDestroy()");
     }// onDestroy()
+
+    /**
+     * Loads settings, either from manifest or {@link Settings}.
+     */
+    private void loadSettings() {
+        Bundle metaData = null;
+        try {
+            metaData = getPackageManager().getActivityInfo(getComponentName(),
+                    PackageManager.GET_META_DATA).metaData;
+        } catch (NameNotFoundException e) {
+            /*
+             * Never catch this.
+             */
+            e.printStackTrace();
+        }
+
+        if (metaData.containsKey(Settings.Display.METADATA_MIN_WIRED_DOTS))
+            mMinWiredDots = Settings.Display.validateMinWiredDots(this,
+                    metaData.getInt(Settings.Display.METADATA_MIN_WIRED_DOTS));
+        else
+            mMinWiredDots = Settings.Display.getMinWiredDots(this);
+
+        if (metaData.containsKey(Settings.Display.METADATA_MAX_RETRIES))
+            mMaxRetry = Settings.Display.validateMaxRetries(this,
+                    metaData.getInt(Settings.Display.METADATA_MAX_RETRIES));
+        else
+            mMaxRetry = Settings.Display.getMaxRetries(this);
+
+        if (metaData.containsKey(Settings.Security.METADATA_AUTO_SAVE_PATTERN))
+            mAutoSave = metaData
+                    .getBoolean(Settings.Security.METADATA_AUTO_SAVE_PATTERN);
+        else
+            mAutoSave = Settings.Security.isAutoSavePattern(this);
+
+        if (metaData.containsKey(Settings.Display.METADATA_CAPTCHA_WIRED_DOTS))
+            mCaptchaWiredDots = Settings.Display
+                    .validateCaptchaWiredDots(
+                            this,
+                            metaData.getInt(Settings.Display.METADATA_CAPTCHA_WIRED_DOTS));
+        else
+            mCaptchaWiredDots = Settings.Display.getCaptchaWiredDots(this);
+
+        if (metaData.containsKey(Settings.Display.METADATA_STEALTH_MODE))
+            mStealthMode = metaData
+                    .getBoolean(Settings.Display.METADATA_STEALTH_MODE);
+        else
+            mStealthMode = Settings.Display.isStealthMode(this);
+
+        /*
+         * Encrypter.
+         */
+        char[] encrypterClass;
+        if (metaData.containsKey(Settings.Security.METADATA_ENCRYPTER_CLASS))
+            encrypterClass = metaData.getString(
+                    Settings.Security.METADATA_ENCRYPTER_CLASS).toCharArray();
+        else
+            encrypterClass = Settings.Security.getEncrypterClass(this);
+
+        if (encrypterClass != null) {
+            try {
+                mEncrypter = (IEncrypter) Class.forName(
+                        new String(encrypterClass), false, getClassLoader())
+                        .newInstance();
+            } catch (Throwable t) {
+                throw new InvalidEncrypterException();
+            }
+        }
+    }// loadSettings()
 
     /**
      * Initializes UI...
@@ -423,7 +475,7 @@ public class LockPatternActivity extends Activity {
         }
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
-        mLockPatternView.setInStealthMode(Settings.Display.isStealthMode(this)
+        mLockPatternView.setInStealthMode(mStealthMode
                 && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()));
         mLockPatternView.setOnPatternListener(mLockPatternViewListener);
         if (lastPattern != null && lastDisplayMode != null
@@ -495,8 +547,7 @@ public class LockPatternActivity extends Activity {
                 getIntent().putParcelableArrayListExtra(
                         EXTRA_PATTERN,
                         pattern = LockPatternUtils
-                                .genCaptchaPattern(Settings.Display
-                                        .getCaptchaWiredDots(this)));
+                                .genCaptchaPattern(mCaptchaWiredDots));
 
             mLockPatternView.setPattern(DisplayMode.Animate, pattern);
         }// ACTION_VERIFY_CAPTCHA
