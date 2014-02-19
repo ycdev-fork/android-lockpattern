@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.6 beta
+* Version: 3.0.6
 
 Feel free to contact us at:
 
@@ -25,6 +25,11 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.6:
+    + *Release*: February 19, 2014
+    + Add support to directly configure settings via AndroidManifest.xml (tag
+      `<meta-data>`).
 
 * Version 3.0.6 beta:
     + *Initialize*: February 18, 2014

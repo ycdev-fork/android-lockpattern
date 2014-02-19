@@ -32,12 +32,12 @@ public class Sys {
     /**
      * The library version code.
      */
-    public static final int LIB_VERSION_CODE = 39;
+    public static final int LIB_VERSION_CODE = 40;
 
     /**
      * The library version name.
      */
-    public static final String LIB_VERSION_NAME = "3.0.6 beta";
+    public static final String LIB_VERSION_NAME = "3.0.6";
 
     /**
      * This is singleton class.
