@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.6
+* Version: 3.0.7
 
 Feel free to contact us at:
 
@@ -25,6 +25,10 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.0.7:
+    + *Release*: February 21, 2014
+    + Fix `NullPointerException` while loading settings from manifest.
 
 * Version 3.0.6:
     + *Release*: February 19, 2014
