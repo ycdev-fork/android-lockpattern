@@ -362,25 +362,32 @@ public class LockPatternActivity extends Activity {
             e.printStackTrace();
         }
 
-        if (metaData.containsKey(Settings.Display.METADATA_MIN_WIRED_DOTS))
+        if (metaData != null
+                && metaData
+                        .containsKey(Settings.Display.METADATA_MIN_WIRED_DOTS))
             mMinWiredDots = Settings.Display.validateMinWiredDots(this,
                     metaData.getInt(Settings.Display.METADATA_MIN_WIRED_DOTS));
         else
             mMinWiredDots = Settings.Display.getMinWiredDots(this);
 
-        if (metaData.containsKey(Settings.Display.METADATA_MAX_RETRIES))
+        if (metaData != null
+                && metaData.containsKey(Settings.Display.METADATA_MAX_RETRIES))
             mMaxRetry = Settings.Display.validateMaxRetries(this,
                     metaData.getInt(Settings.Display.METADATA_MAX_RETRIES));
         else
             mMaxRetry = Settings.Display.getMaxRetries(this);
 
-        if (metaData.containsKey(Settings.Security.METADATA_AUTO_SAVE_PATTERN))
+        if (metaData != null
+                && metaData
+                        .containsKey(Settings.Security.METADATA_AUTO_SAVE_PATTERN))
             mAutoSave = metaData
                     .getBoolean(Settings.Security.METADATA_AUTO_SAVE_PATTERN);
         else
             mAutoSave = Settings.Security.isAutoSavePattern(this);
 
-        if (metaData.containsKey(Settings.Display.METADATA_CAPTCHA_WIRED_DOTS))
+        if (metaData != null
+                && metaData
+                        .containsKey(Settings.Display.METADATA_CAPTCHA_WIRED_DOTS))
             mCaptchaWiredDots = Settings.Display
                     .validateCaptchaWiredDots(
                             this,
@@ -388,7 +395,8 @@ public class LockPatternActivity extends Activity {
         else
             mCaptchaWiredDots = Settings.Display.getCaptchaWiredDots(this);
 
-        if (metaData.containsKey(Settings.Display.METADATA_STEALTH_MODE))
+        if (metaData != null
+                && metaData.containsKey(Settings.Display.METADATA_STEALTH_MODE))
             mStealthMode = metaData
                     .getBoolean(Settings.Display.METADATA_STEALTH_MODE);
         else
@@ -398,7 +406,9 @@ public class LockPatternActivity extends Activity {
          * Encrypter.
          */
         char[] encrypterClass;
-        if (metaData.containsKey(Settings.Security.METADATA_ENCRYPTER_CLASS))
+        if (metaData != null
+                && metaData
+                        .containsKey(Settings.Security.METADATA_ENCRYPTER_CLASS))
             encrypterClass = metaData.getString(
                     Settings.Security.METADATA_ENCRYPTER_CLASS).toCharArray();
         else
