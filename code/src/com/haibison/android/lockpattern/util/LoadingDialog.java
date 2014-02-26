@@ -58,7 +58,7 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      *            it, or by pressing Back button.
      */
     public LoadingDialog(Context context, boolean cancelable) {
-        this(context, cancelable, R.string.alp_loading);
+        this(context, cancelable, R.string.alp_42447968_loading);
     }// LoadingDialog()
 
     /**

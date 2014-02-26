@@ -17,7 +17,7 @@
 
 <resources>
 
-    <dimen name="alp_lockpatternview_size">350dp</dimen>
-    <dimen name="alp_separator_size">1dp</dimen>
+    <dimen name="alp_42447968_lockpatternview_size">350dp</dimen>
+    <dimen name="alp_42447968_separator_size">1dp</dimen>
 
 </resources>

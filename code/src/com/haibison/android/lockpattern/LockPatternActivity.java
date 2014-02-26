@@ -65,8 +65,8 @@ import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
  * with {@code ACTION_*}. Otherwise the library might behave strangely (we don't
  * cover those cases).</li>
  * <li>You must use one of the themes that this library supports. They start
- * with {@code R.style.Alp_Theme_*}. The reason is the themes contain resources
- * that the library needs.</li>
+ * with {@code R.style.Alp_42447968_Theme_*}. The reason is the themes contain
+ * resources that the library needs.</li>
  * <li>With {@link #ACTION_COMPARE_PATTERN}, there are <b><i>4 possible result
  * codes</i></b>: {@link Activity#RESULT_OK}, {@link Activity#RESULT_CANCELED},
  * {@link #RESULT_FAILED} and {@link #RESULT_FORGOT_PATTERN}.</li>
@@ -173,10 +173,10 @@ public class LockPatternActivity extends Activity {
     public static final String EXTRA_RETRY_COUNT = CLASSNAME + ".retry_count";
 
     /**
-     * Sets value of this key to a theme in {@code R.style.Alp_Theme_*}. Default
-     * is the one you set in your {@code AndroidManifest.xml}. Note that theme
-     * {@link R.style#Alp_Theme_Light_DarkActionBar} is available in API 4+, but
-     * it only works in API 14+.
+     * Sets value of this key to a theme in {@code R.style.Alp_42447968_Theme_*}
+     * . Default is the one you set in your {@code AndroidManifest.xml}. Note
+     * that theme {@link R.style#Alp_42447968_Theme_Light_DarkActionBar} is
+     * available in API 4+, but it only works in API 14+.
      * 
      * @since v1.5.3 beta
      */
@@ -277,7 +277,7 @@ public class LockPatternActivity extends Activity {
     /*
      * FIELDS
      */
-    private int mMaxRetry, mMinWiredDots, mRetryCount = 0, mCaptchaWiredDots;
+    private int mMaxRetries, mMinWiredDots, mRetryCount = 0, mCaptchaWiredDots;
     private boolean mAutoSave, mStealthMode;
     private IEncrypter mEncrypter;
     private ButtonOkCommand mBtnOkCmd;
@@ -306,7 +306,7 @@ public class LockPatternActivity extends Activity {
 
         if (getIntent().hasExtra(EXTRA_THEME))
             setTheme(getIntent().getIntExtra(EXTRA_THEME,
-                    R.style.Alp_Theme_Dark));
+                    R.style.Alp_42447968_Theme_Dark));
 
         super.onCreate(savedInstanceState);
 
@@ -372,10 +372,10 @@ public class LockPatternActivity extends Activity {
 
         if (metaData != null
                 && metaData.containsKey(Settings.Display.METADATA_MAX_RETRIES))
-            mMaxRetry = Settings.Display.validateMaxRetries(this,
+            mMaxRetries = Settings.Display.validateMaxRetries(this,
                     metaData.getInt(Settings.Display.METADATA_MAX_RETRIES));
         else
-            mMaxRetry = Settings.Display.getMaxRetries(this);
+            mMaxRetries = Settings.Display.getMaxRetries(this);
 
         if (metaData != null
                 && metaData
@@ -440,15 +440,15 @@ public class LockPatternActivity extends Activity {
         List<Cell> lastPattern = mLockPatternView != null ? mLockPatternView
                 .getPattern() : null;
 
-        setContentView(R.layout.alp_lock_pattern_activity);
+        setContentView(R.layout.alp_42447968_lock_pattern_activity);
         UI.adjustDialogSizeForLargeScreens(getWindow());
 
-        mTextInfo = (TextView) findViewById(R.id.alp_textview_info);
-        mLockPatternView = (LockPatternView) findViewById(R.id.alp_view_lock_pattern);
+        mTextInfo = (TextView) findViewById(R.id.alp_42447968_textview_info);
+        mLockPatternView = (LockPatternView) findViewById(R.id.alp_42447968_view_lock_pattern);
 
-        mFooter = findViewById(R.id.alp_viewgroup_footer);
-        mBtnCancel = (Button) findViewById(R.id.alp_button_cancel);
-        mBtnConfirm = (Button) findViewById(R.id.alp_button_confirm);
+        mFooter = findViewById(R.id.alp_42447968_viewgroup_footer);
+        mBtnCancel = (Button) findViewById(R.id.alp_42447968_button_cancel);
+        mBtnConfirm = (Button) findViewById(R.id.alp_42447968_button_confirm);
 
         /*
          * LOCK PATTERN VIEW
@@ -459,7 +459,7 @@ public class LockPatternActivity extends Activity {
         case Configuration.SCREENLAYOUT_SIZE_LARGE:
         case Configuration.SCREENLAYOUT_SIZE_XLARGE: {
             final int size = getResources().getDimensionPixelSize(
-                    R.dimen.alp_lockpatternview_size);
+                    R.dimen.alp_42447968_lockpatternview_size);
             LayoutParams lp = mLockPatternView.getLayoutParams();
             lp.width = size;
             lp.height = size;
@@ -506,7 +506,8 @@ public class LockPatternActivity extends Activity {
             if (infoText != null)
                 mTextInfo.setText(infoText);
             else
-                mTextInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
 
             /*
              * BUTTON OK
@@ -515,10 +516,10 @@ public class LockPatternActivity extends Activity {
                 mBtnOkCmd = ButtonOkCommand.CONTINUE;
             switch (mBtnOkCmd) {
             case CONTINUE:
-                mBtnConfirm.setText(R.string.alp_cmd_continue);
+                mBtnConfirm.setText(R.string.alp_42447968_cmd_continue);
                 break;
             case DONE:
-                mBtnConfirm.setText(R.string.alp_cmd_confirm);
+                mBtnConfirm.setText(R.string.alp_42447968_cmd_confirm);
                 break;
             default:
                 /*
@@ -531,18 +532,20 @@ public class LockPatternActivity extends Activity {
         }// ACTION_CREATE_PATTERN
         else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
             if (TextUtils.isEmpty(infoText))
-                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
             else
                 mTextInfo.setText(infoText);
             if (getIntent().hasExtra(EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN)) {
                 mBtnConfirm.setOnClickListener(mBtnConfirmOnClickListener);
-                mBtnConfirm.setText(R.string.alp_cmd_forgot_pattern);
+                mBtnConfirm.setText(R.string.alp_42447968_cmd_forgot_pattern);
                 mBtnConfirm.setEnabled(true);
                 mFooter.setVisibility(View.VISIBLE);
             }
         }// ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-            mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+            mTextInfo
+                    .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
 
             /*
              * NOTE: EXTRA_PATTERN should hold a char[] array. In this case we
@@ -618,11 +621,11 @@ public class LockPatternActivity extends Activity {
                     mRetryCount++;
                     mIntentResult.putExtra(EXTRA_RETRY_COUNT, mRetryCount);
 
-                    if (mRetryCount >= mMaxRetry)
+                    if (mRetryCount >= mMaxRetries)
                         finishWithNegativeResult(RESULT_FAILED);
                     else {
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-                        mTextInfo.setText(R.string.alp_msg_try_again);
+                        mTextInfo.setText(R.string.alp_42447968_msg_try_again);
                         mLockPatternView.postDelayed(mLockPatternViewReloader,
                                 DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
                     }
@@ -642,7 +645,7 @@ public class LockPatternActivity extends Activity {
         if (pattern.size() < mMinWiredDots) {
             mLockPatternView.setDisplayMode(DisplayMode.Wrong);
             mTextInfo.setText(getResources().getQuantityString(
-                    R.plurals.alp_pmsg_connect_x_dots, mMinWiredDots,
+                    R.plurals.alp_42447968_pmsg_connect_x_dots, mMinWiredDots,
                     mMinWiredDots));
             mLockPatternView.postDelayed(mLockPatternViewReloader,
                     DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
@@ -674,11 +677,11 @@ public class LockPatternActivity extends Activity {
 
                     if (result) {
                         mTextInfo
-                                .setText(R.string.alp_msg_your_new_unlock_pattern);
+                                .setText(R.string.alp_42447968_msg_your_new_unlock_pattern);
                         mBtnConfirm.setEnabled(true);
                     } else {
                         mTextInfo
-                                .setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                                .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
                         mBtnConfirm.setEnabled(false);
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                         mLockPatternView.postDelayed(mLockPatternViewReloader,
@@ -706,7 +709,8 @@ public class LockPatternActivity extends Activity {
                     super.onPostExecute(result);
 
                     getIntent().putExtra(EXTRA_PATTERN, result);
-                    mTextInfo.setText(R.string.alp_msg_pattern_recorded);
+                    mTextInfo
+                            .setText(R.string.alp_42447968_msg_pattern_recorded);
                     mBtnConfirm.setEnabled(true);
                 }// onPostExecute()
 
@@ -829,16 +833,19 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
-                mTextInfo.setText(R.string.alp_msg_release_finger_when_done);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_release_finger_when_done);
                 mBtnConfirm.setEnabled(false);
                 if (mBtnOkCmd == ButtonOkCommand.CONTINUE)
                     getIntent().removeExtra(EXTRA_PATTERN);
             }// ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
-                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
             }// ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
             }// ACTION_VERIFY_CAPTCHA
         }// onPatternStart()
 
@@ -866,17 +873,20 @@ public class LockPatternActivity extends Activity {
                 mBtnConfirm.setEnabled(false);
                 if (mBtnOkCmd == ButtonOkCommand.CONTINUE) {
                     getIntent().removeExtra(EXTRA_PATTERN);
-                    mTextInfo.setText(R.string.alp_msg_draw_an_unlock_pattern);
+                    mTextInfo
+                            .setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
                 } else
                     mTextInfo
-                            .setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                            .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
             }// ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 mLockPatternView.setDisplayMode(DisplayMode.Correct);
-                mTextInfo.setText(R.string.alp_msg_draw_pattern_to_unlock);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
             }// ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-                mTextInfo.setText(R.string.alp_msg_redraw_pattern_to_confirm);
+                mTextInfo
+                        .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
                 List<Cell> pattern = getIntent().getParcelableArrayListExtra(
                         EXTRA_PATTERN);
                 mLockPatternView.setPattern(DisplayMode.Animate, pattern);
@@ -906,8 +916,8 @@ public class LockPatternActivity extends Activity {
                     mBtnOkCmd = ButtonOkCommand.DONE;
                     mLockPatternView.clearPattern();
                     mTextInfo
-                            .setText(R.string.alp_msg_redraw_pattern_to_confirm);
-                    mBtnConfirm.setText(R.string.alp_cmd_confirm);
+                            .setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
+                    mBtnConfirm.setText(R.string.alp_42447968_cmd_confirm);
                     mBtnConfirm.setEnabled(false);
                 } else {
                     final char[] pattern = getIntent().getCharArrayExtra(

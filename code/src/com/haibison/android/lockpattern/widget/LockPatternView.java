@@ -396,10 +396,9 @@ public class LockPatternView extends View {
 
         mPathPaint.setAntiAlias(true);
         mPathPaint.setDither(true);
-        mPathPaint.setColor(getContext().getResources()
-                .getColor(
-                        UI.resolveAttribute(getContext(),
-                                R.attr.alp_color_pattern_path)));
+        mPathPaint.setColor(getContext().getResources().getColor(
+                UI.resolveAttribute(getContext(),
+                        R.attr.alp_42447968_color_pattern_path)));
         mPathPaint.setAlpha(mStrokeAlpha);
         mPathPaint.setStyle(Paint.Style.STROKE);
         mPathPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -409,13 +408,13 @@ public class LockPatternView extends View {
          * lot's of bitmaps!
          */
         mBitmapBtnDefault = getBitmapFor(UI.resolveAttribute(getContext(),
-                R.attr.alp_drawable_btn_code_lock_default_holo));
+                R.attr.alp_42447968_drawable_btn_code_lock_default_holo));
         mBitmapBtnTouched = getBitmapFor(UI.resolveAttribute(getContext(),
-                R.attr.alp_drawable_btn_code_lock_touched_holo));
+                R.attr.alp_42447968_drawable_btn_code_lock_touched_holo));
         mBitmapCircleDefault = getBitmapFor(UI
                 .resolveAttribute(
                         getContext(),
-                        R.attr.alp_drawable_indicator_code_lock_point_area_default_holo));
+                        R.attr.alp_42447968_drawable_indicator_code_lock_point_area_default_holo));
 
         mBitmapCircleGreen = getBitmapFor(UI.resolveAttribute(getContext(),
                 R.attr.aosp_drawable_indicator_code_lock_point_area_normal));
@@ -556,28 +555,28 @@ public class LockPatternView extends View {
     }
 
     private void notifyCellAdded() {
-        sendAccessEvent(R.string.alp_lockscreen_access_pattern_cell_added);
+        sendAccessEvent(R.string.alp_42447968_lockscreen_access_pattern_cell_added);
         if (mOnPatternListener != null) {
             mOnPatternListener.onPatternCellAdded(mPattern);
         }
     }
 
     private void notifyPatternStarted() {
-        sendAccessEvent(R.string.alp_lockscreen_access_pattern_start);
+        sendAccessEvent(R.string.alp_42447968_lockscreen_access_pattern_start);
         if (mOnPatternListener != null) {
             mOnPatternListener.onPatternStart();
         }
     }
 
     private void notifyPatternDetected() {
-        sendAccessEvent(R.string.alp_lockscreen_access_pattern_detected);
+        sendAccessEvent(R.string.alp_42447968_lockscreen_access_pattern_detected);
         if (mOnPatternListener != null) {
             mOnPatternListener.onPatternDetected(mPattern);
         }
     }
 
     private void notifyPatternCleared() {
-        sendAccessEvent(R.string.alp_lockscreen_access_pattern_cleared);
+        sendAccessEvent(R.string.alp_42447968_lockscreen_access_pattern_cleared);
         if (mOnPatternListener != null) {
             mOnPatternListener.onPatternCleared();
         }

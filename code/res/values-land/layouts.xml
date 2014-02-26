@@ -17,6 +17,6 @@
 
 <resources>
 
-    <item name="alp_lock_pattern_activity" type="layout">@layout/alp_lock_pattern_activity_land</item>
+    <item name="alp_42447968_lock_pattern_activity" type="layout">@layout/alp_42447968_lock_pattern_activity_land</item>
 
 </resources>

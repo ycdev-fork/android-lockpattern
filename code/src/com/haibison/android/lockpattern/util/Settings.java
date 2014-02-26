@@ -147,10 +147,12 @@ public class Settings {
          * @return {@code true} or {@code false}. Default is {@code false}.
          */
         public static boolean isStealthMode(Context context) {
-            return p(context).getBoolean(
-                    context.getString(R.string.alp_pkey_display_stealth_mode),
-                    context.getResources().getBoolean(
-                            R.bool.alp_pkey_display_stealth_mode_default));
+            return p(context)
+                    .getBoolean(
+                            context.getString(R.string.alp_42447968_pkey_display_stealth_mode),
+                            context.getResources()
+                                    .getBoolean(
+                                            R.bool.alp_42447968_pkey_display_stealth_mode_default));
         }// isStealthMode()
 
         /**
@@ -168,7 +170,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putBoolean(
-                            context.getString(R.string.alp_pkey_display_stealth_mode),
+                            context.getString(R.string.alp_42447968_pkey_display_stealth_mode),
                             v).commit();
         }// setStealthMode()
 
@@ -183,10 +185,10 @@ public class Settings {
         public static int getMinWiredDots(Context context) {
             return p(context)
                     .getInt(context
-                            .getString(R.string.alp_pkey_display_min_wired_dots),
+                            .getString(R.string.alp_42447968_pkey_display_min_wired_dots),
                             context.getResources()
                                     .getInteger(
-                                            R.integer.alp_pkey_display_min_wired_dots_default));
+                                            R.integer.alp_42447968_pkey_display_min_wired_dots_default));
         }// getMinWiredDots()
 
         /**
@@ -200,8 +202,10 @@ public class Settings {
          */
         public static int validateMinWiredDots(Context context, int v) {
             if (v <= 0 || v > 9)
-                v = context.getResources().getInteger(
-                        R.integer.alp_pkey_display_min_wired_dots_default);
+                v = context
+                        .getResources()
+                        .getInteger(
+                                R.integer.alp_42447968_pkey_display_min_wired_dots_default);
             return v;
         }// validateMinWiredDots()
 
@@ -221,7 +225,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putInt(context
-                            .getString(R.string.alp_pkey_display_min_wired_dots),
+                            .getString(R.string.alp_42447968_pkey_display_min_wired_dots),
                             v).commit();
         }// setMinWiredDots()
 
@@ -234,10 +238,12 @@ public class Settings {
          *         {@code 5}.
          */
         public static int getMaxRetries(Context context) {
-            return p(context).getInt(
-                    context.getString(R.string.alp_pkey_display_max_retries),
-                    context.getResources().getInteger(
-                            R.integer.alp_pkey_display_max_retries_default));
+            return p(context)
+                    .getInt(context
+                            .getString(R.string.alp_42447968_pkey_display_max_retries),
+                            context.getResources()
+                                    .getInteger(
+                                            R.integer.alp_42447968_pkey_display_max_retries_default));
         }// getMaxRetries()
 
         /**
@@ -251,8 +257,10 @@ public class Settings {
          */
         public static int validateMaxRetries(Context context, int v) {
             if (v <= 0)
-                v = context.getResources().getInteger(
-                        R.integer.alp_pkey_display_max_retries_default);
+                v = context
+                        .getResources()
+                        .getInteger(
+                                R.integer.alp_42447968_pkey_display_max_retries_default);
             return v;
         }// validateMaxRetries()
 
@@ -272,7 +280,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putInt(context
-                            .getString(R.string.alp_pkey_display_max_retries),
+                            .getString(R.string.alp_42447968_pkey_display_max_retries),
                             v).commit();
         }// setMaxRetries()
 
@@ -286,10 +294,10 @@ public class Settings {
         public static int getCaptchaWiredDots(Context context) {
             return p(context)
                     .getInt(context
-                            .getString(R.string.alp_pkey_display_captcha_wired_dots),
+                            .getString(R.string.alp_42447968_pkey_display_captcha_wired_dots),
                             context.getResources()
                                     .getInteger(
-                                            R.integer.alp_pkey_display_captcha_wired_dots_default));
+                                            R.integer.alp_42447968_pkey_display_captcha_wired_dots_default));
         }// getCaptchaWiredDots()
 
         /**
@@ -303,8 +311,10 @@ public class Settings {
          */
         public static int validateCaptchaWiredDots(Context context, int v) {
             if (v <= 0 || v > 9)
-                v = context.getResources().getInteger(
-                        R.integer.alp_pkey_display_captcha_wired_dots_default);
+                v = context
+                        .getResources()
+                        .getInteger(
+                                R.integer.alp_42447968_pkey_display_captcha_wired_dots_default);
             return v;
         }// validateCaptchaWiredDots()
 
@@ -324,7 +334,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putInt(context
-                            .getString(R.string.alp_pkey_display_captcha_wired_dots),
+                            .getString(R.string.alp_42447968_pkey_display_captcha_wired_dots),
                             v).commit();
         }// setCaptchaWiredDots()
 
@@ -367,10 +377,12 @@ public class Settings {
          * @return {@code true} or {@code false}. Default is {@code false}.
          */
         public static boolean isAutoSavePattern(Context context) {
-            return p(context).getBoolean(
-                    context.getString(R.string.alp_pkey_sys_auto_save_pattern),
-                    context.getResources().getBoolean(
-                            R.bool.alp_pkey_sys_auto_save_pattern_default));
+            return p(context)
+                    .getBoolean(
+                            context.getString(R.string.alp_42447968_pkey_sys_auto_save_pattern),
+                            context.getResources()
+                                    .getBoolean(
+                                            R.bool.alp_42447968_pkey_sys_auto_save_pattern_default));
         }// isAutoSavePattern()
 
         /**
@@ -388,7 +400,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putBoolean(
-                            context.getString(R.string.alp_pkey_sys_auto_save_pattern),
+                            context.getString(R.string.alp_42447968_pkey_sys_auto_save_pattern),
                             v).commit();
             if (!v)
                 setPattern(context, null);
@@ -403,7 +415,8 @@ public class Settings {
          */
         public static char[] getPattern(Context context) {
             String pattern = p(context).getString(
-                    context.getString(R.string.alp_pkey_sys_pattern), null);
+                    context.getString(R.string.alp_42447968_pkey_sys_pattern),
+                    null);
             return pattern == null ? null : pattern.toCharArray();
         }// getPattern()
 
@@ -419,7 +432,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putString(
-                            context.getString(R.string.alp_pkey_sys_pattern),
+                            context.getString(R.string.alp_42447968_pkey_sys_pattern),
                             pattern != null ? new String(pattern) : null)
                     .commit();
         }// setPattern()
@@ -432,9 +445,10 @@ public class Settings {
          * @return the full name of encrypter class. Default is {@code null}.
          */
         public static char[] getEncrypterClass(Context context) {
-            String clazz = p(context).getString(
-                    context.getString(R.string.alp_pkey_sys_encrypter_class),
-                    null);
+            String clazz = p(context)
+                    .getString(
+                            context.getString(R.string.alp_42447968_pkey_sys_encrypter_class),
+                            null);
             return clazz == null ? null : clazz.toCharArray();
         }// getEncrypterClass()
 
@@ -471,7 +485,7 @@ public class Settings {
             p(context)
                     .edit()
                     .putString(
-                            context.getString(R.string.alp_pkey_sys_encrypter_class),
+                            context.getString(R.string.alp_42447968_pkey_sys_encrypter_class),
                             clazz != null ? new String(clazz) : null).commit();
         }// setEncrypterClass()
 
