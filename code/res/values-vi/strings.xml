@@ -22,11 +22,11 @@
     <string name="alp_42447968_cmd_forgot_pattern">Quên rồi?</string>
     <string name="alp_42447968_cmd_retry">Thử lại</string>
     <string name="alp_42447968_loading">Đang tải…</string>
-    <string name="alp_42447968_lockscreen_access_pattern_cell_added">Cell added</string>
-    <string name="alp_42447968_lockscreen_access_pattern_cleared">Pattern cleared</string>
-    <string name="alp_42447968_lockscreen_access_pattern_detected">Pattern completed</string>
-    <string name="alp_42447968_lockscreen_access_pattern_start">Pattern started</string>
-    <string name="alp_42447968_msg_connect_4dots">Kết nối ít nhất 4 điểm.\nHãy thử lại…</string>
+    <string name="alp_42447968_lockscreen_access_pattern_cell_added">Đã thêm điểm</string>
+    <string name="alp_42447968_lockscreen_access_pattern_cleared">Đã xóa mẫu khóa</string>
+    <string name="alp_42447968_lockscreen_access_pattern_detected">Hoàn thành mẫu khóa</string>
+    <string name="alp_42447968_lockscreen_access_pattern_start">Bắt đầu mẫu khóa</string>
+    <string name="alp_42447968_msg_connect_4dots">Kết nối ít nhứt 4 điểm.\nHãy thử lại…</string>
     <string name="alp_42447968_msg_draw_an_unlock_pattern">Vẽ mẫu khóa:</string>
     <string name="alp_42447968_msg_draw_pattern_to_unlock">Vẽ mẫu khóa để truy cập:</string>
     <string name="alp_42447968_msg_pattern_recorded">Mẫu khóa đã được nhớ!</string>
@@ -36,7 +36,7 @@
     <string name="alp_42447968_msg_your_new_unlock_pattern">Mẫu khóa mới của bạn:</string>
 
     <plurals name="alp_42447968_pmsg_connect_x_dots">
-        <item quantity="other">Kết nối ít nhất %1$d điểm.\nHãy thử lại…</item>
+        <item quantity="other">Kết nối ít nhứt %1$d điểm.\nHãy thử lại…</item>
     </plurals>
 
 </resources>
