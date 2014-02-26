@@ -40,13 +40,6 @@ import com.haibison.android.lockpattern.R;
 public class Settings {
 
     /**
-     * This unique ID is used for the preferences' file name.
-     * 
-     * @since v2.6 beta
-     */
-    public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
-
-    /**
      * This is singleton class.
      */
     private Settings() {
@@ -58,7 +51,7 @@ public class Settings {
      * @return the global preference filename.
      */
     public static final String genPreferenceFilename() {
-        return String.format("%s_%s", Sys.LIB_NAME, UID);
+        return String.format("%s_%s", Sys.LIB_NAME, Sys.UID);
     }// genPreferenceFilename()
 
     /**
@@ -67,7 +60,7 @@ public class Settings {
      * @return the global database filename.
      */
     public static final String genDatabaseFilename(String name) {
-        return String.format("%s_%s_%s", Sys.LIB_NAME, UID, name);
+        return String.format("%s_%s_%s", Sys.LIB_NAME, Sys.UID, name);
     }// genDatabaseFilename()
 
     /**

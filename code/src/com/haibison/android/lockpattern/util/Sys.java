@@ -40,6 +40,13 @@ public class Sys {
     public static final String LIB_VERSION_NAME = "3.0.8 beta";
 
     /**
+     * This unique ID is used for some stuffs such as preferences' file name.
+     * 
+     * @since v2.6 beta
+     */
+    public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
+
+    /**
      * This is singleton class.
      */
     private Sys() {
