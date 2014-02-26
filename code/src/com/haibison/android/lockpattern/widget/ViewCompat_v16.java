@@ -14,35 +14,35 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
+package com.haibison.android.lockpattern.widget;
+
+import android.view.View;
 
 /**
- * System utilities.
+ * Helper class for {@link View} in API 16+.
  * 
  * @author Hai Bison
- * 
+ * @since v2.4 beta
  */
-public class Sys {
-
-    /**
-     * The library name.
-     */
-    public static final String LIB_NAME = "android-lockpattern";
-
-    /**
-     * The library version code.
-     */
-    public static final int LIB_VERSION_CODE = 41;
-
-    /**
-     * The library version name.
-     */
-    public static final String LIB_VERSION_NAME = "3.0.7";
+public class ViewCompat_v16 {
 
     /**
      * This is singleton class.
      */
-    private Sys() {
-    }// Sys
+    private ViewCompat_v16() {
+    }// ViewCompat_v16
+
+    /**
+     * Wrapper for {@link View#announceForAccessibility(CharSequence)}.
+     * 
+     * @param view
+     *            a view.
+     * @param text
+     *            The announcement text.
+     * @see View#announceForAccessibility(CharSequence)
+     */
+    public static void announceForAccessibility(View view, CharSequence text) {
+        view.announceForAccessibility(text);
+    }// announceForAccessibility()
 
 }

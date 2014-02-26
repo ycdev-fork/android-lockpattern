@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
+package com.haibison.android.lockpattern.util;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

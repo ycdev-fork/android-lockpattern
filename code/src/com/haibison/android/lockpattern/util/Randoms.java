@@ -14,12 +14,12 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
-
-import group.pals.android.lib.ui.lockpattern.collect.Lists;
+package com.haibison.android.lockpattern.util;
 
 import java.util.List;
 import java.util.Random;
+
+import com.haibison.android.lockpattern.collect.Lists;
 
 /**
  * Random utilities.

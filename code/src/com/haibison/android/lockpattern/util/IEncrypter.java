@@ -14,13 +14,13 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
-
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
+package com.haibison.android.lockpattern.util;
 
 import java.util.List;
 
 import android.content.Context;
+
+import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
 
 /**
  * Interface for encrypter.

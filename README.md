@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.7
+* Version: 3.0.8 beta
 
 Feel free to contact us at:
 
@@ -26,50 +26,53 @@ project. We hope this project will be always useful for everyone.
 
 # HISTORY
 
-* Version 3.0.7:
+* Version 3.0.8 beta
+    + *Initialize*: February 26, 2014
+
+* Version 3.0.7
     + *Release*: February 21, 2014
     + Fix `NullPointerException` while loading settings from manifest.
 
-* Version 3.0.6:
+* Version 3.0.6
     + *Release*: February 19, 2014
     + Add support to directly configure settings via AndroidManifest.xml (tag
       `<meta-data>`).
 
-* Version 3.0.6 beta:
+* Version 3.0.6 beta
     + *Initialize*: February 18, 2014
 
-* Version 3.0.5:
+* Version 3.0.5
     + *Release:* Feburary 12, 2014
     + Add `SimpleWeakEncryption`.
     + Update `LockPatternView` to branch `kitkat-release` (commit:
       `c46c4a6765196bcabf3ea89771a1f9067b22baad`).
     + Update Javadocs, some minor changes...
 
-* Version 3.0.5 beta:
+* Version 3.0.5 beta
     + *Initialize:* January 12, 2014
 
-* Version 3.0.4:
+* Version 3.0.4
     + *Release:* January 12, 2014
     + Refactor package `prefs` to a single class `util.Settings`.
     + Add `LoadingDialog` for the case that implementation of `IEncrypter` takes
       lots of time to finish.
 
-* Version 3.0.4 beta:
+* Version 3.0.4 beta
     + *Initialize:* January 11, 2014
 
-* Version 3.0.3:
+* Version 3.0.3
     + *Release:* December 18, 2013
     + Optimize code.
 
-* Version 3.0.2:
+* Version 3.0.2
     + *Release:* December 18, 2013
     + Add theme light with dark action bar (for API 14+).
 
-* Version 3.0.1:
+* Version 3.0.1
     + *Release:* October 10, 2013
     + Use default icon set (from AOSP).
 
-* Version 3.0:
+* Version 3.0
     + *Release:* September 15, 2013
     + Upgrade IEncrypter.
 

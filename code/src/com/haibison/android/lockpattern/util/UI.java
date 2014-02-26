@@ -14,9 +14,8 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
+package com.haibison.android.lockpattern.util;
 
-import group.pals.android.lib.ui.lockpattern.BuildConfig;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -25,6 +24,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Window;
+
+import com.haibison.android.lockpattern.BuildConfig;
 
 /**
  * UI utilities.

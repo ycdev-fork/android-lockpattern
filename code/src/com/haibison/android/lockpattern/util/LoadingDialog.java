@@ -14,15 +14,16 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.util;
+package com.haibison.android.lockpattern.util;
 
-import group.pals.android.lib.ui.lockpattern.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+
+import com.haibison.android.lockpattern.R;
 
 /**
  * An implementation of {@link AsyncTask}, used to show {@link ProgressDialog}

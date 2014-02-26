@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.widget;
-
-import group.pals.android.lib.ui.lockpattern.BuildConfig;
-import group.pals.android.lib.ui.lockpattern.collect.Lists;
-import group.pals.android.lib.ui.lockpattern.util.Randoms;
+package com.haibison.android.lockpattern.widget;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -29,6 +25,10 @@ import java.util.List;
 import java.util.Locale;
 
 import android.util.Log;
+
+import com.haibison.android.lockpattern.BuildConfig;
+import com.haibison.android.lockpattern.collect.Lists;
+import com.haibison.android.lockpattern.util.Randoms;
 
 /**
  * Utilities for the lock pattern and its settings.

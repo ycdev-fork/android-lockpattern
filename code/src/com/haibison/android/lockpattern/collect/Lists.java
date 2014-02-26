@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.collect;
+package com.haibison.android.lockpattern.collect;
 
 import java.util.ArrayList;
 import java.util.Collections;

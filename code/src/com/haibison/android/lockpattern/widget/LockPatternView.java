@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.widget;
-
-import group.pals.android.lib.ui.lockpattern.R;
-import group.pals.android.lib.ui.lockpattern.util.UI;
+package com.haibison.android.lockpattern.widget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +37,9 @@ import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+
+import com.haibison.android.lockpattern.R;
+import com.haibison.android.lockpattern.util.UI;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger

@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern.widget;
+package com.haibison.android.lockpattern.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -14,19 +14,7 @@
  *   limitations under the License.
  */
 
-package group.pals.android.lib.ui.lockpattern;
-
-import group.pals.android.lib.ui.lockpattern.util.IEncrypter;
-import group.pals.android.lib.ui.lockpattern.util.InvalidEncrypterException;
-import group.pals.android.lib.ui.lockpattern.util.LoadingDialog;
-import group.pals.android.lib.ui.lockpattern.util.Settings;
-import group.pals.android.lib.ui.lockpattern.util.Settings.Display;
-import group.pals.android.lib.ui.lockpattern.util.Settings.Security;
-import group.pals.android.lib.ui.lockpattern.util.UI;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternUtils;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.Cell;
-import group.pals.android.lib.ui.lockpattern.widget.LockPatternView.DisplayMode;
+package com.haibison.android.lockpattern;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +36,18 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.haibison.android.lockpattern.util.IEncrypter;
+import com.haibison.android.lockpattern.util.InvalidEncrypterException;
+import com.haibison.android.lockpattern.util.LoadingDialog;
+import com.haibison.android.lockpattern.util.Settings;
+import com.haibison.android.lockpattern.util.Settings.Display;
+import com.haibison.android.lockpattern.util.Settings.Security;
+import com.haibison.android.lockpattern.util.UI;
+import com.haibison.android.lockpattern.widget.LockPatternUtils;
+import com.haibison.android.lockpattern.widget.LockPatternView;
+import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
+import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 
 /**
  * Main activity for this library.
