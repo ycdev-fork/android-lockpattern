@@ -327,7 +327,8 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.d(CLASSNAME, "onConfigurationChanged()");
+        if (BuildConfig.DEBUG)
+            Log.d(CLASSNAME, "onConfigurationChanged()");
         super.onConfigurationChanged(newConfig);
         initContentView();
     }// onConfigurationChanged()
@@ -346,13 +347,6 @@ public class LockPatternActivity extends Activity {
 
         return super.onKeyDown(keyCode, event);
     }// onKeyDown()
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (BuildConfig.DEBUG)
-            Log.d(CLASSNAME, "onDestroy()");
-    }// onDestroy()
 
     /**
      * Loads settings, either from manifest or {@link Settings}.
