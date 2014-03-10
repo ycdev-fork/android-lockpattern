@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.0.8 beta
+* Version: 3.1
 
 Feel free to contact us at:
 
@@ -25,6 +25,14 @@ project. We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.1
+    + *Release*: March 10, 2014
+    + Change package name to `com.haibison.android.lockpattern`.
+    + Change prefixes:
+        - From `alp_` to `alp_42447968_`.
+        - From `Alp.` to `Alp.42447968.`.
+    + Optimize code and make some other minor changes.
 
 * Version 3.0.8 beta
     + *Initialize*: February 26, 2014
