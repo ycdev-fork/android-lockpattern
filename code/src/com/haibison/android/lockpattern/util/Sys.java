@@ -32,12 +32,17 @@ public class Sys {
     /**
      * The library version code.
      */
-    public static final int LIB_VERSION_CODE = 43;
+    public static final int LIB_VERSION_CODE = 44;
 
     /**
      * The library version name.
      */
-    public static final String LIB_VERSION_NAME = "3.1";
+    public static final String LIB_VERSION_NAME = "3.1.1 beta";
+
+    /**
+     * The library package name.
+     */
+    public static final String LIB_PACKAGE_NAME = "com.haibison.android.lockpattern";
 
     /**
      * This unique ID is used for some stuffs such as preferences' file name.

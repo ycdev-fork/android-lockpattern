@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.1
+* Version: 3.1.1 beta (#44)
 
 Feel free to contact us at:
 
@@ -26,8 +26,11 @@ project. We hope this project will be always useful for everyone.
 
 # HISTORY
 
-* Version 3.1
-    + *Release*: March 10, 2014
+* Version 3.1.1 beta (#44)
+    + *Initialize:* April 04, 2014
+
+* Version 3.1 (#43)
+    + *Release:* March 10, 2014
     + Change package name to `com.haibison.android.lockpattern`.
     + Change prefixes:
         - From `alp_` to `alp_42447968_`.
@@ -35,19 +38,19 @@ project. We hope this project will be always useful for everyone.
     + Optimize code and make some other minor changes.
 
 * Version 3.0.8 beta
-    + *Initialize*: February 26, 2014
+    + *Initialize:* February 26, 2014
 
 * Version 3.0.7
-    + *Release*: February 21, 2014
+    + *Release:* February 21, 2014
     + Fix `NullPointerException` while loading settings from manifest.
 
 * Version 3.0.6
-    + *Release*: February 19, 2014
+    + *Release:* February 19, 2014
     + Add support to directly configure settings via AndroidManifest.xml (tag
       `<meta-data>`).
 
 * Version 3.0.6 beta
-    + *Initialize*: February 18, 2014
+    + *Initialize:* February 18, 2014
 
 * Version 3.0.5
     + *Release:* Feburary 12, 2014
@@ -115,7 +118,7 @@ project. We hope this project will be always useful for everyone.
 
 * Version 2.6
     + *Release:* May 18, 2013
-    + Use UPPER_CASE for `static final` fields and enums;
+    + Use `UPPER_CASE` for `static final` fields and enums;
     + Move most of dynamic settings to `SharedPreferences`;
     + Change `IEncrypter`;
 

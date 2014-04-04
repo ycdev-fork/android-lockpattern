@@ -85,7 +85,7 @@ import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
  * @author Hai Bison
  * @since v1.0
  */
-public class LockPatternActivity extends Activity {
+public class LockPatternActivity extends Activity implements IContentView {
 
     private static final String CLASSNAME = LockPatternActivity.class.getName();
 
@@ -116,7 +116,7 @@ public class LockPatternActivity extends Activity {
      * this extra, its priority is higher than the one stored in shared
      * preferences.
      * <p/>
-     * You can use {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN} to help your
+     * You can use {@link #EXTRA_PENDING_INTENT_FORGOT_PATTERN} to help your
      * users in case they forgot the patterns.
      * <p/>
      * If the user passes, {@link Activity#RESULT_OK} returns. If not,
@@ -162,12 +162,12 @@ public class LockPatternActivity extends Activity {
     /**
      * If you use {@link #ACTION_COMPARE_PATTERN} and the user forgot his/ her
      * pattern and decided to ask for your help with recovering the pattern (
-     * {@link #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN}), this activity will finish
+     * {@link #EXTRA_PENDING_INTENT_FORGOT_PATTERN}), this activity will finish
      * with this result code.
      * 
      * @see #ACTION_COMPARE_PATTERN
      * @see #EXTRA_RETRY_COUNT
-     * @see #EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN
+     * @see #EXTRA_PENDING_INTENT_FORGOT_PATTERN
      * @since v2.8 beta
      */
     public static final int RESULT_FORGOT_PATTERN = RESULT_FIRST_USER + 2;
@@ -244,17 +244,18 @@ public class LockPatternActivity extends Activity {
             + ".pending_intent_cancelled";
 
     /**
-     * You put an {@link Intent} of <i>{@link Activity}</i> into this extra. The
-     * library will show a button <i>"Forgot pattern?"</i> and call your intent
-     * later when the user taps it.
-     * 
+     * You put a {@link PendingIntent} into this extra. The library will show a
+     * button <i>"Forgot pattern?"</i> and call your intent later when the user
+     * taps it.
+     * <p/>
      * <h1>Notes</h1>
      * <ul>
-     * <li>You don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent,
-     * since the library will call it inside {@link LockPatternActivity} .</li>
+     * <li>If you use an activity, you don't need
+     * {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library
+     * will call it inside {@link LockPatternActivity} .</li>
      * <li>{@link LockPatternActivity} will finish with
      * {@link #RESULT_FORGOT_PATTERN} <i><b>after</b> making a call</i> to start
-     * your activity.</li>
+     * your pending intent.</li>
      * <li>It is your responsibility to make sure the Intent is good. The
      * library doesn't cover any errors when calling your intent.</li>
      * </ul>
@@ -263,8 +264,8 @@ public class LockPatternActivity extends Activity {
      * @since v2.8 beta
      * @author Thanks to Yan Cheng Cheok for his idea.
      */
-    public static final String EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN = CLASSNAME
-            + ".intent_activity_forgot_pattern";
+    public static final String EXTRA_PENDING_INTENT_FORGOT_PATTERN = CLASSNAME
+            + ".pending_intent_forgot_pattern";
 
     /**
      * Helper enum for button OK commands. (Because we use only one "OK" button
@@ -525,7 +526,7 @@ public class LockPatternActivity extends Activity {
                         .setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
             else
                 mTextInfo.setText(infoText);
-            if (getIntent().hasExtra(EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN)) {
+            if (getIntent().hasExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN)) {
                 mBtnConfirm.setOnClickListener(mBtnConfirmOnClickListener);
                 mBtnConfirm.setText(R.string.alp_42447968_cmd_forgot_pattern);
                 mBtnConfirm.setEnabled(true);
@@ -754,11 +755,7 @@ public class LockPatternActivity extends Activity {
             try {
                 pi.send(this, RESULT_OK, mIntentResult);
             } catch (Throwable t) {
-                if (BuildConfig.DEBUG) {
-                    Log.e(CLASSNAME, "Error sending PendingIntent: " + pi);
-                    Log.e(CLASSNAME, ">>> " + t);
-                    t.printStackTrace();
-                }
+                Log.e(CLASSNAME, "Error sending PendingIntent: " + pi, t);
             }
         }
 
@@ -799,11 +796,7 @@ public class LockPatternActivity extends Activity {
             try {
                 pi.send(this, resultCode, mIntentResult);
             } catch (Throwable t) {
-                if (BuildConfig.DEBUG) {
-                    Log.e(CLASSNAME, "Error sending PendingIntent: " + pi);
-                    Log.e(CLASSNAME, ">>> " + t);
-                    t.printStackTrace();
-                }
+                Log.e(CLASSNAME, "Error sending PendingIntent: " + pi, t);
             }
         }
 
@@ -921,11 +914,17 @@ public class LockPatternActivity extends Activity {
                 /*
                  * We don't need to verify the extra. First, this button is only
                  * visible if there is this extra in the intent. Second, it is
-                 * the responsibility of the caller to make sure the extra is an
-                 * Intent of Activity.
+                 * the responsibility of the caller to make sure the extra is
+                 * good.
                  */
-                startActivity((Intent) getIntent().getParcelableExtra(
-                        EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN));
+                PendingIntent pi = null;
+                try {
+                    pi = getIntent().getParcelableExtra(
+                            EXTRA_PENDING_INTENT_FORGOT_PATTERN);
+                    pi.send();
+                } catch (Throwable t) {
+                    Log.e(CLASSNAME, "Error sending pending intent: " + pi, t);
+                }
                 finishWithNegativeResult(RESULT_FORGOT_PATTERN);
             }// ACTION_COMPARE_PATTERN
         }// onClick()
