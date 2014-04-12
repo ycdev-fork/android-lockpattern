@@ -1166,7 +1166,7 @@ public class LockPatternView extends View {
              * add last in progress section
              */
             if ((mPatternInProgress || mPatternDisplayMode == DisplayMode.Animate)
-                    && anyCircles && count > 1) {
+                    && anyCircles && count > 0) {
                 currentPath.lineTo(mInProgressX, mInProgressY);
             }
             canvas.drawPath(currentPath, mPathPaint);
