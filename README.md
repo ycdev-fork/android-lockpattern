@@ -4,18 +4,17 @@
 
 Feel free to contact us at:
 
-* [Homepage](http://www.haibison.com)
 * E-mails:
     + haibison.apps[at]gmail.com
 
-In short, you can use this library in your closed source/ commercial apps with
+In short, you can use this library in your closed source/commercial apps with
 or without our knowledge. Hope you enjoy it  :-)
 
 
 # CREDITS
 
 We sincerely thank all of our friends -- who have been contributing to this
-project. We hope this project will be always useful for everyone.
+project.  We hope this project will be always useful for everyone.
 
 * C
 * [Steven Byle](http://stackoverflow.com/users/1507439/steven-byle)
