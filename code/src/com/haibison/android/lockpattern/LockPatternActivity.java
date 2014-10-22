@@ -88,7 +88,7 @@ import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
  * @author Hai Bison
  * @since v1.0
  */
-public class LockPatternActivity extends Activity implements IContentView {
+public class LockPatternActivity extends Activity {
 
     private static final String CLASSNAME = LockPatternActivity.class.getName();
 
