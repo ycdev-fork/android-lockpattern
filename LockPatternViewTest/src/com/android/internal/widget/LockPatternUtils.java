@@ -32,13 +32,13 @@ public class LockPatternUtils {
      *            The pattern serialized with {@link #patternToString}
      * @return The pattern.
      */
-    public static List<LockPatternView.Cell> stringToPattern(String string) {
-        List<LockPatternView.Cell> result = Lists.newArrayList();
+    public static List<LockPatternViewEx.Cell> stringToPattern(String string) {
+        List<LockPatternViewEx.Cell> result = Lists.newArrayList();
 
         final byte[] bytes = string.getBytes();
         for (int i = 0; i < bytes.length; i++) {
             byte b = bytes[i];
-            result.add(LockPatternView.Cell.of(b / 3, b % 3));
+            result.add(LockPatternViewEx.Cell.of(b / 3, b % 3));
         }
         return result;
     }
@@ -50,7 +50,7 @@ public class LockPatternUtils {
      *            The pattern.
      * @return The pattern in string form.
      */
-    public static String patternToString(List<LockPatternView.Cell> pattern) {
+    public static String patternToString(List<LockPatternViewEx.Cell> pattern) {
         if (pattern == null) {
             return "";
         }
@@ -58,7 +58,7 @@ public class LockPatternUtils {
 
         byte[] res = new byte[patternSize];
         for (int i = 0; i < patternSize; i++) {
-            LockPatternView.Cell cell = pattern.get(i);
+            LockPatternViewEx.Cell cell = pattern.get(i);
             res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
         }
         return new String(res);

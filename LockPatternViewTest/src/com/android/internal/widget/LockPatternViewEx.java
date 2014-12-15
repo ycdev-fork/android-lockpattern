@@ -42,6 +42,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import app.utils.Resources;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger
@@ -50,7 +51,7 @@ import android.view.animation.Interpolator;
  * Is also capable of displaying a static pattern in "in progress", "wrong" or
  * "correct" states.
  */
-public class LockPatternView extends View {
+public class LockPatternViewEx extends View {
 
     // Aspect to use when rendering this view
     private static final int ASPECT_SQUARE = 0; // View will be the minimum of
@@ -257,17 +258,17 @@ public class LockPatternView extends View {
         void onPatternDetected(List<Cell> pattern);
     }
 
-    public LockPatternView(Context context) {
+    public LockPatternViewEx(Context context) {
         this(context, null);
     }
 
-    public LockPatternView(Context context, AttributeSet attrs) {
+    public LockPatternViewEx(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.LockPatternView);
+                R.styleable.LockPatternViewEx);
 
-        final String aspect = a.getString(R.styleable.LockPatternView_aspect);
+        final String aspect = a.getString(R.styleable.LockPatternViewEx_aspect);
 
         if ("square".equals(aspect)) {
             mAspect = ASPECT_SQUARE;
@@ -285,19 +286,23 @@ public class LockPatternView extends View {
         mPathPaint.setDither(true);
 
         mRegularColor = getResources().getColor(
-                R.color.lock_pattern_view_regular_color);
+                Resources.resolveAttribute(getContext(),
+                        R.attr.color_lock_pattern_view_regular));
         mErrorColor = getResources().getColor(
-                R.color.lock_pattern_view_error_color);
+                Resources.resolveAttribute(getContext(),
+                        R.attr.color_lock_pattern_view_error));
         mSuccessColor = getResources().getColor(
-                R.color.lock_pattern_view_success_color);
-        mRegularColor = a.getColor(R.styleable.LockPatternView_regularColor,
+                Resources.resolveAttribute(getContext(),
+                        R.attr.color_lock_pattern_view_success));
+
+        mRegularColor = a.getColor(R.styleable.LockPatternViewEx_regularColor,
                 mRegularColor);
-        mErrorColor = a.getColor(R.styleable.LockPatternView_errorColor,
+        mErrorColor = a.getColor(R.styleable.LockPatternViewEx_errorColor,
                 mErrorColor);
-        mSuccessColor = a.getColor(R.styleable.LockPatternView_successColor,
+        mSuccessColor = a.getColor(R.styleable.LockPatternViewEx_successColor,
                 mSuccessColor);
 
-        int pathColor = a.getColor(R.styleable.LockPatternView_pathColor,
+        int pathColor = a.getColor(R.styleable.LockPatternViewEx_pathColor,
                 mRegularColor);
         mPathPaint.setColor(pathColor);
 
@@ -1130,7 +1135,7 @@ public class LockPatternView extends View {
         private final boolean mTactileFeedbackEnabled;
 
         /**
-         * Constructor called from {@link LockPatternView#onSaveInstanceState()}
+         * Constructor called from {@link LockPatternViewEx#onSaveInstanceState()}
          */
         private SavedState(Parcelable superState, String serializedPattern,
                 int displayMode, boolean inputEnabled, boolean inStealthMode,

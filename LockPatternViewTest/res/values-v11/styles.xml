@@ -19,4 +19,6 @@
 
     <style name="AppBaseTheme" parent="@android:style/Theme.Holo"></style>
 
+    <style name="AppBaseTheme.Light" parent="@android:style/Theme.Holo.Light"></style>
+
 </resources>

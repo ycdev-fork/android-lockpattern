@@ -19,7 +19,7 @@ package app;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.android.internal.widget.LockPatternView;
+import com.android.internal.widget.LockPatternViewEx;
 
 /**
  * Main activity.
@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(new LockPatternView(this));
+        setContentView(new LockPatternViewEx(this));
     }// onCreate()
 
 }

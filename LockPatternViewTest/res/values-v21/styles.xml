@@ -19,4 +19,6 @@
 
     <style name="AppBaseTheme" parent="@android:style/Theme.Material"></style>
 
+    <style name="AppBaseTheme.Light" parent="@android:style/Theme.Material.Light"></style>
+
 </resources>

@@ -19,9 +19,21 @@
 
     <style name="AppBaseTheme" parent="@android:style/Theme"></style>
 
-    <style name="AppTheme" parent="@style/AppBaseTheme"></style>
+    <style name="AppTheme" parent="@style/AppBaseTheme">
+        <item name="color_lock_pattern_view_regular">@color/lock_pattern_view_regular_light</item>
+        <item name="color_lock_pattern_view_success">@color/lock_pattern_view_success_light</item>
+        <item name="color_lock_pattern_view_error">@color/lock_pattern_view_error_light</item>
+    </style>
 
-    <declare-styleable name="LockPatternView">
+    <style name="AppBaseTheme.Light" parent="@android:style/Theme.Light"></style>
+
+    <style name="AppTheme.Light" parent="@style/AppBaseTheme.Light">
+        <item name="color_lock_pattern_view_regular">@color/lock_pattern_view_regular_dark</item>
+        <item name="color_lock_pattern_view_success">@color/lock_pattern_view_success_dark</item>
+        <item name="color_lock_pattern_view_error">@color/lock_pattern_view_error_dark</item>
+    </style>
+
+    <declare-styleable name="LockPatternViewEx">
 
         <!--
              Aspect to use when drawing LockPatternView. Choices are "square"(default), "lock_width"
