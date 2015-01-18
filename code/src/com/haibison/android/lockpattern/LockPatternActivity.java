@@ -54,7 +54,6 @@ import com.haibison.android.lockpattern.util.Settings;
 import com.haibison.android.lockpattern.util.Settings.Display;
 import com.haibison.android.lockpattern.util.Settings.Security;
 import com.haibison.android.lockpattern.util.UI;
-import com.haibison.android.lockpattern.widget.ILockPatternView;
 import com.haibison.android.lockpattern.widget.LockPatternUtils;
 import com.haibison.android.lockpattern.widget.LockPatternView;
 import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
@@ -299,7 +298,7 @@ public class LockPatternActivity extends Activity {
      * CONTROLS
      */
     private TextView mTextInfo;
-    private ILockPatternView mLockPatternView;
+    private LockPatternView mLockPatternView;
     private View mFooter;
     private Button mBtnCancel;
     private Button mBtnConfirm;
@@ -466,7 +465,7 @@ public class LockPatternActivity extends Activity {
         UI.adjustDialogSizeForLargeScreens(getWindow());
 
         mTextInfo = (TextView) findViewById(R.id.alp_42447968_textview_info);
-        mLockPatternView = (ILockPatternView) findViewById(R.id.alp_42447968_view_lock_pattern);
+        mLockPatternView = (LockPatternView) findViewById(R.id.alp_42447968_view_lock_pattern);
 
         mFooter = findViewById(R.id.alp_42447968_viewgroup_footer);
         mBtnCancel = (Button) findViewById(R.id.alp_42447968_button_cancel);
