@@ -15,6 +15,6 @@
    limitations under the License.
 -->
 
-<com.haibison.android.lockpattern.widget.LockPatternView_v14 xmlns:android="http://schemas.android.com/apk/res/android"
+<com.haibison.android.lockpattern.widget.LockPatternView_v11 xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />

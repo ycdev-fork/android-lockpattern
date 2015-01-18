@@ -95,7 +95,7 @@ public class LockPatternUtils {
         byte[] res = new byte[patternSize];
         for (int i = 0; i < patternSize; i++) {
             LockPatternView.Cell cell = pattern.get(i);
-            res[i] = (byte) (cell.getRow() * 3 + cell.getColumn());
+            res[i] = (byte) (cell.row * 3 + cell.column);
         }
         try {
             return new String(res, UTF8);

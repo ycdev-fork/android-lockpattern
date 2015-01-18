@@ -17,9 +17,24 @@
 
 <resources>
 
+    <!-- LockPatternView v7-10 -->
+
     <attr name="alp_42447968_color_pattern_path" format="reference" />
 
     <color name="alp_42447968_pattern_path_light">@android:color/white</color>
     <color name="alp_42447968_pattern_path_dark">#999999</color>
+
+    <!-- LockPatternView v11+ -->
+
+    <attr name="alp_42447968_color_lock_pattern_view_regular" format="reference" />
+    <attr name="alp_42447968_color_lock_pattern_view_success" format="reference" />
+    <attr name="alp_42447968_color_lock_pattern_view_error" format="reference" />
+
+    <color name="alp_42447968_lock_pattern_view_regular_light">#ffffffff</color>
+    <color name="alp_42447968_lock_pattern_view_success_light">#ffffffff</color>
+    <color name="alp_42447968_lock_pattern_view_error_light">#fff4511e</color>
+    <color name="alp_42447968_lock_pattern_view_regular_dark">#ff37474f</color>
+    <color name="alp_42447968_lock_pattern_view_success_dark">#ff009688</color>
+    <color name="alp_42447968_lock_pattern_view_error_dark">#fff4511e</color>
 
 </resources>

@@ -27,7 +27,7 @@
 
         <item name="android:windowBackground">@drawable/aosp_background_holo_dark</item>
 
-        <!-- android-lockpattern -->
+        <!-- LockPatternView v4-10 -->
 
         <item name="alp_42447968_theme_dialog">@style/Alp.42447968.Theme.Dialog.Dark</item>
         <item name="alp_42447968_drawable_btn_code_lock_default_holo">@drawable/alp_42447968_btn_code_lock_default_holo_light</item>
@@ -36,6 +36,12 @@
         <item name="alp_42447968_color_pattern_path">@color/alp_42447968_pattern_path_light</item>
         <item name="alp_42447968_ic_action_lockpattern">@drawable/alp_42447968_ic_action_lockpattern_light</item>
         <item name="aosp_drawable_indicator_code_lock_point_area_normal">@drawable/aosp_indicator_code_lock_point_area_green_holo</item>
+
+        <!-- LockPatternView v11+ -->
+
+        <item name="alp_42447968_color_lock_pattern_view_regular">@color/alp_42447968_lock_pattern_view_regular_light</item>
+        <item name="alp_42447968_color_lock_pattern_view_success">@color/alp_42447968_lock_pattern_view_success_light</item>
+        <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_light</item>
     </style>
 
     <style name="Alp.42447968.BaseTheme.Light" parent="@android:style/Theme.Light" />
@@ -48,7 +54,7 @@
 
         <item name="android:windowBackground">@drawable/aosp_background_holo_light</item>
 
-        <!-- android-lockpattern -->
+        <!-- LockPatternView v4-10 -->
 
         <item name="alp_42447968_theme_dialog">@style/Alp.42447968.Theme.Dialog.Light</item>
         <item name="alp_42447968_drawable_btn_code_lock_default_holo">@drawable/alp_42447968_btn_code_lock_default_holo_dark</item>
@@ -57,6 +63,12 @@
         <item name="alp_42447968_color_pattern_path">@color/alp_42447968_pattern_path_dark</item>
         <item name="alp_42447968_ic_action_lockpattern">@drawable/alp_42447968_ic_action_lockpattern_dark</item>
         <item name="aosp_drawable_indicator_code_lock_point_area_normal">@drawable/aosp_indicator_code_lock_point_area_blue_holo</item>
+
+        <!-- LockPatternView v11+ -->
+
+        <item name="alp_42447968_color_lock_pattern_view_regular">@color/alp_42447968_lock_pattern_view_regular_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_success">@color/alp_42447968_lock_pattern_view_success_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_dark</item>
     </style>
 
     <style name="Alp.42447968.BaseTheme.Light.DarkActionBar" parent="@android:style/Theme.Light" />
@@ -69,7 +81,7 @@
 
         <item name="android:windowBackground">@drawable/aosp_background_holo_light</item>
 
-        <!-- android-lockpattern -->
+        <!-- LockPatternView v4-10 -->
 
         <item name="alp_42447968_theme_dialog">@style/Alp.42447968.Theme.Dialog.Light</item>
         <item name="alp_42447968_drawable_btn_code_lock_default_holo">@drawable/alp_42447968_btn_code_lock_default_holo_dark</item>
@@ -78,6 +90,12 @@
         <item name="alp_42447968_color_pattern_path">@color/alp_42447968_pattern_path_dark</item>
         <item name="alp_42447968_ic_action_lockpattern">@drawable/alp_42447968_ic_action_lockpattern_dark</item>
         <item name="aosp_drawable_indicator_code_lock_point_area_normal">@drawable/aosp_indicator_code_lock_point_area_blue_holo</item>
+
+        <!-- LockPatternView v11+ -->
+
+        <item name="alp_42447968_color_lock_pattern_view_regular">@color/alp_42447968_lock_pattern_view_regular_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_success">@color/alp_42447968_lock_pattern_view_success_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_dark</item>
     </style>
 
     <style name="Alp.42447968.BaseTheme.Dialog.Dark" parent="@android:style/Theme.Dialog">
@@ -91,7 +109,7 @@
 
     <style name="Alp.42447968.Theme.Dialog.Dark" parent="@style/Alp.42447968.BaseThemeHelper.Dialog.Dark">
 
-        <!-- android-lockpattern -->
+        <!-- LockPatternView v4-10 -->
 
         <item name="alp_42447968_theme_dialog">@style/Alp.42447968.Theme.Dialog.Dark</item>
         <item name="alp_42447968_drawable_btn_code_lock_default_holo">@drawable/alp_42447968_btn_code_lock_default_holo_light</item>
@@ -100,6 +118,12 @@
         <item name="alp_42447968_color_pattern_path">@color/alp_42447968_pattern_path_light</item>
         <item name="alp_42447968_ic_action_lockpattern">@drawable/alp_42447968_ic_action_lockpattern_light</item>
         <item name="aosp_drawable_indicator_code_lock_point_area_normal">@drawable/aosp_indicator_code_lock_point_area_green_holo</item>
+
+        <!-- LockPatternView v11+ -->
+
+        <item name="alp_42447968_color_lock_pattern_view_regular">@color/alp_42447968_lock_pattern_view_regular_light</item>
+        <item name="alp_42447968_color_lock_pattern_view_success">@color/alp_42447968_lock_pattern_view_success_light</item>
+        <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_light</item>
     </style>
 
     <style name="Alp.42447968.BaseTheme.Dialog.Light" parent="@android:style/Theme.Light">
@@ -123,7 +147,7 @@
 
     <style name="Alp.42447968.Theme.Dialog.Light" parent="@style/Alp.42447968.BaseThemeHelper.Dialog.Light">
 
-        <!-- android-lockpattern -->
+        <!-- LockPatternView v4-10 -->
 
         <item name="alp_42447968_theme_dialog">@style/Alp.42447968.Theme.Dialog.Light</item>
         <item name="alp_42447968_drawable_btn_code_lock_default_holo">@drawable/alp_42447968_btn_code_lock_default_holo_dark</item>
@@ -132,6 +156,12 @@
         <item name="alp_42447968_color_pattern_path">@color/alp_42447968_pattern_path_dark</item>
         <item name="alp_42447968_ic_action_lockpattern">@drawable/alp_42447968_ic_action_lockpattern_dark</item>
         <item name="aosp_drawable_indicator_code_lock_point_area_normal">@drawable/aosp_indicator_code_lock_point_area_blue_holo</item>
+
+        <!-- LockPatternView v11+ -->
+
+        <item name="alp_42447968_color_lock_pattern_view_regular">@color/alp_42447968_lock_pattern_view_regular_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_success">@color/alp_42447968_lock_pattern_view_success_dark</item>
+        <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_dark</item>
     </style>
 
     <style name="AOSP_DialogWindowTitle">
@@ -139,6 +169,23 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DialogWindowTitle</item>
     </style>
+
+    <declare-styleable name="Alp.42447968.LockPatternView_v11">
+
+        <!--
+             Aspect to use when drawing LockPatternView. Choices are "square"(default), "lock_width"
+             or "lock_height"
+        -->
+        <attr name="aspect" format="string" />
+        <!-- Color to use when drawing LockPatternView paths. -->
+        <attr name="pathColor" format="color|reference" />
+        <!-- The regular pattern color -->
+        <attr name="regularColor" format="color|reference" />
+        <!-- The error color -->
+        <attr name="errorColor" format="color|reference" />
+        <!-- The success color -->
+        <attr name="successColor" format="color|reference" />
+    </declare-styleable>
 
     <item name="alp_42447968_button_bar_style" type="style">@null</item>
     <item name="alp_42447968_button_bar_button_style" type="style">@null</item>
