@@ -48,7 +48,7 @@ import com.haibison.android.lockpattern.util.ResourceUtils;
  * Is also capable of displaying a static pattern in "in progress", "wrong" or
  * "correct" states.
  */
-public class LockPatternView extends View {
+public class LockPatternView extends View implements ILockPatternView {
 
     /**
      * Aspect to use when rendering this view. View will be the minimum of
@@ -436,47 +436,22 @@ public class LockPatternView extends View {
         return mEnableHapticFeedback;
     }
 
-    /**
-     * Set whether the view is in stealth mode. If true, there will be no
-     * visible feedback as the user enters the pattern.
-     * 
-     * @param inStealthMode
-     *            Whether in stealth mode.
-     */
+    @Override
     public void setInStealthMode(boolean inStealthMode) {
         mInStealthMode = inStealthMode;
     }
 
-    /**
-     * Set whether the view will use tactile feedback. If true, there will be
-     * tactile feedback as the user enters the pattern.
-     * 
-     * @param tactileFeedbackEnabled
-     *            Whether tactile feedback is enabled
-     */
+    @Override
     public void setTactileFeedbackEnabled(boolean tactileFeedbackEnabled) {
         mEnableHapticFeedback = tactileFeedbackEnabled;
     }
 
-    /**
-     * Set the call back for pattern detection.
-     * 
-     * @param onPatternListener
-     *            The call back.
-     */
+    @Override
     public void setOnPatternListener(OnPatternListener onPatternListener) {
         mOnPatternListener = onPatternListener;
     }
 
-    /**
-     * Set the pattern explicitely (rather than waiting for the user to input a
-     * pattern).
-     * 
-     * @param displayMode
-     *            How to display the pattern.
-     * @param pattern
-     *            The pattern.
-     */
+    @Override
     public void setPattern(DisplayMode displayMode, List<Cell> pattern) {
         mPattern.clear();
         mPattern.addAll(pattern);
@@ -488,14 +463,7 @@ public class LockPatternView extends View {
         setDisplayMode(displayMode);
     }
 
-    /**
-     * Set the display mode of the current pattern. This can be useful, for
-     * instance, after detecting a pattern to tell this view whether change the
-     * in progress result to correct or wrong.
-     * 
-     * @param displayMode
-     *            The display mode.
-     */
+    @Override
     public void setDisplayMode(DisplayMode displayMode) {
         mPatternDisplayMode = displayMode;
         if (displayMode == DisplayMode.Animate) {
@@ -513,29 +481,16 @@ public class LockPatternView extends View {
         invalidate();
     }
 
-    /**
-     * Retrieves last display mode. This method is useful in case of storing
-     * states and restoring them after screen orientation changed.
-     * 
-     * @return {@link DisplayMode}
-     * @since v1.5.3 beta
-     */
+    @Override
     public DisplayMode getDisplayMode() {
         return mPatternDisplayMode;
-    }
+    }// getDisplayMode()
 
-    /**
-     * Retrieves current displaying pattern. This method is useful in case of
-     * storing states and restoring them after screen orientation changed.
-     * 
-     * @return current displaying pattern. <b>Note:</b> This is an independent
-     *         list with the view's pattern itself.
-     * @since v1.5.3 beta
-     */
     @SuppressWarnings("unchecked")
+    @Override
     public List<Cell> getPattern() {
         return (List<Cell>) mPattern.clone();
-    }
+    }// getPattern()
 
     private void notifyCellAdded() {
         sendAccessEvent(R.string.alp_42447968_lockscreen_access_pattern_cell_added);
@@ -565,9 +520,7 @@ public class LockPatternView extends View {
         }
     }
 
-    /**
-     * Clear the pattern.
-     */
+    @Override
     public void clearPattern() {
         resetPattern();
     }
