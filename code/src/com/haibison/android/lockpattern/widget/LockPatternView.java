@@ -792,7 +792,8 @@ public class LockPatternView extends View {
 
                 @Override
                 public void onAnimationEnd(FloatAnimator animator) {
-                    endRunnable.run();
+                    if (endRunnable != null)
+                        endRunnable.run();
                 }// onAnimationEnd()
 
             });
@@ -815,7 +816,8 @@ public class LockPatternView extends View {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        endRunnable.run();
+                        if (endRunnable != null)
+                            endRunnable.run();
                     }
 
                 });
