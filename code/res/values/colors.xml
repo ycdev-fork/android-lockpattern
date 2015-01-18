@@ -28,4 +28,9 @@
     <color name="alp_42447968_lock_pattern_view_success_dark">#ff009688</color>
     <color name="alp_42447968_lock_pattern_view_error_dark">#fff4511e</color>
 
+    <!-- AOSP -->
+
+    <color name="alp_42447968_aosp_background_material_dark">#ff303030</color>
+    <color name="alp_42447968_aosp_background_material_light">#ffeeeeee</color>
+
 </resources>

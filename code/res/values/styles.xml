@@ -25,7 +25,7 @@
 
         <!-- AOSP -->
 
-        <item name="android:windowBackground">@drawable/aosp_background_holo_dark</item>
+        <item name="android:windowBackground">@color/alp_42447968_aosp_background_material_dark</item>
 
         <!-- android-lockpattern -->
 
@@ -44,7 +44,7 @@
 
         <!-- AOSP -->
 
-        <item name="android:windowBackground">@drawable/aosp_background_holo_light</item>
+        <item name="android:windowBackground">@color/alp_42447968_aosp_background_material_light</item>
 
         <!-- android-lockpattern -->
 
@@ -63,7 +63,7 @@
 
         <!-- AOSP -->
 
-        <item name="android:windowBackground">@drawable/aosp_background_holo_light</item>
+        <item name="android:windowBackground">@color/alp_42447968_aosp_background_material_light</item>
 
         <!-- android-lockpattern -->
 
@@ -78,7 +78,7 @@
 
         <!-- AOSP -->
 
-        <item name="android:windowBackground">@drawable/aosp_dialog_full_holo_dark</item>
+        <item name="android:windowBackground">@drawable/alp_42447968_aosp_dialog_full_holo_dark</item>
     </style>
 
     <style name="Alp.42447968.BaseThemeHelper.Dialog.Dark" parent="@style/Alp.42447968.BaseTheme.Dialog.Dark" />
@@ -100,7 +100,7 @@
 
         <item name="android:windowFrame">@null</item>
         <item name="android:windowTitleStyle">@style/AOSP_DialogWindowTitle</item>
-        <item name="android:windowBackground">@drawable/aosp_dialog_full_holo_light</item>
+        <item name="android:windowBackground">@drawable/alp_42447968_aosp_dialog_full_holo_light</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
