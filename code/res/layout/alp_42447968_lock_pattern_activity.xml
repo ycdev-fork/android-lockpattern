@@ -83,4 +83,6 @@
         </LinearLayout>
     </LinearLayout>
 
+    <include layout="@layout/alp_42447968_view_group_progress_bar" />
+
 </RelativeLayout>

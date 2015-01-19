@@ -16,6 +16,7 @@
 
 package com.haibison.android.lockpattern;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static com.haibison.android.lockpattern.BuildConfig.DEBUG;
 import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_CAPTCHA_WIRED_DOTS;
 import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_MAX_RETRIES;
@@ -41,7 +42,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -53,7 +53,7 @@ import android.widget.TextView;
 
 import com.haibison.android.lockpattern.util.IEncrypter;
 import com.haibison.android.lockpattern.util.InvalidEncrypterException;
-import com.haibison.android.lockpattern.util.LoadingDialog;
+import com.haibison.android.lockpattern.util.LoadingView;
 import com.haibison.android.lockpattern.util.Settings;
 import com.haibison.android.lockpattern.util.Settings.Display;
 import com.haibison.android.lockpattern.util.Settings.Security;
@@ -448,7 +448,7 @@ public class LockPatternActivity extends Activity {
     /**
      * Delay time to reload the lock pattern view after a wrong pattern.
      */
-    private static final long DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW = DateUtils.SECOND_IN_MILLIS;
+    private static final long DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW = SECOND_IN_MILLIS;
 
     /*
      * FIELDS
@@ -458,6 +458,7 @@ public class LockPatternActivity extends Activity {
     private IEncrypter mEncrypter;
     private ButtonOkCommand mBtnOkCmd;
     private Intent mIntentResult;
+    private LoadingView<Void, Void, Object> mLoadingView;
 
     /*
      * CONTROLS
@@ -467,6 +468,7 @@ public class LockPatternActivity extends Activity {
     private View mFooter;
     private Button mBtnCancel;
     private Button mBtnConfirm;
+    private View mViewGroupProgressBar;
 
     /**
      * Called when the activity is first created.
@@ -504,15 +506,19 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        /*
+         * Use this hook instead of onBackPressed(), because onBackPressed() is
+         * not available in API 4.
+         */
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
-            /*
-             * Use this hook instead of onBackPressed(), because onBackPressed()
-             * is not available in API 4.
-             */
+            if (mLoadingView != null)
+                mLoadingView.cancel(true);
+
             finishWithNegativeResult(RESULT_CANCELED);
+
             return true;
-        }
+        }// if
 
         return super.onKeyDown(keyCode, event);
     }// onKeyDown()
@@ -544,6 +550,14 @@ public class LockPatternActivity extends Activity {
 
         return super.onTouchEvent(event);
     }// onTouchEvent()
+
+    @Override
+    protected void onDestroy() {
+        if (mLoadingView != null)
+            mLoadingView.cancel(true);
+
+        super.onDestroy();
+    }// onDestroy()
 
     /**
      * Loads settings, either from manifest or {@link Settings}.
@@ -629,12 +643,25 @@ public class LockPatternActivity extends Activity {
         setContentView(R.layout.alp_42447968_lock_pattern_activity);
         UI.adjustDialogSizeForLargeScreens(getWindow());
 
+        /*
+         * MAP CONTROLS
+         */
+
         mTextInfo = (TextView) findViewById(R.id.alp_42447968_textview_info);
         mLockPatternView = (LockPatternView) findViewById(R.id.alp_42447968_view_lock_pattern);
 
         mFooter = findViewById(R.id.alp_42447968_viewgroup_footer);
         mBtnCancel = (Button) findViewById(R.id.alp_42447968_button_cancel);
         mBtnConfirm = (Button) findViewById(R.id.alp_42447968_button_confirm);
+
+        mViewGroupProgressBar = findViewById(R.id.alp_42447968_view_group_progress_bar);
+
+        /*
+         * SETUP CONTROLS
+         */
+
+        mViewGroupProgressBar
+                .setOnClickListener(mViewGroupProgressBarOnClickListener);
 
         /*
          * LOCK PATTERN VIEW
@@ -766,13 +793,14 @@ public class LockPatternActivity extends Activity {
             return;
 
         /*
-         * Use a LoadingDialog because decrypting pattern might take time...
+         * Use a LoadingView because decrypting pattern might take time...
          */
 
-        new LoadingDialog<Void, Void, Boolean>(this, false) {
+        mLoadingView = new LoadingView<Void, Void, Object>(this,
+                mViewGroupProgressBar) {
 
             @Override
-            protected Boolean doInBackground(Void... params) {
+            protected Object doInBackground(Void... params) {
                 if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                     char[] currentPattern = getIntent().getCharArrayExtra(
                             EXTRA_PATTERN);
@@ -798,10 +826,10 @@ public class LockPatternActivity extends Activity {
             }// doInBackground()
 
             @Override
-            protected void onPostExecute(Boolean result) {
+            protected void onPostExecute(Object result) {
                 super.onPostExecute(result);
 
-                if (result)
+                if ((Boolean) result)
                     finishWithResultOk(null);
                 else {
                     mRetryCount++;
@@ -818,7 +846,9 @@ public class LockPatternActivity extends Activity {
                 }
             }// onPostExecute()
 
-        }.execute();
+        };
+
+        mLoadingView.execute();
     }// doComparePattern()
 
     /**
@@ -836,16 +866,17 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.postDelayed(mLockPatternViewReloader,
                     DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
             return;
-        }
+        }// if
 
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
             /*
-             * Use a LoadingDialog because decrypting pattern might take time...
+             * Use a LoadingView because decrypting pattern might take time...
              */
-            new LoadingDialog<Void, Void, Boolean>(this, false) {
+            mLoadingView = new LoadingView<Void, Void, Object>(this,
+                    mViewGroupProgressBar) {
 
                 @Override
-                protected Boolean doInBackground(Void... params) {
+                protected Object doInBackground(Void... params) {
                     if (mEncrypter != null)
                         return pattern.equals(mEncrypter.decrypt(
                                 LockPatternActivity.this, getIntent()
@@ -858,10 +889,10 @@ public class LockPatternActivity extends Activity {
                 }// doInBackground()
 
                 @Override
-                protected void onPostExecute(Boolean result) {
+                protected void onPostExecute(Object result) {
                     super.onPostExecute(result);
 
-                    if (result) {
+                    if ((Boolean) result) {
                         mTextInfo
                                 .setText(R.string.alp_42447968_msg_your_new_unlock_pattern);
                         mBtnConfirm.setEnabled(true);
@@ -875,15 +906,18 @@ public class LockPatternActivity extends Activity {
                     }
                 }// onPostExecute()
 
-            }.execute();
+            };
+
+            mLoadingView.execute();
         } else {
             /*
-             * Use a LoadingDialog because encrypting pattern might take time...
+             * Use a LoadingView because encrypting pattern might take time...
              */
-            new LoadingDialog<Void, Void, char[]>(this, false) {
+            mLoadingView = new LoadingView<Void, Void, Object>(this,
+                    mViewGroupProgressBar) {
 
                 @Override
-                protected char[] doInBackground(Void... params) {
+                protected Object doInBackground(Void... params) {
                     return mEncrypter != null ? mEncrypter.encrypt(
                             LockPatternActivity.this, pattern)
                             : LockPatternUtils.patternToSha1(pattern)
@@ -891,16 +925,18 @@ public class LockPatternActivity extends Activity {
                 }// onCancel()
 
                 @Override
-                protected void onPostExecute(char[] result) {
+                protected void onPostExecute(Object result) {
                     super.onPostExecute(result);
 
-                    getIntent().putExtra(EXTRA_PATTERN, result);
+                    getIntent().putExtra(EXTRA_PATTERN, (char[]) result);
                     mTextInfo
                             .setText(R.string.alp_42447968_msg_pattern_recorded);
                     mBtnConfirm.setEnabled(true);
                 }// onPostExecute()
 
-            }.execute();
+            };
+
+            mLoadingView.execute();
         }
     }// doCheckAndCreatePattern()
 
@@ -1003,6 +1039,9 @@ public class LockPatternActivity extends Activity {
      * LISTENERS
      */
 
+    /**
+     * Pattern listener for LockPatternView.
+     */
     private final LockPatternView.OnPatternListener mLockPatternViewListener = new LockPatternView.OnPatternListener() {
 
         @Override
@@ -1075,16 +1114,24 @@ public class LockPatternActivity extends Activity {
         public void onPatternCellAdded(List<Cell> pattern) {
             // TODO Auto-generated method stub
         }// onPatternCellAdded()
+
     };// mLockPatternViewListener
 
+    /**
+     * Click listener for button Cancel.
+     */
     private final View.OnClickListener mBtnCancelOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
             finishWithNegativeResult(RESULT_CANCELED);
         }// onClick()
+
     };// mBtnCancelOnClickListener
 
+    /**
+     * Click listener for button Confirm.
+     */
     private final View.OnClickListener mBtnConfirmOnClickListener = new View.OnClickListener() {
 
         @Override
@@ -1124,6 +1171,7 @@ public class LockPatternActivity extends Activity {
                 finishWithNegativeResult(RESULT_FORGOT_PATTERN);
             }// ACTION_COMPARE_PATTERN
         }// onClick()
+
     };// mBtnConfirmOnClickListener
 
     /**
@@ -1136,6 +1184,22 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.clearPattern();
             mLockPatternViewListener.onPatternCleared();
         }// run()
+
     };// mLockPatternViewReloader
+
+    /**
+     * Click listener for view group progress bar.
+     */
+    private final View.OnClickListener mViewGroupProgressBarOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            /*
+             * Do nothing. We just don't want the user to interact with controls
+             * behind this view.
+             */
+        }// onClick()
+
+    };// mViewGroupProgressBarOnClickListener
 
 }

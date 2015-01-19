@@ -15,70 +15,77 @@
    limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal" >
+    android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".3" >
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/alp_42447968_textview_info"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_above="@+id/alp_42447968_viewgroup_footer"
-            android:gravity="center_horizontal|top"
-            android:padding="5dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textIsSelectable="true" />
+            android:layout_weight=".3" >
 
-        <LinearLayout
-            android:id="@+id/alp_42447968_viewgroup_footer"
-            style="?attr/alp_42447968_button_bar_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            android:visibility="gone" >
-
-            <!-- A separator view -->
-
-            <View
+            <TextView
+                android:id="@+id/alp_42447968_textview_info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/alp_42447968_separator_size" />
+                android:layout_height="match_parent"
+                android:layout_above="@+id/alp_42447968_viewgroup_footer"
+                android:gravity="center_horizontal|top"
+                android:padding="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textIsSelectable="true" />
 
-            <Button
-                android:id="@+id/alp_42447968_button_confirm"
-                style="?attr/alp_42447968_button_bar_button_style"
+            <LinearLayout
+                android:id="@+id/alp_42447968_viewgroup_footer"
+                style="?attr/alp_42447968_button_bar_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="@string/alp_42447968_cmd_continue" />
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:visibility="gone" >
 
-            <Button
-                android:id="@+id/alp_42447968_button_cancel"
-                style="?attr/alp_42447968_button_bar_button_style"
-                android:layout_width="match_parent"
+                <!-- A separator view -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/alp_42447968_separator_size" />
+
+                <Button
+                    android:id="@+id/alp_42447968_button_confirm"
+                    style="?attr/alp_42447968_button_bar_button_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/alp_42447968_cmd_continue" />
+
+                <Button
+                    android:id="@+id/alp_42447968_button_cancel"
+                    style="?attr/alp_42447968_button_bar_button_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@android:string/cancel"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".7" >
+
+            <com.haibison.android.lockpattern.widget.LockPatternView
+                android:id="@+id/alp_42447968_view_lock_pattern"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@android:string/cancel"
-                android:visibility="gone" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight=".7" >
+    <include layout="@layout/alp_42447968_view_group_progress_bar" />
 
-        <com.haibison.android.lockpattern.widget.LockPatternView
-            android:id="@+id/alp_42447968_view_lock_pattern"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

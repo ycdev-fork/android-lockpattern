@@ -16,6 +16,7 @@
 
 package com.haibison.android.lockpattern.util;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,10 +38,12 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
     private static final String CLASSNAME = LoadingDialog.class.getName();
 
     private final ProgressDialog mDialog;
+
     /**
-     * Default is {@code 500}ms
+     * Delay time in milliseconds. Default is half a second.
      */
-    private int mDelayTime = 500;
+    private long mDelayTime = SECOND_IN_MILLIS / 2;
+
     /**
      * Flag to use along with {@link #mDelayTime}
      */
@@ -170,7 +173,7 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      * 
      * @return the delay time
      */
-    public int getDelayTime() {
+    public long getDelayTime() {
         return mDelayTime;
     }// getDelayTime()
 
@@ -179,7 +182,7 @@ public abstract class LoadingDialog<Params, Progress, Result> extends
      * 
      * @param delayTime
      *            the delay time to set
-     * @return the instance of this dialog, for chaining multiple calls into a
+     * @return the instance of this object, for chaining multiple calls into a
      *         single statement.
      */
     public LoadingDialog<Params, Progress, Result> setDelayTime(int delayTime) {
