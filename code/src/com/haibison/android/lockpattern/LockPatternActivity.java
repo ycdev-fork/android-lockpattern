@@ -16,6 +16,7 @@
 
 package com.haibison.android.lockpattern;
 
+import static com.haibison.android.lockpattern.BuildConfig.DEBUG;
 import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_CAPTCHA_WIRED_DOTS;
 import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_MAX_RETRIES;
 import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_MIN_WIRED_DOTS;
@@ -23,12 +24,15 @@ import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_ST
 import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_AUTO_SAVE_PATTERN;
 import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_ENCRYPTER_CLASS;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -110,6 +114,81 @@ public class LockPatternActivity extends Activity {
             + ".create_pattern";
 
     /**
+     * Creates new intent with {@link #ACTION_CREATE_PATTERN}. You must call
+     * this intent from a UI thread.
+     * 
+     * @param context
+     *            the context.
+     * @return new intent.
+     */
+    public static Intent newIntentToCreatePattern(Context context) {
+        Intent result = new Intent(ACTION_CREATE_PATTERN, null, context,
+                LockPatternActivity.class);
+        return result;
+    }// newIntentToCreatePattern()
+
+    /**
+     * This method is a shortcut to call
+     * {@link #newIntentToCreatePattern(Context)} from a UI thread.
+     * 
+     * @param caller
+     *            must be an instance of {@link Activity}, or {@link Fragment}
+     *            or support library's {@code Fragment}. Other values will be
+     *            ignored.
+     * @param context
+     *            the context.
+     * @param requestCode
+     *            request code for
+     *            {@link Activity#startActivityForResult(Intent, int)} or
+     *            counterpart methods of fragments.
+     * @return {@code true} if the call has been made successfully,
+     *         {@code false} if any exception occurred.
+     * @throws NullPointerException
+     *             if caller or context is {@code null}.
+     */
+    public static boolean startToCreatePattern(Object caller, Context context,
+            int requestCode) {
+        return callStartActivityForResult(caller,
+                newIntentToCreatePattern(context), requestCode);
+    }// startToCreatePattern()
+
+    /**
+     * Calls {@code startActivityForResult(Intent, int)} from given caller,
+     * ignores any exception.
+     * 
+     * @param caller
+     *            the caller.
+     * @param intent
+     *            the intent.
+     * @param requestCode
+     *            request code.
+     * @throws NullPointerException
+     *             if caller or intent is {@code null}.
+     * @return {@code true} if the call has been made successfully,
+     *         {@code false} if any exception occurred.
+     */
+    public static boolean callStartActivityForResult(Object caller,
+            Intent intent, int requestCode) {
+        try {
+            Method method = caller.getClass().getMethod(
+                    "startActivityForResult", Intent.class, int.class);
+            method.setAccessible(true);
+            method.invoke(caller, intent, requestCode);
+
+            return true;
+        } catch (Exception e) {
+            /*
+             * Just log it. We don't need to go to details here, as it's
+             * responsibility of user to take care of caller.
+             */
+            if (DEBUG)
+                Log.d(CLASSNAME, e.getMessage(), e);
+        }
+
+        return false;
+    }// callStartActivityForResult()
+
+    /**
      * Use this action to compare pattern. You provide the pattern to be
      * compared with {@link #EXTRA_PATTERN}.
      * <p/>
@@ -141,6 +220,53 @@ public class LockPatternActivity extends Activity {
             + ".compare_pattern";
 
     /**
+     * Creates new intent with {@link #ACTION_COMPARE_PATTERN}. You must call
+     * this intent from a UI thread.
+     * 
+     * @param context
+     *            the context.
+     * @param pattern
+     *            optional, see {@link #EXTRA_PATTERN}.
+     * @return new intent.
+     */
+    public static Intent newIntentToComparePattern(Context context,
+            char[] pattern) {
+        Intent result = new Intent(ACTION_COMPARE_PATTERN, null, context,
+                LockPatternActivity.class);
+        if (pattern != null)
+            result.putExtra(EXTRA_PATTERN, pattern);
+
+        return result;
+    }// newIntentToComparePattern()
+
+    /**
+     * This method is a shortcut to call
+     * {@link #newIntentToComparePattern(Context, char[])} from a UI thread.
+     * 
+     * @param caller
+     *            must be an instance of {@link Activity}, or {@link Fragment}
+     *            or support library's {@code Fragment}. Other values will be
+     *            ignored.
+     * @param context
+     *            the context.
+     * @param requestCode
+     *            request code for
+     *            {@link Activity#startActivityForResult(Intent, int)} or
+     *            counterpart methods of fragments.
+     * @param pattern
+     *            optional, see {@link #EXTRA_PATTERN}.
+     * @return {@code true} if the call has been made successfully,
+     *         {@code false} if any exception occurred.
+     * @throws NullPointerException
+     *             if caller or context is {@code null}.
+     */
+    public static boolean startToComparePattern(Object caller, Context context,
+            int requestCode, char[] pattern) {
+        return callStartActivityForResult(caller,
+                newIntentToComparePattern(context, pattern), requestCode);
+    }// startToComparePattern()
+
+    /**
      * Use this action to let the activity generate a random pattern and ask the
      * user to re-draw it to verify.
      * <p/>
@@ -152,6 +278,45 @@ public class LockPatternActivity extends Activity {
      */
     public static final String ACTION_VERIFY_CAPTCHA = CLASSNAME
             + ".verify_captcha";
+
+    /**
+     * Creates new intent with {@link #ACTION_VERIFY_CAPTCHA}. You must call
+     * this intent from a UI thread.
+     * 
+     * @param context
+     *            the context.
+     * @return new intent.
+     */
+    public static Intent newIntentToVerifyCaptcha(Context context) {
+        Intent result = new Intent(ACTION_VERIFY_CAPTCHA, null, context,
+                LockPatternActivity.class);
+        return result;
+    }// newIntentToVerifyCaptcha()
+
+    /**
+     * This method is a shortcut to call
+     * {@link #newIntentToVerifyCaptcha(Context)} from a UI thread.
+     * 
+     * @param caller
+     *            must be an instance of {@link Activity}, or {@link Fragment}
+     *            or support library's {@code Fragment}. Other values will be
+     *            ignored.
+     * @param context
+     *            the context.
+     * @param requestCode
+     *            request code for
+     *            {@link Activity#startActivityForResult(Intent, int)} or
+     *            counterpart methods of fragments.
+     * @return {@code true} if the call has been made successfully,
+     *         {@code false} if any exception occurred.
+     * @throws NullPointerException
+     *             if caller or context is {@code null}.
+     */
+    public static boolean startToVerifyCaptcha(Object caller, Context context,
+            int requestCode) {
+        return callStartActivityForResult(caller,
+                newIntentToVerifyCaptcha(context), requestCode);
+    }// startToVerifyCaptcha()
 
     /**
      * If you use {@link #ACTION_COMPARE_PATTERN} and the user fails to "login"
