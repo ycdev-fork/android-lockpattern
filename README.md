@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: 3.1.1 beta (#44)
+* Version: 3.2 (#45)
 
 Feel free to contact us at:
 
@@ -24,6 +24,18 @@ project.  We hope this project will be always useful for everyone.
 
 
 # HISTORY
+
+* Version 3.2 (#45)
+    + *Release:* January 19th, 2015
+    + Update based code from AOSP Lollipop.
+    + Drop support for APIs < 7.
+    + Add static helper methods for creating new `Intent`'s and calling
+      `startActivityForResult(Intent, int)` from an `Activity`, framework
+      `Fragment` or support library `Fragment`.
+    + Rename `EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN` to
+      `EXTRA_PENDING_INTENT_FORGOT_PATTERN`. Note that its value type is also
+      changed from `Intent` to `PendingIntent`.
+    + Fix small issues.
 
 * Version 3.1.1 beta (#44)
     + *Initialize:* April 04, 2014

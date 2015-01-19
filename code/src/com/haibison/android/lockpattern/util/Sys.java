@@ -25,6 +25,12 @@ package com.haibison.android.lockpattern.util;
 public class Sys {
 
     /**
+     * This is singleton class.
+     */
+    private Sys() {
+    }// Sys
+
+    /**
      * The library name.
      */
     public static final String LIB_NAME = "android-lockpattern";
@@ -32,12 +38,12 @@ public class Sys {
     /**
      * The library version code.
      */
-    public static final int LIB_VERSION_CODE = 44;
+    public static final int LIB_VERSION_CODE = 45;
 
     /**
      * The library version name.
      */
-    public static final String LIB_VERSION_NAME = "3.1.1 beta";
+    public static final String LIB_VERSION_NAME = "3.2";
 
     /**
      * The library package name.
@@ -50,11 +56,5 @@ public class Sys {
      * @since v2.6 beta
      */
     public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
-
-    /**
-     * This is singleton class.
-     */
-    private Sys() {
-    }// Sys
 
 }
