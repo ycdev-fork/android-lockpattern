@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2012 Hai Bison
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<resources>
+
+    <attr name="alp_42447968_color_lock_pattern_view_regular" format="reference" />
+    <attr name="alp_42447968_color_lock_pattern_view_success" format="reference" />
+    <attr name="alp_42447968_color_lock_pattern_view_error" format="reference" />
+
+    <color name="alp_42447968_lock_pattern_view_regular_light">#ffffffff</color>
+    <color name="alp_42447968_lock_pattern_view_success_light">#ffffffff</color>
+    <color name="alp_42447968_lock_pattern_view_error_light">#fff4511e</color>
+    <color name="alp_42447968_lock_pattern_view_regular_dark">#ff37474f</color>
+    <color name="alp_42447968_lock_pattern_view_success_dark">#ff009688</color>
+    <color name="alp_42447968_lock_pattern_view_error_dark">#fff4511e</color>
+    <color name="alp_42447968_view_group_progress_bar_background">#cc515151</color>
+
+    <!-- AOSP -->
+
+    <color name="alp_42447968_aosp_background_material_dark">#ff303030</color>
+    <color name="alp_42447968_aosp_background_material_light">#ffeeeeee</color>
+
+</resources>
