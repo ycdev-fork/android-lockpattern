@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern.util;
+package haibison.android.lockpattern.util;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import android.content.Context;

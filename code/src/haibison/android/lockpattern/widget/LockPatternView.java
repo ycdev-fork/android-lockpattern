@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package com.haibison.android.lockpattern.widget;
+package haibison.android.lockpattern.widget;
+
+import haibison.android.lockpattern.R;
+import haibison.android.lockpattern.util.FloatAnimator;
+import haibison.android.lockpattern.util.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +46,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-
-import com.haibison.android.lockpattern.R;
-import com.haibison.android.lockpattern.util.FloatAnimator;
-import com.haibison.android.lockpattern.util.ResourceUtils;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger

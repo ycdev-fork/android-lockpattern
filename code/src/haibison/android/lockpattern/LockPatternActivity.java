@@ -14,16 +14,27 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern;
+package haibison.android.lockpattern;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
-import static com.haibison.android.lockpattern.BuildConfig.DEBUG;
-import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_CAPTCHA_WIRED_DOTS;
-import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MAX_RETRIES;
-import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MIN_WIRED_DOTS;
-import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_STEALTH_MODE;
-import static com.haibison.android.lockpattern.util.AlpSettings.Security.METADATA_AUTO_SAVE_PATTERN;
-import static com.haibison.android.lockpattern.util.AlpSettings.Security.METADATA_ENCRYPTER_CLASS;
+import static haibison.android.lockpattern.BuildConfig.DEBUG;
+import static haibison.android.lockpattern.util.AlpSettings.Display.METADATA_CAPTCHA_WIRED_DOTS;
+import static haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MAX_RETRIES;
+import static haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MIN_WIRED_DOTS;
+import static haibison.android.lockpattern.util.AlpSettings.Display.METADATA_STEALTH_MODE;
+import static haibison.android.lockpattern.util.AlpSettings.Security.METADATA_AUTO_SAVE_PATTERN;
+import static haibison.android.lockpattern.util.AlpSettings.Security.METADATA_ENCRYPTER_CLASS;
+import haibison.android.lockpattern.util.AlpSettings;
+import haibison.android.lockpattern.util.AlpSettings.Display;
+import haibison.android.lockpattern.util.AlpSettings.Security;
+import haibison.android.lockpattern.util.IEncrypter;
+import haibison.android.lockpattern.util.InvalidEncrypterException;
+import haibison.android.lockpattern.util.LoadingView;
+import haibison.android.lockpattern.util.UI;
+import haibison.android.lockpattern.widget.LockPatternUtils;
+import haibison.android.lockpattern.widget.LockPatternView;
+import haibison.android.lockpattern.widget.LockPatternView.Cell;
+import haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -50,18 +61,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.haibison.android.lockpattern.util.AlpSettings;
-import com.haibison.android.lockpattern.util.AlpSettings.Display;
-import com.haibison.android.lockpattern.util.AlpSettings.Security;
-import com.haibison.android.lockpattern.util.IEncrypter;
-import com.haibison.android.lockpattern.util.InvalidEncrypterException;
-import com.haibison.android.lockpattern.util.LoadingView;
-import com.haibison.android.lockpattern.util.UI;
-import com.haibison.android.lockpattern.widget.LockPatternUtils;
-import com.haibison.android.lockpattern.widget.LockPatternView;
-import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
-import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 
 /**
  * Main activity for this library.
@@ -475,7 +474,7 @@ public class LockPatternActivity extends Activity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (BuildConfig.DEBUG)
+        if (DEBUG)
             Log.d(CLASSNAME, "ClassName = " + CLASSNAME);
 
         /*
@@ -498,9 +497,11 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (BuildConfig.DEBUG)
-            Log.d(CLASSNAME, "onConfigurationChanged()");
         super.onConfigurationChanged(newConfig);
+
+        if (DEBUG)
+            Log.d(CLASSNAME, "onConfigurationChanged()");
+
         initContentView();
     }// onConfigurationChanged()
 

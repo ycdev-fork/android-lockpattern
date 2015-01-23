@@ -16,7 +16,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.haibison.android.lockpattern" >
+    package="haibison.android.lockpattern" >
 
     <uses-sdk android:minSdkVersion="7" />
 

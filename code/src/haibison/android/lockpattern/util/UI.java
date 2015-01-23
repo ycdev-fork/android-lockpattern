@@ -14,16 +14,15 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern.util;
+package haibison.android.lockpattern.util;
 
+import static haibison.android.lockpattern.BuildConfig.DEBUG;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
-
-import com.haibison.android.lockpattern.BuildConfig;
 
 /**
  * UI utilities.
@@ -151,7 +150,7 @@ public class UI {
      *            the window <i>of the dialog</i>.
      */
     public static void adjustDialogSizeForLargeScreens(Window dialogWindow) {
-        if (BuildConfig.DEBUG)
+        if (DEBUG)
             Log.d(CLASSNAME, "adjustDialogSizeForLargeScreens()");
 
         if (!dialogWindow.isFloating())
@@ -173,7 +172,7 @@ public class UI {
 
         int width = metrics.widthPixels;// dialogWindow.getDecorView().getWidth();
         int height = metrics.heightPixels;// dialogWindow.getDecorView().getHeight();
-        if (BuildConfig.DEBUG)
+        if (DEBUG)
             Log.d(CLASSNAME,
                     String.format("width = %,d | height = %,d", width, height));
 
@@ -182,7 +181,7 @@ public class UI {
         height = (int) (height * (isPortrait ? screenSize.fixedHeightMajor
                 : screenSize.fixedHeightMinor));
 
-        if (BuildConfig.DEBUG)
+        if (DEBUG)
             Log.d(CLASSNAME, String.format(
                     "NEW >>> width = %,d | height = %,d", width, height));
         dialogWindow.setLayout(width, height);

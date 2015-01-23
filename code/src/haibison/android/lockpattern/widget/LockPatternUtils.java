@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package com.haibison.android.lockpattern.widget;
+package haibison.android.lockpattern.widget;
+
+import static haibison.android.lockpattern.BuildConfig.DEBUG;
+import haibison.android.lockpattern.collect.Lists;
+import haibison.android.lockpattern.util.Randoms;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -25,10 +29,6 @@ import java.util.List;
 import java.util.Locale;
 
 import android.util.Log;
-
-import com.haibison.android.lockpattern.BuildConfig;
-import com.haibison.android.lockpattern.collect.Lists;
-import com.haibison.android.lockpattern.util.Randoms;
 
 /**
  * Utilities for the lock pattern and its settings.
@@ -166,7 +166,7 @@ public class LockPatternUtils {
              * exit this loop.
              */
 
-            if (BuildConfig.DEBUG)
+            if (DEBUG)
                 Log.d(CLASSNAME, " >> lastId = " + lastId);
 
             final int lastRow = lastId / LockPatternView.MATRIX_WIDTH;

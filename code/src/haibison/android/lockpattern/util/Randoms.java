@@ -14,12 +14,12 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern.util;
+package haibison.android.lockpattern.util;
+
+import haibison.android.lockpattern.collect.Lists;
 
 import java.util.List;
 import java.util.Random;
-
-import com.haibison.android.lockpattern.collect.Lists;
 
 /**
  * Random utilities.

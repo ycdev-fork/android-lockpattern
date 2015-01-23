@@ -35,7 +35,7 @@
         android:layout_above="@+id/alp_42447968_viewgroup_footer"
         android:layout_below="@id/alp_42447968_textview_info" >
 
-        <com.haibison.android.lockpattern.widget.LockPatternView
+        <haibison.android.lockpattern.widget.LockPatternView
             android:id="@+id/alp_42447968_view_lock_pattern"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

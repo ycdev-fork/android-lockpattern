@@ -14,8 +14,9 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern.util;
+package haibison.android.lockpattern.util;
 
+import haibison.android.lockpattern.R;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,8 +24,6 @@ import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-
-import com.haibison.android.lockpattern.R;
 
 /**
  * All settings for the library. They are stored in {@link SharedPreferences}.

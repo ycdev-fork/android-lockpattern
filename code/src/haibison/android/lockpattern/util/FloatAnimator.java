@@ -14,13 +14,13 @@
  *   limitations under the License.
  */
 
-package com.haibison.android.lockpattern.util;
+package haibison.android.lockpattern.util;
+
+import haibison.android.lockpattern.collect.Lists;
 
 import java.util.List;
 
 import android.os.Handler;
-
-import com.haibison.android.lockpattern.collect.Lists;
 
 /**
  * Float animator.
