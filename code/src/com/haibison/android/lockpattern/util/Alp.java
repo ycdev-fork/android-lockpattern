@@ -22,13 +22,13 @@ package com.haibison.android.lockpattern.util;
  * @author Hai Bison
  * 
  */
-public class Sys {
+public class Alp {
 
     /**
      * This is singleton class.
      */
-    private Sys() {
-    }// Sys
+    private Alp() {
+    }// Alp
 
     /**
      * The library name.

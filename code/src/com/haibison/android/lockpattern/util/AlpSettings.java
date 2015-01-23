@@ -37,13 +37,13 @@ import com.haibison.android.lockpattern.R;
  * @author Hai Bison
  * 
  */
-public class Settings {
+public class AlpSettings {
 
     /**
      * This is singleton class.
      */
-    private Settings() {
-    }// Settings
+    private AlpSettings() {
+    }// AlpSettings
 
     /**
      * Generates global preference filename of this library.
@@ -51,7 +51,7 @@ public class Settings {
      * @return the global preference filename.
      */
     public static final String genPreferenceFilename() {
-        return String.format("%s_%s", Sys.LIB_NAME, Sys.UID);
+        return String.format("%s_%s", Alp.LIB_NAME, Alp.UID);
     }// genPreferenceFilename()
 
     /**
@@ -60,7 +60,7 @@ public class Settings {
      * @return the global database filename.
      */
     public static final String genDatabaseFilename(String name) {
-        return String.format("%s_%s_%s", Sys.LIB_NAME, Sys.UID, name);
+        return String.format("%s_%s_%s", Alp.LIB_NAME, Alp.UID, name);
     }// genDatabaseFilename()
 
     /**

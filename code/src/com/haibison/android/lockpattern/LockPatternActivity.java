@@ -18,12 +18,12 @@ package com.haibison.android.lockpattern;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static com.haibison.android.lockpattern.BuildConfig.DEBUG;
-import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_CAPTCHA_WIRED_DOTS;
-import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_MAX_RETRIES;
-import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_MIN_WIRED_DOTS;
-import static com.haibison.android.lockpattern.util.Settings.Display.METADATA_STEALTH_MODE;
-import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_AUTO_SAVE_PATTERN;
-import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_ENCRYPTER_CLASS;
+import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_CAPTCHA_WIRED_DOTS;
+import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MAX_RETRIES;
+import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_MIN_WIRED_DOTS;
+import static com.haibison.android.lockpattern.util.AlpSettings.Display.METADATA_STEALTH_MODE;
+import static com.haibison.android.lockpattern.util.AlpSettings.Security.METADATA_AUTO_SAVE_PATTERN;
+import static com.haibison.android.lockpattern.util.AlpSettings.Security.METADATA_ENCRYPTER_CLASS;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -51,12 +51,12 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.haibison.android.lockpattern.util.AlpSettings;
+import com.haibison.android.lockpattern.util.AlpSettings.Display;
+import com.haibison.android.lockpattern.util.AlpSettings.Security;
 import com.haibison.android.lockpattern.util.IEncrypter;
 import com.haibison.android.lockpattern.util.InvalidEncrypterException;
 import com.haibison.android.lockpattern.util.LoadingView;
-import com.haibison.android.lockpattern.util.Settings;
-import com.haibison.android.lockpattern.util.Settings.Display;
-import com.haibison.android.lockpattern.util.Settings.Security;
 import com.haibison.android.lockpattern.util.UI;
 import com.haibison.android.lockpattern.widget.LockPatternUtils;
 import com.haibison.android.lockpattern.widget.LockPatternView;
@@ -560,7 +560,7 @@ public class LockPatternActivity extends Activity {
     }// onDestroy()
 
     /**
-     * Loads settings, either from manifest or {@link Settings}.
+     * Loads settings, either from manifest or {@link AlpSettings}.
      */
     private void loadSettings() {
         Bundle metaData = null;
@@ -575,34 +575,34 @@ public class LockPatternActivity extends Activity {
         }
 
         if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS))
-            mMinWiredDots = Settings.Display.validateMinWiredDots(this,
+            mMinWiredDots = AlpSettings.Display.validateMinWiredDots(this,
                     metaData.getInt(METADATA_MIN_WIRED_DOTS));
         else
-            mMinWiredDots = Settings.Display.getMinWiredDots(this);
+            mMinWiredDots = AlpSettings.Display.getMinWiredDots(this);
 
         if (metaData != null && metaData.containsKey(METADATA_MAX_RETRIES))
-            mMaxRetries = Settings.Display.validateMaxRetries(this,
+            mMaxRetries = AlpSettings.Display.validateMaxRetries(this,
                     metaData.getInt(METADATA_MAX_RETRIES));
         else
-            mMaxRetries = Settings.Display.getMaxRetries(this);
+            mMaxRetries = AlpSettings.Display.getMaxRetries(this);
 
         if (metaData != null
                 && metaData.containsKey(METADATA_AUTO_SAVE_PATTERN))
             mAutoSave = metaData.getBoolean(METADATA_AUTO_SAVE_PATTERN);
         else
-            mAutoSave = Settings.Security.isAutoSavePattern(this);
+            mAutoSave = AlpSettings.Security.isAutoSavePattern(this);
 
         if (metaData != null
                 && metaData.containsKey(METADATA_CAPTCHA_WIRED_DOTS))
-            mCaptchaWiredDots = Settings.Display.validateCaptchaWiredDots(this,
-                    metaData.getInt(METADATA_CAPTCHA_WIRED_DOTS));
+            mCaptchaWiredDots = AlpSettings.Display.validateCaptchaWiredDots(
+                    this, metaData.getInt(METADATA_CAPTCHA_WIRED_DOTS));
         else
-            mCaptchaWiredDots = Settings.Display.getCaptchaWiredDots(this);
+            mCaptchaWiredDots = AlpSettings.Display.getCaptchaWiredDots(this);
 
         if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE))
             mStealthMode = metaData.getBoolean(METADATA_STEALTH_MODE);
         else
-            mStealthMode = Settings.Display.isStealthMode(this);
+            mStealthMode = AlpSettings.Display.isStealthMode(this);
 
         /*
          * Encrypter.
@@ -612,7 +612,7 @@ public class LockPatternActivity extends Activity {
             encrypterClass = metaData.getString(METADATA_ENCRYPTER_CLASS)
                     .toCharArray();
         else
-            encrypterClass = Settings.Security.getEncrypterClass(this);
+            encrypterClass = AlpSettings.Security.getEncrypterClass(this);
 
         if (encrypterClass != null) {
             try {
@@ -805,7 +805,7 @@ public class LockPatternActivity extends Activity {
                     char[] currentPattern = getIntent().getCharArrayExtra(
                             EXTRA_PATTERN);
                     if (currentPattern == null)
-                        currentPattern = Settings.Security
+                        currentPattern = AlpSettings.Security
                                 .getPattern(LockPatternActivity.this);
                     if (currentPattern != null) {
                         if (mEncrypter != null)
@@ -1148,8 +1148,8 @@ public class LockPatternActivity extends Activity {
                     final char[] pattern = getIntent().getCharArrayExtra(
                             EXTRA_PATTERN);
                     if (mAutoSave)
-                        Settings.Security.setPattern(LockPatternActivity.this,
-                                pattern);
+                        AlpSettings.Security.setPattern(
+                                LockPatternActivity.this, pattern);
                     finishWithResultOk(pattern);
                 }
             }// ACTION_CREATE_PATTERN
