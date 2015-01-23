@@ -17,13 +17,8 @@
 
 <resources>
 
-    <!-- LockPatternView v7-10 -->
-
     <dimen name="alp_42447968_lockpatternview_size">350dp</dimen>
     <dimen name="alp_42447968_separator_size">1dp</dimen>
-
-    <!-- LockPatternView v11+ -->
-
     <dimen name="alp_42447968_lock_pattern_dot_line_width">3dp</dimen>
     <dimen name="alp_42447968_lock_pattern_dot_size">12dp</dimen>
     <dimen name="alp_42447968_lock_pattern_dot_size_activated">28dp</dimen>
