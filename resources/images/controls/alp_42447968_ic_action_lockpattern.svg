@@ -25,15 +25,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
+   width="50"
+   height="50"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="alp_42447968_ic_action_lockpattern.svg"
-   inkscape:export-filename="/media/truecrypt64/projs/android/library/android-lockpattern/resources/images/controls/alp_42447968_ic_action_lockpattern_120.png"
-   inkscape:export-xdpi="225"
-   inkscape:export-ydpi="225">
+   inkscape:export-filename="/media/truecrypt64/projs/android/library/android-lockpattern/code/res/drawable-xxxhdpi/alp_42447968_ic_action_lockpattern_light.png"
+   inkscape:export-xdpi="230.39999"
+   inkscape:export-ydpi="230.39999">
   <defs
      id="defs4">
     <filter
@@ -82,7 +82,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -104,12 +104,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3321"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3323"
@@ -162,7 +163,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -184,12 +185,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3347"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3349"
@@ -242,7 +244,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -264,12 +266,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3373"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3375"
@@ -322,7 +325,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -344,12 +347,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3399"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3401"
@@ -402,7 +406,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -424,12 +428,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3425"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3427"
@@ -482,7 +487,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -504,12 +509,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3451"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3453"
@@ -562,7 +568,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -584,12 +590,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3477"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3479"
@@ -642,7 +649,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -664,12 +671,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3503"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3505"
@@ -722,7 +730,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -744,12 +752,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3529"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3531"
@@ -802,7 +811,7 @@
          specularExponent="35"
          specularConstant="1"
          surfaceScale="4"
-         lighting-color="rgb(255,255,255)"
+         lighting-color="#ffffff"
          result="result1"
          in="result0">
         <fePointLight
@@ -824,12 +833,13 @@
          k2="1"
          operator="arithmetic"
          result="result4"
-         in="fbSourceGraphic" />
+         in="fbSourceGraphic"
+         k1="0"
+         k4="0" />
       <feComposite
          id="feComposite3204"
          in2="result4"
          operator="atop"
-         in="result9"
          result="result91" />
       <feBlend
          id="feBlend3206"
@@ -844,11 +854,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.1914527"
-     inkscape:cx="9.657165"
-     inkscape:cy="36.377952"
+     inkscape:zoom="8.9419546"
+     inkscape:cx="26.246632"
+     inkscape:cy="37.104874"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="g3314"
      showgrid="true"
      inkscape:window-width="1440"
      inkscape:window-height="848"
@@ -879,9 +889,13 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="dots"
-     sodipodi:insensitive="true">
+     transform="translate(0,2)"
+     sodipodi:insensitive="true"
+     style="display:none">
     <g
-       id="g3915">
+       id="g3915"
+       transform="translate(1.0000002,-1.0000001)"
+       style="fill:#333333;fill-opacity:0.6">
       <path
          transform="matrix(0.4213216,0,0,0.4213216,2.3333334,3.5265627)"
          d="m 17.009967,10.617631 a 3.5602257,3.5602257 0 1 1 -7.1204514,0 3.5602257,3.5602257 0 1 1 7.1204514,0 z"
@@ -890,11 +904,11 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path4040"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
       <path
          sodipodi:type="arc"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          id="path4042"
          sodipodi:cx="13.449741"
          sodipodi:cy="10.617631"
@@ -910,7 +924,7 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path4044"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
       <path
          transform="matrix(0.4213216,0,0,0.4213216,34.333333,35.526563)"
@@ -920,7 +934,7 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path4046"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
       <path
          transform="matrix(0.4213216,0,0,0.4213216,18.333333,3.5265627)"
@@ -930,11 +944,11 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path4040-1"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
       <path
          sodipodi:type="arc"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          id="path4066"
          sodipodi:cx="13.449741"
          sodipodi:cy="10.617631"
@@ -944,7 +958,7 @@
          transform="matrix(0.4213216,0,0,0.4213216,18.333333,35.526563)" />
       <path
          sodipodi:type="arc"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          id="path4068"
          sodipodi:cx="13.449741"
          sodipodi:cy="10.617631"
@@ -960,7 +974,7 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path4070"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
       <path
          transform="matrix(0.4213216,0,0,0.4213216,18.333333,19.526563)"
@@ -970,7 +984,7 @@
          sodipodi:cy="10.617631"
          sodipodi:cx="13.449741"
          id="path3913"
-         style="fill:#333333;fill-opacity:1;stroke:none"
+         style="fill:#333333;fill-opacity:0.6;stroke:none"
          sodipodi:type="arc" />
     </g>
   </g>
@@ -978,13 +992,71 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="lines"
-     style="display:inline"
+     style="display:none"
+     transform="translate(0,2)"
      sodipodi:insensitive="true">
     <path
-       style="fill:none;stroke:#333333;stroke-width:0.81999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 24,8 8,24 24,40 40,24 24,24"
+       style="fill:none;stroke:#333333;stroke-width:0.81999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.6;stroke-dasharray:none"
+       d="M 25,7 9,23 25,39 41,23 25,23"
        id="path4075"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
+  </g>
+  <g
+     style="display:inline"
+     transform="translate(0,2)"
+     inkscape:label="product"
+     id="g3314"
+     inkscape:groupmode="layer"
+     sodipodi:insensitive="true">
+    <g
+       id="g4173"
+       style="fill:#ffffff;fill-opacity:0.8">
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffffff;fill-opacity:0.8;stroke:none"
+         id="path3318"
+         sodipodi:cx="13.449741"
+         sodipodi:cy="10.617631"
+         sodipodi:rx="3.5602257"
+         sodipodi:ry="3.5602257"
+         d="m 17.009967,10.617631 a 3.5602257,3.5602257 0 1 1 -7.1204514,0 3.5602257,3.5602257 0 1 1 7.1204514,0 z"
+         transform="matrix(0.8426432,0,0,0.8426432,-2.3333331,-1.9468745)" />
+      <path
+         transform="matrix(0.8426432,0,0,0.8426432,29.666667,-1.9468745)"
+         d="m 17.009967,10.617631 a 3.5602257,3.5602257 0 1 1 -7.1204514,0 3.5602257,3.5602257 0 1 1 7.1204514,0 z"
+         sodipodi:ry="3.5602257"
+         sodipodi:rx="3.5602257"
+         sodipodi:cy="10.617631"
+         sodipodi:cx="13.449741"
+         id="path3320"
+         style="fill:#ffffff;fill-opacity:0.8;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffffff;fill-opacity:0.8;stroke:none"
+         id="path3322"
+         sodipodi:cx="13.449741"
+         sodipodi:cy="10.617631"
+         sodipodi:rx="3.5602257"
+         sodipodi:ry="3.5602257"
+         d="m 17.009967,10.617631 a 3.5602257,3.5602257 0 1 1 -7.1204514,0 3.5602257,3.5602257 0 1 1 7.1204514,0 z"
+         transform="matrix(0.8426432,0,0,0.8426432,-2.3333331,30.053125)" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffffff;fill-opacity:0.8;stroke:none"
+         id="path3324"
+         sodipodi:cx="13.449741"
+         sodipodi:cy="10.617631"
+         sodipodi:rx="3.5602257"
+         sodipodi:ry="3.5602257"
+         d="m 17.009967,10.617631 a 3.5602257,3.5602257 0 1 1 -7.1204514,0 3.5602257,3.5602257 0 1 1 7.1204514,0 z"
+         transform="matrix(0.8426432,0,0,0.8426432,29.666667,30.053125)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3326"
+         d="m 25,4 c -1.656854,0 -3,1.3431458 -3,3 0,0.5227539 0.139922,1.009536 0.375,1.4375 L 10.4375,20.375 C 10.009536,20.139922 9.5227539,20 9,20 c -1.6568542,0 -3,1.343146 -3,3 0,1.656854 1.3431458,3 3,3 0.5227539,0 1.009536,-0.139922 1.4375,-0.375 L 22.375,37.5625 C 22.139922,37.990464 22,38.477246 22,39 c 0,1.656854 1.343146,3 3,3 1.656854,0 3,-1.343146 3,-3 0,-0.522754 -0.139922,-1.009536 -0.375,-1.4375 L 39.5625,25.625 C 39.990464,25.860078 40.477246,26 41,26 c 1.656854,0 3,-1.343146 3,-3 0,-1.656854 -1.343146,-3 -3,-3 -1.370357,0 -2.516274,0.932332 -2.875,2.1875 l -10.25,0 C 27.516274,20.932332 26.370357,20 25,20 c -1.656854,0 -3,1.343146 -3,3 0,1.656854 1.343146,3 3,3 1.370357,0 2.516274,-0.932332 2.875,-2.1875 l 10.25,0 c 0.06185,0.216397 0.143757,0.431584 0.25,0.625 L 26.4375,36.375 C 26.009536,36.139922 25.522754,36 25,36 c -0.522754,0 -1.009536,0.139922 -1.4375,0.375 L 11.625,24.4375 C 11.860078,24.009536 12,23.522754 12,23 12,22.477246 11.860078,21.990464 11.625,21.5625 L 23.5625,9.625 C 23.990464,9.860078 24.477246,10 25,10 26.656854,10 28,8.656854 28,7 28,5.3431458 26.656854,4 25,4 z"
+         style="fill:#ffffff;fill-opacity:0.8;stroke:none" />
+    </g>
   </g>
 </svg>
