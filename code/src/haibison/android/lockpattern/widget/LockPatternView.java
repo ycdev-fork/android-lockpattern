@@ -420,13 +420,14 @@ public class LockPatternView extends View {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && !isInEditMode()) {
             mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                     context, android.R.interpolator.fast_out_slow_in);
             mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                     context, android.R.interpolator.linear_out_slow_in);
         }// if
-    }// LockPatternView_v11()
+    }// LockPatternView()
 
     public CellState[][] getCellStates() {
         return mCellStates;
