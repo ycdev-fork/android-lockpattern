@@ -99,7 +99,7 @@
         <!-- AOSP -->
 
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowTitleStyle">@style/AOSP_DialogWindowTitle</item>
+        <item name="android:windowTitleStyle">@style/Alp.42447968.AOSP.DialogWindowTitle</item>
         <item name="android:windowBackground">@drawable/alp_42447968_aosp_dialog_full_holo_light</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -124,7 +124,7 @@
         <item name="alp_42447968_color_lock_pattern_view_error">@color/alp_42447968_lock_pattern_view_error_dark</item>
     </style>
 
-    <style name="AOSP_DialogWindowTitle">
+    <style name="Alp.42447968.AOSP.DialogWindowTitle" parent="">
         <item name="android:maxLines">1</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DialogWindowTitle</item>
